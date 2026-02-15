@@ -1,0 +1,877 @@
+
+DBG = true;
+
+/**
+ * Gibt einen ISO-Timestamp zurück (vereinfacht, ohne Zeitzonen-Offset)
+ */
+function __getTimestamp() {
+  var d = new Date();
+  function pad(n) { return (n < 10) ? "0" + n : "" + n; }
+  return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()) +
+        "T" + pad(d.getHours()) + ":" + pad(d.getMinutes()) + ":" + pad(d.getSeconds()) + "Z";
+}
+
+/**
+ * Loggt eine Nachricht lokal (in die Datei)
+ * @param {String} level  – INFO, WARN, ERROR, FATAL
+ * @param {String} msg    – Nachricht
+ */
+function __log(level, msg, active_script) {
+  if ( ! active_script ) active_script = "includes";
+  try {
+    var entry = {
+      time: __getTimestamp(),
+      level: level,
+      msg:  msg,
+      script: active_script
+    }
+
+    var _log = __readJson( PATH_LOG_FILE );
+    if ( ! _log ) {
+      _log = {
+        guid: app.userGuid.split('@').shift(),
+        locale: $.locale,
+        os: $.os,
+        version: app.version,
+        entries: []
+      }
+    }
+    _log.entries.push( entry );
+    __writeJson( PATH_LOG_FILE, _log );
+  } catch(e) {
+    if (DBG) $.writeln( e.message + " on " + e.line );
+  }
+}
+
+
+// =============================================================================
+// HILFSFUNKTIONEN – Dateien lesen/schreiben
+// =============================================================================
+
+/**
+ * Liest eine Datei und gibt den Inhalt als String zurück.
+ * Gibt null zurück wenn die Datei nicht existiert.
+ */
+function __readFile(filePath) {
+  var f = new File(filePath);
+  if (!f.exists) return null;
+  try {
+    f.encoding = "UTF-8";
+    f.open("r");
+    var content = f.read();
+    return content;
+  } catch(e) {
+    __log("error", "Datei konnte nicht gelesen werden (" + filePath + "): " + e.message, "includes");
+    if (DBG) $.writeln("__readFile Fehler: " + e.message);
+    return null;
+  } finally {
+    try { f.close(); } catch(e) {}
+  }
+  return content;
+}
+
+/**
+ * Schreibt einen String in eine Datei (überschreibt).
+ * Erstellt Elternordner falls nötig.
+ */
+function __writeFile(filePath, content) {
+  try {
+    var f = new File(filePath);
+    // Elternordner erstellen falls nötig
+    var parentFolder = f.parent;
+    if (!parentFolder.exists) {
+      parentFolder.create();
+    }
+    f.encoding = "UTF-8";
+    f.open("w");
+    f.write(content);
+    f.close();
+  } catch(e) {
+    if (DBG) $.writeln("__writeFile Fehler: " + e.message + " (" + filePath + ")");
+    throw e;
+  }
+}
+
+/**
+ * Liest eine JSON-Datei und gibt das geparste Objekt zurück.
+ * Gibt null zurück wenn die Datei nicht existiert oder nicht parsbar ist.
+ */
+function __readJson(filePath) {
+  var content = __readFile(filePath);
+  if (content === null || content === "") return null;
+  try {
+    return JSON.parse(content);
+  } catch (e) {
+    __log("ERROR", "JSON-Parse fehlgeschlagen: " + filePath + " – " + e.message);
+    if (DBG) $.writeln( e.message + " on " + e.line );
+    return null;
+  }
+}
+
+/**
+ * Schreibt ein Objekt als JSON in eine Datei.
+ */
+function __writeJson(filePath, obj) {
+  __writeFile(filePath, JSON.stringify(obj, null, 2));
+}
+
+/**
+ * Erstellt einen Ordner rekursiv (auch verschachtelte Pfade).
+ */
+function __ensureFolder(folderPath) {
+  // Wenn ein Punkt im Namen, gehe ich von einer Datei aus.
+  if ( folderPath.split("/").pop().search(/\./) != -1 ){
+    folderPath = File( folderPath ).parent.fullName
+  }
+  var f = new Folder(folderPath);
+  if (f.exists) return f;
+
+  try {
+    var parent = f.parent;
+    if (!parent.exists) {
+      __ensureFolder(parent.fullName);
+    }
+    if (!f.create()) {
+      throw new Error("'" + folderPath + "' was not created");
+    }
+    if (!f.exists) {
+      throw new Error("'" + folderPath + "' was not created");
+    }
+    return f;
+  } catch(e) {
+    __log("error", "Ordner konnte nicht erstellt werden (" + folderPath + "): " + e.message, "includes");
+    throw e; // Exception weiterwerfen - Installation MUSS abbrechen
+  }
+}
+
+/**
+ * Move File, wenn Zielpfad noch nicht existiert
+ */
+function __moveFile(srcFile, tgtPath) {
+    if (!srcFile.exists) {
+        __log("warn", "Quelldatei für Move existiert nicht: " + srcFile.fsName, "includes");
+        return false;
+    }
+    var tgtFile = new File(tgtPath);
+    if ( tgtFile.exists ) {
+        __log("warn", "Zieldatei existiert bereits: " + tgtPath, "includes");
+        return false;
+    }
+
+    try {
+        if (!srcFile.copy(tgtFile)) {
+            __log("error", "Kopieren fehlgeschlagen: " + srcFile.fsName + " -> " + tgtPath, "includes");
+            return false;
+        }
+    } catch(e) {
+        __log("error", "Kopieren Exception: " + srcFile.fsName + " -> " + tgtPath + ": " + e.message, "includes");
+        return false;
+    }
+
+    try {
+        if (!srcFile.remove()) {
+            __log("error", "Löschen der Quelldatei fehlgeschlagen: " + srcFile.fsName, "includes");
+            try { tgtFile.remove(); } catch(e2) {}
+            return false;
+        }
+    } catch(e) {
+        __log("error", "Löschen Exception: " + srcFile.fsName + ": " + e.message, "includes");
+        try { tgtFile.remove(); } catch(e2) {}
+        return false;
+    }
+
+    return true;
+}
+
+// --------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------
+//  JSON und RESTIX
+// --------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------
+function __call_request( url, command, type, tgt_path, replace ) {
+  if (typeof JSON !== "object") {
+    __init();
+  }
+  if ( ! type ) type = "data";
+
+  var request = {
+    url: url,
+    command: command, // defaults to ""
+    port: "", // defaults to ""
+    method: "GET",
+  }
+
+  if (type == "data") {
+    var response = restix.fetch(request);
+    if (response.error) {
+      __log("error", "HTTP Request fehlgeschlagen: " + url + "/" + command + " - " + response.errorMsg, "includes");
+      throw new Error(response.error + "\n" + response.errorMsg);
+    }
+    if (response.httpStatus >= 400) {
+      __log("error", "HTTP Status " + response.httpStatus + ": " + url + "/" + command, "includes");
+    }
+
+    if ( tgt_path && (replace || !File(tgt_path).exists) ) {
+      var f = new File( tgt_path );
+      f.encoding = "UTF-8";
+      f.open("w");
+      f.write( response.body );
+      f.close();
+    }
+    return response.body;
+
+  } else {
+    if ( ! tgt_path ) tgt_path = Folder.desktop.fullName + "/_tempdatei.txt";
+
+    if (replace || !File(tgt_path).exists) {
+      var temp = new File(tgt_path);
+      var response = restix.fetchFile(request, temp);
+      if ( response.httpStatus == 404 ) {
+        __log("error", "Datei nicht gefunden (404): " + url + "/" + command, "includes");
+        throw new Error( "File '" + url + "' not found");
+      }
+      if (response.error) {
+        __log("error", "File Download fehlgeschlagen: " + url + "/" + command + " - " + response.errorMsg, "includes");
+        throw new Error(response.error + "\n" + response.errorMsg);
+      }
+      return temp;
+    }
+  }
+}
+
+function __init() {
+  END_OF_INPUT = -1;
+
+  base64Chars = new Array(
+    'A','B','C','D','E','F','G','H',
+    'I','J','K','L','M','N','O','P',
+    'Q','R','S','T','U','V','W','X',
+    'Y','Z','a','b','c','d','e','f',
+    'g','h','i','j','k','l','m','n',
+    'o','p','q','r','s','t','u','v',
+    'w','x','y','z','0','1','2','3',
+    '4','5','6','7','8','9','+','/'
+  );
+
+  reverseBase64Chars = new Array();
+  for (var i=0; i < base64Chars.length; i++){
+    reverseBase64Chars[base64Chars[i]] = i;
+  }
+
+
+  // ------------------------------------------------------------------------------------------------
+  // JSON
+  // ------------------------------------------------------------------------------------------------
+  if (typeof JSON !== "object") {
+    JSON = {};
+  }
+  
+  (function () {
+    "use strict";
+    
+    var rx_one = /^[\],:{}\s]*$/;
+    var rx_two = /\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g;
+    var rx_three = /"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g;
+    var rx_four = /(?:^|:|,)(?:\s*\[)+/g;
+    var rx_escapable = /[\\"\u0000-\u001f\u007f-\u009f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g;
+    var rx_dangerous = /[\u0000\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g;
+    
+    function f(n) {
+      return (n < 10)
+          ? "0" + n
+          : n;
+    }
+    
+    function this_value() {
+      return this.valueOf();
+    }
+    
+    if (typeof Date.prototype.toJSON !== "function") {
+      
+      Date.prototype.toJSON = function () {
+        
+        return isFinite(this.valueOf())
+            ? (
+                this.getUTCFullYear()
+                + "-"
+                + f(this.getUTCMonth() + 1)
+                + "-"
+                + f(this.getUTCDate())
+                + "T"
+                + f(this.getUTCHours())
+                + ":"
+                + f(this.getUTCMinutes())
+                + ":"
+                + f(this.getUTCSeconds())
+                + "Z"
+            )
+            : null;
+      };
+      
+      Boolean.prototype.toJSON = this_value;
+      Number.prototype.toJSON = this_value;
+      String.prototype.toJSON = this_value;
+    }
+    
+    var gap;
+    var indent;
+    var meta;
+    var rep;
+    
+    
+    function quote(string) {
+      rx_escapable.lastIndex = 0;
+      return rx_escapable.test(string)
+          ? "\"" + string.replace(rx_escapable, function (a) {
+        var c = meta[a];
+        return typeof c === "string"
+            ? c
+            : "\\u" + ("0000" + a.charCodeAt(0).toString(16)).slice(-4);
+      }) + "\""
+          : "\"" + string + "\"";
+    }
+    
+    
+    function str(key, holder) {
+      var i;          // The loop counter.
+      var k;          // The member key.
+      var v;          // The member value.
+      var length;
+      var mind = gap;
+      var partial;
+      var value = holder[key];
+      
+      if (
+          value
+          && typeof value === "object"
+          && typeof value.toJSON === "function"
+      ) {
+        value = value.toJSON(key);
+      }
+      
+      if (typeof rep === "function") {
+        value = rep.call(holder, key, value);
+      }
+      
+      switch (typeof value) {
+        case "string":
+          return quote(value);
+        
+        case "number":
+          
+          return (isFinite(value))
+              ? String(value)
+              : "null";
+        
+        case "boolean":
+        case "null":
+          
+          return String(value);
+          
+        case "object":
+          
+          if (!value) {
+            return "null";
+          }
+          
+          gap += indent;
+          partial = [];
+          
+          if (Object.prototype.toString.apply(value) === "[object Array]") {
+            
+            length = value.length;
+            for (i = 0; i < length; i += 1) {
+              partial[i] = str(i, value) || "null";
+            }
+            
+            v = partial.length === 0
+                ? "[]"
+                : gap
+                    ? (
+                        "[\n"
+                        + gap
+                        + partial.join(",\n" + gap)
+                        + "\n"
+                        + mind
+                        + "]"
+                    )
+                    : "[" + partial.join(",") + "]";
+            gap = mind;
+            return v;
+          }
+          
+          if (rep && typeof rep === "object") {
+            length = rep.length;
+            for (i = 0; i < length; i += 1) {
+              if (typeof rep[i] === "string") {
+                k = rep[i];
+                v = str(k, value);
+                if (v) {
+                  partial.push(quote(k) + (
+                      (gap)
+                          ? ": "
+                          : ":"
+                  ) + v);
+                }
+              }
+            }
+          } else {
+            
+            for (k in value) {
+              if (Object.prototype.hasOwnProperty.call(value, k)) {
+                v = str(k, value);
+                if (v) {
+                  partial.push(quote(k) + (
+                      (gap)
+                          ? ": "
+                          : ":"
+                  ) + v);
+                }
+              }
+            }
+          }
+          
+          v = partial.length === 0
+              ? "{}"
+              : gap
+                  ? "{\n" + gap + partial.join(",\n" + gap) + "\n" + mind + "}"
+                  : "{" + partial.join(",") + "}";
+          gap = mind;
+          return v;
+      }
+    }
+    
+    if (typeof JSON.stringify !== "function") {
+      meta = {    // table of character substitutions
+        "\b": "\\b",
+        "\t": "\\t",
+        "\n": "\\n",
+        "\f": "\\f",
+        "\r": "\\r",
+        "\"": "\\\"",
+        "\\": "\\\\"
+      };
+      JSON.stringify = function (value, replacer, space) {
+        
+        var i;
+        gap = "";
+        indent = "";
+                
+        if (typeof space === "number") {
+          for (i = 0; i < space; i += 1) {
+            indent += " ";
+          }
+          
+        } else if (typeof space === "string") {
+          indent = space;
+        }
+        
+        rep = replacer;
+        if (replacer && typeof replacer !== "function" && (
+            typeof replacer !== "object"
+            || typeof replacer.length !== "number"
+        )) {
+          throw new Error("JSON.stringify");
+        }
+        
+        return str("", {"": value});
+      };
+    }
+    
+    
+    if (typeof JSON.parse !== "function") {
+      JSON.parse = function (text, reviver) {
+        
+        var j;
+        
+        function walk(holder, key) {
+          
+          var k;
+          var v;
+          var value = holder[key];
+          if (value && typeof value === "object") {
+            for (k in value) {
+              if (Object.prototype.hasOwnProperty.call(value, k)) {
+                v = walk(value, k);
+                if (v !== undefined) {
+                  value[k] = v;
+                } else {
+                  delete value[k];
+                }
+              }
+            }
+          }
+          return reviver.call(holder, key, value);
+        }
+        
+        text = String(text);
+        rx_dangerous.lastIndex = 0;
+        if (rx_dangerous.test(text)) {
+          text = text.replace(rx_dangerous, function (a) {
+            return (
+                "\\u"
+                + ("0000" + a.charCodeAt(0).toString(16)).slice(-4)
+            );
+          });
+        }
+        
+        if (
+            rx_one.test(
+                text
+                    .replace(rx_two, "@")
+                    .replace(rx_three, "]")
+                    .replace(rx_four, "")
+            )
+        ) {
+          
+          j = eval("(" + text + ")");
+          
+          return (typeof reviver === "function")
+              ? walk({"": j}, "")
+              : j;
+        }
+        
+        throw new SyntaxError("JSON.parse");
+      };
+    }
+  }());
+  
+
+
+  // ------------------------------------------------------------------------------------------------
+  // ------------------------------------------------------------------------------------------------
+  // HTTP
+  // ------------------------------------------------------------------------------------------------
+
+  /****************
+  # Connect InDesign to the web
+  * HTTPS supported 
+  * Works form CS4 to CC 2022 (ExtendScript based library)
+  * Based on VBScript/ServerXMLHTTP (Win) AppleScript/curl (Mac) relies on app.doScript()
+
+  ## Getting started
+  See examples/connect.jsx
+
+  * @Version: 1.37
+  * @Date: 2023-10-28
+  * @Author: Gregor Fellenz, http://www.publishingx.de
+  * Acknowledgments: 
+  ** Library design pattern from Marc Autret https://forums.adobe.com/thread/1111415
+  */
+
+  $.global.hasOwnProperty('restix') || (function (HOST, SELF) {
+    HOST[SELF] = SELF;
+
+    /****************
+    * PRIVATE
+    */
+    var INNER = {};
+    INNER.version = "2025-11-04-1.4";
+
+
+    /** Returns if the operating system is windows 
+    * @return {String} true | false
+    */
+    INNER.isWindows = function () {
+      return ($.os.indexOf("Windows") > -1);
+    }
+
+    /** Check the request information object and construct a full URL
+    * @param {request} Request information object
+    * @returns{request} Request information object or throws an error
+    */
+    INNER.checkRequest = function (request) {
+      if (request.url == undefined || request.url == "") throw Error("No property [url] found/set");
+      if (request.url.toString().slice(-1) == "/") request.url = request.url.toString().slice(0, -1);
+
+      if (request.command == undefined) request.command = "";
+      if (request.command.toString()[0] == "/") request.command = request.command.toString().substr(1);
+
+      if (request.port == undefined) request.port = "";
+      if (isNaN(request.port)) throw Error("[port] is Not a Number");
+
+      // Add port
+      if (request.port != "") {
+        request.fullURL = request.url + ":" + request.port + "/";
+      }
+      else {
+        request.fullURL = request.url + "/";
+      }
+
+      // Add command 
+      if (request.command != "") {
+        request.fullURL = request.fullURL + request.command;
+      }
+
+      // not encoded, we need to encode;
+      if (decodeURI(request.fullURL) == request.fullURL) {
+        request.fullURL = encodeURI(request.fullURL);
+      }
+
+      if (request.method == undefined || request.method == "") request.method = "GET";
+      if (!(request.method == "GET" || request.method == "POST" || request.method == "PUT" || request.method == "PATCH" || request.method == "DELETE" || request.method == "HEAD")) throw Error("Method " + request.method + " is not supported");  // Missing HEAD 
+
+      if (request.method == "POST" && (request.binaryFilePath == undefined || request.binaryFilePath == "")) request.binaryFilePath = false;
+
+      if (request.headers == undefined) request.headers = [];
+      if (!(request.headers instanceof Array)) throw Error("Provide [headers] as Array of {name:'',value''} objects");
+      if (request.body == undefined || request.body == "") request.body = false;
+
+      if (request.body && request.binaryFilePath) throw Error("You must not provide [body] and [binaryFilePath]");
+
+      if (request.unsafe == undefined) request.unsafe = false;
+
+      if (request.proxy == undefined) request.proxy = false;
+
+      return request;
+    }
+
+    /** The main connection function. Need to be slashed
+    * @return {response} Response result object 
+    */
+    INNER.processRequest = function (request, outFile) {
+      var response = {
+        error: false,
+        errorMsg: "",
+        body: "",
+        httpStatus: 900
+      };
+
+      var scriptCommands = [];
+      var result = "";
+
+      if (INNER.isWindows()) {
+        // Since Win10 Update Feb 2019 msxml3 does not work anymore...
+        scriptCommands.push('Dim xHttp : Set xHttp = CreateObject("MSXML2.ServerXMLHTTP.6.0")');
+        // Konstanten für ADODB.Stream
+        scriptCommands.push('Const adTypeBinary = 1');
+        scriptCommands.push('Const adSaveCreateOverWrite = 2');
+        scriptCommands.push('Const adModeReadWrite = 3');
+
+        scriptCommands.push('Dim res');
+        scriptCommands.push('On Error Resume Next');
+        scriptCommands.push('xHttp.Open "' + request.method + '", "' + request.fullURL + '", False');
+
+        if (request.proxy != false) {
+          // xHttp.SetProxy 1
+          scriptCommands.push('xHttp.setProxy 2, "' + request.proxy + '"');
+        }
+
+        for (var i = 0; i < request.headers.length; i++) {
+          scriptCommands.push('xHttp.setRequestHeader "' + request.headers[i].name + '","' + request.headers[i].value.replace(/"/g, '""') + '"');
+        }
+        if (request.unsafe) {
+          //~ ' 2 stands for SXH_OPTION_IGNORE_SERVER_SSL_CERT_ERROR_FLAGS
+          //~ ' 13056 means ignore all server side cert error
+          scriptCommands.push('xHttp.setOption 2, 13056');
+        }
+
+        if (request.body) {
+          scriptCommands.push('xHttp.Send "' + request.body.replace(/"/g, '""').replace(/\n|\r/g, '') + '"');
+        }
+        else if ((request.method == "POST" || request.method == "PUT") && request.binaryFilePath) {
+          // http://www.vbforums.com/showthread.php?418570-RESOLVED-HTTP-POST-a-zip-file
+          scriptCommands.push('    Dim sFile');
+          scriptCommands.push('    sFile = "' + request.binaryFilePath + '"');
+
+
+          scriptCommands.push('    Set objStream = CreateObject("ADODB.Stream")');
+          scriptCommands.push('    objStream.Type = adTypeBinary');
+          scriptCommands.push('    objStream.Mode = adModeReadWrite');
+          scriptCommands.push('    objStream.Open');
+          scriptCommands.push('    objStream.LoadFromFile(sFile)');
+
+          scriptCommands.push('    xHttp.SetRequestHeader "Content-Length", objStream.Size');
+          scriptCommands.push('    xHttp.Send objStream.Read(objStream.Size)');
+          scriptCommands.push('    Set objStream= Nothing');
+        }
+        else {
+          scriptCommands.push('xHttp.Send');
+        }
+
+        scriptCommands.push('If err.Number = 0 Then');
+
+        if (outFile) {
+          scriptCommands.push('    Set objStream = CreateObject("ADODB.Stream")');
+          scriptCommands.push('    objStream.Type = adTypeBinary');
+          scriptCommands.push('    objStream.Mode = adModeReadWrite');
+          scriptCommands.push('    objStream.Open');
+          scriptCommands.push('    objStream.Write xHttp.responseBody');
+          scriptCommands.push('    objStream.SaveToFile "' + outFile.fsName + '" , adSaveCreateOverWrite');
+          scriptCommands.push('    objStream.Close');
+          scriptCommands.push('    Set objStream= Nothing');
+          scriptCommands.push('	res = "outFile" &  vbCr & "-----http-----" & xHttp.getAllResponseHeaders &  vbCr & "-----http-----" &  xHttp.status');
+        }
+        else {
+          scriptCommands.push('	res = xHttp.responseText  &  vbCr & "-----http-----" & xHttp.getAllResponseHeaders &  vbCr & "-----http-----" &  xHttp.status');
+        }
+
+        scriptCommands.push('Else');
+        scriptCommands.push('	res =  "xHttpError "  & Err.Description &  " " & Err.Number');
+        scriptCommands.push('End If');
+
+        scriptCommands.push('Set xHttp = Nothing');
+        scriptCommands.push('returnValue = res');
+
+        scriptCommands = scriptCommands.join("\r\n");
+
+        try {
+          result = app.doScript(scriptCommands, ScriptLanguage.VISUAL_BASIC);
+        }
+        catch (e) {
+          result = "doScriptError: " + e.message + " #" + e.number;
+          if (e.number == 104705) {
+            result += " Please start InDesign once with administrator rights. Close it and start it again as a normal user.";
+          }
+        }
+
+      }
+      else { // Mac
+        // -L follow redirects 
+        var curlString = 'curl --silent --max-time 30 --show-error -g -L ';
+        for (var i = 0; i < request.headers.length; i++) {
+          curlString += (' -H \'' + request.headers[i].name + ': ' + request.headers[i].value + '\'');
+        }
+        if (request.unsafe) {
+          // Es gab einen Fall wo am Mac mit -k es nicht funktioniert hat curl: (35) Server aborted the SSL handshake
+          curlString += ' -k ';
+        }
+
+        if (request.proxy != false) {
+          curlString += ' --proxy ' + request.proxy
+        }
+
+        if (request.method == "HEAD") {
+          curlString += ' -I --head ';
+        }
+        else if (outFile) {
+          curlString += ' -X ' + request.method;
+        }
+        else {
+          curlString += ' -X ' + request.method + ' -i ';
+        }
+        if (request.body) {
+          curlString += ' -d \'' + request.body.replace(/'/g, "\\\\\"").replace(/"/g, "\\\"").replace(/\n|\r/g, '') + '\'';
+        }
+        else if ((request.method == "POST" || request.method == "PUT") && request.binaryFilePath) {
+          curlString += ' --data-binary \'@' + request.binaryFilePath + '\'';
+        }
+
+        if (outFile) {
+          curlString += ' -w \'outFile\n-----http-----%{http_code}\'';
+          curlString += ' -o \'' + outFile.fsName + '\''
+        }
+        else {
+          curlString += ' -w \'\n-----http-----%{http_code}\'';
+        }
+        curlString += ' \'' + request.fullURL + '\'';
+        // $.writeln( "\n\n=========curl==============\n" + curlString + "\n=========/curl==============\n\n");
+        try {
+          result = app.doScript('do shell script "' + curlString + '"', ScriptLanguage.APPLESCRIPT_LANGUAGE);
+        }
+        catch (e) {
+          result = "doScriptError: " + e.message + " #" + e.number;
+        }
+      }
+
+      // Fill response 
+      if (typeof result == 'undefined') {
+        throw Error("No result value. Probably System Script could not run?");
+      }
+      if (result.match(/^xHttpError|^curl: \(\d+\)|^doScriptError:/)) {
+        response.error = true;
+        response.errorMsg = result;
+      }
+      else {
+        if (INNER.isWindows()) {
+          var resArray = result.split("\r-----http-----");
+          if (resArray.length == 3) {
+            response.body = resArray[0];
+            response.head = resArray[1];
+            response.httpStatus = resArray[2] * 1;
+          }
+          else {
+            throw Error("Wrong result value: [" + result + "]");
+          }
+        }
+        else {
+          // $.writeln( "-+-+-+-+-+-+-+-+\n\n" + result );
+          var resArray = result.split("\r-----http-----");
+          if (resArray.length == 2) {
+            if (request.method == "HEAD") {
+              response.head = resArray[0];
+              response.body = "";
+            }
+            else {
+              var headBodySplit = resArray[0].split(/\r\n?\r\n?/);
+              if (headBodySplit.length > 2) {
+                // multiple header sections (redirects)
+                response.head = headBodySplit[headBodySplit.length - 2];
+                response.body = headBodySplit.slice(-1)[0];
+              }
+              else if (headBodySplit.length == 2) {
+                response.head = headBodySplit[0];
+                response.body = headBodySplit[1];
+              }
+              else {
+                response.body = resArray[0];
+                response.head = "";
+              }
+            }
+            response.httpStatus = resArray[1] * 1;
+          }
+          else {
+            throw Error("Wrong result value: [" + result + "]");
+          }
+        }
+
+
+        var headSplit = response.head.split(/\n|\r/);
+        response.head = {}
+        for (var h = 0; h < headSplit.length; h++) {
+          var headProperty = headSplit[h];
+          if (headProperty.replace(/\s/g, '') == "") continue;
+          var colonIndex = headProperty.indexOf(":");
+          response.head[headProperty.substring(0, colonIndex).toLowerCase()] = headProperty.substring(colonIndex + 1).replace(/^ +/, "");
+        }
+      }
+
+      return response;
+    }
+
+
+    /****************
+    * API 
+    */
+    /** Process an HTTP Request 
+    * @param {request} Request object with connection Information
+    * @return {response} Response object {error:error, errorMsg:errorMsg, body:body, httpStatus:httpStatus}
+    */
+    SELF.fetch = function (request) {
+      request = INNER.checkRequest(request);
+      return INNER.processRequest(request, false);
+    }
+
+    /** Process an HTTP Request and writes the result to a give File
+    * @param {request} Request Object with connection Information
+    * @param {outFile} File to write to
+    * @return {response} Response object {error:error, errorMsg:errorMsg, body:body, httpStatus:httpStatus}
+    */
+    SELF.fetchFile = function (request, outFile) {
+      if (outFile == undefined) throw Error("No file provided");
+      if (outFile instanceof String) outFile = File(outFile);
+
+      request = INNER.checkRequest(request);
+      var response = INNER.processRequest(request, outFile);
+      if (outFile.length == 0) {
+        outFile.remove();
+      }
+      if (!outFile.exists) {
+        response.error = true;
+        response.errorMsg = "File was not created\n" + response.errorMsg;
+      }
+      return response;
+    }
+
+  })($.global, { toString: function () { return 'restix'; } });
+}

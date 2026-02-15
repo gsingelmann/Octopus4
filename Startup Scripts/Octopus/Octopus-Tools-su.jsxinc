@@ -1,0 +1,200 @@
+// Change
+function __alert( level, msg, titel, btn, is_palette ) {
+  var rs = true;
+  var kind = is_palette ? "palette" : "dialog"
+  try {
+    if ( ! btn ) btn = "OK";
+
+    if ( ! titel ) titel = localize( {"de": "Obacht", "en": "be mindful"} );
+    var w = new Window( kind + " {text: '" + titel + "'}");
+    w.g = w.add("group {orientation: 'row', alignChildren: ['left', 'top']}")
+    w.g.spacing = 20;
+
+    var icon = new File( PATH_DATA_FOLDER + "/images/icons/" + level + ".png" );
+    if ( icon.exists ) {
+      try {
+        w.g.add("image", undefined, icon);
+      } catch(e) {
+        __log("error", "loading alert-icon: " + e.message, "alert");
+      }
+    }
+
+    // Schätzen, wie breit das Fenster sein muss
+    var aux = msg.split("\n");
+    var len = 0;
+    for ( var n = 0; n < aux.length; n++ ) {
+      len = Math.max( len, aux[n].length );
+    }
+    var width = Math.min( 400, len * 7 + 45 )
+    w.msg = w.g.add("statictext", undefined, msg, {multiline: true} );
+    w.msg.preferredSize.width = width;
+
+    if ( btn.constructor.name == "Array") {
+      w.btns = [];
+      w.btn_group = w.add("group {orientation: 'row', alignChildren: ['center', 'top'] }");
+      for ( var n = 0; n < btn.length; n++ ) {
+        w.btns.push( w.btn_group.add("button", undefined, btn[n].text ));
+        (function( _button, _value ) {
+          _button.onClick = function() { rs = _value; this.window.close() } 
+        })( w.btns[n], btn[n].value )
+      }
+    } else {
+      w.btn = w.add( "button", undefined, btn )
+      w.btn.onClick = function() {
+        w.close();
+      }
+    }
+    w.show();
+  } catch(e) {
+    __log("error", e.message + " on " + e.line, "alert");
+  }
+	return rs;
+}
+function __move_scriptui_to( p, x, y ) {
+	var c = switch_coords_system( x, y );
+	var screen_matches = [];
+	// Is there a screen, that contains the target coordinates?
+	// If not, is there a screen that is the same longi- or latitude?
+  for ( var n = 0; n < $.screens.length; n++ ) {
+		var is_inside = 0;
+		if ( $.screens[n].left < c[0] &&  c[0] + p.bounds.width < $.screens[n].right ) {
+			is_inside += 1;
+		}
+		// screen.bottom is the higher value in a cartesian coords
+		if ( $.screens[n].top < c[1] - p.bounds.height &&  c[1] < $.screens[n].bottom ) {
+			is_inside += 2;
+		}
+		if ( is_inside == 3 ) {
+			p.location = [x,y];
+			return [x,y];
+		} else {
+			screen_matches[n] = is_inside;
+		}
+	}
+	var x1 = null, y1 = null, c1;
+	for ( var n = 0; n < $.screens.length; n++ ) {
+		if ( screen_matches[n] == 1 ) {
+			x1 = c[0];
+			y1 = ($.screens[n].bottom < c[1] ) ? ($.screens[n].bottom - 20) : ($.screens[n].top + p.bounds.height);
+			c1 = switch_coords_system( x1, y1 );
+			p.location = c1;
+			return c1;
+		}
+		if ( screen_matches[n] == 2 ) {
+			x1 = ($.screens[n].right < c[0] ) ? ($.screens[n].right - p.bounds.width - 20) : ($.screens[n].left + 20);
+			y1 = c[1];
+			c1 = switch_coords_system( x1, y1 );
+			p.location = c1;
+			return c1;
+		}
+	}
+	c1 = switch_coords_system( $.screens[n].left, $.screens[n].bottom );
+	p.location = c1;
+	return c1;
+
+  function switch_coords_system( x, y ) {
+    var ps;
+    for ( var n = 0; n < $.screens.length; n++ ) {
+      if ( $.screens[n].primary ) ps = $.screens[n];
+    }
+    return [ x, ps.bottom - y ]
+  }  
+}
+function __insert_head( w, script_id ) {
+  if ( ! script_id ) return;
+  try {
+    // ------------------------------  Kopfbild -------------------------------
+    w.fish = w.add( 'group {orientation: "stack", alignChildren: ["fill", "center"]}');
+    var _fl = w.fish.add("group {alignChildren: ['left', 'bottom']}");
+    var hd = __get_head_png( script_id );
+    try {
+      if ( hd ) _fl.add("image", undefined, hd );
+    } catch(e) {
+      // Beim Download kann was kaputt gegangen sein. Dann weg damit.
+      __log("error", e.message + " on " + e.line, "inserting png");
+      if ( hd.exists) hd.remove();
+    }
+    // ------------------------------  Fragezeichen -------------------------------
+    var _fr = w.fish.add("group {alignChildren: ['right', 'bottom']}");
+    var qm = new File( PATH_DATA_FOLDER + "/images/icons/qm.png" );
+    var help = qm.exists ?
+              _fr.add( 'iconbutton', undefined, qm, {style: 'toolbutton'}) :
+              _fr.add( 'button', undefined, '?');
+    help.onClick = function() { 
+      var sn = this.window.hasOwnProperty("script_name") ? this.window.script_name : null;
+      var url = __get_help_url( sn );
+      __log("info", "Calling help-url: " + url, script_id);
+      __open_website( url ) 
+    };
+  } catch(e) {
+    __log("error", e.message + " on " + e.line,  "Insert Head");
+  }
+}
+function __get_help_url( script_id ) {
+  try {
+    var cfg = readJson( PATH_DATA_FOLDER + "/config.json" );
+    for ( var n = 0; n < cfg.length; n++ ) {
+      if ( cfg[n].id == script_id && cfg[n].hasOwnProperty("help_url") ) {
+        return cfg[n].help_url;
+      }
+    }
+  } catch(e) {
+    __log("error", e.message + " on " + e.line, "get help")
+  }
+  return "https://www.project-octopus.net";
+}
+function __get_head_png( script_id ) {
+  try {
+    __log("info", "Getting head: " + script_id );
+    // -------------------------------------------------------------------------------------
+    //  Name/URL zusammensetzen
+    var base = PATH_DATA_FOLDER + "/images/heads"
+    var sfmap = { "0": "32", "0.5": "5e", "0.51": "c2", "1": "f0"};
+    var uib = app.generalPreferences.uiBrightnessPreference;
+    var suffix = sfmap.hasOwnProperty(uib) ? sfmap[ uib ] : "5e";
+    var name = script_id + "-" + suffix + ".png";
+    var path = base + "/" + name;
+
+    var hd_file = new File( path );
+    if ( hd_file.exists ) {
+      return hd_file;
+    }
+  } catch(e) {
+    __log("error", e.message + " on " + e.line, "insert-head");
+  }
+}
+function __open_website(url) {
+	url = url.split(" ");
+	url = url.join("+");
+	url = encodeURI( url );
+	if (File.fs == "Macintosh") {
+		var tempFile = File( Folder.myDocuments.fullName + "/tempurl.webloc");
+		tempFile.open("w");
+		tempFile.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\
+		<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\
+		<plist version=\"1.0\">\
+			<dict>\
+				<key>URL</key>\
+				<string>"+url+"</string>\
+			</dict>\
+		</plist>");
+		tempFile.close();
+		tempFile.execute();
+		for (var aux = 0; aux < 100; aux++) {
+			$.sleep(10);
+		}
+		tempFile.remove();
+	} else {
+		var tempFile = File(Folder.myDocuments.fullName + "/temp.url");
+		tempFile.open("w");
+		tempFile.write("[InternetShortcut]\
+URL="+url);
+		tempFile.close();
+		tempFile.execute();
+		for (var aux = 0; aux < 100; aux++) {
+			$.sleep(10);
+		}
+		tempFile.remove();
+	}
+}
+

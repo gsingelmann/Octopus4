@@ -1,0 +1,251 @@
+{
+  "collect-docfonts": {
+    "Schriften sammeln": {
+      "en": "Collect fonts",
+      "it": "Raccogli i font",
+      "fr": "Collecter les polices"
+    },
+    "Schriften nicht sammeln": {
+      "en": "Do not collect fonts",
+      "it": "Non raccogliere i font",
+      "fr": "Ne pas collecter les polices"
+    },
+    "Sammle Schriften, wenn in diesen Pfaden gespeichert wird": {
+      "en": "Collect fonts when saving to these paths",
+      "it": "Raccogli i font quando si salva in questi percorsi",
+      "fr": "Collecter les polices lors de l'enregistrement dans ces chemins"
+    },
+    "Sammle keine Schriften, wenn in diesen Pfaden gespeichert wird": {
+      "en": "Do not collect fonts when saving to these paths",
+      "it": "Non raccogliere i font quando si salva in questi percorsi",
+      "fr": "Ne pas collecter les polices lors de l'enregistrement dans ces chemins"
+    },
+    "help-text": {
+      "de": "Sie können Pfade eingeben, bei denen das Skript beim Speichern des Dokuments entscheidet, ob Schriften gesammelt werden sollen oder nicht. Geben Sie jeden Pfad in eine neue Zeile ein.",
+      "en": "You can enter paths where the script will decide whether to collect fonts or not when saving the document. \nEnter each path on a new line.",
+      "it": "È possibile inserire i percorsi in cui lo script deciderà se raccogliere o meno i font durante il salvataggio del documento. Inserisci ogni percorso su una nuova riga.",
+      "fr": "Vous pouvez entrer des chemins où le script décidera de collecter ou non les polices lors de l'enregistrement du document. Entrez chaque chemin sur une nouvelle ligne."
+    },
+    "active-or-blocking": {
+      "de": "Aktive Liste oder Blockliste",
+      "en": "Active list or blocklist",
+      "it": "Elenco attivo o elenco di blocco",
+      "fr": "Liste active ou liste de blocage"
+    },
+    "close": {
+      "de": "Schließen",
+      "en": "Close",
+      "it": "Chiudi",
+      "fr": "Fermer"
+    },
+    "Fehler beim Kopieren von ": {
+      "en": "Error copying ",
+      "it": "Errore durante la copia di ",
+      "fr": "Erreur lors de la copie de "
+    },
+    "adobe-fonts": {
+      "de": "Adobe Fonts, die über die Creative Cloud hinzugefügt wurden, können nicht kopiert werden",
+      "en": "Adobe Fonts added via Creative Cloud cannot be copied",
+      "it": "I font Adobe aggiunti tramite Creative Cloud non possono essere copiati",
+      "fr": "Les polices Adobe ajoutées via Creative Cloud ne peuvent pas être copiées"
+    },
+    "does-not-exist": {
+      "de": "Die Schriftdatei existiert nicht",
+      "en": "The font file does not exist",
+      "it": "Il file del font non esiste",
+      "fr": "Le fichier de police n'existe pas"
+    }
+  },
+  "dashboard": {
+    "tab1": {
+      "de": "Verfügbare Scripte",
+      "en": "Available Scripts"
+    },
+    "tab2": {
+      "de": "Scriptsets",
+      "en": "Scriptsets"
+    },
+    "activate": {
+      "de": "Aktivieren",
+      "en": "activate"
+    },
+    "deactivate": {
+      "de": "Deaktivieren",
+      "en": "deactivate"
+    },
+    "help": {
+      "de": "Handbuch",
+      "en": "Manual"
+    }
+  },
+  "exporter": {
+    "doc-group": {
+      "de": "Welche Dokumente",
+      "en": "Which documents"
+    },
+    "crnt_doc": {
+      "de": "Aktuelles Dokument",
+      "en": "Current Document"
+    },
+    "open_docs": {
+      "de": "Offene Dokumente",
+      "en": "Open Documents"
+    },
+    "crnt_book": {
+      "de": "Aktuelles Buch",
+      "en": "Current Book"
+    },
+    "folder_content": {
+      "de": "Ordnerinhalte",
+      "en": "Docs in Folder"
+    },
+    "choose_folder": {
+      "de": "In welchem Ordner liegen die Dokumente?",
+      "en": "Which folder contains the documents?"
+    },
+    "choose_tgt_folder": {
+      "de": "Wo soll gespeichert werden?",
+      "en": "Where do you want the files to be saved to?"
+    },
+    "save_location_hd": {
+      "de": "Speicherort",
+      "en": "Location"
+    },
+    "need_something_open": {
+      "de": "Es muss mindestens ein Dokument oder Buch geoeffnet sein",
+      "en": "You need an open document or book"
+    },
+    "leave_same": {
+      "de": "Lassen Sie die Presets identisch, um nur ein PDF zu exportieren",
+      "en": "Leave presets identical to export only one PDF"
+    },
+    "doc_group": {
+      "de": "Dokumente",
+      "en": "Documents"
+    },
+    "pdf_group": {
+      "de": "PDF",
+      "en": "PDF"
+    },
+    "package_group": {
+      "de": "Verpacken",
+      "en": "Package"
+    },
+    "save": {
+      "de": "Speichern",
+      "en": "Save"
+    },
+    "save_close": {
+      "de": "Speichern & Schliessen",
+      "en": "Save & Close"
+    },
+    "close": {
+      "de": "Schliessen ohne Speichern",
+      "en": "Close w/o Saving"
+    },
+    "saveas": {
+      "de": "Speichern unter",
+      "en": "Save as"
+    },
+    "package": {
+      "de": "Verpacken",
+      "en": "Package"
+    },
+    "export_group": {
+      "de": "Exportieren",
+      "en": "Export"
+    },
+    "pdfexport": {
+      "de": "PDF exportieren",
+      "en": "Export PDF"
+    },
+    "idmlexport": {
+      "de": "IDML exportieren",
+      "en": "Export IDML"
+    },
+    "jpgexport": {
+      "de": "JPG exportieren",
+      "en": "Export JPG"
+    },
+    "pngexport": {
+      "de": "PNG exportieren",
+      "en": "Export PNG"
+    },
+    "targetfolder": {
+      "de": "An Zielordner",
+      "en": "In target folder"
+    },
+    "relativefolder": {
+      "de": "Relativ zum INDD",
+      "en": "Relative to INDD"
+    },
+    "cancel": {
+      "de": "Abbrechen",
+      "en": "Cancel"
+    },
+    "export": {
+      "de": "Exportieren",
+      "en": "Export"
+    },
+    "savemsg": {
+      "de": " Dokumente gespeichert",
+      "en": " documents saved"
+    },
+    "saveclosemsg": {
+      "de": " Dokumente gespeichert und geschlossen",
+      "en": " documents saved and closed"
+    },
+    "closemsg": {
+      "de": " Dokumente geschlossen",
+      "en": " documents closed"
+    },
+    "no_docs": {
+      "de": "Keine Dokumente ausgewaehlt",
+      "en": "No documents to process"
+    },
+    "doc_not_saved": {
+      "de": "Dokument _1_ ist nicht gespeichert und wird ignoriert",
+      "en": "Document _1_ ist not saved yet and will be ignored"
+    },
+    "view_pdf": {
+      "de": "PDF öffnen:",
+      "en": "View PDF:"
+    },
+    "copy_fonts": {
+      "de": "Fonts kopieren",
+      "en": "Copy fonts"
+    },
+    "copy_links": {
+      "de": "Links kopieren",
+      "en": "Copy links"
+    },
+    "update_links": {
+      "de": "Links aktualisieren",
+      "en": "Update links"
+    },
+    "hidden_layers": {
+      "de": "Inkl. ausgeblendeter Ebenen",
+      "en": "Include hidden layers"
+    },
+    "create_report": {
+      "de": "Bericht erzeugen",
+      "en": "Create report"
+    },
+    "idml": {
+      "de": "IDML erzeugen",
+      "en": "Create IDML"
+    },
+    "pdf": {
+      "de": "PDF exportieren",
+      "en": "Export PDF"
+    },
+    "pdf_style": {
+      "de": "PDF-Vorgabe",
+      "en": "PDF-Preset"
+    },
+    "images": {
+      "de": "Bilder",
+      "en": "Images"
+    }
+  }
+}

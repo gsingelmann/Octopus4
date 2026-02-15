@@ -1,17 +1,27 @@
-var dbg = false;
+var dbg = true;
 init();
 
 main();
 
 function main() {
-  var folder = Folder.selectDialog("Bitte wählen Sie einen Ordner aus:");
+  var base_folder = Folder.selectDialog("Bitte wählen Sie einen Ordner aus:");
 
-  if (!folder) {
+  if (!base_folder) {
     alert("Kein Ordner ausgewählt. Vorgang abgebrochen.");
     return;
   }
 
-	var index_file = new File(folder.fullName + "/index.json");
+	var ignore_file = new File( base_folder.fullName + "/octignore.txt" );
+	var ignore_list = [];
+	if ( ignore_file.exists ) {
+		ignore_file.encoding = "utf-8";
+		ignore_file.open("r");
+		var raw = ignore_file.read();
+		ignore_file.close();
+		ignore_list = raw.replace(/\r/g, "\n").replace(/\n\n+/g, "\n").split("\n");
+	}
+
+	var index_file = new File(base_folder.fullName + "/index.json");
 	if ( index_file.exists ) {
 		index_file.encoding = "utf-8";
 		index_file.open("r");
@@ -24,7 +34,7 @@ function main() {
 	var not_found = [];
 	for ( var n = 0; n < fileList.length; n++ ) not_found.push( fileList[n].id );
 
-  scanFolder(folder, folder, fileList);
+  scanFolder(base_folder, base_folder, fileList);
 
 	if ( not_found.length ) {
 		for ( var o = 0; o < not_found.length; o++ ) {
@@ -65,7 +75,7 @@ function main() {
     return filename.split(".").pop();
   }
   function isHiddenFile(filename) {
-    return filename.charAt(0) === '.';
+    return filename.charAt(0) === '.' || filename.charAt(0) === '~' || filename.search(/\/\./) != -1;
   }
   function getSubpath(file, rootFolder) {
     var filePath = file.parent.fsName;
@@ -81,6 +91,16 @@ function main() {
 
     return subpath;
   }
+	function ignore_this( filename ) {
+		if ( isHiddenFile(filename) ) return true;
+		for ( var n = 0; n < ignore_list.length; n++ ) {
+			if ( filename.search( ignore_list[n] ) != -1 ) {
+				if (dbg) $.writeln( "   IGNORE " + filename + " because of " + ignore_list[n] );
+				return true;
+			}
+		}
+		return false;
+	}
 
   function scanFolder(folder, rootFolder, fileList) {
 		if (dbg) $.writeln( "->" + folder.name )
@@ -98,13 +118,8 @@ function main() {
         var filename = files[i].name;
 				if (dbg) $.writeln( " ... " + filename );
 
-        // Überspringe versteckte Dateien und index.json
-        if (
-					isHiddenFile(filename) || 
-					filename.indexOf("index") != -1 ||
-					filename.indexOf("test") != -1 ||
-					filename.search(/jsonify/) != -1
-				) {
+        // Überspringe versteckte Dateien und Einträge aus octignore
+        if ( ignore_this( rootFolder.fullName.substr( base_folder.fullName.length + 1 ) + "/" +filename ) ) {
           continue;
         }
 

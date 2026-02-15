@@ -76,6 +76,62 @@
     "help": {
       "de": "Handbuch",
       "en": "Manual"
+    },
+    "last updated": {
+      "de": "Letztes Update ",
+      "en": "Last updated on "
+    },
+    "cancel": {
+      "de": "Abbrechen",
+      "en": "Cancel"
+    },
+    "ok": {
+      "de": "OK",
+      "en": "OK"
+    },
+    "setlist": {
+      "de": "Deklarierte Scriptordner",
+      "en": "Declared script folders"
+    },
+    "add_set": {
+      "de": "Ordner aufnehmen",
+      "en": "Add Folder"
+    },
+    "add_set_label": {
+      "de": "Ordner hinzufügen",
+      "en": "Add Folder Path"
+    },
+    "path": {
+      "de": "Pfad",
+      "en": "Path"
+    },
+    "choose-folder": {
+      "de": "Ordner auswählen",
+      "en": "Choose folder"
+    },
+    "settype": {
+      "de": "Typ der Sammlung",
+      "en": "Type of the set"
+    },
+    "setname": {
+      "de": "Name der Sammlung",
+      "en": "Name of the set"
+    },
+    "setpath": {
+      "de": "Pfad zum Skriptordner",
+      "en": "Path to the script folder"
+    },
+    "delete-set": {
+      "de": "Scripte deinstallieren",
+      "en": "Uninstall scripts"
+    },
+    "choose_folder": {
+      "de": "Wählen Sie den Ordner, in dem sich die Skripte befinden, die Sie hinzufügen möchten.",
+      "en": "Choose the folder where the scripts you want to add are located."
+    },
+    "cancel_confirm": {
+      "de": "Es wurden Änderungen vorgenommen. Wollen Sie wirklich abbrechen und alle Änderungen verwerfen?",
+      "en": "Changes have been made. Do you really want to cancel and discard all changes?"
     }
   },
   "exporter": {

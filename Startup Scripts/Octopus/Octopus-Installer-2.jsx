@@ -84,6 +84,7 @@ function install() {
   // -------------------------------------------------------------------------------------------
   //  Installationsschleife
   // -------------------------------------------------------------------------------------------
+  var nu = [], updated = [], failed = [], removed = [];
   var _pbw = new Window("palette");
   _pbw.pb = _pbw.add("progressbar", [undefined, undefined, 400, 20]);
   _pbw.pb.maxvalue = configs.length;
@@ -97,6 +98,7 @@ function install() {
         continue;
       }
       try {
+        $.bp( c.filename.search(/gradient/i) != -1);
         var tgt_path = get_tgt_path( c );
         __ensureFolder( tgt_path );
       } catch(e) {
@@ -104,6 +106,7 @@ function install() {
         continue;
       }
       var tgt_file = new File( tgt_path ), done;
+      var is_new = ! tgt_file.exists;
       if ( ! eq_filesize( c.check, tgt_path )) {
         var src_path = (c.base_path + "/" + c.subpath).replace(/\/$/, "");
 
@@ -119,15 +122,18 @@ function install() {
               true
             )
             __log("info", tgt_file.name + " installiert: " + tgt_file.exists, "installer" )
+            if ( is_new ) {
+              nu.push( c.id );
+            } else {
+              updated.push( c.id );
+            }
           } catch(e) {
             __log("error", "Download fehlgeschlagen (" + c.filename + "): " + e.message, "installer");
+            failed.push( c.id );
           }
           $.sleep(100);
 
         } else {
-          // --------------------------------------------------------------------
-          // ----------------------------------------------------- File
-
           // --------------------------------------------------------------------
           // ----------------------------------------------------- File
           try {
@@ -136,14 +142,22 @@ function install() {
               done = src.copy( tgt_path );
               if (!done) {
                 __log("error", "Kopieren fehlgeschlagen: " + src.fsName + " -> " + tgt_path, "installer");
+                failed.push( c.id );
               } else {
                 __log("info", tgt_path + " installiert", "installer");
+                if ( is_new ) {
+                  nu.push( c.id );
+                } else {
+                  updated.push( c.id );
+                }
               }
             } else {
               __log("error", "Quelldatei nicht gefunden: " + src.fsName, "installer");
+              failed.push( c.id );
             }
           } catch(e) {
             __log("error", "Datei-Operation fehlgeschlagen (" + c.filename + "): " + e.message, "installer");
+            failed.push( c.id );
           }
         }
       }
@@ -199,9 +213,16 @@ function install() {
       }
 
       now = new Date().getTime();
-      $.writeln( c.filename + ": " + ((now-then)/1000) + " secs")
+      // $.writeln( c.filename + ": " + ((now-then)/1000) + " secs")
     }
     __log("info", "Installation abgeschlossen (" + configs.length + " Configs verarbeitet)", "installer");
+    if ( nu.length > 0 || updated.length > 0 || failed.length > 0 ) {
+      var msg = "";
+      if ( nu.length > 0 ) msg += "Neue Installationen: " + nu.join(", ") + "\n";
+      if ( updated.length > 0 ) msg += "Aktualisierte Installationen: " + updated.join(", ") + "\n";
+      if ( failed.length > 0 ) msg += "Fehlerhafte Installationen: " + failed.join(", ") + "\n";
+      __alert("info", msg, "Installation abgeschlossen");
+    }
   } catch(e) {
     __log("error", e.message + " on " + e.line, "installer" );
   } finally {
@@ -274,8 +295,10 @@ function install() {
   }
   function eq_filesize( check, tgt_path ) {
     var tgt_file = new File( tgt_path );
+    var tgt_size = tgt_file.length;
+    $.writeln("Vergleiche: " + check + " mit " + tgt_size + " für " + tgt_path);
     // Ich weiß nicht, ob "exakt identische Länge" zu restriktiv ist
-    return Math.abs( tgt_file.length - check ) < 4;
+    return Math.abs( tgt_size - check ) < 4;
   }
 
   function get_submenu( menu_name, prnt_menu, after_menu ) {

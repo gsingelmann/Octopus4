@@ -10,6 +10,7 @@ function main() {
     alert("Kein Ordner ausgewählt. Vorgang abgebrochen.");
     return;
   }
+	var base_folder_name = base_folder.name;
 
 	var ignore_file = new File( base_folder.fullName + "/octignore.txt" );
 	var ignore_list = [];
@@ -118,8 +119,9 @@ function main() {
         var filename = files[i].name;
 				if (dbg) $.writeln( " ... " + filename );
 
+				// $.bp( filename.search(/jpg/) != -1);
         // Überspringe versteckte Dateien und Einträge aus octignore
-        if ( ignore_this( rootFolder.fullName.substr( base_folder.fullName.length + 1 ) + "/" +filename ) ) {
+        if ( ignore_this( folder.fullName.substr( base_folder.fullName.length + 1 ) + "/" +filename ) ) {
           continue;
         }
 
@@ -132,6 +134,7 @@ function main() {
 					if (dbg) $.writeln( "     " + fileList[ix].subpath + " -> " + aux + " | " + fileList[ix].check + " -> " + files[i].length );
 					fileList[ix].subpath = aux;
 					fileList[ix].check = files[i].length;
+					fileList[ix].set = base_folder_name;
 					fileList[ix].updated = now_str;
 					for ( var n = not_found.length-1; n >= 0; n-- ) {
 						if ( not_found[n] == id ) {
@@ -155,7 +158,8 @@ function main() {
 							after_item: "",
 							order: 100,
 							check: files[i].length,
-							updated: now_str
+							updated: now_str,
+							set: base_folder_name
 						};
 					} else {
 						fileObj = {
@@ -163,7 +167,8 @@ function main() {
 							filename: filename,
 							subpath: getSubpath(files[i], rootFolder),
 							check: files[i].length,
-							updated: now_str
+							updated: now_str,
+							set: base_folder_name
 						};
 					}
 					fileList.push(fileObj);

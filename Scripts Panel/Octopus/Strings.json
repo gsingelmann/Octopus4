@@ -132,6 +132,554 @@
     "cancel_confirm": {
       "de": "Es wurden Änderungen vorgenommen. Wollen Sie wirklich abbrechen und alle Änderungen verwerfen?",
       "en": "Changes have been made. Do you really want to cancel and discard all changes?"
+    },
+    "prefs_save_error": {
+      "de": "Fehler beim Speichern der Einstellungen. ",
+      "en": "Error saving preferences. "
+    },
+    "no_scripts_found": {
+      "de": "Die Config-Datei konnte nicht geladen werden.",
+      "en": "Config-File could not be loaded."
+    }
+  },
+  "diplay-config": {
+    "ui_ok": {
+      "de": "OK",
+      "en": "OK"
+    },
+    "ui_done": {
+      "de": "Fertig",
+      "en": "Done"
+    },
+    "ui_apply": {
+      "de": "Schließen und anwenden",
+      "en": "Close and apply"
+    },
+    "ui_cancel": {
+      "de": "Abbrechen",
+      "en": "Cancel"
+    },
+    "ui_on": {
+      "de": "An",
+      "en": "On"
+    },
+    "ui_off": {
+      "de": "Aus",
+      "en": "Off"
+    },
+    "ui_active": {
+      "de": "aktiv",
+      "en": "active"
+    },
+    "ui_setdefault": {
+      "de": "Setze Default",
+      "en": "Set default"
+    },
+    "ui_usedefault": {
+      "de": "Wende '___' beim Öffnen von Dokumenten an",
+      "en": "Use default '___' when document opens"
+    },
+    "show_on_startup": {
+      "de": "Anzeige-Panel beim Start anzeigen",
+      "en": "Show Display panel on startup"
+    },
+    "export_to_where": {
+      "de": "Wo soll das Preset gespeichert werden?",
+      "en": "Where do you want to save the preset?"
+    },
+    "view_proof": {
+      "de": "Proof",
+      "en": "Proof"
+    },
+    "view_overprintpreview": {
+      "de": "Überdruckenvorschau",
+      "en": "Overprintpreview"
+    },
+    "view_windowsettings": {
+      "de": "Fenster-Einstellungen",
+      "en": "Window-Settings"
+    },
+    "ui_config": {
+      "de": "Anzeige konfigurieren",
+      "en": "Configure Display-Settings"
+    },
+    "alert_wrong_params": {
+      "de": "Beim Einlesen der gespeicherten Parameter ist etwas schief gegangen\\nSie sehen die Default-Parameter",
+      "en": "Error occurred loading parameters"
+    },
+    "display_threshold": {
+      "de": "Anzeigeschwellenwert",
+      "en": "Threshold"
+    },
+    "smart_guides": {
+      "de": "Intelligente Hilfslinien",
+      "en": "Smart Guides"
+    },
+    "guides_color": {
+      "de": "Hilfslinienfarbe",
+      "en": "Guide Colour"
+    },
+    "guides_lock": {
+      "de": "Hilfslinien sperren",
+      "en": "Lock Guides"
+    },
+    "guides_inback": {
+      "de": "Hilfslinien im Hintergrund",
+      "en": "Guides in Back"
+    },
+    "guides_show": {
+      "de": "Hilfslinien einblenden",
+      "en": "Show Guides"
+    },
+    "guides_guides": {
+      "de": "Hilfslinien",
+      "en": "Guides"
+    },
+    "grid_inback": {
+      "de": "Raster im Hintergrund",
+      "en": "Grid in Back"
+    },
+    "grid_color": {
+      "de": "Dokumentrasterfarbe",
+      "en": "Grid Colour"
+    },
+    "grid_grid": {
+      "de": "Dokumentraster",
+      "en": "Document Grid"
+    },
+    "grid_baselinecolor": {
+      "de": "Grundlinienfarbe",
+      "en": "Baselinegrid Colour"
+    },
+    "grid_threshold": {
+      "de": "Schwellenwert GLR",
+      "en": "Baselinegrid Threshold"
+    },
+    "grid_baseline": {
+      "de": "Grundlinienraster",
+      "en": "Baselinegrid"
+    },
+    "grid_grid1": {
+      "de": "Raster",
+      "en": "Grid"
+    },
+    "styles_reset": {
+      "de": "Formatvorgaben auf Null",
+      "en": "Reset"
+    },
+    "styles_hiddenchars": {
+      "de": "Verborgene Zeichen",
+      "en": "Hidden Characters"
+    },
+    "styles_show_diverge": {
+      "de": "Abweichung markieren",
+      "en": "Show Overrides"
+    },
+    "show_kerning": {
+      "de": "Laufweite/Kerning",
+      "en": "Show Kerning"
+    },
+    "show_hjviolation": {
+      "de": "Silbentrennung etc",
+      "en": "Show HJ Violations"
+    },
+    "show_subst_glyphs": {
+      "de": "Ersetzte Glyphen",
+      "en": "Show substituted Glyphs"
+    },
+    "show_subst_fonts": {
+      "de": "Ersetzte Schriftarten",
+      "en": "Show substituted Fonts"
+    },
+    "show_keeps": {
+      "de": "Absatzumbruchverletzungen",
+      "en": "Show Keepviolations"
+    },
+    "show_typo": {
+      "de": "Typographie",
+      "en": "Typography"
+    },
+    "show_rulers": {
+      "de": "Lineale einblenden",
+      "en": "Show Rulers"
+    },
+    "show_notes": {
+      "de": "Notizen einblenden",
+      "en": "Show Notes"
+    },
+    "show_frame_edges": {
+      "de": "Rahmenkanten einblenden",
+      "en": "Show Edges"
+    },
+    "show_ruler_enum": {
+      "de": "Lineal",
+      "en": "Rulers"
+    },
+    "ruler_unit_vert": {
+      "de": "Linealeinheit vertikal",
+      "en": "Units vertical"
+    },
+    "ruler_unit_horz": {
+      "de": "Linealeinheit horizontal",
+      "en": "Units horizontal"
+    },
+    "view_view": {
+      "de": "Ansicht",
+      "en": "Display"
+    },
+    "view_zoom": {
+      "de": "Zoom",
+      "en": "Zoom"
+    },
+    "view_quality": {
+      "de": "Anzeigeleistung",
+      "en": "Display Performance"
+    },
+    "view_screenmode": {
+      "de": "Bildschirmmodus",
+      "en": "Screen Mode"
+    },
+    "view_trp": {
+      "de": "Referenzpunkt",
+      "en": "Transform Reference Point"
+    },
+    "preview_sim_paper": {
+      "de": "Papier simulieren",
+      "en": "Simulate Paper"
+    },
+    "preview_sim_black": {
+      "de": "Schwarz simulieren",
+      "en": "Simulate Black"
+    },
+    "preview_preserve_cmyk": {
+      "de": "CMYK-Werte beibehalten",
+      "en": "Preserve CMYK"
+    },
+    "preview_profile": {
+      "de": "Proof-Profil",
+      "en": "Proof-Profile"
+    },
+    "preview_proof": {
+      "de": "Proof",
+      "en": "Proof"
+    },
+    "view_page_1": {
+      "de": "Seite 1 aktiv",
+      "en": "Show Page 1"
+    },
+    "preview_oppreview": {
+      "de": "Überdruckenvorschau",
+      "en": "Overprintpreview"
+    },
+    "window_settings": {
+      "de": "Fenster-Einstellungen",
+      "en": "Windows-Settings"
+    },
+    "colors_white": {
+      "de": "Weiß",
+      "en": "White"
+    },
+    "colors_gridgreen": {
+      "de": "Rastergrün",
+      "en": "Grid Green"
+    },
+    "colors_suplhur": {
+      "de": "Schwefel",
+      "en": "Sulphur"
+    },
+    "colors_cuteteal": {
+      "de": "Helltürkis",
+      "en": "Cute Teal"
+    },
+    "colors_lipstick": {
+      "de": "Lippenstift",
+      "en": "Lipstick"
+    },
+    "colors_lightolive": {
+      "de": "Helloliv",
+      "en": "Light Olive"
+    },
+    "colors_fiesta": {
+      "de": "Feuerrot",
+      "en": "Fiesta"
+    },
+    "colors_gridorange": {
+      "de": "Rasterorange",
+      "en": "Grid Orange"
+    },
+    "colors_gridblue": {
+      "de": "Rasterblau",
+      "en": "Grid Blue"
+    },
+    "colors_charcoal": {
+      "de": "Anthrazit",
+      "en": "Charcoal"
+    },
+    "colors_lightgrey": {
+      "de": "Hellgrau",
+      "en": "Light Grey"
+    },
+    "colors_purple": {
+      "de": "Lila",
+      "en": "Purple"
+    },
+    "colors_ochre": {
+      "de": "Ocker",
+      "en": "Ochre"
+    },
+    "colors_grassgreen": {
+      "de": "Grasgrün",
+      "en": "Grass Green"
+    },
+    "colors_burgundy": {
+      "de": "Weinrot",
+      "en": "Burgundy"
+    },
+    "colors_peach": {
+      "de": "Aprikot",
+      "en": "Peach"
+    },
+    "colors_olivegreen": {
+      "de": "Olivgrün",
+      "en": "Olive Green"
+    },
+    "colors_brick": {
+      "de": "Rotbraun",
+      "en": "Brick Red"
+    },
+    "colors_lavender": {
+      "de": "Lavendel",
+      "en": "Lavender"
+    },
+    "colors_pink": {
+      "de": "Rosa",
+      "en": "Pink"
+    },
+    "colors_darkblue": {
+      "de": "Dunkelblau",
+      "en": "Dark Blue"
+    },
+    "colors_gold": {
+      "de": "Gold",
+      "en": "Gold"
+    },
+    "colors_violet": {
+      "de": "Violett",
+      "en": "Violet"
+    },
+    "colors_brown": {
+      "de": "Braun",
+      "en": "Brown"
+    },
+    "colors_tan": {
+      "de": "Hellbraun",
+      "en": "Tan"
+    },
+    "colors_teal": {
+      "de": "Türkis",
+      "en": "Teal"
+    },
+    "colors_darkgreen": {
+      "de": "Dunkelgrün",
+      "en": "Dark Green"
+    },
+    "colors_orange": {
+      "de": "Orange",
+      "en": "Orange"
+    },
+    "colors_black": {
+      "de": "Schwarz",
+      "en": "Black"
+    },
+    "colors_grey": {
+      "de": "Grau",
+      "en": "Grey"
+    },
+    "colors_cyan": {
+      "de": "Cyan",
+      "en": "Cyan"
+    },
+    "colors_magenta": {
+      "de": "Magenta",
+      "en": "Magenta"
+    },
+    "colors_yellow": {
+      "de": "Gelb",
+      "en": "Yellow"
+    },
+    "colors_blue": {
+      "de": "Blau",
+      "en": "Blue"
+    },
+    "colors_green": {
+      "de": "Grün",
+      "en": "Green"
+    },
+    "colors_red": {
+      "de": "Rot",
+      "en": "Red"
+    },
+    "colors_lightblue": {
+      "de": "Hellblau",
+      "en": "Light Blue"
+    },
+    "origin_spine": {
+      "de": "Bund",
+      "en": "Spine"
+    },
+    "origin_spread": {
+      "de": "Druckbogen",
+      "en": "Spread"
+    },
+    "origin_page": {
+      "de": "Seite",
+      "en": "Page"
+    },
+    "measure_pixel": {
+      "de": "Pixels",
+      "en": "Pixels"
+    },
+    "measure_point": {
+      "de": "Points",
+      "en": "Points"
+    },
+    "measure_cm": {
+      "de": "Zentimeter",
+      "en": "CM"
+    },
+    "measure_mm": {
+      "de": "Millimeter",
+      "en": "MM"
+    },
+    "zoom_pasteboard": {
+      "de": "Montagefläche",
+      "en": "Pasteboard"
+    },
+    "zoom_spread": {
+      "de": "Druckbogen einpassen",
+      "en": "Fit Spread"
+    },
+    "zoom_page": {
+      "de": "Seite einpassen",
+      "en": "Fit Page"
+    },
+    "quality_high": {
+      "de": "Hohe Qualität",
+      "en": "High"
+    },
+    "quality_normal": {
+      "de": "Typisch",
+      "en": "Normal"
+    },
+    "quality_opt": {
+      "de": "Schnell",
+      "en": "Optimized"
+    },
+    "anchor_center": {
+      "de": "mittig",
+      "en": "Center"
+    },
+    "anchor_topleft": {
+      "de": "oben links",
+      "en": "Top-Left"
+    },
+    "mode_info": {
+      "de": "Infobereich",
+      "en": "Infoarea"
+    },
+    "mode_bleed": {
+      "de": "Anschnitt",
+      "en": "Bleed"
+    },
+    "mode_page": {
+      "de": "Vorschau",
+      "en": "Preview"
+    },
+    "mode_off": {
+      "de": "Normal",
+      "en": "Off"
+    },
+    "proof_doc": {
+      "de": "Dokumentfarbraum",
+      "en": "Document-Space"
+    },
+    "proof_work": {
+      "de": "Arbeitsfarbraum",
+      "en": "Working-Space"
+    },
+    "proof_off": {
+      "de": "Proof aus",
+      "en": "Proof off"
+    },
+    "default_workspace": {
+      "de": "[Erweitert]",
+      "en": "[Advanced]"
+    },
+    "manager_title": {
+      "de": "Anzeige-Vorgaben",
+      "en": "Display-Presets"
+    },
+    "presets": {
+      "de": "Vorgaben: ",
+      "en": "Presets: "
+    },
+    "new_preset": {
+      "de": "Neue Vorgabe", 
+      "en": "New preset"
+    },
+    "new_preset_name": {
+      "de": "Vorgabenname: ", 
+      "en": "Presetname: "
+    },
+    "new": {
+      "de": "Neu...",
+      "en": "New..."
+    },
+    "edit": {
+      "de": "Bearbeiten...",
+      "en": "Edit..."
+    },
+    "delete": {
+      "de": "Löschen",
+      "en": "Delete"
+    },
+    "import": {
+      "de": "Importieren",
+      "en": "Import"
+    },
+    "export": {
+      "de": "Exportieren",
+      "en": "Export"
+    },
+    "file_exists": {
+      "de": "Datei existiert bereits\nÜberschreiben?",
+      "en": "File exists\nOverwrite?"
+    },
+    "really_delete": {
+      "de": "Vorgabe wirklich löschen?",
+      "en": "Really delete preset?"
+    },
+    "import_from_where": {
+      "de": "Welche Dateien importieren?",
+      "en": "Files to import?"
+    },
+    "import_to_where": {
+      "de": "Wohin exportieren?",
+      "en": "Export to:"
+    },
+    "workspace": {
+      "de": "Arbeitsbereich",
+      "en": "Workspace"
+    }
+  },
+  "display": {
+    "start_config_first": {
+      "de": "Starten Sie zuerst das 'Anzeige konfigurieren', um Ihre Einstellungen festzulegen",
+      "en": "Start the config-script once to define your own preferences"
+    },
+    "Edit": {
+      "de": "Edit",
+      "en": "Edit"
     }
   },
   "exporter": {

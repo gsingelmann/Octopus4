@@ -1,1149 +1,1 @@
-[
-  {
-    "id": "octopus-installer-2",
-    "filename": "Octopus-Installer-2.jsx",
-    "subpath": "Startup Scripts/Octopus",
-    "label": {
-      "de": "Octopus-Installer-2",
-      "en": "Octopus-Installer-2"
-    },
-    "help_url": "https://www.project-octopus.net/",
-    "menu": "",
-    "submenu": "",
-    "after_item": "",
-    "order": 100,
-    "check": 12547,
-    "updated": "2026-02-15"
-  }, 
-  {
-    "id": "octopus-include-su",
-    "filename": "Octopus-include-su.jsxinc",
-    "subpath": "Startup Scripts/Octopus",
-    "label": {
-      "de": "Octopus-include-su",
-      "en": "Octopus-include-su"
-    },
-    "help_url": "https://www.project-octopus.net/",
-    "menu": "",
-    "submenu": "",
-    "after_item": "",
-    "order": 100,
-    "check": 28379,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "octopus-tools-su",
-    "filename": "Octopus-Tools-su.jsxinc",
-    "subpath": "Startup Scripts/Octopus",
-    "label": {
-      "de": "Octopus-Tools-su",
-      "en": "Octopus-Tools-su"
-    },
-    "help_url": "https://www.project-octopus.net/",
-    "menu": "",
-    "submenu": "",
-    "after_item": "",
-    "order": 100,
-    "check": 6623,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "collect-docfonts-daemon",
-    "filename": "Collect-Docfonts-Daemon.jsx",
-    "subpath": "Startup Scripts/Octopus",
-    "label": {
-      "de": "Collect-Docfonts-Daemon",
-      "en": "Collect-Docfonts-Daemon"
-    },
-    "help_url": "https://www.project-octopus.net/",
-    "menu": "",
-    "submenu": "",
-    "after_item": "",
-    "order": 100,
-    "check": 6801,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "qm-32",
-    "filename": "qm-32.png",
-    "subpath": "images/heads",
-    "check": 246,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "placeholdertextwarning-f0",
-    "filename": "PlaceholderTextWarning-f0.png",
-    "subpath": "images/heads",
-    "check": 8604,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "check-tags-c2",
-    "filename": "Check-Tags-c2.png",
-    "subpath": "images/heads",
-    "check": 7462,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "check-add-bookmarks-32",
-    "filename": "Check-Add-Bookmarks-32.png",
-    "subpath": "images/heads",
-    "check": 7673,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "exporter-32",
-    "filename": "Exporter-32.png",
-    "subpath": "images/heads",
-    "check": 6944,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "check-language-c2",
-    "filename": "Check-Language-c2.png",
-    "subpath": "images/heads",
-    "check": 7711,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "octolock-ui-5e",
-    "filename": "OctoLock-UI-5e.png",
-    "subpath": "images/heads",
-    "check": 6458,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "octolock-f0",
-    "filename": "OctoLock-f0.png",
-    "subpath": "images/heads",
-    "check": 4894,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "colorscript-5e",
-    "filename": "ColorScript-5e.png",
-    "subpath": "images/heads",
-    "check": 6283,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "check-articles-5e",
-    "filename": "Check-Articles-5e.png",
-    "subpath": "images/heads",
-    "check": 7774,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "placeholder-c2",
-    "filename": "Placeholder-c2.png",
-    "subpath": "images/heads",
-    "check": 7063,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "check-alt-text-32",
-    "filename": "Check-Alt-Text-32.png",
-    "subpath": "images/heads",
-    "check": 7738,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "check-list-32",
-    "filename": "Check-List-32.png",
-    "subpath": "images/heads",
-    "check": 7019,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "dashboard-32",
-    "filename": "Dashboard-32.png",
-    "subpath": "images/heads",
-    "check": 7088,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "opentypefeatures-f0",
-    "filename": "OpenTypeFeatures-f0.png",
-    "subpath": "images/heads",
-    "check": 6787,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "display-config-f0",
-    "filename": "Display-Config-f0.png",
-    "subpath": "images/heads",
-    "check": 7429,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "check-tags-5e",
-    "filename": "Check-Tags-5e.png",
-    "subpath": "images/heads",
-    "check": 7615,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "custom-menu-entries-f0",
-    "filename": "Custom-Menu-Entries-f0.png",
-    "subpath": "images/heads",
-    "check": 6888,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "check-typo-32",
-    "filename": "Check-Typo-32.png",
-    "subpath": "images/heads",
-    "check": 7786,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "check-language-5e",
-    "filename": "Check-Language-5e.png",
-    "subpath": "images/heads",
-    "check": 7812,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "octolock-ui-c2",
-    "filename": "OctoLock-UI-c2.png",
-    "subpath": "images/heads",
-    "check": 6495,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "daily-tip-f0",
-    "filename": "Daily-Tip-f0.png",
-    "subpath": "images/heads",
-    "check": 6925,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "question-32",
-    "filename": "question-32.png",
-    "subpath": "images/heads",
-    "check": 3073,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "cleancontenttypes-32",
-    "filename": "CleanContentTypes-32.png",
-    "subpath": "images/heads",
-    "check": 7504,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "octopus-help-32",
-    "filename": "Octopus-Help-32.png",
-    "subpath": "images/heads",
-    "check": 6501,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "check-articles-c2",
-    "filename": "Check-Articles-c2.png",
-    "subpath": "images/heads",
-    "check": 7616,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "colorscript-c2",
-    "filename": "ColorScript-c2.png",
-    "subpath": "images/heads",
-    "check": 6356,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "placeholder-5e",
-    "filename": "Placeholder-5e.png",
-    "subpath": "images/heads",
-    "check": 7062,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "watermark-f0",
-    "filename": "Watermark-f0.png",
-    "subpath": "images/heads",
-    "check": 7371,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "colorscript-32",
-    "filename": "ColorScript-32.png",
-    "subpath": "images/heads",
-    "check": 6470,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "check-articles-32",
-    "filename": "Check-Articles-32.png",
-    "subpath": "images/heads",
-    "check": 7579,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "cleancontenttypes-c2",
-    "filename": "CleanContentTypes-c2.png",
-    "subpath": "images/heads",
-    "check": 7529,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "octopus-help-c2",
-    "filename": "Octopus-Help-c2.png",
-    "subpath": "images/heads",
-    "check": 6370,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "check-hyphenation-f0",
-    "filename": "Check-Hyphenation-f0.png",
-    "subpath": "images/heads",
-    "check": 7780,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "octolock-ui-32",
-    "filename": "OctoLock-UI-32.png",
-    "subpath": "images/heads",
-    "check": 6619,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "exporter-5e",
-    "filename": "Exporter-5e.png",
-    "subpath": "images/heads",
-    "check": 6829,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "check-add-bookmarks-5e",
-    "filename": "Check-Add-Bookmarks-5e.png",
-    "subpath": "images/heads",
-    "check": 7860,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "check-typo-c2",
-    "filename": "Check-Typo-c2.png",
-    "subpath": "images/heads",
-    "check": 7796,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "check-placeholder-f0",
-    "filename": "Check-Placeholder-f0.png",
-    "subpath": "images/heads",
-    "check": 7087,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "add-hyperlinks-f0",
-    "filename": "Add-Hyperlinks-f0.png",
-    "subpath": "images/heads",
-    "check": 7593,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "dashboard-c2",
-    "filename": "Dashboard-c2.png",
-    "subpath": "images/heads",
-    "check": 6917,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "check-list-c2",
-    "filename": "Check-List-c2.png",
-    "subpath": "images/heads",
-    "check": 7094,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "fontinstaller-f0",
-    "filename": "Fontinstaller-f0.png",
-    "subpath": "images/heads",
-    "check": 7009,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "show-overflow-f0",
-    "filename": "Show-Overflow-f0.png",
-    "subpath": "images/heads",
-    "check": 7546,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "setupbaselinegrid-f0",
-    "filename": "setUpBaselineGrid-f0.png",
-    "subpath": "images/heads",
-    "check": 7273,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "check-alt-text-c2",
-    "filename": "Check-Alt-Text-c2.png",
-    "subpath": "images/heads",
-    "check": 7634,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "qm-5e",
-    "filename": "qm-5e.png",
-    "subpath": "images/heads",
-    "check": 248,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "placeholder-32",
-    "filename": "Placeholder-32.png",
-    "subpath": "images/heads",
-    "check": 7170,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "check-endofline-f0",
-    "filename": "Check-Endofline-f0.png",
-    "subpath": "images/heads",
-    "check": 7539,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "octopus-help-5e",
-    "filename": "Octopus-Help-5e.png",
-    "subpath": "images/heads",
-    "check": 6407,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "cleancontenttypes-5e",
-    "filename": "CleanContentTypes-5e.png",
-    "subpath": "images/heads",
-    "check": 7400,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "indesign-help-f0",
-    "filename": "InDesign-Help-f0.png",
-    "subpath": "images/heads",
-    "check": 4678,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "check-add-bookmarks-c2",
-    "filename": "Check-Add-Bookmarks-c2.png",
-    "subpath": "images/heads",
-    "check": 7514,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "check-language-32",
-    "filename": "Check-Language-32.png",
-    "subpath": "images/heads",
-    "check": 7617,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "exporter-c2",
-    "filename": "Exporter-c2.png",
-    "subpath": "images/heads",
-    "check": 6853,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "check-typo-5e",
-    "filename": "Check-Typo-5e.png",
-    "subpath": "images/heads",
-    "check": 8019,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "check-tags-32",
-    "filename": "Check-Tags-32.png",
-    "subpath": "images/heads",
-    "check": 7433,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "warnung-f0",
-    "filename": "warnung-f0.png",
-    "subpath": "images/heads",
-    "check": 3270,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "dashboard-5e",
-    "filename": "Dashboard-5e.png",
-    "subpath": "images/heads",
-    "check": 6933,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "check-add-hyperlinks-f0",
-    "filename": "Check-Add-hyperlinks-f0.png",
-    "subpath": "images/heads",
-    "check": 7593,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "check-list-5e",
-    "filename": "Check-List-5e.png",
-    "subpath": "images/heads",
-    "check": 7309,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "check-alt-text-5e",
-    "filename": "Check-Alt-Text-5e.png",
-    "subpath": "images/heads",
-    "check": 7819,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "qm-c2",
-    "filename": "qm-c2.png",
-    "subpath": "images/heads",
-    "check": 397,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "check-articles-f0",
-    "filename": "Check-Articles-f0.png",
-    "subpath": "images/heads",
-    "check": 7543,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "colorscript-f0",
-    "filename": "ColorScript-f0.png",
-    "subpath": "images/heads",
-    "check": 6374,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "watermark-32",
-    "filename": "Watermark-32.png",
-    "subpath": "images/heads",
-    "check": 7577,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "check-hyphenation-32",
-    "filename": "Check-Hyphenation-32.png",
-    "subpath": "images/heads",
-    "check": 7786,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "octolock-5e",
-    "filename": "OctoLock-5e.png",
-    "subpath": "images/heads",
-    "check": 7134,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "daily-tip-c2",
-    "filename": "Daily-Tip-c2.png",
-    "subpath": "images/heads",
-    "check": 6872,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "octolock-ui-f0",
-    "filename": "OctoLock-UI-f0.png",
-    "subpath": "images/heads",
-    "check": 6519,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "custom-menu-entries-c2",
-    "filename": "Custom-Menu-Entries-c2.png",
-    "subpath": "images/heads",
-    "check": 6895,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "check-placeholder-32",
-    "filename": "Check-Placeholder-32.png",
-    "subpath": "images/heads",
-    "check": 7172,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "add-hyperlinks-32",
-    "filename": "Add-Hyperlinks-32.png",
-    "subpath": "images/heads",
-    "check": 7509,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "display-config-c2",
-    "filename": "Display-Config-c2.png",
-    "subpath": "images/heads",
-    "check": 7386,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "opentypefeatures-c2",
-    "filename": "OpenTypeFeatures-c2.png",
-    "subpath": "images/heads",
-    "check": 6749,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "placeholdertextwarning-5e",
-    "filename": "PlaceholderTextWarning-5e.png",
-    "subpath": "images/heads",
-    "check": 8396,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "fontinstaller-32",
-    "filename": "Fontinstaller-32.png",
-    "subpath": "images/heads",
-    "check": 7088,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "show-overflow-32",
-    "filename": "Show-Overflow-32.png",
-    "subpath": "images/heads",
-    "check": 7678,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "setupbaselinegrid-32",
-    "filename": "setUpBaselineGrid-32.png",
-    "subpath": "images/heads",
-    "check": 7455,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "placeholder-f0",
-    "filename": "Placeholder-f0.png",
-    "subpath": "images/heads",
-    "check": 7087,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "check-endofline-32",
-    "filename": "Check-Endofline-32.png",
-    "subpath": "images/heads",
-    "check": 7586,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "octolock-c2",
-    "filename": "OctoLock-c2.png",
-    "subpath": "images/heads",
-    "check": 7125,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "indesign-help-32",
-    "filename": "InDesign-Help-32.png",
-    "subpath": "images/heads",
-    "check": 7065,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "daily-tip-5e",
-    "filename": "Daily-Tip-5e.png",
-    "subpath": "images/heads",
-    "check": 6858,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "check-language-f0",
-    "filename": "Check-Language-f0.png",
-    "subpath": "images/heads",
-    "check": 7693,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "custom-menu-entries-5e",
-    "filename": "Custom-Menu-Entries-5e.png",
-    "subpath": "images/heads",
-    "check": 6889,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "check-tags-f0",
-    "filename": "Check-Tags-f0.png",
-    "subpath": "images/heads",
-    "check": 7400,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "display-config-5e",
-    "filename": "Display-Config-5e.png",
-    "subpath": "images/heads",
-    "check": 7349,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "opentypefeatures-5e",
-    "filename": "OpenTypeFeatures-5e.png",
-    "subpath": "images/heads",
-    "check": 6727,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "stop-32",
-    "filename": "stop-32.png",
-    "subpath": "images/heads",
-    "check": 3259,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "check-add-hyperlinks-32",
-    "filename": "Check-Add-hyperlinks-32.png",
-    "subpath": "images/heads",
-    "check": 7509,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "placeholdertextwarning-c2",
-    "filename": "PlaceholderTextWarning-c2.png",
-    "subpath": "images/heads",
-    "check": 8721,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "qm-f0",
-    "filename": "qm-f0.png",
-    "subpath": "images/heads",
-    "check": 251,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "setupbaselinegrid-5e",
-    "filename": "setUpBaselineGrid-5e.png",
-    "subpath": "images/heads",
-    "check": 7352,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "show-overflow-5e",
-    "filename": "Show-Overflow-5e.png",
-    "subpath": "images/heads",
-    "check": 7532,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "fontinstaller-5e",
-    "filename": "Fontinstaller-5e.png",
-    "subpath": "images/heads",
-    "check": 6934,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "placeholdertextwarning-32",
-    "filename": "PlaceholderTextWarning-32.png",
-    "subpath": "images/heads",
-    "check": 8406,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "check-add-hyperlinks-c2",
-    "filename": "Check-Add-hyperlinks-c2.png",
-    "subpath": "images/heads",
-    "check": 7603,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "add-hyperlinks-5e",
-    "filename": "Add-Hyperlinks-5e.png",
-    "subpath": "images/heads",
-    "check": 7842,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "check-placeholder-5e",
-    "filename": "Check-Placeholder-5e.png",
-    "subpath": "images/heads",
-    "check": 7053,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "check-add-bookmarks-f0",
-    "filename": "Check-Add-Bookmarks-f0.png",
-    "subpath": "images/heads",
-    "check": 7505,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "exporter-f0",
-    "filename": "Exporter-f0.png",
-    "subpath": "images/heads",
-    "check": 6863,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "indesign-help-c2",
-    "filename": "InDesign-Help-c2.png",
-    "subpath": "images/heads",
-    "check": 6924,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "octolock-32",
-    "filename": "OctoLock-32.png",
-    "subpath": "images/heads",
-    "check": 7230,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "check-hyphenation-5e",
-    "filename": "Check-Hyphenation-5e.png",
-    "subpath": "images/heads",
-    "check": 8019,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "check-endofline-c2",
-    "filename": "Check-Endofline-c2.png",
-    "subpath": "images/heads",
-    "check": 7564,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "watermark-5e",
-    "filename": "Watermark-5e.png",
-    "subpath": "images/heads",
-    "check": 7463,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "check-alt-text-f0",
-    "filename": "Check-Alt-Text-f0.png",
-    "subpath": "images/heads",
-    "check": 7636,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "setupbaselinegrid-c2",
-    "filename": "setUpBaselineGrid-c2.png",
-    "subpath": "images/heads",
-    "check": 7285,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "show-overflow-c2",
-    "filename": "Show-Overflow-c2.png",
-    "subpath": "images/heads",
-    "check": 7530,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "check-list-f0",
-    "filename": "Check-List-f0.png",
-    "subpath": "images/heads",
-    "check": 7002,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "fontinstaller-c2",
-    "filename": "Fontinstaller-c2.png",
-    "subpath": "images/heads",
-    "check": 7022,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "check-add-hyperlinks-5e",
-    "filename": "Check-Add-hyperlinks-5e.png",
-    "subpath": "images/heads",
-    "check": 7842,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "dashboard-f0",
-    "filename": "Dashboard-f0.png",
-    "subpath": "images/heads",
-    "check": 6948,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "opentypefeatures-32",
-    "filename": "OpenTypeFeatures-32.png",
-    "subpath": "images/heads",
-    "check": 6867,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "display-config-32",
-    "filename": "Display-Config-32.png",
-    "subpath": "images/heads",
-    "check": 7478,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "add-hyperlinks-c2",
-    "filename": "Add-Hyperlinks-c2.png",
-    "subpath": "images/heads",
-    "check": 7603,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "check-placeholder-c2",
-    "filename": "Check-Placeholder-c2.png",
-    "subpath": "images/heads",
-    "check": 7063,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "custom-menu-entries-32",
-    "filename": "Custom-Menu-Entries-32.png",
-    "subpath": "images/heads",
-    "check": 7025,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "check-typo-f0",
-    "filename": "Check-Typo-f0.png",
-    "subpath": "images/heads",
-    "check": 7780,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "daily-tip-32",
-    "filename": "Daily-Tip-32.png",
-    "subpath": "images/heads",
-    "check": 6999,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "indesign-help-5e",
-    "filename": "InDesign-Help-5e.png",
-    "subpath": "images/heads",
-    "check": 6991,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "cleancontenttypes-f0",
-    "filename": "CleanContentTypes-f0.png",
-    "subpath": "images/heads",
-    "check": 7549,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "octopus-help-f0",
-    "filename": "Octopus-Help-f0.png",
-    "subpath": "images/heads",
-    "check": 6395,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "check-hyphenation-c2",
-    "filename": "Check-Hyphenation-c2.png",
-    "subpath": "images/heads",
-    "check": 7796,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "glasses",
-    "filename": "glasses.png",
-    "subpath": "images/icons",
-    "check": 3771,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "check-endofline-5e",
-    "filename": "Check-Endofline-5e.png",
-    "subpath": "images/heads",
-    "check": 7558,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "watermark-c2",
-    "filename": "Watermark-c2.png",
-    "subpath": "images/heads",
-    "check": 7374,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "stop",
-    "filename": "stop.png",
-    "subpath": "images/icons",
-    "check": 3608,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "on",
-    "filename": "On.png",
-    "subpath": "images/icons",
-    "check": 643,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "off",
-    "filename": "Off.png",
-    "subpath": "images/icons",
-    "check": 683,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "question",
-    "filename": "question.png",
-    "subpath": "images/icons",
-    "check": 3709,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "krake",
-    "filename": "krake.png",
-    "subpath": "images/icons",
-    "check": 3238,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "qm",
-    "filename": "qm.png",
-    "subpath": "images/icons",
-    "check": 544,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "warnung",
-    "filename": "warnung.png",
-    "subpath": "images/icons",
-    "check": 3538,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "cogwheel-sm",
-    "filename": "cogwheel_sm.png",
-    "subpath": "images/icons",
-    "check": 1908,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "cogwheel",
-    "filename": "cogwheel.png",
-    "subpath": "images/icons",
-    "check": 5385,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "toggle",
-    "filename": "toggle.ai",
-    "subpath": "images/icons",
-    "check": 536952,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "off-sm",
-    "filename": "Off-Sm.js",
-    "subpath": "images/icons",
-    "check": 795,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "on-sm",
-    "filename": "On-Sm.png",
-    "subpath": "images/icons",
-    "check": 2023,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "exporter",
-    "filename": "Exporter.jsx",
-    "subpath": "help-pages",
-    "label": {
-      "de": "Exporter",
-      "en": "Exporter"
-    },
-    "help_url": "https://www.project-octopus.net/",
-    "menu": "Octopus",
-    "submenu": "",
-    "after_item": "",
-    "order": 100,
-    "check": 13188,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "octopus-tools",
-    "filename": "Octopus-Tools.jsxinc",
-    "subpath": "Scripts Panel/Octopus",
-    "label": {
-      "de": "Octopus-Tools",
-      "en": "Octopus-Tools"
-    },
-    "help_url": "https://www.project-octopus.net/",
-    "menu": "",
-    "submenu": "",
-    "after_item": "",
-    "order": 100,
-    "check": 6613,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "close-all",
-    "filename": "Close-All.jsx",
-    "subpath": "Scripts Panel/Octopus",
-    "label": {
-      "de": "Close-All",
-      "en": "Close-All"
-    },
-    "help_url": "https://www.project-octopus.net/",
-    "menu": "Octopus",
-    "submenu": "",
-    "after_item": "",
-    "order": 100,
-    "check": 2781,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "dashboard",
-    "filename": "Dashboard.jsx",
-    "subpath": "Scripts Panel/Octopus",
-    "label": {
-      "de": "Dashboard",
-      "en": "Dashboard"
-    },
-    "help_url": "https://www.project-octopus.net/",
-    "menu": "Octopus",
-    "submenu": "",
-    "after_item": "",
-    "order": 100,
-    "check": 5219,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "strings",
-    "filename": "Strings.json",
-    "subpath": "Scripts Panel/Octopus",
-    "check": 7007,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "octopus-include-2",
-    "filename": "Octopus-include-2.jsxinc",
-    "subpath": "Scripts Panel/Octopus",
-    "label": {
-      "de": "Octopus-include-2",
-      "en": "Octopus-include-2"
-    },
-    "help_url": "https://www.project-octopus.net/",
-    "menu": "",
-    "submenu": "",
-    "after_item": "",
-    "order": 100,
-    "check": 28951,
-    "updated": "2026-02-15"
-  },
-  {
-    "id": "collect-docfonts",
-    "filename": "Collect-Docfonts.jsx",
-    "subpath": "Scripts Panel/Octopus",
-    "label": {
-      "de": "Collect-Docfonts",
-      "en": "Collect-Docfonts"
-    },
-    "help_url": "https://www.project-octopus.net/",
-    "menu": "Octopus",
-    "submenu": "",
-    "after_item": "",
-    "order": 100,
-    "check": 13452,
-    "updated": "2026-02-15"
-  }
-]
+[  {    "id": "octopus-installer-2",    "filename": "Octopus-Installer-2.jsx",    "subpath": "Startup Scripts/Octopus",    "label": {      "de": "Octopus-Installer-2",      "en": "Octopus-Installer-2"    },    "help_url": "https://www.project-octopus.net/",    "menu": "",    "submenu": "",    "after_item": "",    "order": 100,    "check": 12714,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "octopus-include-su",    "filename": "Octopus-include-su.jsxinc",    "subpath": "Startup Scripts/Octopus",    "label": {      "de": "Octopus-include-su",      "en": "Octopus-include-su"    },    "help_url": "https://www.project-octopus.net/",    "menu": "",    "submenu": "",    "after_item": "",    "order": 100,    "check": 28379,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "octopus-tools-su",    "filename": "Octopus-Tools-su.jsxinc",    "subpath": "Startup Scripts/Octopus",    "label": {      "de": "Octopus-Tools-su",      "en": "Octopus-Tools-su"    },    "help_url": "https://www.project-octopus.net/",    "menu": "",    "submenu": "",    "after_item": "",    "order": 100,    "check": 6623,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "collect-docfonts-daemon",    "filename": "Collect-Docfonts-Daemon.jsx",    "subpath": "Startup Scripts/Octopus",    "label": {      "de": "Collect-Docfonts-Daemon",      "en": "Collect-Docfonts-Daemon"    },    "help_url": "https://www.project-octopus.net/",    "menu": "",    "submenu": "",    "after_item": "",    "order": 100,    "check": 6801,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "qm-32",    "filename": "qm-32.png",    "subpath": "images/heads",    "check": 246,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "placeholdertextwarning-f0",    "filename": "PlaceholderTextWarning-f0.png",    "subpath": "images/heads",    "check": 8604,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "check-tags-c2",    "filename": "Check-Tags-c2.png",    "subpath": "images/heads",    "check": 7462,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "check-add-bookmarks-32",    "filename": "Check-Add-Bookmarks-32.png",    "subpath": "images/heads",    "check": 7673,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "exporter-32",    "filename": "Exporter-32.png",    "subpath": "images/heads",    "check": 6944,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "check-language-c2",    "filename": "Check-Language-c2.png",    "subpath": "images/heads",    "check": 7711,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "octolock-ui-5e",    "filename": "OctoLock-UI-5e.png",    "subpath": "images/heads",    "check": 6458,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "octolock-f0",    "filename": "OctoLock-f0.png",    "subpath": "images/heads",    "check": 4894,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "colorscript-5e",    "filename": "ColorScript-5e.png",    "subpath": "images/heads",    "check": 6283,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "check-articles-5e",    "filename": "Check-Articles-5e.png",    "subpath": "images/heads",    "check": 7774,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "placeholder-c2",    "filename": "Placeholder-c2.png",    "subpath": "images/heads",    "check": 7063,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "check-alt-text-32",    "filename": "Check-Alt-Text-32.png",    "subpath": "images/heads",    "check": 7738,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "check-list-32",    "filename": "Check-List-32.png",    "subpath": "images/heads",    "check": 7019,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "dashboard-32",    "filename": "Dashboard-32.png",    "subpath": "images/heads",    "check": 7088,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "opentypefeatures-f0",    "filename": "OpenTypeFeatures-f0.png",    "subpath": "images/heads",    "check": 6787,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "display-config-f0",    "filename": "Display-Config-f0.png",    "subpath": "images/heads",    "check": 7429,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "check-tags-5e",    "filename": "Check-Tags-5e.png",    "subpath": "images/heads",    "check": 7615,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "custom-menu-entries-f0",    "filename": "Custom-Menu-Entries-f0.png",    "subpath": "images/heads",    "check": 6888,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "check-typo-32",    "filename": "Check-Typo-32.png",    "subpath": "images/heads",    "check": 7786,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "check-language-5e",    "filename": "Check-Language-5e.png",    "subpath": "images/heads",    "check": 7812,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "octolock-ui-c2",    "filename": "OctoLock-UI-c2.png",    "subpath": "images/heads",    "check": 6495,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "daily-tip-f0",    "filename": "Daily-Tip-f0.png",    "subpath": "images/heads",    "check": 6925,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "question-32",    "filename": "question-32.png",    "subpath": "images/heads",    "check": 3073,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "cleancontenttypes-32",    "filename": "CleanContentTypes-32.png",    "subpath": "images/heads",    "check": 7504,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "octopus-help-32",    "filename": "Octopus-Help-32.png",    "subpath": "images/heads",    "check": 6501,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "check-articles-c2",    "filename": "Check-Articles-c2.png",    "subpath": "images/heads",    "check": 7616,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "colorscript-c2",    "filename": "ColorScript-c2.png",    "subpath": "images/heads",    "check": 6356,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "placeholder-5e",    "filename": "Placeholder-5e.png",    "subpath": "images/heads",    "check": 7062,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "watermark-f0",    "filename": "Watermark-f0.png",    "subpath": "images/heads",    "check": 7371,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "colorscript-32",    "filename": "ColorScript-32.png",    "subpath": "images/heads",    "check": 6470,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "check-articles-32",    "filename": "Check-Articles-32.png",    "subpath": "images/heads",    "check": 7579,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "cleancontenttypes-c2",    "filename": "CleanContentTypes-c2.png",    "subpath": "images/heads",    "check": 7529,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "octopus-help-c2",    "filename": "Octopus-Help-c2.png",    "subpath": "images/heads",    "check": 6370,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "check-hyphenation-f0",    "filename": "Check-Hyphenation-f0.png",    "subpath": "images/heads",    "check": 7780,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "octolock-ui-32",    "filename": "OctoLock-UI-32.png",    "subpath": "images/heads",    "check": 6619,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "exporter-5e",    "filename": "Exporter-5e.png",    "subpath": "images/heads",    "check": 6829,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "check-add-bookmarks-5e",    "filename": "Check-Add-Bookmarks-5e.png",    "subpath": "images/heads",    "check": 7860,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "check-typo-c2",    "filename": "Check-Typo-c2.png",    "subpath": "images/heads",    "check": 7796,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "check-placeholder-f0",    "filename": "Check-Placeholder-f0.png",    "subpath": "images/heads",    "check": 7087,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "add-hyperlinks-f0",    "filename": "Add-Hyperlinks-f0.png",    "subpath": "images/heads",    "check": 7593,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "dashboard-c2",    "filename": "Dashboard-c2.png",    "subpath": "images/heads",    "check": 6917,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "check-list-c2",    "filename": "Check-List-c2.png",    "subpath": "images/heads",    "check": 7094,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "fontinstaller-f0",    "filename": "Fontinstaller-f0.png",    "subpath": "images/heads",    "check": 7009,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "show-overflow-f0",    "filename": "Show-Overflow-f0.png",    "subpath": "images/heads",    "check": 7546,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "setupbaselinegrid-f0",    "filename": "setUpBaselineGrid-f0.png",    "subpath": "images/heads",    "check": 7273,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "check-alt-text-c2",    "filename": "Check-Alt-Text-c2.png",    "subpath": "images/heads",    "check": 7634,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "qm-5e",    "filename": "qm-5e.png",    "subpath": "images/heads",    "check": 248,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "placeholder-32",    "filename": "Placeholder-32.png",    "subpath": "images/heads",    "check": 7170,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "check-endofline-f0",    "filename": "Check-Endofline-f0.png",    "subpath": "images/heads",    "check": 7539,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "octopus-help-5e",    "filename": "Octopus-Help-5e.png",    "subpath": "images/heads",    "check": 6407,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "cleancontenttypes-5e",    "filename": "CleanContentTypes-5e.png",    "subpath": "images/heads",    "check": 7400,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "indesign-help-f0",    "filename": "InDesign-Help-f0.png",    "subpath": "images/heads",    "check": 4678,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "check-add-bookmarks-c2",    "filename": "Check-Add-Bookmarks-c2.png",    "subpath": "images/heads",    "check": 7514,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "check-language-32",    "filename": "Check-Language-32.png",    "subpath": "images/heads",    "check": 7617,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "exporter-c2",    "filename": "Exporter-c2.png",    "subpath": "images/heads",    "check": 6853,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "check-typo-5e",    "filename": "Check-Typo-5e.png",    "subpath": "images/heads",    "check": 8019,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "check-tags-32",    "filename": "Check-Tags-32.png",    "subpath": "images/heads",    "check": 7433,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "warnung-f0",    "filename": "warnung-f0.png",    "subpath": "images/heads",    "check": 3270,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "dashboard-5e",    "filename": "Dashboard-5e.png",    "subpath": "images/heads",    "check": 6933,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "check-add-hyperlinks-f0",    "filename": "Check-Add-hyperlinks-f0.png",    "subpath": "images/heads",    "check": 7593,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "check-list-5e",    "filename": "Check-List-5e.png",    "subpath": "images/heads",    "check": 7309,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "check-alt-text-5e",    "filename": "Check-Alt-Text-5e.png",    "subpath": "images/heads",    "check": 7819,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "qm-c2",    "filename": "qm-c2.png",    "subpath": "images/heads",    "check": 397,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "check-articles-f0",    "filename": "Check-Articles-f0.png",    "subpath": "images/heads",    "check": 7543,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "colorscript-f0",    "filename": "ColorScript-f0.png",    "subpath": "images/heads",    "check": 6374,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "watermark-32",    "filename": "Watermark-32.png",    "subpath": "images/heads",    "check": 7577,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "check-hyphenation-32",    "filename": "Check-Hyphenation-32.png",    "subpath": "images/heads",    "check": 7786,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "octolock-5e",    "filename": "OctoLock-5e.png",    "subpath": "images/heads",    "check": 7134,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "daily-tip-c2",    "filename": "Daily-Tip-c2.png",    "subpath": "images/heads",    "check": 6872,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "octolock-ui-f0",    "filename": "OctoLock-UI-f0.png",    "subpath": "images/heads",    "check": 6519,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "custom-menu-entries-c2",    "filename": "Custom-Menu-Entries-c2.png",    "subpath": "images/heads",    "check": 6895,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "check-placeholder-32",    "filename": "Check-Placeholder-32.png",    "subpath": "images/heads",    "check": 7172,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "add-hyperlinks-32",    "filename": "Add-Hyperlinks-32.png",    "subpath": "images/heads",    "check": 7509,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "display-config-c2",    "filename": "Display-Config-c2.png",    "subpath": "images/heads",    "check": 7386,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "opentypefeatures-c2",    "filename": "OpenTypeFeatures-c2.png",    "subpath": "images/heads",    "check": 6749,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "placeholdertextwarning-5e",    "filename": "PlaceholderTextWarning-5e.png",    "subpath": "images/heads",    "check": 8396,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "fontinstaller-32",    "filename": "Fontinstaller-32.png",    "subpath": "images/heads",    "check": 7088,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "show-overflow-32",    "filename": "Show-Overflow-32.png",    "subpath": "images/heads",    "check": 7678,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "setupbaselinegrid-32",    "filename": "setUpBaselineGrid-32.png",    "subpath": "images/heads",    "check": 7455,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "placeholder-f0",    "filename": "Placeholder-f0.png",    "subpath": "images/heads",    "check": 7087,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "check-endofline-32",    "filename": "Check-Endofline-32.png",    "subpath": "images/heads",    "check": 7586,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "octolock-c2",    "filename": "OctoLock-c2.png",    "subpath": "images/heads",    "check": 7125,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "indesign-help-32",    "filename": "InDesign-Help-32.png",    "subpath": "images/heads",    "check": 7065,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "daily-tip-5e",    "filename": "Daily-Tip-5e.png",    "subpath": "images/heads",    "check": 6858,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "check-language-f0",    "filename": "Check-Language-f0.png",    "subpath": "images/heads",    "check": 7693,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "custom-menu-entries-5e",    "filename": "Custom-Menu-Entries-5e.png",    "subpath": "images/heads",    "check": 6889,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "check-tags-f0",    "filename": "Check-Tags-f0.png",    "subpath": "images/heads",    "check": 7400,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "display-config-5e",    "filename": "Display-Config-5e.png",    "subpath": "images/heads",    "check": 7349,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "opentypefeatures-5e",    "filename": "OpenTypeFeatures-5e.png",    "subpath": "images/heads",    "check": 6727,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "stop-32",    "filename": "stop-32.png",    "subpath": "images/heads",    "check": 3259,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "check-add-hyperlinks-32",    "filename": "Check-Add-hyperlinks-32.png",    "subpath": "images/heads",    "check": 7509,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "placeholdertextwarning-c2",    "filename": "PlaceholderTextWarning-c2.png",    "subpath": "images/heads",    "check": 8721,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "qm-f0",    "filename": "qm-f0.png",    "subpath": "images/heads",    "check": 251,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "setupbaselinegrid-5e",    "filename": "setUpBaselineGrid-5e.png",    "subpath": "images/heads",    "check": 7352,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "show-overflow-5e",    "filename": "Show-Overflow-5e.png",    "subpath": "images/heads",    "check": 7532,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "fontinstaller-5e",    "filename": "Fontinstaller-5e.png",    "subpath": "images/heads",    "check": 6934,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "placeholdertextwarning-32",    "filename": "PlaceholderTextWarning-32.png",    "subpath": "images/heads",    "check": 8406,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "check-add-hyperlinks-c2",    "filename": "Check-Add-hyperlinks-c2.png",    "subpath": "images/heads",    "check": 7603,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "add-hyperlinks-5e",    "filename": "Add-Hyperlinks-5e.png",    "subpath": "images/heads",    "check": 7842,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "check-placeholder-5e",    "filename": "Check-Placeholder-5e.png",    "subpath": "images/heads",    "check": 7053,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "check-add-bookmarks-f0",    "filename": "Check-Add-Bookmarks-f0.png",    "subpath": "images/heads",    "check": 7505,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "exporter-f0",    "filename": "Exporter-f0.png",    "subpath": "images/heads",    "check": 6863,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "indesign-help-c2",    "filename": "InDesign-Help-c2.png",    "subpath": "images/heads",    "check": 6924,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "octolock-32",    "filename": "OctoLock-32.png",    "subpath": "images/heads",    "check": 7230,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "check-hyphenation-5e",    "filename": "Check-Hyphenation-5e.png",    "subpath": "images/heads",    "check": 8019,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "check-endofline-c2",    "filename": "Check-Endofline-c2.png",    "subpath": "images/heads",    "check": 7564,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "watermark-5e",    "filename": "Watermark-5e.png",    "subpath": "images/heads",    "check": 7463,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "check-alt-text-f0",    "filename": "Check-Alt-Text-f0.png",    "subpath": "images/heads",    "check": 7636,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "setupbaselinegrid-c2",    "filename": "setUpBaselineGrid-c2.png",    "subpath": "images/heads",    "check": 7285,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "show-overflow-c2",    "filename": "Show-Overflow-c2.png",    "subpath": "images/heads",    "check": 7530,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "check-list-f0",    "filename": "Check-List-f0.png",    "subpath": "images/heads",    "check": 7002,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "fontinstaller-c2",    "filename": "Fontinstaller-c2.png",    "subpath": "images/heads",    "check": 7022,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "check-add-hyperlinks-5e",    "filename": "Check-Add-hyperlinks-5e.png",    "subpath": "images/heads",    "check": 7842,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "dashboard-f0",    "filename": "Dashboard-f0.png",    "subpath": "images/heads",    "check": 6948,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "opentypefeatures-32",    "filename": "OpenTypeFeatures-32.png",    "subpath": "images/heads",    "check": 6867,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "display-config-32",    "filename": "Display-Config-32.png",    "subpath": "images/heads",    "check": 7478,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "add-hyperlinks-c2",    "filename": "Add-Hyperlinks-c2.png",    "subpath": "images/heads",    "check": 7603,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "check-placeholder-c2",    "filename": "Check-Placeholder-c2.png",    "subpath": "images/heads",    "check": 7063,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "custom-menu-entries-32",    "filename": "Custom-Menu-Entries-32.png",    "subpath": "images/heads",    "check": 7025,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "check-typo-f0",    "filename": "Check-Typo-f0.png",    "subpath": "images/heads",    "check": 7780,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "daily-tip-32",    "filename": "Daily-Tip-32.png",    "subpath": "images/heads",    "check": 6999,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "indesign-help-5e",    "filename": "InDesign-Help-5e.png",    "subpath": "images/heads",    "check": 6991,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "cleancontenttypes-f0",    "filename": "CleanContentTypes-f0.png",    "subpath": "images/heads",    "check": 7549,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "octopus-help-f0",    "filename": "Octopus-Help-f0.png",    "subpath": "images/heads",    "check": 6395,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "check-hyphenation-c2",    "filename": "Check-Hyphenation-c2.png",    "subpath": "images/heads",    "check": 7796,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "glasses",    "filename": "glasses.png",    "subpath": "images/icons",    "check": 3771,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "check-endofline-5e",    "filename": "Check-Endofline-5e.png",    "subpath": "images/heads",    "check": 7558,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "watermark-c2",    "filename": "Watermark-c2.png",    "subpath": "images/heads",    "check": 7374,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "stop",    "filename": "stop.png",    "subpath": "images/icons",    "check": 3608,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "on",    "filename": "On.png",    "subpath": "images/icons",    "check": 643,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "off",    "filename": "Off.png",    "subpath": "images/icons",    "check": 683,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "question",    "filename": "question.png",    "subpath": "images/icons",    "check": 3709,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "krake",    "filename": "krake.png",    "subpath": "images/icons",    "check": 3238,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "qm",    "filename": "qm.png",    "subpath": "images/icons",    "check": 544,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "warnung",    "filename": "warnung.png",    "subpath": "images/icons",    "check": 3538,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "cogwheel-sm",    "filename": "cogwheel_sm.png",    "subpath": "images/icons",    "check": 1908,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "cogwheel",    "filename": "cogwheel.png",    "subpath": "images/icons",    "check": 5385,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "toggle",    "filename": "toggle.ai",    "subpath": "images/icons",    "check": 536952,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "off-sm",    "filename": "Off-Sm.js",    "subpath": "images/icons",    "check": 795,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "on-sm",    "filename": "On-Sm.png",    "subpath": "images/icons",    "check": 2023,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "exporter",    "filename": "Exporter.jsx",    "subpath": "Scripts Panel/Octopus",    "label": {      "de": "Exporter",      "en": "Exporter"    },    "help_url": "https://singels.info/Octopus/help-pages/Exporter.html",    "menu": "Octopus",    "submenu": "",    "after_item": "",    "order": 100,    "check": 21002,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "octopus-tools",    "filename": "Octopus-Tools.jsxinc",    "subpath": "Scripts Panel/Octopus",    "label": {      "de": "Octopus-Tools",      "en": "Octopus-Tools"    },    "help_url": "https://www.project-octopus.net/",    "menu": "",    "submenu": "",    "after_item": "",    "order": 100,    "check": 6613,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "close-all",    "filename": "Close-All.jsx",    "subpath": "Scripts Panel/Octopus",    "label": {      "de": "Close-All",      "en": "Close-All"    },    "help_url": "https://singels.info/Octopus/help-pages/Close-All.html",    "menu": "Octopus",    "submenu": "",    "after_item": "",    "order": 100,    "check": 2781,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "dashboard",    "filename": "Dashboard.jsx",    "subpath": "Scripts Panel/Octopus",    "label": {      "de": "Dashboard",      "en": "Dashboard"    },    "help_url": "https://www.project-octopus.net/",    "menu": "Octopus",    "submenu": "",    "after_item": "",    "order": 100,    "check": 16778,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "strings",    "filename": "Strings.json",    "subpath": "Scripts Panel/Octopus",    "check": 20169,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "octopus-include-2",    "filename": "Octopus-include-2.jsxinc",    "subpath": "Scripts Panel/Octopus",    "label": {      "de": "Octopus-include-2",      "en": "Octopus-include-2"    },    "help_url": "https://www.project-octopus.net/",    "menu": "",    "submenu": "",    "after_item": "",    "order": 100,    "check": 28951,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "collect-docfonts",    "filename": "Collect-Docfonts.jsx",    "subpath": "Scripts Panel/Octopus",    "label": {      "de": "Collect-Docfonts",      "en": "Collect-Docfonts"    },    "help_url": "https://www.project-octopus.net/",    "menu": "Octopus",    "submenu": "",    "after_item": "",    "order": 100,    "check": 13452,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "index",    "filename": "index.json",    "subpath": "",    "check": 29890,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "default-cfg",    "filename": "default_cfg.json",    "subpath": "prefs/display-configs",    "check": 5721,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "display-config",    "filename": "display-config.json",    "subpath": "Scripts Panel/Octopus",    "check": 43746,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "display",    "filename": "Display.jsx",    "subpath": "Scripts Panel/Octopus",    "label": {      "de": "Display",      "en": "Display"    },    "help_url": "https://www.project-octopus.net/",    "menu": "Octopus",    "submenu": "",    "after_item": "",    "order": 100,    "check": 8888,    "updated": "2026-02-16",    "set": "Octopus"  },  {    "id": "display-config-pref",    "filename": "display-config-pref.json",    "subpath": "prefs",    "check": 57,    "updated": "2026-02-16",    "set": "Octopus"  }]

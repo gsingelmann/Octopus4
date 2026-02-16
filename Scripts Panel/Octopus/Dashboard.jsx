@@ -41,6 +41,10 @@ var w_width = 750;
 show_dashboard( cfgs, prefs );
 
 function show_dashboard( cfgs, prefs ) {
+  if ( cfgs.length == 0 ) {
+    __alert( "warnung", __('no_scripts_found'), script_id, "ok", false );
+    return;
+  }
   // -----------------------------------------------------------------------------------------------------
   //  Fenster und zwei Tabs
   // -----------------------------------------------------------------------------------------------------
@@ -59,11 +63,11 @@ function show_dashboard( cfgs, prefs ) {
     "listbox", 
     undefined, "", 
     {
-      minimumSize: [w_width,400], 
-      numberOfColumns: 2, 
+      minimumSize: [w_width, 200], 
+      numberOfColumns: 3, 
       showHeaders: true, 
-      columnTitles: ['Script', __('last updated')],
-      columnWidths: [calc_width(75), calc_width(25)]
+      columnTitles: ['Script', __('last updated'), "Set"],
+      columnWidths: [calc_width(60), calc_width(20), calc_width(20)]
     }
   );
   for ( var n = 0; n < cfgs.length; n++ ) {
@@ -72,6 +76,7 @@ function show_dashboard( cfgs, prefs ) {
     if ( dt ) dt = dt.substr(0,10);
     var a = w.script_list.add("item", localize(cfgs[n].label));
     a.subItems[0].text = dt;
+    a.subItems[1].text = cfgs[n].set || "";
     a.checked = ! prefs.ignore.hasOwnProperty( cfgs[n].id );
     a.ix = n;
     a.sid = cfgs[n].id;
@@ -91,7 +96,7 @@ function show_dashboard( cfgs, prefs ) {
   // w.ok_btns.margins.top = 20
   w.cancelElement = w.ok_btns.add("button", undefined, __('cancel'));
   w.defaultElement = w.ok_btns.add("button", undefined, __('ok'));
-  w.dbg = w.add("edittext", [undefined, undefined, w_width, 150], "", {name: "debug", multiline: true, readonly: true});
+  // w.dbg = w.add("edittext", [undefined, undefined, w_width, 150], "", {name: "debug", multiline: true, readonly: true});
 
   // -----------------------------------------------------------------------------------------------------
   //  Buttons ändern state, wenn ein Script ausgewählt ist
@@ -190,13 +195,19 @@ function show_dashboard( cfgs, prefs ) {
   w.add_set_btn.onClick = function() {
     var name = w.set_name_fd.text,
         path = w.set_path_fd.text,
-        type = w.set_url_btn.value ? "url" : "files";
+        type = w.set_url_btn.value ? "url" : "file";
     if (! path ) {
-      alert( __('fill_out_all_fields') );
+      __alert( "warnung",  __('fill_out_all_fields'), "", "ok", false );
       return;
     }
     if ( ! name ) {
       name = path.split("/").pop();
+    }
+    for ( var n = 0; n < prefs.config_paths.length; n++ ) {
+      if ( prefs.config_paths[n].path == path ) {
+        __alert( "warnung", "set exists", "", "ok", false );
+        return;
+      }
     }
     var new_set = {name: name, path: path, type: type};
     prefs.config_paths.push( new_set );
@@ -205,7 +216,7 @@ function show_dashboard( cfgs, prefs ) {
     w.set_name_fd.text = "";
     w.set_path_fd.text = ""; 
     changes.sets.push( {action: "add", set: new_set.path } );
-    w.dbg.text = JSON.stringify(prefs, null, 2) + "\n\n" + JSON.stringify(changes, null, 2);
+    // w.dbg.text = JSON.stringify(prefs, null, 2) + "\n\n" + JSON.stringify(changes, null, 2);
   }
   w.rm_set_btn.onClick = function() {
     var sel = w.setlist_dd.selection;
@@ -218,7 +229,7 @@ function show_dashboard( cfgs, prefs ) {
     w.crnt_type_txt.text = "";
     w.crnt_name_txt.text = "";
     w.crnt_path_txt.text = "";
-    w.dbg.text = JSON.stringify(prefs, null, 2) + "\n\n" + JSON.stringify(changes, null, 2);
+    // w.dbg.text = JSON.stringify(prefs, null, 2) + "\n\n" + JSON.stringify(changes, null, 2);
   }
 
 
@@ -267,7 +278,7 @@ function show_dashboard( cfgs, prefs ) {
         w.activate_btn.enabled = true;
         prefs.ignore[id] = true;
       }
-      w.dbg.text = JSON.stringify(prefs, null, 2) + "\n\n" + JSON.stringify(changes, null, 2);
+      // w.dbg.text = JSON.stringify(prefs, null, 2) + "\n\n" + JSON.stringify(changes, null, 2);
     } catch(e) {
       alert( e.message + " on " + e.line );
     }
@@ -299,7 +310,7 @@ function show_dashboard( cfgs, prefs ) {
       return;
     }
     var tgt_path = path.replace(/\/Scripts Panel\//, "/Scripts Panel Off/").replace(/\/Startup Scripts\//, "/Startup Scripts Off/");
-    ensureFolder(tgt_path);
+    __ensureFolder(tgt_path);
     if (__moveFile(f, tgt_path) ) {
       __log("info", "Script deinstalliert: " + path, script_id);
     } else {
@@ -312,7 +323,11 @@ function show_dashboard( cfgs, prefs ) {
 //  Ausnahmen und zusätzliche Configs
 // -----------------------------------------------------------------------------------------------------
 function get_prefs() {
-  var prefs = __readJson( PATH_DATA_FOLDER  + "/prefs.json" );
+  try {
+    var prefs = __readJson( PATH_DATA_FOLDER  + "/prefs.json" );
+  } catch(e) {
+    __log( "error", "prefs konnten nicht geladen werden: " + e.message + " on " + e.line, script_id);
+  }
   if ( ! prefs ) {
     prefs = {
       ignore: {},
@@ -322,13 +337,23 @@ function get_prefs() {
   return prefs;
 }
 function write_prefs( prefs ) {
-  __writeJson( PATH_DATA_FOLDER  + "/prefs.json", prefs );
+  try {
+    __writeJson( PATH_DATA_FOLDER  + "/prefs.json", prefs );
+  } catch(e) {
+    __log( "error", "prefs konnten nicht gespeichert werden: " + e.message + " on " + e.line, script_id);
+    __alert( "warnung", __('prefs_save_error'), script_id, "ok", false );
+  }
 }
 // -----------------------------------------------------------------------------------------------------
 // Lokale Liste der config-items
 // -----------------------------------------------------------------------------------------------------
 function get_configs() {
-  var configs =  __readJson( PATH_DATA_FOLDER  + "/config.json" );
+  try {
+    var configs =  __readJson( PATH_DATA_FOLDER  + "/config.json" );
+  } catch(e) {
+    __log( "error", "configs konnten nicht geladen werden: " + e.message + " on " + e.line, script_id);
+    return [];
+  }
   return configs;
 }
 

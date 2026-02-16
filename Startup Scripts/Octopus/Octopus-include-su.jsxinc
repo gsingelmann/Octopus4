@@ -82,16 +82,13 @@ function __readFile(filePath) {
  * Schreibt einen String in eine Datei (überschreibt).
  * Erstellt Elternordner falls nötig.
  */
-function __writeFile(filePath, content) {
+function __writeFile(filePath, content, mode) {
+  if ( ! mode ) mode = "w";
   try {
     var f = new File(filePath);
-    // Elternordner erstellen falls nötig
-    var parentFolder = f.parent;
-    if (!parentFolder.exists) {
-      parentFolder.create();
-    }
+    __ensureFolder( f.parent.fullName );
     f.encoding = "UTF-8";
-    f.open("w");
+    f.open( mode );
     f.write(content);
     f.close();
   } catch(e) {

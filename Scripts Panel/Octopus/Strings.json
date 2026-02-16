@@ -882,6 +882,224 @@
       "en": "Images"
     }
   },
+  "fontinstaller": {
+    "Fonthub": {
+      "de": "Octopus-Fontinstaller",
+      "en": "Octopus-Fontinstaller"
+    },
+    "Add Folder": {
+      "de": "Fontordner hinzufügen",
+      "en": "Add Fontfolder"
+    },
+    "Remove": {
+      "de": "Fontordner vergessen",
+      "en": "Remove Fontfolder from List"
+    },
+    "Update": {
+      "de": "Fontliste aktualisieren",
+      "en": "Update Fontlist"
+    },
+    "Install": {
+      "de": "Schriften des Dokuments installieren",
+      "en": "Install Fonts of Document"
+    },
+    "Install manually": {
+      "de": "Schriften aus Liste installieren",
+      "en": "Install Fonts from List"
+    },
+    "Cancel": {
+      "de": "Schließen",
+      "en": "Close"
+    },
+    "Delete": {
+      "de": "Listen-Dateien löschen",
+      "en": "Remove List-Files"
+    },
+    "yes": {
+      "de": "Ja",
+      "en": "Yes"
+    },
+    "no": {
+      "de": "Nein",
+      "en": "No"
+    },
+    "Fontlists": {
+      "de": "Schriftenlisten",
+      "en": "Lists of Fonts"
+    },
+    "Liste hinzufügen": {
+      "de": "Liste aus Ordner erzeugen",
+      "en": "Add List"
+    },
+    "Liste entfernen": {
+      "de": "Liste aus Script entfernen",
+      "en": "Remove List"
+    },
+    "Fonts in List": {
+      "de": "Schriften im Ordner",
+      "en": "Fonts in List"
+    },
+    "Schriften installieren": {
+      "de": "Schriften installieren",
+      "en": "Install all Fonts"
+    },
+    "Global Dokument-Schriften installieren": {
+      "de": "Dok.-Schriften aus allen Listen installieren",
+      "en": "Install Document-Fonts from all lists"
+    },
+    "Dokument-Schriften installieren": {
+      "de": "Dok.-Schriften aus dieser Liste installieren",
+      "en": "Install Document-Fonts from current list"
+    },
+    "Alle Schriften installieren": {
+      "de": "Alle Schriften installieren",
+      "en": "Install all Fonts"
+    },
+    "Ausgewählte Schriften installieren": {
+      "de": "Ausgewählte Schriften installieren",
+      "en": "Install selected Fonts"
+    },
+    "Schriftenliste aktualisieren": {
+      "de": "Liste erneut aus Ordner erzeugen",
+      "en": "Update Fontlist"
+    },
+    "Liste umbenennen": {
+      "de": "Liste im Script umbenennen",
+      "en": "Rename List"
+    },
+    "Documentfonts": {
+      "de": "Dokument-Schriften",
+      "en": "Documentfonts"
+    },
+    "really_remove": {
+      "de": "Soll die Liste wirklich entfernt werden?\nDies betrifft nur die Liste und nicht den Fontordner auf der Festplatte.",
+      "en": "Really remove the list?\nThis affects only the list, not the folder on your disk."
+    },
+    "Where": {
+      "de": "Wo liegen die Fonts?",
+      "en": "Which folder contains the new fonts?"
+    },
+    "none-missing": {
+      "de": "Es sind keine Schriften als fehlend markiert",
+      "en": "Apparently no fonts are missing"
+    },
+    "install_fail": {
+      "de": "Folgende Schriften wurden nicht installiert",
+      "en": "Some fonts could not be installed"
+    },
+    "number-installed": {
+      "de": "Schriftschnitte wurden installiert\n\nSoll das Dokument gleich neu geöffnet werden, um die Schriften zu aktivieren? \n\nEs muss dafür zuvor gespeichert werden.",
+      "en": "Font-styles were installed\n\nDo you want the document re-opened to activate the fonts?\n\nIt needs to be saved first."
+    },
+    "install-all": {
+      "de": "Installiere alle Schriften in Liste",
+      "en": "Install all Fonts in List"
+    },
+    "install-sel": {
+      "de": "Installiere ausgewählte Schrift",
+      "en": "Install selected Font"
+    },
+    "install-doc": {
+      "de": "Installiere Dokumentschriften",
+      "en": "Install document fonts"
+    },
+    "not-found": {
+      "de": "nicht gefunden",
+      "en": "not found"
+    },
+    "not-copied": {
+      "de": " konnte nicht kopiert werden",
+      "en": " could not be copied"
+    },
+    "update-hint": {
+      "de": "Es dauert meistens einen Moment, bis InDesign die Schriften in 'Document fonts' entdeckt...",
+      "en": "Usually it takes a moment or two until InDesign recognises new Fonts in 'Document fonts'"
+    },
+    "Select Font": {
+      "de": "Wählen Sie die zu löschende Liste(n)",
+      "en": "Select the list(s) you want to remove"
+    },
+    "Installed Msg": {
+      "de": "Diese Schriften wurden gefunden",
+      "en": "These fonts were found"
+    },
+    "none found": {
+      "de": "Keine der fehlenden Schriften wurden im Depot gefunden",
+      "en": "None of the missing fonts were found"
+    },
+    "wait": {
+      "de": "Normalerweise braucht InDesign einen Moment, bis er die Schriften entdeckt hat",
+      "en": "Please wait a moment for InDesign to recognize the new fonts"
+    },
+    "need to be saved": {
+      "de": "Es können nur für gespeicherte Dokumente die Schriften nachinstalliert werden",
+      "en": "The document needs to be saved before you can install fonts"
+    },
+    "need-open-doc": {
+      "de": "Kein Dokument offen\nEs muss ein gespeichertes Dokument offen sein, um Fonts für dieses Dokument zu installieren.",
+      "en": "No open document\nThis script installs Fonts in the 'Document fonts' folder of the active Document."
+    },
+    "Ruhig bleiben": {
+      "de": "Die Schriftenordner, aus denen die Listen ausgelesen werden, werden vom Script NICHT verändert.",
+      "en": "This script will NOT make any changes in the font-folders the lists are extracted from"
+    }
+  },
+  "ocktolock": {
+    "username": {
+      "de": "Username: ",
+      "en": "Username: "
+    },
+    "open_head": {
+      "de": "Deine 'offenen' Dokumente: ",
+      "en": "Your 'open' documents: "
+    },
+    "locked_dirs": {
+      "de": "Geschützte Verzeichnisse: ",
+      "en": "Locked directories: "
+    },
+    "add_dir": {
+      "de": "Verzeichnis hinzufügen",
+      "en": "Add directory"
+    },
+    "rm_dir": {
+      "de": "Auswahl entfernen",
+      "en": "Remove selection"
+    },
+    "cancel": {
+      "de": "Abbrechen",
+      "en": "Cancel"
+    },
+    "which_dir": {
+      "de": "Welches Verzeichnis?",
+      "en": "Which directory?"
+    },
+    "no_string": {
+      "de": "Config-Error\nDer Parameter, der in ein Array gewandelt werden soll, ist kein String, sondern '_1_'",
+      "en": "Config-Error\nThis should be a string but is in fact a '_1_'"
+    }
+	},
+  "octolock-daemon": {
+		"is_opened": {
+			"de": "Die Datei '_1_' ist anscheinend bereits von '_2_' seit dem Zeitpunkt _3_ geöffnet.",
+			"en": "The file '_1_' apparently has been opened by user '_2_' since _3_."
+		},
+		"cancel_opening": {
+			"de": "Öffnen abbrechen?",
+			"en": "Cancel opening?"
+		},
+		"lock_text": {
+			"de": "Diese Datei wird vom Script OctoLock aus dem Projekt Octopus verwendet, um auch in komplizierten Situationen zu kontrollieren, ob Dokumente bereits von anderen Anwendern verwendet werden.",
+			"en": "This file is used by the OctoLock script from the Octopus project to check whether documents are already in use by other users, even in complicated situations."
+		},
+		"yes": {
+			"de": "Ja",
+			"en": "Yes"
+		},
+		"no": {
+			"de": "Nein",
+			"en": "No"
+		}
+	},
   "watermark": {
 		"no-doc": {"de": "Es muss ein Dokument offen sein", "en": "You need an open document"},
     "links": {"de": "links", "en": "left" },

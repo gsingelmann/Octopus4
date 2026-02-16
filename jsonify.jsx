@@ -45,6 +45,26 @@ function main() {
 		}
 	}
 
+	fileList.sort( function(a,b) {
+		if ( a.subpath.search(/panel/i) != -1 && b.subpath.search(/panel/i) == -1 ) return -1;
+		if ( a.subpath.search(/panel/i) == -1 && b.subpath.search(/panel/i) != -1 ) return 1;
+		if ( a.subpath.search(/panel/i) != -1 && b.subpath.search(/panel/i) != -1 ) {
+			if ( a.id < b.id ) return -1;
+			if ( a.id > b.id ) return 1;
+			return 0;
+		}
+		if ( a.subpath.search(/startup/i) != -1 && b.subpath.search(/startup/i) == -1 ) return -1;
+		if ( a.subpath.search(/startup/i) == -1 && b.subpath.search(/startup/i) != -1 ) return 1;
+		if ( a.subpath.search(/startup/i) != -1 && b.subpath.search(/startup/i) != -1 ) {
+			if ( a.id < b.id ) return -1;
+			if ( a.id > b.id ) return 1;
+			return 0;
+		}
+		if ( a.id < b.id ) return -1;
+		if ( a.id > b.id ) return 1;
+		return 0;
+	})
+
   // JSON erstellen
   var jsonString = JSON.stringify(fileList, null, 2);
 

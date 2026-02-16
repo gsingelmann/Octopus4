@@ -851,5 +851,41 @@
       "de": "Bilder",
       "en": "Images"
     }
+  },
+  "watermark": {
+		"no-doc": {"de": "Es muss ein Dokument offen sein", "en": "You need an open document"},
+    "links": {"de": "links", "en": "left" },
+    "mitte": {"de": "mitte", "en": "center" },
+    "rechts": {"de": "rechts", "en": "right" },
+    "oben": {"de": "oben", "en": "top" },
+    "unten": {"de": "unten", "en": "bottom" },
+
+    "watermarkText" : { "de": "Wasserzeichentext", "en": "Watermarktext" },
+    "watermarkFontColor" : { "de": "Fontfarbe", "en": "Fontcolor" },
+    "watermarkFontFamily" : { "de": "Schrift", "en": "Font" },
+    "watermarkFontStyle" : { "de": "Schnitt", "en": "Style" },
+    "watermarkFontPointSize" : { "de": "Schriftgrad", "en": "Fontsize" },
+    "watermarkHorizontalPosition" : { "de": "Horizontale Position", "en": "Position horizontal" },
+    "watermarkVerticalPosition" : { "de": "Vertikale Position", "en": "Position vertical" },
+    "watermarkHorizontalOffset" : { "de": "Horizontaler Versatz", "en": "Offset horizontal" },
+    "watermarkVerticalOffset" : { "de": "Vertikaler Versatz", "en": "Offset vertical" },
+    "watermarkOpacity" : { "de": "Deckkraft", "en": "Opacity" },
+    "watermarkRotation" : { "de": "Rotation", "en": "Rotation" },
+    "watermarkVisibility" : { "de": "Sichtbar im Dokument", "en": "Visible in Document" },
+    "watermarkDoPrint" : { "de": "Sichtbar im Druck", "en": "Visible in Output" },
+    "watermarkDrawInBack" : { "de": "Im Hintergrund", "en": "In Background" },
+
+		"Inhalt": {"de": "Inhalt", "en": "Content"},
+		"Formatierung": {"de": "Formatierung", "en": "Formatting"},
+		"Position": {"de": "Position", "en": "Position"},
+		"Sichtbarkeit": {"de": "Sichtbarkeit", "en": "Visibility"},
+
+    "fontfail": {
+      "de": "Aus bisher ungeklärten Gründen akzeptiert InDesign manche Schriften nicht für Wasserzeichen. \r\rProbieren Sie bitte eine andere\r\rDie Eigenschaften der gewählten Schrift sind:\r", 
+      "en": "For unclear reasons some fonts cannot be used for watermarks. \nProperties of the chosen font are: \n" 
+    },
+
+    "read-error": {"de": "Fehler beim Auslesen der Eigenschaft ", "en": "Error when reading property " },
+    "xx": {"de": "xx", "en": "yy" },
   }
 }

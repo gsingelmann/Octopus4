@@ -27,15 +27,14 @@
 		DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------- */
 #targetengine "octopus_watermark"
-#include "./Octopus-include.jsxinc"
-
+#include "./Octopus-include-2.jsxinc"
+#include "./Octopus-Tools.jsxinc"
 __init(); 
-var script_name = "Watermark"
-var script_version = __get_script_version( script_name);
+var script_id = "Watermark"
 
 if ( app.documents.length ) {
-	__log_run(script_name);
-	set_watermark( __("Wasserzeichen"), script_version );
+	__log("run", script_id, script_id );
+	set_watermark( __("Wasserzeichen") );
 } else {
 	__alert( "stop", __('no-doc'), "", "OK" );
 }
@@ -154,12 +153,12 @@ function set_watermark( title, version ) {
   var width = 300, lw = 140;
 
   var w = new Window('dialog', title, ( window_position ? { x: window_position.x, y: window_position.y} : undefined ) );
-	w.script_name = script_name;
+	w.script_id = script_id;
   if ( "I want to be able to collapse this ") {
     w.orientation = 'column';
     w.alignChildren = ['fill', 'fill'];
 
-		__insert_head( w );
+		__insert_head( w, script_id );
 
     w.main = w.add( 'group {orientation: "column", alignChildren: ["fill","fill"]}');
     w.btns = w.add('group {orientation: "row", alignChildren: ["right", "fill"]}');
@@ -362,7 +361,7 @@ function set_watermark( title, version ) {
   w.defaultElement = w.btns.add('button', undefined, "OK")
   w.cancelElement = w.btns.add('button', undefined, "Abbrechen")
 
-  w.footer.add('statictext', undefined, 'v' + version)
+  // w.footer.add('statictext', undefined, 'v' + version)
 
   var r = w.show();
 	if ( r == 1 ) {
@@ -476,66 +475,40 @@ function get_working_fonts() {
 
 
 function __( id ) {
-  loc_strings = load_translation();
+  var txt = "";
+  try {
+    var a = loc_strings;
+  } catch(e) {
+    loc_strings = __readJson( get_script_folder_path() + "/Strings.json");
+    if ( ! loc_strings || ! loc_strings.hasOwnProperty(script_id) ) {
+      return id;
+    }
+    loc_strings = loc_strings[ script_id ];
+    if (DBG) $.writeln("loaded loc-strings");
+  }
+
   if (loc_strings.hasOwnProperty(id)) {
-    return localize(loc_strings[id]);
+    txt = localize(loc_strings[id]);
   } else {
-    return "---" + id
+    txt = id
   }
+	var re;
+	for ( var n = 1; n < arguments.length; n++ ) {
+		try {
+			re = new RegExp( "_" + n.toString() + "_" );
+			txt = txt.replace( re,  arguments[n].toString() );
+		} catch(e) {
+			__log( "error", e.message + " on " + e.line, script_id);
+		}
+	}
+	return txt;
 }
-
-function  load_translation() {
-  return {
-		"no-doc": {"de": "Es muss ein Dokument offen sein", "en": "You need an open document"},
-    "links": {"de": "links", "en": "left" },
-    "mitte": {"de": "mitte", "en": "center" },
-    "rechts": {"de": "rechts", "en": "right" },
-    "oben": {"de": "oben", "en": "top" },
-    "unten": {"de": "unten", "en": "bottom" },
-
-    "watermarkText" : { "de": "Wasserzeichentext", "en": "Watermarktext" },
-    "watermarkFontColor" : { "de": "Fontfarbe", "en": "Fontcolor" },
-    "watermarkFontFamily" : { "de": "Schrift", "en": "Font" },
-    "watermarkFontStyle" : { "de": "Schnitt", "en": "Style" },
-    "watermarkFontPointSize" : { "de": "Schriftgrad", "en": "Fontsize" },
-    "watermarkHorizontalPosition" : { "de": "Horizontale Position", "en": "Position horizontal" },
-    "watermarkVerticalPosition" : { "de": "Vertikale Position", "en": "Position vertical" },
-    "watermarkHorizontalOffset" : { "de": "Horizontaler Versatz", "en": "Offset horizontal" },
-    "watermarkVerticalOffset" : { "de": "Vertikaler Versatz", "en": "Offset vertical" },
-    "watermarkOpacity" : { "de": "Deckkraft", "en": "Opacity" },
-    "watermarkRotation" : { "de": "Rotation", "en": "Rotation" },
-    "watermarkVisibility" : { "de": "Sichtbar im Dokument", "en": "Visible in Document" },
-    "watermarkDoPrint" : { "de": "Sichtbar im Druck", "en": "Visible in Output" },
-    "watermarkDrawInBack" : { "de": "Im Hintergrund", "en": "In Background" },
-
-		"Inhalt": {"de": "Inhalt", "en": "Content"},
-		"Formatierung": {"de": "Formatierung", "en": "Formatting"},
-		"Position": {"de": "Position", "en": "Position"},
-		"Sichtbarkeit": {"de": "Sichtbarkeit", "en": "Visibility"},
-
-
-    // "Wasserzeichen": {"de": "Wasserzeichen", "en": "Watermark" },
-    // "Wasserzeichentext": {"de": "Wasserzeichentext", "en": "Watermarktext" },
-    // "Fontfarbe": {"de": "Fontfarbe (RGB)", "en": "Fontcolor (RGB)" },
-    // "Font": {"de": "Font", "en": "Font" },
-    // "Schriftgrad": {"de": "Schriftgrad", "en": "Pointsize" },
-    // "Horizontale Position": {"de": "Horizontale Position", "en": "Position horizontal" },
-    // "Vertikale Position": {"de": "Vertikale Position", "en": "Position vertical" },
-    // "Deckkraft": {"de": "Deckkraft", "en": "Opacity" },
-    // "Rotation": {"de": "Rotation", "en": "Rotation" },
-    // "Horizontaler Versatz": {"de": "Horizontaler Versatz", "en": "Offset horizontal" },
-    // "Vertikaler Versatz": {"de": "Vertikaler Versatz", "en": "Offset vertical" },
-    // "in-doc": {"de": "Sichtbar im Dokument", "en": "Visible in Document" },
-    // "in-print": {"de": "Sichtbar im Druck", "en": "Visible on Print" },
-    // "in-back": {"de": "Im Hintergrund", "en": "In Background" },
-    "fontfail": {
-      "de": "Aus bisher ungeklärten Gründen akzeptiert InDesign manche Schriften nicht für Wasserzeichen. \r\rProbieren Sie bitte eine andere\r\rDie Eigenschaften der gewählten Schrift sind:\r", 
-      "en": "For unclear reasons some fonts cannot be used for watermarks. \nProperties of the chosen font are: \n" 
-    },
-
-    "read-error": {"de": "Fehler beim Auslesen der Eigenschaft ", "en": "Error when reading property " },
-    "xx": {"de": "xx", "en": "yy" },
-  }
+function get_script_folder_path() {
+    try {
+      return app.activeScript.parent.fullName;
+    } catch (e) { 
+      return e.fileName.replace(/\/[^\/]+$/, "");
+    }
 }
 
 // --------------------------------------------------------------------------------------------------------------------------

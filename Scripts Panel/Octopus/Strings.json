@@ -1,4 +1,34 @@
 {
+  "cleancontenttypes": {
+    "convert": {
+      "de": "Konvertieren",
+      "en": "Convert"
+    },
+    "ignore": {
+      "de": "Ignorieren",
+      "en": "Ignore"
+    },
+    "remove": {
+      "de": "Löschen",
+      "en": "Remove"
+    },
+    "cancel": {
+      "de": "Abbrechen",
+      "en": "Cancel"
+    },
+    "all": {
+      "de": "Alle konvertieren",
+      "en": "Convert all"
+    },
+    "scriptname": {
+      "de": "Inhaltstypen aufräumen...",
+      "en": "Clean Content Types..."
+    },
+    "none_found": {
+      "de": "Keine auffälligen Rahmen gefunden",
+      "en": "No wrongly assigned frames found"
+    }
+  },
   "collect-docfonts": {
     "Schriften sammeln": {
       "en": "Collect fonts",

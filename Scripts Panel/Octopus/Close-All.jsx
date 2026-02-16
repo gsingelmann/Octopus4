@@ -27,7 +27,6 @@
 		DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------- */
 #include "./Octopus-include-2.jsxinc"
-#include "./Octopus-Tools.jsxinc"
 __init();
 var script_id = "close-all";
 __log( "run", script_id, script_id);
@@ -64,6 +63,8 @@ function close_all() {
         app.documents.everyItem().close( SaveOptions.YES );
       }
       $.bp();
+    } else {
+      app.documents.everyItem().close( SaveOptions.NO );
     }
   }
 }

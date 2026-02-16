@@ -27,7 +27,6 @@
 		DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------- */
 #include "./Octopus-include-2.jsxinc"
-#include "./Octopus-Tools.jsxinc"
 __init();
 var script_id = "exporter";
 __log( "run", script_id, script_id);

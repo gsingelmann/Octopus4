@@ -27,7 +27,6 @@
 		DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------- */
 #include "./Octopus-include-2.jsxinc"
-#include "./Octopus-Tools.jsxinc"
 #targetengine collect_docfonts
 __init();
 var script_id = "collect-docfonts";

@@ -47,10 +47,11 @@ function install() {
   PATH_SCRIPT_PARENT = app.scriptPreferences.scriptsFolder.parent.fullName;
   PATH_USER_FOLDER    = Folder.userData.fullName + "/" + package_name;
   PATH_DATA_FOLDER    = PATH_USER_FOLDER + "/Data";
-  PATH_LOG_FILE = PATH_DATA_FOLDER + "/_log.json";
+  PATH_LOG_FILE = PATH_DATA_FOLDER + "/Logs/log.json";
   try {
     __ensureFolder(PATH_USER_FOLDER);
     __ensureFolder(PATH_DATA_FOLDER);
+    __ensureFolder(PATH_DATA_FOLDER + "/Logs");
   } catch(e) {
     alert("KRITISCHER FEHLER: Octopus kann notwendige Ordner nicht erstellen.\n\n" +
           "Pfad: " + PATH_USER_FOLDER + "\n\n" +
@@ -216,6 +217,11 @@ function install() {
       // $.writeln( c.filename + ": " + ((now-then)/1000) + " secs")
     }
     __log("info", "Installation abgeschlossen (" + configs.length + " Configs verarbeitet)", "installer");
+  } catch(e) {
+    __log("error", e.message + " on " + e.line, "installer" );
+  } finally {
+    _pbw.close();
+  }
     if ( nu.length > 0 || updated.length > 0 || failed.length > 0 ) {
       var msg = "";
       if ( nu.length > 0 ) msg += "Neue Installationen: " + nu.join(", ") + "\n";
@@ -223,11 +229,6 @@ function install() {
       if ( failed.length > 0 ) msg += "Fehlerhafte Installationen: " + failed.join(", ") + "\n";
       __alert("info", msg, "Installation abgeschlossen");
     }
-  } catch(e) {
-    __log("error", e.message + " on " + e.line, "installer" );
-  } finally {
-    _pbw.close();
-  }
 
 
   // -------------------------------------------------------------------------------------------

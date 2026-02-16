@@ -28,7 +28,6 @@
 // ---------------------------------------------------------------------------------------------------------------------- */
 #targetengine octopus_display
 #include "./Octopus-include-2.jsxinc"
-#include "./Octopus-Tools.jsxinc"
 __init();
 var script_id = "display"
 __log( "run", script_id, script_id );

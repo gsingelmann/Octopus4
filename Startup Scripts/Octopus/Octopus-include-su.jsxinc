@@ -14,6 +14,10 @@ function __getDayString() {
   var d = new Date();
   return d.getFullYear() + "-" + __pad(d.getMonth() + 1) + "-" + __pad(d.getDate())
 }
+function __getMinuteString() {
+  var d = new Date();
+  return d.getFullYear() + "-" + __pad(d.getMonth() + 1) + "-" + __pad(d.getDate()) + "_" + __pad(d.getHours()) + "-" + __pad(d.getMinutes());
+}
 
 /**
  * Loggt eine Nachricht lokal (in die Datei)
@@ -24,7 +28,7 @@ function __log(level, msg, active_script) {
   if ( ! active_script ) active_script = "includes";
   if ( level == "reset_log" && PATH_LOG_FILE ) {
     var f = new File( PATH_LOG_FILE );
-    f.rename( __getDayString() + ".json");
+    f.rename( __getMinuteString() + ".json");
   }
   try {
     var entry = {

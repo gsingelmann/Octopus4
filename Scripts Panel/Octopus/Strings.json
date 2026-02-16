@@ -1,4 +1,250 @@
 {
+  "check-articles": {
+    "hide articles": {
+      "de": "Rahmen in Artikeln ausblenden",
+      "en": "Hide frames that are part of an article"
+    },
+    "show articles": {
+      "de": "Rahmen in Artikeln einblenden",
+      "en": "Show frames that are part of an article"
+    }
+  },
+  "check-alt-text": {
+    "make layer": {
+      "de": "Erstelle Marker-Ebene",
+      "en": "Create indicator layer"
+    },
+    "hide alts": {
+      "de": "Alle Verknüpfungen mit Alt-Text ausblenden",
+      "en": "Hide all links with alt-text"
+    },
+    "hide deco": {
+      "de": "Alle dekorativen Verknüpfungen ausblenden",
+      "en": "Hide all decorative links"
+    },
+    "show alts": {
+      "de": "Alle Verknüpfungen mit Alt-Text einblenden",
+      "en": "Show all links with alt-text"
+    },
+    "show deco": {
+      "de": "Alle dekorativen Verknüpfungen einblenden",
+      "en": "Show all decorative links"
+    },
+    "save warning": {
+      "de": "Alt-Text Warnung",
+      "en": "Alt-Text Warning"
+    },
+    "still hidden": {
+      "de": "Es sind noch Rahmen ausgeblendet. Es wird versucht, sie vor dem Speichern einzublenden\n\nTrotzdem Speichern?",
+      "en": "Some frames are still hidden. We attempt to show them before save.\n\nSave anyway?"
+    },
+    "yes": {
+      "de": "Ja",
+      "en": "Yes"
+    },
+    "no": {
+      "de": "Nein",
+      "en": "No"
+    },
+    "start_config_first": {
+      "de": "Starten Sie zuerst das 'Anzeige konfigurieren', um Ihre Einstellungen festzulegen",
+      "en": "Start the config-script once to define your own preferences"
+    }
+  },
+  "check-endofline": {
+    "prev": {
+      "de": "Vorherige Fundstelle",
+      "en": "Previous"
+    },
+    "next": {
+      "de": "Nachfolgende Fundstelle",
+      "en": "Next"
+    },
+    "fix": {
+      "de": "Korrigieren",
+      "en": "Fix"
+    },
+    "fix_all": {
+      "de": "Alle dieses Typs korrigieren",
+      "en": "Fix all of this type"
+    },
+    "refresh": {
+      "de": "Neu durchsuchen",
+      "en": "Refresh"
+    },
+    "found": {
+      "de": "Fundstelle: ",
+      "en": "Match: "
+    },
+    "type": {
+      "de": "Art: ",
+      "en": "Type: "
+    },
+    "hyphen": {
+      "de": "Harte Trennung",
+      "en": "Rigid hyphen"
+    },
+    "break": {
+      "de": "Harter Zeilenumbruch",
+      "en": "Hard linebreak"
+    },
+    "spaces": {
+      "de": "Mehrfache Leerzeichen",
+      "en": "Multiple Spaces"
+    },
+    "nothing found": {
+      "de": "Nichts gefunden",
+      "en": "Nothing found"
+    },
+    "available greps": {
+      "de": "Installierte Greps",
+      "en": "Available Greps"
+    },
+    "corrected": {
+      "de": "Korrigierte Wörter: ",
+      "en": "Fixed words: "
+    },
+    "aux2": {
+      "de": "",
+      "en": ""
+    },
+    "hyphengrep": {
+      "de": "∴ Octopus Falsche Trennzeichen",
+      "en": "∴ Octopus Wrong Hyphen"
+    },
+    "linebreakgrep": {
+      "de": "∴ Octopus Erzwungener Zeilenumbruch",
+      "en": "∴ Octopus Forced Linebreak"
+    },
+    "multispacegrep": {
+      "de": "∴ Octopus Mehrfache Leerzeichen",
+      "en": "∴ Octopus Multiple Spaces"
+    }
+  },
+  "check-hyphenation": {
+    "prev": {
+      "de": "Vorherige Fundstelle",
+      "en": "Previous"
+    },
+    "next": {
+      "de": "Nachfolgende Fundstelle",
+      "en": "Next"
+    },
+    "fix": {
+      "de": "Korrigieren",
+      "en": "Fix"
+    },
+    "found": {
+      "de": "Fundstelle: ",
+      "en": "Match: "
+    },
+    "type": {
+      "de": "Art: ",
+      "en": "Type: "
+    },
+    "hyphen": {
+      "de": "Harte Trennung",
+      "en": "Rigid hyphen"
+    },
+    "break": {
+      "de": "Harter Zeilenumbruch",
+      "en": "Hard linebreak"
+    },
+    "schwobbl": {
+      "de": "Zahlschwobbl",
+      "en": "Shwobbl with digit"
+    },
+    "nothing found": {
+      "de": "Nichts gefunden",
+      "en": "Nothing found"
+    }
+  },
+  "check-language": {
+    "language": {
+      "de": "Sprache",
+      "en": "Language"
+    },
+    "share": {
+      "de": "Anteil",
+      "en": "Share"
+    },
+    "chars": {
+      "de": "Zeichen",
+      "en": "Chars"
+    },
+    "ranges": {
+      "de": "Strecken",
+      "en": "Ranges"
+    },
+    "hide main": {
+      "de": "Hauptsprache nicht anzeigen",
+      "en": "Don't mark main language"
+    },
+    "hide marker": {
+      "de": "Markierungen ausblenden",
+      "en": "Hide marker"
+    },
+    "prev": {
+      "de": "Vorherige anzeigen",
+      "en": "Show previous"
+    },
+    "next": {
+      "de": "Nächste anzeigen",
+      "en": "Show next"
+    },
+    "in overset": {
+      "de": "Treffer im Übersatz",
+      "en": "Text in Overflow"
+    },
+  },
+  "check-lists": {
+    "nothing-found": {
+      "de": "Keine Fundstellen",
+      "en": " Nothing found"
+    },
+    "previous": {
+      "de": "Vorherige Fundstelle",
+      "en": " Previous list"
+    },
+    "next": {
+      "de": "Nachfolgende Fundstelle",
+      "en": " Next list"
+    },
+    "refresh": {
+      "de": "Neu durchsuchen",
+      "en": " Refresh"
+    },
+    "paragraphs": {
+      "de": "Abs\u00e4tze",
+      "en": "paragraphs"
+    }
+  },
+  "check-tags": {
+    "locked-stories": {
+      "de": "Textabschnitte sind abgeschlossen",
+      "en": " Stories are locked"
+    },
+    "locked-layers": {
+      "de": "Ebenen sind abgeschlossen",
+      "en": " Layers are locked"
+    },
+    "hidden-layers": {
+      "de": "Ebenen sind ausgeblendet",
+      "en": " Layers are hidden"
+    },
+    "add-btn": {
+      "de": "Tags markieren",
+      "en": "Add markings for tags"
+    },
+    "rm-btn": {
+      "de": "Markierungen entfernen",
+      "en": "Remove markings for tags"
+    },
+    "cancel": {
+      "de": "Abbrechen",
+      "en": "Cancel"
+    }
+  },
   "cleancontenttypes": {
     "convert": {
       "de": "Konvertieren",
@@ -654,11 +900,11 @@
       "en": "Presets: "
     },
     "new_preset": {
-      "de": "Neue Vorgabe", 
+      "de": "Neue Vorgabe",
       "en": "New preset"
     },
     "new_preset_name": {
-      "de": "Vorgabenname: ", 
+      "de": "Vorgabenname: ",
       "en": "Presetname: "
     },
     "new": {
@@ -1044,6 +1290,52 @@
       "en": "This script will NOT make any changes in the font-folders the lists are extracted from"
     }
   },
+  "indesign-help": {
+    "ui_ok": {
+      "de": "Frage senden",
+      "en": "Send Question"
+    },
+    "ui_cancel": {
+      "de": "Schließen",
+      "en": "Close"
+    },
+    "q": {
+      "de": "Ihre Frage",
+      "en": "Your Question"
+    },
+    "a": {
+      "de": "Die Antwort",
+      "en": "The Answer"
+    },
+    "id-needed": {
+      "de": "Das Wort 'InDesign' muss in der Frage auftauchen",
+      "en": "The word 'InDesign' has to be part of the question"
+    },
+    "wait": {
+      "de": "Die Anfrage wird über einen einfachen Account gestellt. Das kann je nach Auslastungen zwischen 5 und 60sec dauern.",
+      "en": "The request is made with a low-prio account. This can take between 5 and 60 seconds"
+    },
+    "wait_msg": {
+      "de": "Unsere OpenAI Schnittstelle ist nicht die allerschnellste. Anfragen können eine Minute oder mehr dauern",
+      "en": "Our OpenAI API can take quite some time to generate a text"
+    },
+    "ui_saved_questions": {
+      "de": "Gespeicherte Fragen",
+      "en": "Saved Questions"
+    },
+    "q1": {
+      "de": "In InDesign, wo stellt man ein, dass Verknüpfungen beim Öffnen des Dokuments nicht aktualisiert werden?",
+      "en": "In InDesign, how do you configure that links are not checked when opening a document?"
+    },
+    "q2": {
+      "de": "In InDesign, wie richtet man den Goldenen Schnitt als Satzspiegel ein?",
+      "en": "How do you create a layout following the golden ratio?"
+    },
+    "q3": {
+      "de": "Kann man aus einem InDesign-Dokument ein fertig ausgeschossenes PDF erzeugen?",
+      "en": "Can you create a ready imposed PDF from an InDesign document?"
+    }
+  },
   "ocktolock": {
     "username": {
       "de": "Username: ",
@@ -1077,63 +1369,163 @@
       "de": "Config-Error\nDer Parameter, der in ein Array gewandelt werden soll, ist kein String, sondern '_1_'",
       "en": "Config-Error\nThis should be a string but is in fact a '_1_'"
     }
-	},
+  },
   "octolock-daemon": {
-		"is_opened": {
-			"de": "Die Datei '_1_' ist anscheinend bereits von '_2_' seit dem Zeitpunkt _3_ geöffnet.",
-			"en": "The file '_1_' apparently has been opened by user '_2_' since _3_."
-		},
-		"cancel_opening": {
-			"de": "Öffnen abbrechen?",
-			"en": "Cancel opening?"
-		},
-		"lock_text": {
-			"de": "Diese Datei wird vom Script OctoLock aus dem Projekt Octopus verwendet, um auch in komplizierten Situationen zu kontrollieren, ob Dokumente bereits von anderen Anwendern verwendet werden.",
-			"en": "This file is used by the OctoLock script from the Octopus project to check whether documents are already in use by other users, even in complicated situations."
-		},
-		"yes": {
-			"de": "Ja",
-			"en": "Yes"
-		},
-		"no": {
-			"de": "Nein",
-			"en": "No"
-		}
-	},
-  "watermark": {
-		"no-doc": {"de": "Es muss ein Dokument offen sein", "en": "You need an open document"},
-    "links": {"de": "links", "en": "left" },
-    "mitte": {"de": "mitte", "en": "center" },
-    "rechts": {"de": "rechts", "en": "right" },
-    "oben": {"de": "oben", "en": "top" },
-    "unten": {"de": "unten", "en": "bottom" },
-
-    "watermarkText" : { "de": "Wasserzeichentext", "en": "Watermarktext" },
-    "watermarkFontColor" : { "de": "Fontfarbe", "en": "Fontcolor" },
-    "watermarkFontFamily" : { "de": "Schrift", "en": "Font" },
-    "watermarkFontStyle" : { "de": "Schnitt", "en": "Style" },
-    "watermarkFontPointSize" : { "de": "Schriftgrad", "en": "Fontsize" },
-    "watermarkHorizontalPosition" : { "de": "Horizontale Position", "en": "Position horizontal" },
-    "watermarkVerticalPosition" : { "de": "Vertikale Position", "en": "Position vertical" },
-    "watermarkHorizontalOffset" : { "de": "Horizontaler Versatz", "en": "Offset horizontal" },
-    "watermarkVerticalOffset" : { "de": "Vertikaler Versatz", "en": "Offset vertical" },
-    "watermarkOpacity" : { "de": "Deckkraft", "en": "Opacity" },
-    "watermarkRotation" : { "de": "Rotation", "en": "Rotation" },
-    "watermarkVisibility" : { "de": "Sichtbar im Dokument", "en": "Visible in Document" },
-    "watermarkDoPrint" : { "de": "Sichtbar im Druck", "en": "Visible in Output" },
-    "watermarkDrawInBack" : { "de": "Im Hintergrund", "en": "In Background" },
-
-		"Inhalt": {"de": "Inhalt", "en": "Content"},
-		"Formatierung": {"de": "Formatierung", "en": "Formatting"},
-		"Position": {"de": "Position", "en": "Position"},
-		"Sichtbarkeit": {"de": "Sichtbarkeit", "en": "Visibility"},
-
-    "fontfail": {
-      "de": "Aus bisher ungeklärten Gründen akzeptiert InDesign manche Schriften nicht für Wasserzeichen. \r\rProbieren Sie bitte eine andere\r\rDie Eigenschaften der gewählten Schrift sind:\r", 
-      "en": "For unclear reasons some fonts cannot be used for watermarks. \nProperties of the chosen font are: \n" 
+    "is_opened": {
+      "de": "Die Datei '_1_' ist anscheinend bereits von '_2_' seit dem Zeitpunkt _3_ geöffnet.",
+      "en": "The file '_1_' apparently has been opened by user '_2_' since _3_."
     },
-
-    "read-error": {"de": "Fehler beim Auslesen der Eigenschaft ", "en": "Error when reading property " },
-    "xx": {"de": "xx", "en": "yy" },
+    "cancel_opening": {
+      "de": "Öffnen abbrechen?",
+      "en": "Cancel opening?"
+    },
+    "lock_text": {
+      "de": "Diese Datei wird vom Script OctoLock aus dem Projekt Octopus verwendet, um auch in komplizierten Situationen zu kontrollieren, ob Dokumente bereits von anderen Anwendern verwendet werden.",
+      "en": "This file is used by the OctoLock script from the Octopus project to check whether documents are already in use by other users, even in complicated situations."
+    },
+    "yes": {
+      "de": "Ja",
+      "en": "Yes"
+    },
+    "no": {
+      "de": "Nein",
+      "en": "No"
+    }
+  },
+  "placeholder-text": {
+    "select_text": {
+      "de": "Bitte wählen Sie einen Textrahmen",
+      "en": "Please select a textframe"
+    },
+    "ui_ok": {
+      "de": "Anfrage senden",
+      "en": "Send Request"
+    },
+    "ui_cancel": {
+      "de": "Schließen",
+      "en": "Close"
+    },
+    "what_topic": {
+      "de": "Worum geht's?",
+      "en": "What's the topic?"
+    },
+    "wait": {
+      "de": "Die Anfrage wird über einen einfachen Account gestellt. Das kann je nach Auslastungen zwischen 5 und 20sec dauern.",
+      "en": "The request is made with a low-prio account. This can take between 5 and 20 seconds"
+    },
+    "no_frame": {
+      "de": "Es muss ein Textrahmen markiert sein",
+      "en": "You need to select a textframe first"
+    }
+  },
+  "watermark": {
+    "no-doc": {
+      "de": "Es muss ein Dokument offen sein",
+      "en": "You need an open document"
+    },
+    "links": {
+      "de": "links",
+      "en": "left"
+    },
+    "mitte": {
+      "de": "mitte",
+      "en": "center"
+    },
+    "rechts": {
+      "de": "rechts",
+      "en": "right"
+    },
+    "oben": {
+      "de": "oben",
+      "en": "top"
+    },
+    "unten": {
+      "de": "unten",
+      "en": "bottom"
+    },
+    "watermarkText": {
+      "de": "Wasserzeichentext",
+      "en": "Watermarktext"
+    },
+    "watermarkFontColor": {
+      "de": "Fontfarbe",
+      "en": "Fontcolor"
+    },
+    "watermarkFontFamily": {
+      "de": "Schrift",
+      "en": "Font"
+    },
+    "watermarkFontStyle": {
+      "de": "Schnitt",
+      "en": "Style"
+    },
+    "watermarkFontPointSize": {
+      "de": "Schriftgrad",
+      "en": "Fontsize"
+    },
+    "watermarkHorizontalPosition": {
+      "de": "Horizontale Position",
+      "en": "Position horizontal"
+    },
+    "watermarkVerticalPosition": {
+      "de": "Vertikale Position",
+      "en": "Position vertical"
+    },
+    "watermarkHorizontalOffset": {
+      "de": "Horizontaler Versatz",
+      "en": "Offset horizontal"
+    },
+    "watermarkVerticalOffset": {
+      "de": "Vertikaler Versatz",
+      "en": "Offset vertical"
+    },
+    "watermarkOpacity": {
+      "de": "Deckkraft",
+      "en": "Opacity"
+    },
+    "watermarkRotation": {
+      "de": "Rotation",
+      "en": "Rotation"
+    },
+    "watermarkVisibility": {
+      "de": "Sichtbar im Dokument",
+      "en": "Visible in Document"
+    },
+    "watermarkDoPrint": {
+      "de": "Sichtbar im Druck",
+      "en": "Visible in Output"
+    },
+    "watermarkDrawInBack": {
+      "de": "Im Hintergrund",
+      "en": "In Background"
+    },
+    "Inhalt": {
+      "de": "Inhalt",
+      "en": "Content"
+    },
+    "Formatierung": {
+      "de": "Formatierung",
+      "en": "Formatting"
+    },
+    "Position": {
+      "de": "Position",
+      "en": "Position"
+    },
+    "Sichtbarkeit": {
+      "de": "Sichtbarkeit",
+      "en": "Visibility"
+    },
+    "fontfail": {
+      "de": "Aus bisher ungeklärten Gründen akzeptiert InDesign manche Schriften nicht für Wasserzeichen. \r\rProbieren Sie bitte eine andere\r\rDie Eigenschaften der gewählten Schrift sind:\r",
+      "en": "For unclear reasons some fonts cannot be used for watermarks. \nProperties of the chosen font are: \n"
+    },
+    "read-error": {
+      "de": "Fehler beim Auslesen der Eigenschaft ",
+      "en": "Error when reading property "
+    },
+    "xx": {
+      "de": "xx",
+      "en": "yy"
+    }
   }
 }

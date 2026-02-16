@@ -178,7 +178,8 @@ function create_log_entry( path ) {
 	__writeFile( logpath, join_log(log) );
 }
 function remove_log_entry( path ) {
-	var logpath = __get_config_path("octolock-logs") + "/" + app.version.split(".").shift() + ".txt";
+	var logpath = PATH_DATA_FOLDER + "/octolock-logs/" + app.version.split(".").shift() + ".txt";
+	// var logpath = __get_config_path("octolock-logs") + "/" + app.version.split(".").shift() + ".txt";
 	var log = __read_file( logpath );
 	log = split_log( log );
 	var hline = "";
@@ -190,7 +191,8 @@ function remove_log_entry( path ) {
 	}
 	__writeFile( logpath, join_log(log) );
 	
-	var historypath = __get_config_path("octolock-logs") + "/history-" + app.version.split(".").shift() + ".txt";
+	var historypath = PATH_DATA_FOLDER + "/octolock-logs/history-" + app.version.split(".").shift() + ".txt";
+	// var historypath = __get_config_path("octolock-logs") + "/history-" + app.version.split(".").shift() + ".txt";
 	__writeFile( historypath, hline + "\n", "a" );
 }
 // Log ist ein TSV. Ich brauch oben ein normalen 2dim Array
@@ -235,7 +237,8 @@ function get_user_name() {
 	return rs;
 }
 function read_volumes_from_prefs() {
-	var f_volumes = __get_config_path() + "/octolock.txt";
+	var f_volumes = PATH_DATA_FOLDER + "/prefs/octolock.txt";
+	// var f_volumes = __get_config_path() + "/octolock.txt";
   var volumes = __read_file( f_volumes );
   volumes = volumes.length ? volumes.split("\n") : [];
 	return volumes;

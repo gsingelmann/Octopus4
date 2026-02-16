@@ -1285,12 +1285,14 @@ function initLog() {
         scriptFolderPath = scriptFolderPath.parent;
     }
 
-    var logFolder = Folder(scriptFolderPath + "/" + logFolderName + "/");
-    if (!logFolder.create()) {
-        // Schreibe Log auf den Desktop
-        logFolder = Folder(Folder.desktop + "/indesign-log/");
-        logFolder.create();
-    }
+    // var logFolder = Folder(scriptFolderPath + "/" + logFolderName + "/");
+    // if (!logFolder.create()) {
+    //     // Schreibe Log auf den Desktop
+    //     logFolder = Folder(Folder.desktop + "/indesign-log/");
+    //     logFolder.create();
+    // }
+    var logFolder = new Folder( PATH_DATA_FOLDER + "/logs/add-hyperlinks" );
+    __ensureFolder(logFolder);
     if (appendLog) {
         var logFile = File(logFolder + "/" + projectName + "_" + getUserName() + "_log.txt");
     }

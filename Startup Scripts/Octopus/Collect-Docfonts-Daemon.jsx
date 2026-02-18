@@ -33,7 +33,6 @@
 #targetengine collect_docfonts
 
 #include "./Octopus-include-su.jsxinc"
-#include "./Octopus-Tools-su.jsxinc"
 
 script_id = "collect-docfonts-daemon";
 
@@ -131,18 +130,19 @@ function collect_doc_main( doc ) {
 						try {
 							fontfile.copy( tgt_file.fullName );
 						} catch ( e ) {
-							msgs.push( __("Fehler beim Kopieren von ") + fname + ": " + e.message );
+							msgs.push( __("Collect-Error", script_id) + fname + ": " + e.message );
 						}
 					} else {
-						if ( l == "Added from Adobe Fonts" ) {
-							msgs.push( __("adobe-fonts") + ": " + f.name );
+						// __log("dbg", "location: '" + l + "', font: '" + f.name + "', strg: '" + __("activated-adobe", script_id) + "', PATH_SCRIPT_PARENT: " + PATH_SCRIPT_PARENT, script_id)
+						if ( l == __("activated-adobe", script_id) ) {
+							msgs.push( __("adobe-fonts", script_id) + ": " + f.name );
 						} else {
-							msgs.push( __("does-not-exist") + ": " + fname );
+							msgs.push( __("does-not-exist", script_id) + ": " + fname );
 						}
 					}		// exists
 				}			// font loop
 				if ( msgs.length > 0 ) {
-					__alert( "krake", __("Schriften sammeln") + "\n" + msgs.join("\n"), "", "OK", false );
+					__alert( "krake", __("Collect-Fonts", script_id) + "\n\n" + msgs.join("\n"), "", "OK", false );
 				}
 			} else {
 				__log("info", "Doc erfüllt die Kriterien nicht", script_id)

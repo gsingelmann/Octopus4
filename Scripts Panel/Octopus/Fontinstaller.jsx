@@ -27,14 +27,21 @@
 		DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------- */
 #targetengine octopus_fontinstaller
-#include "./Octopus--2.jsxinc"
+#include "./Octopus-Include-2.jsxinc"
 __init();
 var script_id = "fontinstaller";
 __log( "run", script_id, script_id);
 
 var fonthub_path = PATH_DATA_FOLDER + "/prefs/" + script_id;
-__ensurePath( fonthub_path );
+__ensureFolder( fonthub_path );
 var fonthub_folder = new Folder( fonthub_path );
+
+try {
+	var aux = app.activeScript.parent.fullName;
+	var is_debug = false;
+} catch (e) { 
+	var is_debug = true;
+}
 
 var dev = false;
 var dbg = true;
@@ -152,7 +159,7 @@ function what_to_do( title, doc) {
 				w.btn_docinstall.enabled = true;
 				w.btn_allinstall.enabled = true;
 				w.btn_selinstall.enabled = true;
-				w.btn_update.enabled = true;
+				// w.btn_update.enabled = true;
 			}
 		} else {
 			state.crnt_list = null;
@@ -161,7 +168,7 @@ function what_to_do( title, doc) {
 				w.btn_docinstall.enabled = false;
 				w.btn_allinstall.enabled = false;
 				w.btn_selinstall.enabled = false;
-				w.btn_update.enabled = false;
+				// w.btn_update.enabled = false;
 			}
 		}
 		build_family_list();

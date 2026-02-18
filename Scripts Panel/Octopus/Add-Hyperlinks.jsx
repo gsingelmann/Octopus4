@@ -7,6 +7,7 @@
 
 #targetengine "octopus-ua-checktypo";
 #include "../Octopus-include-2.jsxinc"
+__init();
 var script_id = "add_hyperlinks";
 __log("run", script_id, script_id);
 
@@ -1292,7 +1293,7 @@ function initLog() {
     //     logFolder.create();
     // }
     var logFolder = new Folder( PATH_DATA_FOLDER + "/logs/add-hyperlinks" );
-    __ensureFolder(logFolder);
+    __ensureFolder(logFolder.fullName);
     if (appendLog) {
         var logFile = File(logFolder + "/" + projectName + "_" + getUserName() + "_log.txt");
     }

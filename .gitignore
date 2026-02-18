@@ -1,7 +1,6 @@
 .claude
 help-pages/
-octignore.txt
-.vscode/
+vscode/
 .DS_Store
 Thumbs.db
 .idea/

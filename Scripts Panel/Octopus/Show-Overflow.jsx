@@ -37,7 +37,7 @@ init_cellbox();
 
 var dev = false;
 if (! dev ) {
-	app.doScript(main, undefined, undefined, UndoModes.ENTIRE_SCRIPT)
+	app.doScript(main, undefined, undefined, UndoModes.ENTIRE_SCRIPT, "Show Overflow");
 } else {
 	main();
 }
@@ -92,7 +92,7 @@ function main() {
 		}
 
 		var w = new Window('dialog' );
-		w.script_name = script_name;
+		w.script_id = script_id;
 		w.orientation = 'column';
 		w.alignChildren = ['fill', 'fill'];
 

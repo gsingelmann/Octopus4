@@ -24,7 +24,7 @@ function install() {
   // -------------------------------------------------------------------------------------------
   //  Globale Config
   // -------------------------------------------------------------------------------------------
-  var basisurl = "https://singels.info/Octopus";
+  var basisurl = "https://daten.project-octopus.net/Octopus4";
   var config_paths = [
     // {
     //   type: "url",
@@ -38,9 +38,6 @@ function install() {
     }
   ]
   var package_name = "Octopus4";
-
-  __log("reset_log", "Log zurückgesetzt", "installer");
-  __log("info", "Installation gestartet", "installer");
 
   // -------------------------------------------------------------------------------------------
   //  Ordnerpfade
@@ -61,6 +58,39 @@ function install() {
     return null; // Installation abbrechen
   }
   app.insertLabel(package_name + "-Paths", JSON.stringify({ PATH_SCRIPT_PARENT: PATH_SCRIPT_PARENT, PATH_USER_FOLDER: PATH_USER_FOLDER, PATH_DATA_FOLDER: PATH_DATA_FOLDER, PATH_LOG_FILE: PATH_LOG_FILE }))
+
+  // -------------------------------------------------------------------------------------------
+  //  Logs zum Server und Reset
+  // -------------------------------------------------------------------------------------------
+  try {
+    var _data = __readFile(PATH_LOG_FILE);
+    if ( _data ) {
+      var log_url = "singels.info/Octopus/Octopus4Log";
+      var request = {
+        url: log_url,
+        method: "POST",
+        body: _data,
+        headers: [
+          {name:"Content-Type", value:"application/json; charset=UTF-8"},
+          {name: "x-project-octopus", value: "true"}
+        ]
+      }
+      var response = restix.fetch(request);
+      if ($.getenv("USER") == "singel") {
+        try {
+          __writeJson( PATH_DATA_FOLDER + "/Logs/last_request.json", response );
+        } catch(e) {
+          __log("error", "Fehler beim Schreiben der letzten Server-Antwort: " + e.message, "installer");
+        }
+      }
+    }
+  } catch (e) {
+    __log("error", "Fehler beim Pushen  der Log-Datei: " + e.message + " on " + e.line, "installer");
+    alert( "Fehler beim Pushen  der Log-Datei: " + e.message + " on " + e.line);
+  }
+
+  __log("reset_log", "Log zurückgesetzt", "installer");
+  __log("info", "Installation gestartet", "installer");
 
   // -------------------------------------------------------------------------------------------
   //  Prefs und Configs
@@ -255,11 +285,14 @@ function install() {
       failed = ("  " + failed.join("\n  ")).split("\n");
       msg = msg.concat(failed);
     }
-    var w = new Window("dialog");
+    var w = new Window("palette");
     __insert_head(w, "installer")
     var _lb = w.add("listbox", undefined, msg);
     _lb.minimumSize = [450, 300]
     w.cancelElement = w.add("button", undefined, "OK");
+    w.cancelElement.onClick = function () {
+      w.close();
+    }
     w.show();
   }
 

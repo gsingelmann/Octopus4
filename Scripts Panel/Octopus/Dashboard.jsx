@@ -63,6 +63,7 @@ function show_dashboard( cfgs, prefs ) {
     undefined, "", 
     {
       minimumSize: [w_width, 200], 
+      maximumSize: [w_width, 500],
       numberOfColumns: 3, 
       showHeaders: true, 
       columnTitles: ['Script', __('last updated'), "Set"],
@@ -308,9 +309,10 @@ function show_dashboard( cfgs, prefs ) {
       __log("error", "Script kann nicht deinstalliert werden: " + path, script_id);
       return;
     }
-    var tgt_path = path.replace(/\/Scripts Panel\//, "/Scripts Panel Off/").replace(/\/Startup Scripts\//, "/Startup Scripts Off/");
-    __ensureFolder(tgt_path);
-    if (__moveFile(f, tgt_path) ) {
+    // var tgt_path = path.replace(/\/Scripts Panel\//, "/Scripts Panel Off/").replace(/\/Startup Scripts\//, "/Startup Scripts Off/");
+    // __ensureFolder(tgt_path);
+    // if (__moveFile(f, tgt_path) ) {
+    if ( f.remove() ) {
       __log("info", "Script deinstalliert: " + path, script_id);
     } else {
       __log("error", "Script konnte nicht deinstalliert werden: " + path, script_id);

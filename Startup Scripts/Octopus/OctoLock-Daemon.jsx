@@ -26,9 +26,10 @@
 		FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
 		DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------- */
+#targetengine "octolock"
 
 #include "./Octopus-include-su.jsxinc"
-#targetengine octolock
+__init();
 
 
 app.addEventListener( "beforeOpen", bo_handler );
@@ -68,28 +69,44 @@ function bo_handler( event ) {
 	}
 } 
 function ao_handler( event ) {
-  if ( ! get_info(event, "after-open") ) return;
-	write_lock_data( event.target );
+	try {
+		if ( ! get_info(event, "after-open") ) return;
+		write_lock_data( event.target );
+	} catch(e) {
+		__log("error", e.message + " on " + e.line, "OctoLock-Daemon" );
+	}
 }
 function bc_handler( event ) {
-  if ( ! get_info(event, "before-close") ) return;
-	remove_lock_data( event.target );
+	try {
+		if ( ! get_info(event, "before-close") ) return;
+		remove_lock_data( event.target );
+	} catch(e) {
+		__log("error", e.message + " on " + e.line, "OctoLock-Daemon" );
+	}
 }
 
 function bsa_handler(event) {
-  if ( ! get_info(event, "before-save-as") ) return;
-	remove_lock_data( event.target );
+	try {
+		if ( ! get_info(event, "before-save-as") ) return;
+		remove_lock_data( event.target );
+	} catch(e) {
+		__log("error", e.message + " on " + e.line, "OctoLock-Daemon" );
+	}
 }
 function asa_handler(event) {
-  if ( ! get_info(event, "after-save-as") ) return;
-	write_lock_data( event.target );
+	try {
+		if ( ! get_info(event, "after-save-as") ) return;
+		write_lock_data( event.target );
+	} catch(e) {
+		__log("error", e.message + " on " + e.line, "OctoLock-Daemon" );
+	}
 }
 
 function get_lock_data( event ) {
-	var volumes = read_volumes_from_prefs();
-
-	var data = "";
 	try {
+		var volumes = read_volumes_from_prefs();
+
+		var data = "";
 		var ct = event.currentTarget;
 		var path = "";
 		if ( ct.constructor.name == "Application" ) {
@@ -111,25 +128,26 @@ function get_lock_data( event ) {
 	return data;
 }
 function write_lock_data( doc ) {
-	var volumes = read_volumes_from_prefs();
-
 	try {
+		var volumes = read_volumes_from_prefs();
+
 		if ( doc.constructor.name == "Document" && doc.saved ) {
 			var fn = doc.fullName;
 			if ( fn ) {
 				var path = get_path_to_lock( fn.toString() );
 				if ( path ) {
-					__write_file( 
+					__writeFile( 
 						path, 
-						get_user_name() + "\t" + __get_now_string() + "\n\n" + __("lock_text"),
-						"w"
+						get_user_name() + "\t" + __get_now_string() + "\n\n" + __("lock_text")
 					);
-					__log("run", "OctoLock-Daemon", "OctoLock-Daemon");
+					__log("run", "lock file created: " + path, "OctoLock-Daemon");
 				}
 				create_log_entry( path );
 			} else {
+				__("dbg", "document got no fullName, no lock-file created", "OctoLock-Daemon" );
 			}
 		} else {
+			__log("dbg", "document not saved yet, no lock-file created", "OctoLock-Daemon" );
 		}
 	} catch(e) {
 		__log("error", e.message + " on " + e.line, "OctoLock-Daemon");
@@ -156,109 +174,144 @@ function remove_lock_data( doc ) {
 // Wunsch: Es soll eine Liste geben, welche lock-Dateien noch existieren.
 // also muss ich loggen, wann diese hergestellt und wann sie gelöscht werden.
 function create_log_entry( path ) {
-	var logpath = PATH_DATA_FOLDER + "/octolock-logs/" + app.version.split(".").shift() + ".txt";
-	// var logpath = __get_config_path("octolock-logs") + "/" + app.version.split(".").shift() + ".txt";
-	var log = __readFile( logpath );
-	log = split_log( log );
-	// Ich fürchte, es kann passieren, dass derselbe Pfad mehrfach im Log steht.
-	var old = false;
-	for ( var n = log.length-1; n >= 0; n-- ) {
-		if ( log[n].constructor.name == "Array" && log[n][0] == path ) {
-			if ( old ) {
-				log.splice(n,1);
-			} else {
-				old = true;
-				log[n][1] = __get_now_string();
+	try {
+		var logpath = PATH_DATA_FOLDER + "/octolock-logs/" + app.version.split(".").shift() + ".txt";
+		// var logpath = __get_config_path("octolock-logs") + "/" + app.version.split(".").shift() + ".txt";
+		var log = __readFile( logpath );
+		log = split_log( log );
+		// Ich fürchte, es kann passieren, dass derselbe Pfad mehrfach im Log steht.
+		var old = false;
+		for ( var n = log.length-1; n >= 0; n-- ) {
+			if ( log[n].constructor.name == "Array" && log[n][0] == path ) {
+				if ( old ) {
+					log.splice(n,1);
+				} else {
+					old = true;
+					log[n][1] = __get_now_string();
+				}
 			}
 		}
+		if ( ! old ) {
+			log.push( [path, __get_now_string(), "" ] );
+		}
+		__writeFile( logpath, join_log(log) );
+	} catch(e) {
+		__log("error", e.message + " on " + e.line, "OctoLock-Daemon" );
 	}
-	if ( ! old ) {
-		log.push( [path, __get_now_string(), "" ] );
-	}
-	__writeFile( logpath, join_log(log) );
 }
 function remove_log_entry( path ) {
-	var logpath = PATH_DATA_FOLDER + "/octolock-logs/" + app.version.split(".").shift() + ".txt";
-	// var logpath = __get_config_path("octolock-logs") + "/" + app.version.split(".").shift() + ".txt";
-	var log = __read_file( logpath );
-	log = split_log( log );
-	var hline = "";
-	for ( var n = log.length-1; n >= 0; n-- ) {
-		if ( log[n][0] == path ) {
-			hline = log[n].join("\t") + "\t" + __get_now_string();
-			log.splice(n,1);
+	try {
+		var logpath = PATH_DATA_FOLDER + "/octolock-logs/" + app.version.split(".").shift() + ".txt";
+		// var logpath = __get_config_path("octolock-logs") + "/" + app.version.split(".").shift() + ".txt";
+		var log = __readFile( logpath );
+		if ( ! log ) return;
+		log = split_log( log );
+		var hline = "";
+		for ( var n = log.length-1; n >= 0; n-- ) {
+			if ( log[n][0] == path ) {
+				hline = log[n].join("\t") + "\t" + __get_now_string();
+				log.splice(n,1);
+			}
 		}
+		__writeFile( logpath, join_log(log) );
+		
+		var historypath = PATH_DATA_FOLDER + "/octolock-logs/history-" + app.version.split(".").shift() + ".txt";
+		// var historypath = __get_config_path("octolock-logs") + "/history-" + app.version.split(".").shift() + ".txt";
+		__writeFile( historypath, hline + "\n", "a" );
+	} catch(e) {
+		__log("error", e.message + " on " + e.line, "OctoLock-Daemon" );
 	}
-	__writeFile( logpath, join_log(log) );
-	
-	var historypath = PATH_DATA_FOLDER + "/octolock-logs/history-" + app.version.split(".").shift() + ".txt";
-	// var historypath = __get_config_path("octolock-logs") + "/history-" + app.version.split(".").shift() + ".txt";
-	__writeFile( historypath, hline + "\n", "a" );
 }
 // Log ist ein TSV. Ich brauch oben ein normalen 2dim Array
 function split_log( log ) {
-	if ( typeof log != "string" ) throw new Error("Der Parameter, der in ein Array gewandelt werden soll, ist kein String, sondern " + log.constructor.name );
-	if ( log == "" ) return [];
-	log = log.replace(/\r\n/g, "\n").replace(/\r/g, "\n").replace(/\n\n+/g, "\n");
-	log = log.split("\n");
-	for (var n = 0; n < log.length; n++ ) {
-		log[n] = log[n].split("\t");
+	try {
+		if ( ! log ) return [];
+		if ( typeof log != "string" ) throw new Error("Der Parameter, der in ein Array gewandelt werden soll, ist kein String, sondern " + log.constructor.name );
+		if ( log == "" ) return [];
+		log = log.replace(/\r\n/g, "\n").replace(/\r/g, "\n").replace(/\n\n+/g, "\n");
+		log = log.split("\n");
+		for (var n = 0; n < log.length; n++ ) {
+			log[n] = log[n].split("\t");
+		}
+		return log;
+	} catch(e) {
+		__log("error", e.message + " on " + e.line, "OctoLock-Daemon" );
 	}
-	return log;
 }
 function join_log( log ) {
-	if ( log.constructor.name !== "Array") return log.toString();
-	for ( var n = 0; n < log.length; n++ ) {
-		if (log[n].constructor.name == "Array") log[n] = log[n].join("\t");
+	try {
+		if ( log.constructor.name !== "Array") return log.toString();
+		for ( var n = 0; n < log.length; n++ ) {
+			if (log[n].constructor.name == "Array") log[n] = log[n].join("\t");
+		}
+		return log.join("\n");
+	} catch(e) {
+		__log("error", e.message + " on " + e.line, "OctoLock-Daemon" );
 	}
-	return log.join("\n");
 }
 function get_path_to_lock( fn ) {
-	var volumes = read_volumes_from_prefs();
-		
-	var path = "";
-	for ( var n = 0; n < volumes.length; n++ ) {
-		var v = volumes[n];
-		if ( unescape(fn).substr(0, v.length).toLowerCase() == v.toLowerCase() ) {
-			path = fn.replace(/\.indd/i, "_octolock.txt");
+	try {
+		var volumes = read_volumes_from_prefs();
+			
+		var path = "";
+		for ( var n = 0; n < volumes.length; n++ ) {
+			var v = volumes[n];
+			if ( unescape(fn).substr(0, v.length).toLowerCase() == v.toLowerCase() ) {
+				path = fn.replace(/\.indd/i, "_octolock.txt");
+				break;
+			}
 		}
+		return path; 
+	} catch(e) {
+		__log("error", e.message + " on " + e.line, "OctoLock-Daemon" );
 	}
-	return path; 
 }
 function get_user_name() {
-	var rs = app.extractLabel("octolock_user");
-	if ( ! rs ) {
-		if($.os.substring(0, 7)=="Windows"){ 
-			rs = $.getenv("USERNAME");
-		} else { 
-			rs = $.getenv("USER");
-		} 
+	try {
+		var rs = app.extractLabel("octolock_user");
+		if ( ! rs ) {
+			if($.os.substring(0, 7)=="Windows"){ 
+				rs = $.getenv("USERNAME");
+			} else { 
+				rs = $.getenv("USER");
+			} 
+		}
+		return rs;
+	} catch(e) {
+		__log("error", e.message + " on " + e.line, "OctoLock-Daemon" );
 	}
-	return rs;
 }
 function read_volumes_from_prefs() {
-	var f_volumes = PATH_DATA_FOLDER + "/prefs/octolock.txt";
-	// var f_volumes = __get_config_path() + "/octolock.txt";
-  var volumes = __read_file( f_volumes );
-  volumes = volumes.length ? volumes.split("\n") : [];
-	return volumes;
+	try {
+		var f_volumes = PATH_DATA_FOLDER + "/prefs/octolock.txt";
+		// var f_volumes = __get_config_path() + "/octolock.txt";
+		var volumes = __readFile( f_volumes );
+		volumes = volumes.length ? volumes.split("\n") : [];
+		return volumes;
+	} catch(e) {
+		__log("error", e.message + " on " + e.line, "OctoLock-Daemon" );
+	}
 }
 
 function get_info( event, str ) {
-	if ( str == "before-open" && event.target.constructor.name != "Application" ) {
-		return false;
-	} else if ( str != "before-open" && event.target.constructor.name != "Document" ) {
-		return false;
-	}
-	
-	for ( var p in event ) {
-		if ( "bubbles eventPhase parent userInteractionLevel cancelable timeStamp propagationStopped defaultPrevented id index properties isValid".indexOf(p) != -1 ) continue;
-		try {
-			var nm = event[p].hasOwnProperty("name") ? " / " + event[p].name : "";
-		} catch(e) {
+	try {
+		if ( str == "before-open" && event.target.constructor.name != "Application" ) {
+			return false;
+		} else if ( str != "before-open" && event.target.constructor.name != "Document" ) {
+			return false;
 		}
+		
+		for ( var p in event ) {
+			if ( "bubbles eventPhase parent userInteractionLevel cancelable timeStamp propagationStopped defaultPrevented id index properties isValid".indexOf(p) != -1 ) continue;
+			try {
+				var nm = event[p].hasOwnProperty("name") ? " / " + event[p].name : "";
+			} catch(e) {
+			}
+		}
+		return true;
+	} catch(e) {
+		__log("error", e.message + " on " + e.line, "OctoLock-Daemon" );
 	}
-	return true;
 }
 
 function __( id ) {
@@ -266,7 +319,8 @@ function __( id ) {
   try {
     var a = loc_strings;
   } catch(e) {
-    loc_strings = __readJson( get_script_folder_path() + "/Strings.json");
+    // loc_strings = __readJson( get_script_folder_path() + "/Strings.json");
+		loc_strings = __readJson( PATH_SCRIPT_PARENT + "/Scripts Panel/Octopus/Strings.json");
     if ( ! loc_strings || ! loc_strings.hasOwnProperty(script_id) ) {
       return id;
     }
@@ -297,3 +351,14 @@ function get_script_folder_path() {
       return e.fileName.replace(/\/[^\/]+$/, "");
     }
 }
+function __get_now_string() {
+  var now = new Date();
+	var now_str = now.getFullYear() + "" +
+	("0" + (now.getMonth() + 1)).substr(-2) + "" +
+	("0" + now.getDate()).substr(-2) + "-" +
+	("0" + now.getHours()).substr(-2) + "" +
+	("0" + now.getMinutes()).substr(-2) + "" +
+	("0" + now.getSeconds()).substr(-2)
+  return now_str;
+}
+ 

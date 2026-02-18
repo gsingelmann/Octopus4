@@ -49,22 +49,62 @@ function close_all() {
     if ( n_modified || n_unsaved ) {
       var rs = __alert( 
         "question", 
-        "Sie haben " + n_modified + " geänderte und " + n_unsaved + " niemals gesicherte Dokumente offen.\n\nSollen die Änderungen soweit möglich gespeichert werden?", 
-        "Watt nu?",
+        __("message", n_modified, n_unsaved), 
+        __("question"),
         [
-          {value: "save", text: "Speichern"},
-          {value: "egal", text: "Alles Egal"}
+          {value: "save", text: __("save")},
+          {value: "egal", text: __("discard")},
+          {value: "abbrechen", text: __("cancel")}
         ], 
         false
       );
       if ( rs == "egal" ) {
         app.documents.everyItem().close( SaveOptions.NO );
-      } else {
+      } else if ( rs == "save" ) {
         app.documents.everyItem().close( SaveOptions.YES );
+      } else if ( rs == "abbrechen" ) {
+        return;
       }
       $.bp();
     } else {
       app.documents.everyItem().close( SaveOptions.NO );
     }
+  }  
+}
+
+function __( id ) {
+  var txt = "";
+  try {
+    var a = loc_strings;
+  } catch(e) {
+    loc_strings = __readJson( get_script_folder_path() + "/Strings.json");
+    if ( ! loc_strings || ! loc_strings.hasOwnProperty(script_id) ) {
+      return id;
+    }
+    loc_strings = loc_strings[ script_id ];
+    if (DBG) $.writeln("loaded loc-strings");
   }
+
+  if (loc_strings.hasOwnProperty(id)) {
+    txt = localize(loc_strings[id]);
+  } else {
+    txt = id
+  }
+	var re;
+	for ( var n = 1; n < arguments.length; n++ ) {
+		try {
+			re = new RegExp( "_" + n.toString() + "_" );
+			txt = txt.replace( re,  arguments[n].toString() );
+		} catch(e) {
+			__log( "error", e.message + " on " + e.line, script_id);
+		}
+	}
+	return txt;
+}
+function get_script_folder_path() {
+    try {
+      return app.activeScript.parent.fullName;
+    } catch (e) { 
+      return e.fileName.replace(/\/[^\/]+$/, "");
+    }
 }

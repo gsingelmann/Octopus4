@@ -39,7 +39,7 @@ __log( "run", script_id, script_id);
 // ----------------------------------------------------------------------------------------------------------------
 var presets = [];
 try {
-  var cfg_folder_path = PATH_DATA_FOLDER + "/Display";
+  var cfg_folder_path = PATH_DATA_FOLDER + "/prefs/display-configs";
   __ensureFolder( cfg_folder_path );
   var cfg_folder = new Folder( cfg_folder_path ),
       cfg_files = cfg_folder.getFiles( "*.json" );
@@ -347,8 +347,6 @@ function main( what_to_do, preset ) {
   w.main = w.add("group {preferredWidth: 600, alignChildren: ['fill', 'fill']}");
   w.btnarea = w.add("group {alignment: ['right', 'top'], orientation: 'row'}");
 
-  w.footer = w.add('group {orientation: "row", alignChildren: ["right", "fill"]}');
-  w.footer.add('statictext', undefined, 'v' + script_version );
   w.opac = w.add("slider", undefined, 1, 0.1, 1);
   w.opac.onChanging = function () {
     this.window.opacity = this.value;

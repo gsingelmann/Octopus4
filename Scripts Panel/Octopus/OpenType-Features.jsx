@@ -35,6 +35,7 @@
 
 //@targetengine "OpenTypeFeatures"
 #include "./Octopus-include-2.jsxinc"
+__init();
 __log( "run", "opentypefeatures", "opentypefeatures"  );
 
 

@@ -28,7 +28,7 @@
 // ---------------------------------------------------------------------------------------------------------------------- */
 #include "./Octopus-include-2.jsxinc"
 #targetengine collect_docfonts
-__init();
+__init(); 
 var script_id = "collect-docfonts";
 __log("run", script_id, script_id);
 
@@ -40,19 +40,19 @@ function open_config() {
 	// ---------------------------------------------------------------------------------------------------
 	// Interface aufbauen
 	// ---------------------------------------------------------------------------------------------------
-	var w = new Window( "dialog {orientation: 'column', alignChildren: ['fill', 'top']}" );
-	w.toggle = create_toggle( w, "onoff", __("Schriften sammeln", script_id), __("Schriften nicht sammeln", script_id), prefs.onoff );
+	var w = new Window( "palette {orientation: 'column', alignChildren: ['fill', 'top']}" );
+	w.toggle = create_toggle( w, "onoff", __("Collect-Fonts", script_id), __("Dont-Collect-Fonts", script_id), prefs.onoff );
 
 	// ---------------------------------------------------------------------------------------------------
 	// Aktive Ordner oder Ordner blocken
 	w.active_or_block_group = w.add("panel { text: '" + __("active-or-blocking", script_id) + "', orientation: 'column', alignChildren: ['left', 'fill']}");
-	w.active_rb = w.active_or_block_group.add("radiobutton", undefined, __("Sammle Schriften, wenn in diesen Pfaden gespeichert wird", script_id));
-	w.block_rb = w.active_or_block_group.add("radiobutton", undefined, __("Sammle keine Schriften, wenn in diesen Pfaden gespeichert wird", script_id));
+	w.active_rb = w.active_or_block_group.add("radiobutton", undefined, __("Paths-active", script_id));
+	w.block_rb = w.active_or_block_group.add("radiobutton", undefined, __("Paths-blocking", script_id));
 	w.active_rb.value = true;
 	// ---------------------------------------------------------------------------------------------------
 	// Pfadliste
 	w.add_row = w.add("group {orientation: 'row', alignChildren: ['fill', 'fill']}");
-	w.add_et = w.add_row.add("edittext", [undefined, undefined, 500, 200], prefs.paths.join("\n"), {multiline: true, scrolling: true});
+	w.add_et = w.add_row.add("edittext", [undefined, undefined, 500, 200], prefs.path ? prefs.paths.join("\n") : "", {multiline: true, scrolling: true});
 
 	// ---------------------------------------------------------------------------------------------------
 	// Listbutton
@@ -81,6 +81,7 @@ function open_config() {
 	w.close_btn = w.ok_btns.add("button", undefined, __("close", script_id));
 	w.close_btn.onClick = function() {
 		try {
+			this.window.close();
 			var paths = w.add_et.text;
 			paths.replace(/\r/g, "\n").replace(/^\n+/, "").replace(/\n+$/, "").replace(/\n+/g, "\n");
 			paths = paths.split("\n");
@@ -91,7 +92,6 @@ function open_config() {
 				"paths": paths
 			};
 			app.insertLabel( "octopus_collect_fonts", JSON.stringify(config_data) );
-			this.window.close();
 		} catch(e) {
 			alert( e.message + " on " + e.line );
 		}

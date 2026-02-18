@@ -28,14 +28,14 @@
 // ---------------------------------------------------------------------------------------------------------------------- */
 #include "./Octopus-include-2.jsxinc"
 __init();
-var script_id = "octolock";
+var script_id = "octolock"; 
 __log( "run", script_id, script_id);
 octolock_config();
 
 function octolock_config() {
   var f_prefs = PATH_DATA_FOLDER + "/prefs/octolock.txt";
   var prefs = __readFile( f_prefs );
-  prefs = prefs.length ? prefs.split("\n") : [];
+  prefs = (prefs && prefs.length) ? prefs.split("\n") : [];
 
   var w = new Window('dialog' );
   w.script_id = script_id;
@@ -46,8 +46,8 @@ function octolock_config() {
 
   w.pnl = w.add("group {orientation: 'column', alignChildren: ['fill', 'fill']} ");
   w.btns = w.add("group {orientation: 'row', alignChildren: ['center', 'top']}");
-  w.footer = w.add('group {orientation: "row", alignChildren: ["right", "fill"]}');
-  w.footer.add('statictext', undefined, __get_script_version(w.script_id) );
+  // w.footer = w.add('group {orientation: "row", alignChildren: ["right", "fill"]}');
+  // w.footer.add('statictext', undefined, __get_script_version(w.script_id) );
   
   w.namerow = w.pnl.add("group {orientation: 'row', alignChildren: ['left', 'fill']}")
   w.namerow.add("statictext", undefined, __('username'));
@@ -112,7 +112,7 @@ function octolock_config() {
     for ( var n = 0; n < w.list.items.length; n++ ) {
       rs.push( w.list.items[n].text )
     }
-    __write_file( f_prefs, rs.join("\n") );
+    __writeFile( f_prefs, rs.join("\n") );
   } else {
     
   }
@@ -140,6 +140,7 @@ function octolock_config() {
   
 
     function split_log( log ) {
+      if ( ! log ) return [];
       if ( typeof log != "string" ) throw new Error(__('no_string',  log.constructor.name ) );
       if ( log == "" ) return [];
       log = log.replace(/\r\n/g, "\n").replace(/\r/g, "\n").replace(/\n\n+/g, "\n");
@@ -149,6 +150,21 @@ function octolock_config() {
       }
       return log;
     }    
+  }
+  function __parse_now_string(s) {
+    try {
+      var d = new Date(
+        Number( s.substr(0,4) ),
+        Number( s.substr(4,2) )-1,
+        Number( s.substr(5,2) ),
+        Number( s.substr(8,2) ),
+        Number( s.substr(10,2) ),
+        Number( s.substr(12,2) ),
+      )
+      return d;
+    } catch(e) {
+      return null;
+    }
   }
 }
 

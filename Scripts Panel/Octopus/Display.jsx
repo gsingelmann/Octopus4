@@ -50,9 +50,10 @@ function handle_doc() {
   //  User-gespeicherte JSON finden
   // ---------------------------------------------------------------------
   try {
-    var cfg_folder_path = PATH_DATA_FOLDER + "/display_configs",
+    var cfg_folder_path = PATH_DATA_FOLDER + "/prefs/display-configs",
         cfg_folder = new Folder( cfg_folder_path ),
         cfg_files = cfg_folder.getFiles( "*.json" );
+    __log("info", cfg_files.length + " config files found in '" + cfg_folder_path + "'", script_id);
   } catch(e) {
     __alert('stop', __('alert_wrong_params') + "\n\n" + e, "Stop", "OK");
     return;
@@ -71,7 +72,7 @@ function handle_doc() {
   var configs = {}
   for ( var nf = 0; nf < cfg_files.length; nf++ ) {
     try {
-      var config = readJson( cfg_files[nf] );
+      var config = __readJson( cfg_files[nf] );
       configs[config.name] = config;
     } catch(e) {
       __log("error", "Fehler beim Einlesen der Config-Datei '" + cfg_files[nf].name + "': " + e.message + " on " + e.line);

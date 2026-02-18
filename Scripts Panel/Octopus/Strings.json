@@ -275,23 +275,49 @@
       "en": "No wrongly assigned frames found"
     }
   },
+  "close-all": {
+    "save": {
+      "de": "Speichern",
+      "en": "Save"
+    },
+    "discard": {
+      "de": "Verwerfen",
+      "en": "Discard"
+    },
+    "cancel": {
+      "de": "Abbrechen",
+      "en": "Cancel"
+    },
+    "question": {
+      "de": "Watt nu?",
+      "en": "What now?"
+    },
+    "message": {
+      "de": "Sie haben _1_ geänderte und _2_ niemals gesicherte Dokumente offen.\n\nSollen die Änderungen soweit möglich gespeichert werden?",
+      "en": "You have _1_ modified and _2_ unsaved documents open.\n\nShould the changes be saved as far as possible?"
+    }
+  },
   "collect-docfonts": {
-    "Schriften sammeln": {
+    "Collect-Fonts": {
+      "de": "Schriften sammeln",
       "en": "Collect fonts",
       "it": "Raccogli i font",
       "fr": "Collecter les polices"
     },
-    "Schriften nicht sammeln": {
+    "Dont-Collect-Fonts": {
+      "de": "Schriften nicht sammeln",
       "en": "Do not collect fonts",
       "it": "Non raccogliere i font",
       "fr": "Ne pas collecter les polices"
     },
-    "Sammle Schriften, wenn in diesen Pfaden gespeichert wird": {
+    "Paths-active": {
+      "de": "Sammle Schriften, wenn in diesen Pfaden gespeichert wird",
       "en": "Collect fonts when saving to these paths",
       "it": "Raccogli i font quando si salva in questi percorsi",
       "fr": "Collecter les polices lors de l'enregistrement dans ces chemins"
     },
-    "Sammle keine Schriften, wenn in diesen Pfaden gespeichert wird": {
+    "Paths-blocking": {
+      "de": "Sammle keine Schriften, wenn in diesen Pfaden gespeichert wird",
       "en": "Do not collect fonts when saving to these paths",
       "it": "Non raccogliere i font quando si salva in questi percorsi",
       "fr": "Ne pas collecter les polices lors de l'enregistrement dans ces chemins"
@@ -314,10 +340,45 @@
       "it": "Chiudi",
       "fr": "Fermer"
     },
-    "Fehler beim Kopieren von ": {
+    "Collect-Error": {
+      "de": "Fehler beim Kopieren von ",
       "en": "Error copying ",
       "it": "Errore durante la copia di ",
       "fr": "Erreur lors de la copie de "
+    },
+    "activated-adobe": {
+      "de": "Aktiviert von Adobe Fonts",
+      "en": "Added from Adobe Fonts"
+    },
+    "adobe-fonts": {
+      "de": "Adobe Fonts, die über die Creative Cloud hinzugefügt wurden, können nicht kopiert werden",
+      "en": "Adobe Fonts added via Creative Cloud cannot be copied",
+      "it": "I font Adobe aggiunti tramite Creative Cloud non possono essere copiati",
+      "fr": "Les polices Adobe ajoutées via Creative Cloud ne peuvent pas être copiées"
+    },
+    "does-not-exist": {
+      "de": "Die Schriftdatei existiert nicht",
+      "en": "The font file does not exist",
+      "it": "Il file del font non esiste",
+      "fr": "Le fichier de police n'existe pas"
+    }
+  },
+  "collect-docfonts-daemon": {
+    "Collect-Fonts": {
+      "de": "Schriften sammeln",
+      "en": "Collect fonts",
+      "it": "Raccogli i font",
+      "fr": "Collecter les polices"
+    },
+    "Collect-Error": {
+      "de": "Fehler beim Kopieren von ",
+      "en": "Error copying ",
+      "it": "Errore durante la copia di ",
+      "fr": "Erreur lors de la copie de "
+    },
+    "activated-adobe": {
+      "de": "Aktiviert von Adobe Fonts",
+      "en": "Added from Adobe Fonts"
     },
     "adobe-fonts": {
       "de": "Adobe Fonts, die über die Creative Cloud hinzugefügt wurden, können nicht kopiert werden",
@@ -418,7 +479,7 @@
       "en": "Config-File could not be loaded."
     }
   },
-  "diplay-config": {
+  "display-config": {
     "ui_ok": {
       "de": "OK",
       "en": "OK"
@@ -1336,7 +1397,7 @@
       "en": "Can you create a ready imposed PDF from an InDesign document?"
     }
   },
-  "ocktolock": {
+  "octolock": {
     "username": {
       "de": "Username: ",
       "en": "Username: "

@@ -1,0 +1,10 @@
+test.jsx
+script-template.html
+octignore.txt
+jsonify.jsx
+help-pages
+index.html
+.vscode
+.gitignore
+.git
+.claude

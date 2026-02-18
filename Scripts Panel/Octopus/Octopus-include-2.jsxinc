@@ -34,10 +34,14 @@ function __log(level, msg, active_script) {
       script: active_script
     }
 
+    var guid = app.userGuid.split('@').shift();
+    if ( !guid ) {
+      guid = app.extractLabel("octopus_guid");
+    }
     var _log = __readJson( PATH_LOG_FILE );
     if ( ! _log ) {
       _log = {
-        guid: app.userGuid.split('@').shift(),
+        guid: guid,
         locale: $.locale,
         os: $.os,
         version: app.version,
@@ -50,6 +54,27 @@ function __log(level, msg, active_script) {
     if (DBG) $.writeln( e.message + " on " + e.line );
   }
 }
+
+function __deep_copy( o ) {
+  if ( ! o ) return o;
+  var c = o.constructor.name;
+  var rs;
+  if ( " String Number Boolean ".indexOf(c) != -1 ) {
+    return o
+  } else if ( c == "Array" ) {
+    rs = [];
+    for ( var n = 0; n < o.length; n++ ) {
+      rs.push( __deep_copy( o[n] ) );
+    }
+    return rs;
+  } else if ( c == "Object" ) {
+    rs = {};
+    for ( var p in o ) {
+      rs[p] = __deep_copy( o[p] );
+    }
+    return rs;
+  }
+} 
 
 
 // =============================================================================
@@ -67,6 +92,7 @@ function __readFile(filePath) {
     f.encoding = "UTF-8";
     f.open("r");
     var content = f.read();
+    $.writeln(content);
     return content;
   } catch(e) {
     __log("error", "Datei konnte nicht gelesen werden (" + filePath + "): " + e.message, "includes");
@@ -337,7 +363,6 @@ function __get_help_url( script_id ) {
 }
 function __get_head_png( script_id ) {
   try {
-    __log("info", "Getting head: " + script_id );
     // -------------------------------------------------------------------------------------
     //  Name/URL zusammensetzen
     var base = PATH_DATA_FOLDER + "/images/heads"
@@ -451,23 +476,14 @@ function __call_request( url, command, type, tgt_path, replace ) {
 
 function __init() {
 
-  END_OF_INPUT = -1;
-
-  base64Chars = new Array(
-    'A','B','C','D','E','F','G','H',
-    'I','J','K','L','M','N','O','P',
-    'Q','R','S','T','U','V','W','X',
-    'Y','Z','a','b','c','d','e','f',
-    'g','h','i','j','k','l','m','n',
-    'o','p','q','r','s','t','u','v',
-    'w','x','y','z','0','1','2','3',
-    '4','5','6','7','8','9','+','/'
-  );
-
-  reverseBase64Chars = new Array();
-  for (var i=0; i < base64Chars.length; i++){
-    reverseBase64Chars[base64Chars[i]] = i;
+  // alert( "guid: " + app.userGuid );
+  var guid = app.userGuid.split('@').shift();
+  if ( guid ) {
+    app.insertLabel("octopus_guid", guid);
+  } else {
+    app.insertLabel("octopus_guid", "huba")
   }
+
 
 
   // ------------------------------------------------------------------------------------------------
@@ -769,6 +785,16 @@ function __init() {
   * HTTPS supported 
   * Works form CS4 to CC 2022 (ExtendScript based library)
   * Based on VBScript/ServerXMLHTTP (Win) AppleScript/curl (Mac) relies on app.doScript()
+  * https://github.com/grefel/restix
+
+  var request = {
+    url:"String",
+    command:"String", // defaults to ""
+    port:443, // defaults to ""
+    method:"GET|POST", // defaults to GET
+    headers:[{name:"String", value:"String"}], // defaults to []
+    body:"" // defaults to ""
+  }  
 
   ## Getting started
   See examples/connect.jsx

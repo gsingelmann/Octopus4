@@ -51,9 +51,9 @@
     {
       "type": "extendscript-debug",
       "request": "launch",
-      "name": "collect_docfonts-script-19",
+      "name": "octopus-ua-checkalttext",
       "hostAppSpecifier": "indesign-19.064",
-      "engineName": "collect_docfonts",
+      "engineName": "octopus-ua-checkalttext",
       "hiddenTypes": [
         "prototype",
         "builtin"

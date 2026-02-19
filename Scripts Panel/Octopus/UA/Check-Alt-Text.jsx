@@ -53,7 +53,7 @@ function show_ui() {
     } catch(e){}
   } 
   
-  var frames = handle_links( doc );
+  var frames = handle_links( doc, true );
   var visibility = {};
   for ( var p in frames ) {
     for ( var n = 0; n < frames[p].length; n++ ) {
@@ -105,7 +105,7 @@ function show_ui() {
     // $.writeln( "clicked on " + this.state );
     try {
       if (this.state == "shown") {
-        frames = handle_links( doc )
+        frames = handle_links( doc, true )
         this.state = "hidden";
         this.text = __('show deco');
         toggle_visibility("deco", false)
@@ -229,7 +229,7 @@ function show_ui() {
     var _v = doc.extractLabel("octopus-checkalttext-initialvisibility");
     if ( ! _v ) throw new Error( "visibility-state not saved in doc");
     var visibility = JSON.parse( _v );
-    if ( ! frames ) frames = handle_links( doc );
+    if ( ! frames ) frames = handle_links( doc, true );
     try {
       var list = frames[ lname ];
       // __log( lname + ", " + list.length + " to " + state.toString(), "toggling" );
@@ -322,22 +322,38 @@ function show_ui() {
   }
   // // $.writeln( n + ": " + _e.name + ", " + _e.handler.name  + ", " + _e.eventType);
   function remove_listeners( doc, types, handler ) {
-    var _t = " " + types.join(" ") + " ";
-    for ( var n = doc.eventListeners.length-1; n >= 0; n-- ) {
-      var _e = doc.eventListeners[n];
-      if ( _t.indexOf( " " + _e.eventType + " ") != -1 && _e.handler.name == handler.name ) {
-        // $.writeln( "removing EL " + n );
-        _e.remove();
+    try {
+      var _t = " " + types.join(" ") + " ";
+      for ( var n = doc.eventListeners.length-1; n >= 0; n-- ) {
+        var _e = doc.eventListeners[n];
+        if ( _t.indexOf( " " + _e.eventType + " ") != -1 && _e.handler.name == handler.name ) {
+          // $.writeln( "removing EL " + n );
+          _e.remove();
+        }
       }
+    } catch(e) {
+      alert( e.message + " on " + e.line );
     }
   }
 }
 
-function handle_links( doc ) {
-  var links = doc.links.everyItem().getElements();
-  var frames = [];
-  for ( var n = 0; n < links.length; n++ ) {
-    frames[n] = links[n].parent.parent;
+function handle_links( doc, page_items_too ) {
+  if ( page_items_too ) {
+    var frames = doc.pageItems.everyItem().getElements();
+    var links = [];
+    for ( var n = 0; n < frames.length; n++ ) {
+      if ( frames[n].allGraphics.length == 1 && frames[n].allGraphics[0].itemLink ) {
+        links.push( frames[n].allGraphics[0].itemLink );
+      } else {
+        links.push( null );
+      }
+    }
+  } else {
+    var links = doc.links.everyItem().getElements();
+    var frames = [];
+    for ( var n = 0; n < links.length; n++ ) {
+      frames[n] = links[n].parent.parent;
+    }
   }
   var has_alt = [],
       has_no_alt = [],
@@ -346,7 +362,7 @@ function handle_links( doc ) {
   for ( var nf = 0; nf < frames.length; nf++ ) {
     var fr = frames[nf],
         link = links[nf],
-        xmp = link.linkXmp,
+        xmp = link ? link.linkXmp : null,
         oeo = fr.objectExportOptions,
         atst = oeo.altTextSourceType,
         att = oeo.applyTagType,
@@ -368,10 +384,10 @@ function handle_links( doc ) {
       txt = cat;
 
     } else if ( atst.toString() == "SOURCE_XMP_TITLE" ) {
-      txt = xmp.documentTitle;
+      txt = xmp ? xmp.documentTitle : "";
 
     } else if ( atst.toString() == "SOURCE_XMP_DESCRIPTION" ) {
-      txt = xmp.description;
+      txt = xmp ? xmp.description : "";
 
     } else if ( atst.toString() == "SOURCE_XMP_HEADLINE" ) {
       txt = get_custom_xmp( xmp, "photoshop:Headline");
@@ -398,6 +414,7 @@ function handle_links( doc ) {
   }
   return {ok: has_alt, nok: has_no_alt, deco: is_decorative };
 }
+
 
 function get_custom_xmp( xmp, path ) {
   var map = {

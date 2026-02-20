@@ -2,123 +2,172 @@
   "check-articles": {
     "hide articles": {
       "de": "Rahmen in Artikeln ausblenden",
-      "en": "Hide frames that are part of an article"
+      "en": "Hide frames that are part of an article",
+      "es": "Ocultar marcos que son parte de un artículo"
     },
     "show articles": {
       "de": "Rahmen in Artikeln einblenden",
-      "en": "Show frames that are part of an article"
+      "en": "Show frames that are part of an article",
+      "es": "Mostrar marcos que son parte de un artículo"
+    },
+    "orphan": {
+      "de": "Aufgefegt-",
+      "en": "Orphan-",
+      "es": "Huérfano-"
+    },
+    "sequence": {
+      "de": "Sequenz",
+      "en": "Sequence",
+      "es": "Secuencia"
+    },
+    "next-frame": {
+      "de": "Nächster Rahmen",
+      "en": "Next Frame",
+      "es": "Siguiente marco"
+    },
+    "next-spread": {
+      "de": "Nächste Seite",
+      "en": "Next Spread",
+      "es": "Siguiente página"
+    },
+    "collect orphans": {
+      "de": "Unzugewiesene Textrahmen sammeln",
+      "en": "Collect unassigned textframes",
+      "es": "Recoger marcos de texto no asignados"
+    },
+    "show sequence": {
+      "de": "Sequenz anzeigen",
+      "en": "Show sequence",
+      "es": "Mostrar secuencia"
+    },
+    "remove layers": {  
+      "de": "Indikatorebene entfernen",
+      "en": "Remove indicator layer",
+      "es": "Eliminar capa indicadora"
     }
   },
   "check-alt-text": {
     "make layer": {
       "de": "Erstelle Marker-Ebene",
-      "en": "Create indicator layer"
+      "en": "Create indicator layer",
+      "es": "Crear capa indicadora"
     },
     "hide alts": {
       "de": "Alle Verknüpfungen mit Alt-Text ausblenden",
-      "en": "Hide all links with alt-text"
+      "en": "Hide all links with alt-text",
+      "es": "Ocultar los enlaces con texto alternativo"
     },
     "hide deco": {
-      "de": "Alle dekorativen Verknüpfungen ausblenden",
-      "en": "Hide all decorative links"
+      "de": "Alle dekorativen Objekte ausblenden",
+      "en": "Hide all decorative objects",
+      "es": "Ocultar los objetos decorativos"
     },
     "show alts": {
       "de": "Alle Verknüpfungen mit Alt-Text einblenden",
-      "en": "Show all links with alt-text"
+      "en": "Show all links with alt-text",
+      "es": "Mostrar los enlaces con texto alternativo"
     },
     "show deco": {
-      "de": "Alle dekorativen Verknüpfungen einblenden",
-      "en": "Show all decorative links"
+      "de": "Alle dekorativen Objekte einblenden",
+      "en": "Show all decorative objects",
+      "es": "Mostrar los objetos decorativos"
     },
     "save warning": {
       "de": "Alt-Text Warnung",
-      "en": "Alt-Text Warning"
+      "en": "Alt-Text Warning",
+      "es": "Aviso de texto alternativo"
     },
     "still hidden": {
       "de": "Es sind noch Rahmen ausgeblendet. Es wird versucht, sie vor dem Speichern einzublenden\n\nTrotzdem Speichern?",
-      "en": "Some frames are still hidden. We attempt to show them before save.\n\nSave anyway?"
-    },
-    "yes": {
-      "de": "Ja",
-      "en": "Yes"
-    },
-    "no": {
-      "de": "Nein",
-      "en": "No"
-    },
-    "start_config_first": {
-      "de": "Starten Sie zuerst das 'Anzeige konfigurieren', um Ihre Einstellungen festzulegen",
-      "en": "Start the config-script once to define your own preferences"
+      "en": "Some frames are still hidden. We attempt to show them before save.\n\nSave anyway?",
+      "es": "Algunos marcos aún están ocultos. Se intentará mostrarlos antes de guardarlos.\n\n¿Guardar de todos modos?"
     }
   },
   "check-endofline": {
     "prev": {
       "de": "Vorherige Fundstelle",
-      "en": "Previous"
+      "en": "Previous",
+      "es": "Previo"
     },
     "next": {
       "de": "Nachfolgende Fundstelle",
-      "en": "Next"
+      "en": "Next",
+      "es": "Siguiente"
     },
     "fix": {
       "de": "Korrigieren",
-      "en": "Fix"
+      "en": "Fix",
+      "es": "Corregir"
     },
     "fix_all": {
       "de": "Alle dieses Typs korrigieren",
-      "en": "Fix all of this type"
+      "en": "Fix all of this type",
+      "es": "Todos los de este tipo"
     },
     "refresh": {
       "de": "Neu durchsuchen",
-      "en": "Refresh"
+      "en": "Refresh",
+      "es": "Refrescar"
     },
     "found": {
       "de": "Fundstelle: ",
-      "en": "Match: "
+      "en": "Match: ",
+      "es": "Coincidencia: "
     },
     "type": {
       "de": "Art: ",
-      "en": "Type: "
+      "en": "Type: ",
+      "es": "Tipo: "
     },
     "hyphen": {
       "de": "Harte Trennung",
-      "en": "Rigid hyphen"
+      "en": "Rigid hyphen",
+      "es": "Signo menos"
     },
     "break": {
       "de": "Harter Zeilenumbruch",
-      "en": "Hard linebreak"
+      "en": "Hard linebreak",
+      "es": "Salto de línea forzado"
     },
     "spaces": {
       "de": "Mehrfache Leerzeichen",
-      "en": "Multiple Spaces"
+      "en": "Multiple Spaces",
+      "es": "Espacios múltiples"
     },
     "nothing found": {
       "de": "Nichts gefunden",
-      "en": "Nothing found"
+      "en": "Nothing found",
+      "es": "Nada encontrado"
     },
     "available greps": {
       "de": "Installierte Greps",
-      "en": "Available Greps"
+      "en": "Available Greps",
+      "es": "GREP disponibles"
     },
     "corrected": {
       "de": "Korrigierte Wörter: ",
-      "en": "Fixed words: "
+      "en": "Fixed words: ",
+      "es": "Palabras corregidas: "
     },
     "aux2": {
       "de": "",
-      "en": ""
+      "en": "",
+      "es": ""
     },
     "hyphengrep": {
       "de": "∴ Octopus Falsche Trennzeichen",
-      "en": "∴ Octopus Wrong Hyphen"
+      "en": "∴ Octopus Wrong Hyphen",
+      "es": "∴ Guion incorrecto de Octopus"
     },
     "linebreakgrep": {
       "de": "∴ Octopus Erzwungener Zeilenumbruch",
-      "en": "∴ Octopus Forced Linebreak"
+      "en": "∴ Octopus Forced Linebreak",
+      "es": "∴ Salto de línea manual de Octopus"
     },
     "multispacegrep": {
       "de": "∴ Octopus Mehrfache Leerzeichen",
-      "en": "∴ Octopus Multiple Spaces"
+      "en": "∴ Octopus Multiple Spaces",
+      "es": "∴ Espacios múltiples de Octopus"
     }
   },
   "check-hyphenation": {
@@ -162,39 +211,48 @@
   "check-language": {
     "language": {
       "de": "Sprache",
-      "en": "Language"
+      "en": "Language",
+      "es": "Idioma"
     },
     "share": {
       "de": "Anteil",
-      "en": "Share"
+      "en": "Share",
+      "es": "%"
     },
     "chars": {
       "de": "Zeichen",
-      "en": "Chars"
+      "en": "Chars",
+      "es": "Cars."
     },
     "ranges": {
       "de": "Strecken",
-      "en": "Ranges"
+      "en": "Ranges",
+      "es": "Áreas"
     },
     "hide main": {
       "de": "Hauptsprache nicht anzeigen",
-      "en": "Don't mark main language"
+      "en": "Don't mark main language",
+      "es": "No marcar el idioma principal"
     },
     "hide marker": {
       "de": "Markierungen ausblenden",
-      "en": "Hide marker"
+      "en": "Hide marker",
+      "es": "Ocultar marcadores"
     },
     "prev": {
       "de": "Vorherige anzeigen",
-      "en": "Show previous"
+      "en": "Show previous",
+      "es": "Ver anteriores"
     },
     "next": {
       "de": "Nächste anzeigen",
-      "en": "Show next"
+      "en": "Show next",
+      "es": "Ver siguiente"
     },
     "in overset": {
       "de": "Treffer im Übersatz",
-      "en": "Text in Overflow"
+      "en": "Text in Overflow",
+      "es": "Texto desbordado"
     },
   },
   "check-lists": {
@@ -248,31 +306,38 @@
   "cleancontenttypes": {
     "convert": {
       "de": "Konvertieren",
-      "en": "Convert"
+      "en": "Convert",
+      "es": "Convertir"
     },
     "ignore": {
       "de": "Ignorieren",
-      "en": "Ignore"
+      "en": "Ignore",
+      "es": "Ignorar"
     },
     "remove": {
       "de": "Löschen",
-      "en": "Remove"
+      "en": "Remove",
+      "es": "Remover"
     },
     "cancel": {
       "de": "Abbrechen",
-      "en": "Cancel"
+      "en": "Cancel",
+      "es": "Cancelar"
     },
     "all": {
       "de": "Alle konvertieren",
-      "en": "Convert all"
+      "en": "Convert all",
+      "es": "Convertir todo"
     },
     "scriptname": {
       "de": "Inhaltstypen aufräumen...",
-      "en": "Clean Content Types..."
+      "en": "Clean Content Types...",
+      "es": "Limpiar tipos de contenido…"
     },
     "none_found": {
       "de": "Keine auffälligen Rahmen gefunden",
-      "en": "No wrongly assigned frames found"
+      "en": "No wrongly assigned frames found",
+      "es": "No se encontraron marcos asignados incorrectamente"
     }
   },
   "close-all": {
@@ -1022,39 +1087,48 @@
   "exporter": {
     "doc-group": {
       "de": "Welche Dokumente",
-      "en": "Which documents"
+      "en": "Which documents",
+      "es": "Qué documentos"
     },
     "crnt_doc": {
       "de": "Aktuelles Dokument",
-      "en": "Current Document"
+      "en": "Current Document",
+      "es": "Documento actual"
     },
     "open_docs": {
       "de": "Offene Dokumente",
-      "en": "Open Documents"
+      "en": "Open Documents",
+      "es": "Documentos abiertos"
     },
     "crnt_book": {
       "de": "Aktuelles Buch",
-      "en": "Current Book"
+      "en": "Current Book",
+      "es": "Libro actual"
     },
     "folder_content": {
       "de": "Ordnerinhalte",
-      "en": "Docs in Folder"
+      "en": "Docs in Folder",
+      "es": "Documentos de la carpeta"
     },
     "choose_folder": {
       "de": "In welchem Ordner liegen die Dokumente?",
-      "en": "Which folder contains the documents?"
+      "en": "Which folder contains the documents?",
+      "es": "¿Qué carpeta tiene los documentos?"
     },
     "choose_tgt_folder": {
       "de": "Wo soll gespeichert werden?",
-      "en": "Where do you want the files to be saved to?"
+      "en": "Where do you want the files to be saved to?",
+      "es": "¿Dónde quiere guardar los cocumentos?"
     },
     "save_location_hd": {
       "de": "Speicherort",
-      "en": "Location"
+      "en": "Location",
+      "es": "Lugar"
     },
     "need_something_open": {
       "de": "Es muss mindestens ein Dokument oder Buch geoeffnet sein",
-      "en": "You need an open document or book"
+      "en": "You need an open document or book",
+      "es": "Necesita un documento o libro abierto"
     },
     "leave_same": {
       "de": "Lassen Sie die Presets identisch, um nur ein PDF zu exportieren",
@@ -1062,67 +1136,83 @@
     },
     "doc_group": {
       "de": "Dokumente",
-      "en": "Documents"
+      "en": "Documents",
+      "es": "Documentos"
     },
     "pdf_group": {
       "de": "PDF",
-      "en": "PDF"
+      "en": "PDF",
+      "es": "PDF"
     },
     "package_group": {
       "de": "Verpacken",
-      "en": "Package"
+      "en": "Package",
+      "es": "Paquete"
     },
     "save": {
       "de": "Speichern",
-      "en": "Save"
+      "en": "Save",
+      "es": "Guardar"
     },
     "save_close": {
       "de": "Speichern & Schliessen",
-      "en": "Save & Close"
+      "en": "Save & Close",
+      "es": "Guardar y cerrar"
     },
     "close": {
       "de": "Schliessen ohne Speichern",
-      "en": "Close w/o Saving"
+      "en": "Close w/o Saving",
+      "es": "Cerrar sin guardar"
     },
     "saveas": {
       "de": "Speichern unter",
-      "en": "Save as"
+      "en": "Save as",
+      "es": "Guardar como"
     },
     "package": {
       "de": "Verpacken",
-      "en": "Package"
+      "en": "Package",
+      "es": "Empaquetar"
     },
     "export_group": {
       "de": "Exportieren",
-      "en": "Export"
+      "en": "Export",
+      "es": "Exportar"
     },
     "pdfexport": {
       "de": "PDF exportieren",
-      "en": "Export PDF"
+      "en": "Export PDF",
+      "es": "Como PDF"
     },
     "idmlexport": {
       "de": "IDML exportieren",
-      "en": "Export IDML"
+      "en": "Export IDML",
+      "es": "Exportar como IDML"
     },
     "jpgexport": {
       "de": "JPG exportieren",
-      "en": "Export JPG"
+      "en": "Export JPG",
+      "es": "Como JPG"
     },
     "pngexport": {
       "de": "PNG exportieren",
-      "en": "Export PNG"
+      "en": "Export PNG",
+      "es": "Como PNG"
     },
     "targetfolder": {
       "de": "An Zielordner",
-      "en": "In target folder"
+      "en": "In target folder",
+      "es": "En una carpeta"
     },
     "relativefolder": {
       "de": "Relativ zum INDD",
-      "en": "Relative to INDD"
+      "en": "Relative to INDD",
+      "es": "Relativo al INDD"
     },
     "cancel": {
       "de": "Abbrechen",
-      "en": "Cancel"
+      "en": "Cancel",
+      "es": "Cancelar"
     },
     "export": {
       "de": "Exportieren",
@@ -1130,59 +1220,73 @@
     },
     "savemsg": {
       "de": " Dokumente gespeichert",
-      "en": " documents saved"
+      "en": " documents saved",
+      "es": " documentos guardados"
     },
     "saveclosemsg": {
       "de": " Dokumente gespeichert und geschlossen",
-      "en": " documents saved and closed"
+      "en": " documents saved and closed",
+      "es": " documentos guardados y cerrados"
     },
     "closemsg": {
       "de": " Dokumente geschlossen",
-      "en": " documents closed"
+      "en": " documents closed",
+      "es": " documentos cerrados"
     },
     "no_docs": {
       "de": "Keine Dokumente ausgewaehlt",
-      "en": "No documents to process"
+      "en": "No documents to process",
+      "es": "No hay documentos para procesar"
     },
     "doc_not_saved": {
       "de": "Dokument _1_ ist nicht gespeichert und wird ignoriert",
-      "en": "Document _1_ ist not saved yet and will be ignored"
+      "en": "Document _1_ ist not saved yet and will be ignored",
+      "es": "El documento _1_ no fue guardado y será ignorado"
     },
     "view_pdf": {
       "de": "PDF öffnen:",
-      "en": "View PDF:"
+      "en": "View PDF:",
+      "es": "Ver PDF"
     },
     "copy_fonts": {
       "de": "Fonts kopieren",
-      "en": "Copy fonts"
+      "en": "Copy fonts",
+      "es": "Copiar fuentes"
     },
     "copy_links": {
       "de": "Links kopieren",
-      "en": "Copy links"
+      "en": "Copy links",
+      "es": "Copiar vínculos"
     },
     "update_links": {
       "de": "Links aktualisieren",
-      "en": "Update links"
+      "en": "Update links",
+      "es": "Actualizar vínculos"
     },
     "hidden_layers": {
       "de": "Inkl. ausgeblendeter Ebenen",
-      "en": "Include hidden layers"
+      "en": "Include hidden layers",
+      "es": "Incluir capas ocultas"
     },
     "create_report": {
       "de": "Bericht erzeugen",
-      "en": "Create report"
+      "en": "Create report",
+      "es": "Crear informe"
     },
     "idml": {
       "de": "IDML erzeugen",
-      "en": "Create IDML"
+      "en": "Create IDML",
+      "es": "Crear IDML"
     },
     "pdf": {
       "de": "PDF exportieren",
-      "en": "Export PDF"
+      "en": "Export PDF",
+      "es": "Exportar PDF"
     },
     "pdf_style": {
       "de": "PDF-Vorgabe",
-      "en": "PDF-Preset"
+      "en": "PDF-Preset",
+      "es": "Valores de PDF"
     },
     "images": {
       "de": "Bilder",
@@ -1192,243 +1296,302 @@
   "fontinstaller": {
     "Fonthub": {
       "de": "Octopus-Fontinstaller",
-      "en": "Octopus-Fontinstaller"
+      "en": "Octopus-Fontinstaller",
+      "es": "Octopus-Fontinstaller"
     },
     "Add Folder": {
       "de": "Fontordner hinzufügen",
-      "en": "Add Fontfolder"
+      "en": "Add Fontfolder",
+      "es": "Agregar carpeta de fuentes"
     },
     "Remove": {
       "de": "Fontordner vergessen",
-      "en": "Remove Fontfolder from List"
+      "en": "Remove Fontfolder from List",
+      "es": "Eliminar la carpeta de fuentes de la lista"
     },
     "Update": {
       "de": "Fontliste aktualisieren",
-      "en": "Update Fontlist"
+      "en": "Update Fontlist",
+      "es": "Actualizar la lista de fuentes"
     },
     "Install": {
       "de": "Schriften des Dokuments installieren",
-      "en": "Install Fonts of Document"
+      "en": "Install Fonts of Document",
+      "es": "Instalar las fuentes del documento"
     },
     "Install manually": {
       "de": "Schriften aus Liste installieren",
-      "en": "Install Fonts from List"
+      "en": "Install Fonts from List",
+      "es": "Instalar las fuentes de la lista"
     },
     "Cancel": {
       "de": "Schließen",
-      "en": "Close"
+      "en": "Close",
+      "es": "Cerrar"
     },
     "Delete": {
       "de": "Listen-Dateien löschen",
-      "en": "Remove List-Files"
+      "en": "Remove List-Files",
+      "es": "Quitar la lista de archivos"
     },
     "yes": {
       "de": "Ja",
-      "en": "Yes"
+      "en": "Yes",
+      "es": "Sí"
     },
     "no": {
       "de": "Nein",
-      "en": "No"
+      "en": "No",
+      "es": "No"
     },
     "Fontlists": {
       "de": "Schriftenlisten",
-      "en": "Lists of Fonts"
+      "en": "Lists of Fonts",
+      "es": "Listas de fuentes"
     },
     "Liste hinzufügen": {
       "de": "Liste aus Ordner erzeugen",
-      "en": "Add List"
+      "en": "Add List",
+      "es": "Agregar lista"
     },
     "Liste entfernen": {
       "de": "Liste aus Script entfernen",
-      "en": "Remove List"
+      "en": "Remove List",
+      "es": "Eliminar lista"
     },
     "Fonts in List": {
       "de": "Schriften im Ordner",
-      "en": "Fonts in List"
+      "en": "Fonts in List",
+      "es": "Fuentes en la lista"
     },
     "Schriften installieren": {
       "de": "Schriften installieren",
-      "en": "Install all Fonts"
+      "en": "Install all Fonts",
+      "es": "Instalar todas las fuentes"
     },
     "Global Dokument-Schriften installieren": {
       "de": "Dok.-Schriften aus allen Listen installieren",
-      "en": "Install Document-Fonts from all lists"
+      "en": "Install Document-Fonts from all lists",
+      "es": "Instalar las fuentes desde todas las listas"
     },
     "Dokument-Schriften installieren": {
       "de": "Dok.-Schriften aus dieser Liste installieren",
-      "en": "Install Document-Fonts from current list"
+      "en": "Install Document-Fonts from current list",
+      "es": "Instalar las fuentes desde la lista actual"
     },
     "Alle Schriften installieren": {
       "de": "Alle Schriften installieren",
-      "en": "Install all Fonts"
+      "en": "Install all Fonts",
+      "es": "Instalar todas las fuentes"
     },
     "Ausgewählte Schriften installieren": {
       "de": "Ausgewählte Schriften installieren",
-      "en": "Install selected Fonts"
+      "en": "Install selected Fonts",
+      "es": "Instalar las fuentes seleccionadas"
     },
     "Schriftenliste aktualisieren": {
       "de": "Liste erneut aus Ordner erzeugen",
-      "en": "Update Fontlist"
+      "en": "Update Fontlist",
+      "es": "Actualizar la lista de fuentes"
     },
     "Liste umbenennen": {
       "de": "Liste im Script umbenennen",
-      "en": "Rename List"
+      "en": "Rename List",
+      "es": "Renombrar la lista"
     },
     "Documentfonts": {
       "de": "Dokument-Schriften",
-      "en": "Documentfonts"
+      "en": "Documentfonts",
+      "es": "Fuentes del documento"
     },
     "really_remove": {
       "de": "Soll die Liste wirklich entfernt werden?\nDies betrifft nur die Liste und nicht den Fontordner auf der Festplatte.",
-      "en": "Really remove the list?\nThis affects only the list, not the folder on your disk."
+      "en": "Really remove the list?\nThis affects only the list, not the folder on your disk.",
+      "es": "¿Realmente quiere eliminar la lista?\nEsto afecta solo a la lista, no a la carpeta del disco."
     },
     "Where": {
       "de": "Wo liegen die Fonts?",
-      "en": "Which folder contains the new fonts?"
+      "en": "Which folder contains the new fonts?",
+      "es": "¿Qué carpeta contiene las nuevas fuentes?"
     },
     "none-missing": {
       "de": "Es sind keine Schriften als fehlend markiert",
-      "en": "Apparently no fonts are missing"
+      "en": "Apparently no fonts are missing",
+      "es": "No parece faltar ninguna fuente"
     },
     "install_fail": {
       "de": "Folgende Schriften wurden nicht installiert",
-      "en": "Some fonts could not be installed"
+      "en": "Some fonts could not be installed",
+      "es": "Algunas fuentes no se pudieron instalar"
     },
     "number-installed": {
       "de": "Schriftschnitte wurden installiert\n\nSoll das Dokument gleich neu geöffnet werden, um die Schriften zu aktivieren? \n\nEs muss dafür zuvor gespeichert werden.",
-      "en": "Font-styles were installed\n\nDo you want the document re-opened to activate the fonts?\n\nIt needs to be saved first."
+      "en": "Font-styles were installed\n\nDo you want the document re-opened to activate the fonts?\n\nIt needs to be saved first.",
+      "es": "Se instalaron estilos de fuente\n\n¿Quiere volver a abrir el documento para activarlos?\n\nPrimero lo debe guardar."
     },
     "install-all": {
       "de": "Installiere alle Schriften in Liste",
-      "en": "Install all Fonts in List"
+      "en": "Install all Fonts in List",
+      "es": "Instalar todas las fuentes de la lista"
     },
     "install-sel": {
       "de": "Installiere ausgewählte Schrift",
-      "en": "Install selected Font"
+      "en": "Install selected Font",
+      "es": "Instalar la fuente seleccionada"
     },
     "install-doc": {
       "de": "Installiere Dokumentschriften",
-      "en": "Install document fonts"
+      "en": "Install document fonts",
+      "es": "Instalar las fuentes del documento"
     },
     "not-found": {
       "de": "nicht gefunden",
-      "en": "not found"
+      "en": "not found",
+      "es": "no encontrado"
     },
     "not-copied": {
       "de": " konnte nicht kopiert werden",
-      "en": " could not be copied"
+      "en": " could not be copied",
+      "es": " no se pudo copiar"
     },
     "update-hint": {
       "de": "Es dauert meistens einen Moment, bis InDesign die Schriften in 'Document fonts' entdeckt...",
-      "en": "Usually it takes a moment or two until InDesign recognises new Fonts in 'Document fonts'"
+      "en": "Usually it takes a moment or two until InDesign recognises new Fonts in 'Document fonts'",
+      "es": "Por lo general, toma uno o dos minutos hasta que InDesign reconoce las nuevas fuentes en 'Fuentes del documento'."
     },
     "Select Font": {
       "de": "Wählen Sie die zu löschende Liste(n)",
-      "en": "Select the list(s) you want to remove"
+      "en": "Select the list(s) you want to remove",
+      "es": "Seleccione la(s) lista(s) que desea eliminar"
     },
     "Installed Msg": {
       "de": "Diese Schriften wurden gefunden",
-      "en": "These fonts were found"
+      "en": "These fonts were found",
+      "es": "Se encontraron estas fuentes"
     },
     "none found": {
       "de": "Keine der fehlenden Schriften wurden im Depot gefunden",
-      "en": "None of the missing fonts were found"
+      "en": "None of the missing fonts were found",
+      "es": "No se encontró ninguna de las fuentes faltantes"
     },
     "wait": {
       "de": "Normalerweise braucht InDesign einen Moment, bis er die Schriften entdeckt hat",
-      "en": "Please wait a moment for InDesign to recognize the new fonts"
+      "en": "Please wait a moment for InDesign to recognize the new fonts",
+      "es": "Espere un momento para que InDesign reconozca las nuevas fuentes."
     },
     "need to be saved": {
       "de": "Es können nur für gespeicherte Dokumente die Schriften nachinstalliert werden",
-      "en": "The document needs to be saved before you can install fonts"
+      "en": "The document needs to be saved before you can install fonts",
+      "es": "Es necesario guardar el documento antes de poder instalar fuentes"
     },
     "need-open-doc": {
       "de": "Kein Dokument offen\nEs muss ein gespeichertes Dokument offen sein, um Fonts für dieses Dokument zu installieren.",
-      "en": "No open document\nThis script installs Fonts in the 'Document fonts' folder of the active Document."
+      "en": "No open document\nThis script installs Fonts in the 'Document fonts' folder of the active Document.",
+      "es": "No hay documentos abiertos\nEste guion instala fuentes en la carpeta 'Fuentes del documento' del documento activo."
     },
     "Ruhig bleiben": {
       "de": "Die Schriftenordner, aus denen die Listen ausgelesen werden, werden vom Script NICHT verändert.",
-      "en": "This script will NOT make any changes in the font-folders the lists are extracted from"
+      "en": "This script will NOT make any changes in the font-folders the lists are extracted from",
+      "es": "Este guion NO realizará ningún cambio en las carpetas de fuentes de las que se extraen las listas."
     }
   },
   "indesign-help": {
     "ui_ok": {
       "de": "Frage senden",
-      "en": "Send Question"
+      "en": "Send Question",
+      "es": "Enviar pregunta"
     },
     "ui_cancel": {
       "de": "Schließen",
-      "en": "Close"
+      "en": "Close",
+      "es": "Cerrar"
     },
     "q": {
       "de": "Ihre Frage",
-      "en": "Your Question"
+      "en": "Your Question",
+      "es": "Su pregunta"
     },
     "a": {
       "de": "Die Antwort",
-      "en": "The Answer"
+      "en": "The Answer",
+      "es": "La respuesta"
     },
     "id-needed": {
       "de": "Das Wort 'InDesign' muss in der Frage auftauchen",
-      "en": "The word 'InDesign' has to be part of the question"
+      "en": "The word 'InDesign' has to be part of the question",
+      "es": "La palabra 'InDesign' debe ser parte de la pregunta."
     },
     "wait": {
       "de": "Die Anfrage wird über einen einfachen Account gestellt. Das kann je nach Auslastungen zwischen 5 und 60sec dauern.",
-      "en": "The request is made with a low-prio account. This can take between 5 and 60 seconds"
+      "en": "The request is made with a low-prio account. This can take between 5 and 60 seconds",
+      "es": "La solicitud se realiza con una cuenta de baja prioridad. Esto puede demorar entre 5 y 60 segundos."
     },
     "wait_msg": {
       "de": "Unsere OpenAI Schnittstelle ist nicht die allerschnellste. Anfragen können eine Minute oder mehr dauern",
-      "en": "Our OpenAI API can take quite some time to generate a text"
+      "en": "Our OpenAI API can take quite some time to generate a text",
+      "es": "Nuestra API OpenAI puede tardar algún tiempo en generar un texto"
     },
     "ui_saved_questions": {
       "de": "Gespeicherte Fragen",
-      "en": "Saved Questions"
+      "en": "Saved Questions",
+      "es": "Preguntas guardadas"
     },
     "q1": {
       "de": "In InDesign, wo stellt man ein, dass Verknüpfungen beim Öffnen des Dokuments nicht aktualisiert werden?",
-      "en": "In InDesign, how do you configure that links are not checked when opening a document?"
+      "en": "In InDesign, how do you configure that links are not checked when opening a document?",
+      "es": "En InDesign, ¿cómo se configura para que no se marquen los enlaces al abrir un documento?"
     },
     "q2": {
       "de": "In InDesign, wie richtet man den Goldenen Schnitt als Satzspiegel ein?",
-      "en": "How do you create a layout following the golden ratio?"
+      "en": "How do you create a layout following the golden ratio?",
+      "es": "¿Cómo crear un diseño en InDesign siguiendo la proporción áurea?"
     },
     "q3": {
       "de": "Kann man aus einem InDesign-Dokument ein fertig ausgeschossenes PDF erzeugen?",
-      "en": "Can you create a ready imposed PDF from an InDesign document?"
+      "en": "Can you create a ready imposed PDF from an InDesign document?",
+      "es": "¿Es posible crear un PDF con imposición inmediata a partir de un documento de InDesign?"
     }
   },
   "octolock": {
     "username": {
       "de": "Username: ",
-      "en": "Username: "
+      "en": "Username: ",
+      "es": "Nombre de usuario: "
     },
     "open_head": {
       "de": "Deine 'offenen' Dokumente: ",
-      "en": "Your 'open' documents: "
+      "en": "Your 'open' documents: ",
+      "es": "Sus documentos 'abiertos': "
     },
     "locked_dirs": {
       "de": "Geschützte Verzeichnisse: ",
-      "en": "Locked directories: "
+      "en": "Locked directories: ",
+      "es": "Directorios bloqueados: "
     },
     "add_dir": {
       "de": "Verzeichnis hinzufügen",
-      "en": "Add directory"
+      "en": "Add directory",
+      "es": "Agregar directorio: "
     },
     "rm_dir": {
       "de": "Auswahl entfernen",
-      "en": "Remove selection"
+      "en": "Remove selection",
+      "es": "Eliminar la selección"
     },
     "cancel": {
       "de": "Abbrechen",
-      "en": "Cancel"
+      "en": "Cancel",
+      "es": "Cancelar"
     },
     "which_dir": {
       "de": "Welches Verzeichnis?",
-      "en": "Which directory?"
+      "en": "Which directory?",
+      "es": "¿Que directorio?"
     },
     "no_string": {
       "de": "Config-Error\nDer Parameter, der in ein Array gewandelt werden soll, ist kein String, sondern '_1_'",
-      "en": "Config-Error\nThis should be a string but is in fact a '_1_'"
+      "en": "Config-Error\nThis should be a string but is in fact a '_1_'",
+      "es": "Error de configuración.\nEsto debería ser una cadena pero en realidad es un '_1_'"
     }
   },
   "octolock-daemon": {
@@ -1456,137 +1619,170 @@
   "placeholder-text": {
     "select_text": {
       "de": "Bitte wählen Sie einen Textrahmen",
-      "en": "Please select a textframe"
+      "en": "Please select a textframe",
+      "es": "Seleccione un marco de texto"
     },
     "ui_ok": {
       "de": "Anfrage senden",
-      "en": "Send Request"
+      "en": "Send Request",
+      "es": "Enviar solicitud"
     },
     "ui_cancel": {
       "de": "Schließen",
-      "en": "Close"
+      "en": "Close",
+      "es": "Cerrar"
     },
     "what_topic": {
       "de": "Worum geht's?",
-      "en": "What's the topic?"
+      "en": "What's the topic?",
+      "es": "¿Cual es el tema?"
     },
     "wait": {
       "de": "Die Anfrage wird über einen einfachen Account gestellt. Das kann je nach Auslastungen zwischen 5 und 20sec dauern.",
-      "en": "The request is made with a low-prio account. This can take between 5 and 20 seconds"
+      "en": "The request is made with a low-prio account. This can take between 5 and 20 seconds",
+      "es": "La solicitud se realiza con una cuenta de baja prioridad. Esto puede tardar entre 5 y 20 segundos."
     },
     "no_frame": {
       "de": "Es muss ein Textrahmen markiert sein",
-      "en": "You need to select a textframe first"
+      "en": "You need to select a textframe first",
+      "es": "Primero debe seleccionar un marco de texto"
     }
   },
   "watermark": {
     "no-doc": {
       "de": "Es muss ein Dokument offen sein",
-      "en": "You need an open document"
+      "en": "You need an open document",
+      "es": "Necesita un documento abierto"
     },
     "links": {
       "de": "links",
-      "en": "left"
+      "en": "left",
+      "es": "izquierda"
     },
     "mitte": {
       "de": "mitte",
-      "en": "center"
+      "en": "center",
+      "es": "centro"
     },
     "rechts": {
       "de": "rechts",
-      "en": "right"
+      "en": "right",
+      "es": "derecha"
     },
     "oben": {
       "de": "oben",
-      "en": "top"
+      "en": "top",
+      "es": "arriba"
     },
     "unten": {
       "de": "unten",
-      "en": "bottom"
+      "en": "bottom",
+      "es": "abajo"
     },
     "watermarkText": {
       "de": "Wasserzeichentext",
-      "en": "Watermarktext"
+      "en": "Watermarktext",
+      "es": "Filigrana"
     },
     "watermarkFontColor": {
       "de": "Fontfarbe",
-      "en": "Fontcolor"
+      "en": "Fontcolor",
+      "es": "Color"
     },
     "watermarkFontFamily": {
       "de": "Schrift",
-      "en": "Font"
+      "en": "Font",
+      "es": "Fuente"
     },
     "watermarkFontStyle": {
       "de": "Schnitt",
-      "en": "Style"
+      "en": "Style",
+      "es": "Atributo"
     },
     "watermarkFontPointSize": {
       "de": "Schriftgrad",
-      "en": "Fontsize"
+      "en": "Fontsize",
+      "es": "Cuerpo"
     },
     "watermarkHorizontalPosition": {
       "de": "Horizontale Position",
-      "en": "Position horizontal"
+      "en": "Position horizontal",
+      "es": "Posición horizontal"
     },
     "watermarkVerticalPosition": {
       "de": "Vertikale Position",
-      "en": "Position vertical"
+      "en": "Position vertical",
+      "es": "Posición vertical"
     },
     "watermarkHorizontalOffset": {
       "de": "Horizontaler Versatz",
-      "en": "Offset horizontal"
+      "en": "Offset horizontal",
+      "es": "Despl. horizontal"
     },
     "watermarkVerticalOffset": {
       "de": "Vertikaler Versatz",
-      "en": "Offset vertical"
+      "en": "Offset vertical",
+      "es": "Despl. vertical"
     },
     "watermarkOpacity": {
       "de": "Deckkraft",
-      "en": "Opacity"
+      "en": "Opacity",
+      "es": "Opacidad"
     },
     "watermarkRotation": {
       "de": "Rotation",
-      "en": "Rotation"
+      "en": "Rotation",
+      "es": "Inclinación"
     },
     "watermarkVisibility": {
       "de": "Sichtbar im Dokument",
-      "en": "Visible in Document"
+      "en": "Visible in Document",
+      "es": "Visible en el documento"
     },
     "watermarkDoPrint": {
       "de": "Sichtbar im Druck",
-      "en": "Visible in Output"
+      "en": "Visible in Output",
+      "es": "Visible en la salida"
     },
     "watermarkDrawInBack": {
       "de": "Im Hintergrund",
-      "en": "In Background"
+      "en": "In Background",
+      "es": "En segundo plano"
     },
     "Inhalt": {
       "de": "Inhalt",
-      "en": "Content"
+      "en": "Content",
+      "es": "Contenido"
     },
     "Formatierung": {
       "de": "Formatierung",
-      "en": "Formatting"
+      "en": "Formatting",
+      "es": "Formato"
     },
     "Position": {
       "de": "Position",
-      "en": "Position"
+      "en": "Position",
+      "es": "Posición"
     },
     "Sichtbarkeit": {
       "de": "Sichtbarkeit",
-      "en": "Visibility"
+      "en": "Visibility",
+      "es": "Visibilidad"
     },
     "fontfail": {
       "de": "Aus bisher ungeklärten Gründen akzeptiert InDesign manche Schriften nicht für Wasserzeichen. \r\rProbieren Sie bitte eine andere\r\rDie Eigenschaften der gewählten Schrift sind:\r",
-      "en": "For unclear reasons some fonts cannot be used for watermarks. \nProperties of the chosen font are: \n"
+      "en": "For unclear reasons some fonts cannot be used for watermarks. \nProperties of the chosen font are: \n",
+      "es": "Por razones poco claras, algunas fuentes no se pueden utilizar para marcas de agua. \nLas propiedades de la fuente elegida son: \n"
     },
     "read-error": {
       "de": "Fehler beim Auslesen der Eigenschaft ",
-      "en": "Error when reading property "
+      "en": "Error when reading property ",
+      "es": "Error al leer la propiedad "
     },
     "xx": {
       "de": "xx",
-      "en": "yy"
+      "en": "yy",
+      "es": "zz"
     }
   }
 }

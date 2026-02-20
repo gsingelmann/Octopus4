@@ -1003,48 +1003,90 @@ function __defineIconsForUI() {
 
 
 /* Deutsch-Englische Dialogtexte und Fehlermeldungen */
-function __defLocalizeStrings() {
-  
-  _global.addBookmarks = { en:"Add Bookmarks 1.1", 
-                           de:"Add Bookmarks 1.1" }
-                         
-  _global.pStyleButtonLabel  = { en:"Paragraph Style", 
-                                 de:"Absatzformat" }
-                           
-  _global.cStyleButtonLabel  = { en:"Character Style", 
-                                 de:"Zeichenformat" }
-                      
-  _global.placeholder = { en:"Please select one these options.", 
-                          de:"Bitte eine der Optionen auswählen." }
-  
-  _global.grepButtonLabel = { en:"GREP", 
-                              de:"GREP" }
-  
-  _global.startButtonLabel = { en:"Go", 
-                               de:"Los" } 
-                              
-  _global.cancelButtonLabel = { en:"Close", 
-                                de:"Schlie\u00dfen" }
-  
-  _global.anchorLabel = { en:"Bookmark", 
-                          de:"Lesezeichen" }
-  
-  _global.bookmarksAddedAlert = { en:"Bookmarks added", 
-                                  de:"Lesezeichen erstellt" } 
-                                
-  _global.refreshBookmarkListDoScriptLabel = { en:"Refresh bookmarks list", 
-                                  de:"Lesezeichen-Liste aktualisieren" }
-   
-  _global.errorsAlert = { en:"Search results skipped", 
-                          de:"Fundstellen \u00fcbersprungen" }
-                        
-  _global.conditionAlert = { en:"Note! You already use »Conditional Text« in your document.\r\rIn certain cases these conditions can be overwritten by this script.\r\rContinue Anyway?", 
-                             de:"Hinweis!\rSie arbeiten in Ihrem Dokument mit »bedingtem Text«.\r\rIn bestimmten F\u00e4llen k\u00f6nnen die an den Suchbegriffen angewandten »Bedingungen« durch dieses Skipts \u00fcberschrieben werden.\r\rTrotzdem fortfahren?" }
-  
-  _global.parentBookmarkCheckboxLabel = { en:"Parent Bookmark", 
-                                          de:"\u00dcbergeordnetes Lesezeichen" }
-  
-  _global.cancelWithESCLabel = { en:"Cancel with ESC", 
-                                 de:"Abbrechen mit ESC" }
-                        
-} /* END function __defLocalizeStrings */
+  function __defLocalizeStrings() {
+
+    _global.addBookmarks = {
+      en: "Add Bookmarks 1.1",
+      es: "Agregar marcadores 1.1",
+      de: "Add Bookmarks 1.1"
+    }
+
+    _global.pStyleButtonLabel = {
+      en: "Paragraph Style",
+      es: "Estilo de p\u00E1rrafo",
+      de: "Absatzformat"
+    }
+
+    _global.cStyleButtonLabel = {
+      en: "Character Style",
+      es: "Estilo de car\u00E1cter",
+      de: "Zeichenformat"
+    }
+
+    _global.placeholder = {
+      en: "Please select one these options.",
+      es: "Elija una opci\u00F3n.",
+      de: "Bitte eine der Optionen auswählen."
+    }
+
+    _global.grepButtonLabel = {
+      en: "GREP",
+      es: "GREP",
+      de: "GREP"
+    }
+
+    _global.startButtonLabel = {
+      en: "Go",
+      es: "Proceder",
+      de: "Los"
+    }
+
+    _global.cancelButtonLabel = {
+      en: "Close",
+      es: "Cerrar",
+      de: "Schlie\u00dfen"
+    }
+
+    _global.anchorLabel = {
+      en: "Bookmark",
+      es: "Marcador",
+      de: "Lesezeichen"
+    }
+
+    _global.bookmarksAddedAlert = {
+      en: "Bookmarks added",
+      es: "Marcadores agregados",
+      de: "Lesezeichen erstellt"
+    }
+
+    _global.refreshBookmarkListDoScriptLabel = {
+      en: "Refresh bookmarks list",
+      es: "Refrescar lista de marcadores",
+      de: "Lesezeichen-Liste aktualisieren"
+    }
+
+    _global.errorsAlert = {
+      en: "Search results skipped",
+      es: "Resultados de b\u00FAsqueda omitidos",
+      de: "Fundstellen \u00fcbersprungen"
+    }
+
+    _global.conditionAlert = {
+      en: "Note! You already use »Conditional Text« in your document.\r\rIn certain cases these conditions can be overwritten by this script.\r\rContinue Anyway?",
+      es: "Est\u00E1 usando 'Texto condicional' en el documento.\r\rEn ciertos casos, este guion puede sobrescribir estas condiciones.\r\r\u00BFContinuar igual?",
+      de: "Hinweis!\rSie arbeiten in Ihrem Dokument mit »bedingtem Text«.\r\rIn bestimmten F\u00e4llen k\u00f6nnen die an den Suchbegriffen angewandten »Bedingungen« durch dieses Skipts \u00fcberschrieben werden.\r\rTrotzdem fortfahren?"
+    }
+
+    _global.parentBookmarkCheckboxLabel = {
+      en: "Parent Bookmark",
+      es: "Marcador padre",
+      de: "\u00dcbergeordnetes Lesezeichen"
+    }
+
+    _global.cancelWithESCLabel = {
+      en: "Cancel with ESC",
+      es: "Cancelar con ESC",
+      de: "Abbrechen mit ESC"
+    }
+
+  } /* END function __defLocalizeStrings */

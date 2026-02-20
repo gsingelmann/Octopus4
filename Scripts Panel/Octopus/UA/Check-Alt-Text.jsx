@@ -248,6 +248,7 @@ function show_ui() {
       make_indic( frames.ok, "Alt-Text")
       make_indic( frames.nok, "no-Alt-Text")
       make_indic( frames.deco, "purely-decorative")
+
     } catch(e) {
       __log("error", e.message + " on "  + e.line, script_id );
     }
@@ -262,18 +263,29 @@ function show_ui() {
           var fr = doc.pageItems.itemByID(list[n].frame);
           var spread = get_spread(fr);
           var colour = get_color( name );
-          if ( name == "Alt-Text" ) {
-            var dup = spread.textFrames.add({fillColor: "None", strokeColor: colour, strokeWeight: 4});
-          } else {
+          if ( name == "no-Alt-Text" ) {
             var dup = spread.polygons.add({fillColor: "None", strokeColor: colour, strokeWeight: 4});
+          } else {
+            var dup = spread.textFrames.add({fillColor: "None", strokeColor: colour, strokeWeight: 4});
           }
           dup.itemLayer = layer;
           dup.paths[0].entirePath = fr.paths[0].entirePath;
-          if ( name == "Alt-Text" ) {
-            dup.contents = list[n].text;
-            dup.parentStory.paragraphs.everyItem().fillColor = "Paper";
-            dup.parentStory.paragraphs.everyItem().strokeColor = "Black";
-            // dup.fillTransparencySettings.blendingSettings.opacity = 50;
+          /*
+          {frame: fr.id, kind: fr.constructor.name, link: link, altText: altText, actText: actualText, altDeco: (altTST == "SOURCE_DECORATIVE_IMAGE"), actDeko: (aTT == "TAG_ARTIFACT"), vstate: fr.visible }
+          */
+          if ( name !== "no-Alt-Text" ) {
+            dup.contents = "Alt-Text: \"" + list[n].altText + "\"\nActual Text: \"" + list[n].actText + "\"";
+            dup.parentStory.paragraphs[0].applyParagraphStyle( doc.paragraphStyles[0], true )
+            dup.parentStory.paragraphs.everyItem().fillColor = "Black";
+            dup.parentStory.paragraphs.everyItem().strokeColor = "Paper";
+            var pts = 28;
+            dup.parentStory.paragraphs.everyItem().pointSize = pts;
+            while ( dup.overflows && pts >= 8 ) {
+              pts -= 4;
+              dup.parentStory.paragraphs.everyItem().pointSize = pts;
+            }
+            dup.fillColor = "Paper";
+            dup.fillTransparencySettings.blendingSettings.opacity = 70;
           }
         }
       } catch(e) {
@@ -362,55 +374,100 @@ function handle_links( doc, page_items_too ) {
   for ( var nf = 0; nf < frames.length; nf++ ) {
     var fr = frames[nf],
         link = links[nf],
-        xmp = link ? link.linkXmp : null,
+        // xmp = link ? link.linkXmp : null,
         oeo = fr.objectExportOptions,
-        atst = oeo.altTextSourceType,
-        att = oeo.applyTagType,
-        amp = oeo.altMetadataProperty,
-        acmp = oeo.actualMetadataProperty,
-        cat = oeo.customAltText,
-        txt = "";
+        actualText = oeo.actualText(),
+        altText = oeo.altText(),
+        altTST = oeo.altTextSourceType.toString(),
+        actualTST = oeo.actualTextSourceType.toString(),
+        aTT = oeo.applyTagType.toString(),
+        end_of_vars = true;
+        // att = oeo.applyTagType,
+        // amp = oeo.altMetadataProperty,
+        // acmp = oeo.actualMetadataProperty,
+        // cat = oeo.customAltText,
+        // txt = "",
+        // huba = oeo.actualText(),
+        // hopp = oeo.altText();
+      // oeo.customActualText -> pdf-custom-text
 
-    if ( atst.toString() == "SOURCE_XML_STRUCTURE" ) {
-      var xnode = fr.associatedXMLElement;
-      if ( xnode && xnode.isValid ) {
-        var xatts = xnode.xmlAttributes.everyItem().getElements();
-        for ( n = 0; n < xatts.length; n++ ) {
-          if ( xatts[n].name.search(/Alt/) != -1 ) txt = xatts[n].value;
-        }
-      } 
-
-    } else if ( atst.toString() == "SOURCE_CUSTOM" ) {
-      txt = cat;
-
-    } else if ( atst.toString() == "SOURCE_XMP_TITLE" ) {
-      txt = xmp ? xmp.documentTitle : "";
-
-    } else if ( atst.toString() == "SOURCE_XMP_DESCRIPTION" ) {
-      txt = xmp ? xmp.description : "";
-
-    } else if ( atst.toString() == "SOURCE_XMP_HEADLINE" ) {
-      txt = get_custom_xmp( xmp, "photoshop:Headline");
-
-    } else if ( atst.toString() == "SOURCE_XMP_EXTENDED_DESCRIPTION" ) {
-      txt = get_custom_xmp( xmp, "Iptc4xmpCore:ExtDescrAccessibility[1]");
-
-    } else if ( atst.toString() == "SOURCE_XMP_OTHER" ) {
-      txt = get_custom_xmp( xmp, amp);
-
-    } else if ( atst.toString() == "SOURCE_XMP_ALT_TEXT" ) {
-      txt = get_custom_xmp(xmp, ["Iptc4xmpCore", "AltTextAccessibility[1]"]);
-
-    } else if ( atst.toString() == "SOURCE_DECORATIVE_IMAGE" ) {
-      txt = "decorative image"
-    }
-    if ( ! txt ) {
-      has_no_alt.push( {frame: fr.id, link: link, text: "", vstate: fr.visible } );
-    } else if ( txt == "decorative image" ) {
-      is_decorative.push( {frame: fr.id, link: link, text: "deco", vstate: fr.visible } );
+    if ( altTST == "SOURCE_DECORATIVE_IMAGE" || aTT == "TAG_ARTIFACT" ) {
+      is_decorative.push( {
+        frame: fr.id, 
+        kind: fr.constructor.name, 
+        link: link, 
+        altText: altText, 
+        actText: actualText, 
+        altDeco: (altTST == "SOURCE_DECORATIVE_IMAGE"), 
+        actDeko: (aTT == "TAG_ARTIFACT"), 
+        vstate: fr.visible 
+      } );
     } else {
-      has_alt.push( {frame: fr.id, link: link, text: txt, vstate: fr.visible } );
+      if ( actualText || altText) {
+        has_alt.push( {
+          frame: fr.id, 
+          kind: fr.constructor.name, 
+          link: link, 
+          altText: altText, 
+          actText: actualText, 
+          altDeco: false, 
+          actDeko: false, 
+          vstate: fr.visible 
+        } );
+      } else {
+        has_no_alt.push( {
+          frame: fr.id, 
+          kind: fr.constructor.name, 
+          link: link, 
+          altText: altText, 
+          actText: actualText, 
+          altDeco: false, 
+          actDeko: false, 
+          vstate: fr.visible 
+        } );
+      }
     }
+
+    // if ( atst.toString() == "SOURCE_XML_STRUCTURE" ) {
+    //   var xnode = fr.associatedXMLElement;
+    //   if ( xnode && xnode.isValid ) {
+    //     var xatts = xnode.xmlAttributes.everyItem().getElements();
+    //     for ( n = 0; n < xatts.length; n++ ) {
+    //       if ( xatts[n].name.search(/Alt/) != -1 ) txt = xatts[n].value;
+    //     }
+    //   } 
+
+    // } else if ( atst.toString() == "SOURCE_CUSTOM" ) {
+    //   txt = cat;
+
+    // } else if ( atst.toString() == "SOURCE_XMP_TITLE" ) {
+    //   txt = xmp ? xmp.documentTitle : "";
+
+    // } else if ( atst.toString() == "SOURCE_XMP_DESCRIPTION" ) {
+    //   txt = xmp ? xmp.description : "";
+
+    // } else if ( atst.toString() == "SOURCE_XMP_HEADLINE" ) {
+    //   txt = get_custom_xmp( xmp, "photoshop:Headline");
+
+    // } else if ( atst.toString() == "SOURCE_XMP_EXTENDED_DESCRIPTION" ) {
+    //   txt = get_custom_xmp( xmp, "Iptc4xmpCore:ExtDescrAccessibility[1]");
+
+    // } else if ( atst.toString() == "SOURCE_XMP_OTHER" ) {
+    //   txt = get_custom_xmp( xmp, amp);
+
+    // } else if ( atst.toString() == "SOURCE_XMP_ALT_TEXT" ) {
+    //   txt = get_custom_xmp(xmp, ["Iptc4xmpCore", "AltTextAccessibility[1]"]);
+
+    // } else if ( atst.toString() == "SOURCE_DECORATIVE_IMAGE" ) {
+    //   txt = "decorative image"
+    // }
+    // if ( ! txt ) {
+    //   has_no_alt.push( {frame: fr.id, kind: fr.constructor.name, link: link, text: "", vstate: fr.visible } );
+    // } else if ( txt == "decorative image" ) {
+    //   is_decorative.push( {frame: fr.id, kind: fr.constructor.name, link: link, text: "deco", vstate: fr.visible } );
+    // } else {
+    //   has_alt.push( {frame: fr.id, kind: fr.constructor.name, link: link, text: txt, vstate: fr.visible } );
+    // }
   }
   return {ok: has_alt, nok: has_no_alt, deco: is_decorative };
 }

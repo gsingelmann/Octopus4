@@ -51,7 +51,7 @@ function __log(level, msg, active_script) {
     _log.entries.push( entry );
     __writeJson( PATH_LOG_FILE, _log );
   } catch(e) {
-    if (DBG) $.writeln( e.message + " on " + e.line );
+    if (DBG) $.writeln( "logging: " + e.message + " on " + e.line );
   }
 }
 
@@ -92,7 +92,6 @@ function __readFile(filePath) {
     f.encoding = "UTF-8";
     f.open("r");
     var content = f.read();
-    $.writeln(content);
     return content;
   } catch(e) {
     __log("error", "Datei konnte nicht gelesen werden (" + filePath + "): " + e.message, "includes");

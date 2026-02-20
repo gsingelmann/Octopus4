@@ -63,13 +63,15 @@ function install() {
   //  Logs zum Server und Reset
   // -------------------------------------------------------------------------------------------
   try {
-    var _data = __readFile(PATH_LOG_FILE);
+    var _data = __readJson(PATH_LOG_FILE);
     if ( _data ) {
-      var log_url = "singels.info/Octopus/Octopus4Log";
+      if ( ! _data.guid ) _data.guid = "na";
+      _data = JSON.stringify( _data );
+      var log_url = "https://singels.info/Octopus/Octopus4Log";
       var request = {
         url: log_url,
         method: "POST",
-        body: _data,
+        body: "{\"data\": \"" + encodeURIComponent(_data) + "\"}",
         headers: [
           {name:"Content-Type", value:"application/json; charset=UTF-8"},
           {name: "x-project-octopus", value: "true"}
@@ -78,7 +80,7 @@ function install() {
       var response = restix.fetch(request);
       if ($.getenv("USER") == "singel") {
         try {
-          __writeJson( PATH_DATA_FOLDER + "/Logs/last_request.json", response );
+          __writeJson( PATH_DATA_FOLDER + "/Logs/last_response.json", response );
         } catch(e) {
           __log("error", "Fehler beim Schreiben der letzten Server-Antwort: " + e.message, "installer");
         }
@@ -88,7 +90,6 @@ function install() {
     __log("error", "Fehler beim Pushen  der Log-Datei: " + e.message + " on " + e.line, "installer");
     alert( "Fehler beim Pushen  der Log-Datei: " + e.message + " on " + e.line);
   }
-
   __log("reset_log", "Log zurückgesetzt", "installer");
   __log("info", "Installation gestartet", "installer");
 
@@ -146,6 +147,7 @@ function install() {
         // ------------------------------------------------------- URL
         if (c.base_path.search(/^http/i) != -1) {
           try {
+            __log("dbg", "Request: " + JSON.stringify({url: src_path, filename: c.filename, tgt: tgt_path}), "installer");
             tgt_file = __call_request(
               src_path,
               c.filename,
@@ -322,6 +324,7 @@ function install() {
         }
       } else {
         try {
+          __log("dbg", "Request: " + cp.path, "installer");
           if (cp.path.substring(0, 4).toLowerCase() == "http") {
             json = __call_request(cp.path, "index.json");
           } else {

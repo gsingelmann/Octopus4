@@ -1373,17 +1373,18 @@ function __(id) {
         return id
     }
 }
+
 function load_translation() {
     return {
-        "what links": { "de": "Welche Hyperlinks sollen erstellt werden?", "en": "What hyperlinks are to be created?" },
-        "create web": { "de": "Web Hyperlinks erstellen", "en": "Create Web Hyperlinks" },
-        "create mailto": { "de": "Mailto Hyperlinks erstellen", "en": "Create Mailto Hyperlinks" },
-        "long tld": { "de": "Lange/Neue TLDs erlauben (.koeln ...)", "en": "Allow long TLDs (.bingo…)" },
-        "apply cs": { "de": "Soll ein Zeichenformat angewendet werden?", "en": "Apply character style?" },
-        "apply": { "de": "Zeichenformat anwenden", "en": "Apply character style" },
-        "masterpage": { "de": "Sollen Hyperlinks auf Musterdruckbögen erstellt werden?", "en": "Create links on master-pages?" },
-        "include master": { "de": "Musterdruckbögen einbeziehen", "en": "Include master-pages" },
-        "cancel": { "de": "Abbrechen", "en": "Cancel" },
-        "prev": { "de": "xxxxxx", "en": "yyyyyy" },
+        "what links": { "de": "Welche Hyperlinks sollen erstellt werden?", "en": "What hyperlinks are to be created?", "es": "¿Qué hipervínculos se deben crear?" },
+        "create web": { "de": "Web Hyperlinks erstellen", "en": "Create Web Hyperlinks", "es": "Hipervínculos web" },
+        "create mailto": { "de": "Mailto Hyperlinks erstellen", "en": "Create Mailto Hyperlinks", "es": "Hipervínculos para correo" },
+        "long tld": { "de": "Lange/Neue TLDs erlauben (.koeln ...)", "en": "Allow long TLDs (.bingo…)", "es": "Permitir TLD largos (.bingo…)" },
+        "apply cs": { "de": "Soll ein Zeichenformat angewendet werden?", "en": "Apply character style?", "es": "¿Aplicar estilo de carácter?" },
+        "apply": { "de": "Zeichenformat anwenden", "en": "Apply character style", "es": "Estilo de carácter" },
+        "masterpage": { "de": "Sollen Hyperlinks auf Musterdruckbögen erstellt werden?", "en": "Create links on master-pages?", "es": "¿Crear vínculos en páginas maestras?" },
+        "include master": { "de": "Musterdruckbögen einbeziehen", "en": "Include master-pages", "es": "Incluir páginas maestras" },
+        "cancel": { "de": "Abbrechen", "en": "Cancel", "es": "Cancelar" },
+        "prev": { "de": "xxxxxx", "en": "yyyyyy", "es": "zzzzzz" },
     }
 }

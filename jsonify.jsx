@@ -4,12 +4,19 @@ init();
 main();
 
 function main() {
-  var base_folder = Folder.selectDialog("Bitte wählen Sie einen Ordner aus:");
+	var pref = app.extractLabel( "octopus_jsonify_path" );
+	if ( pref ) {
+		var base_folder = new Folder( pref );
+		base_folder = base_folder.selectDlg("Bitte wählen Sie einen Ordner aus:")
+	} else {
+		var base_folder = Folder.selectDialog("Bitte wählen Sie einen Ordner aus:");
+	}
 
   if (!base_folder) {
     alert("Kein Ordner ausgewählt. Vorgang abgebrochen.");
     return;
   }
+	app.insertLabel( "octopus_jsonify_path", base_folder.fullName )
 	var base_folder_name = base_folder.name;
 
 	var ignore_file = new File( base_folder.fullName + "/octignore.txt" );

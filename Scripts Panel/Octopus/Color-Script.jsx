@@ -2821,609 +2821,730 @@ function __defineIconsForUI() {
 
 // Deutsch-Englische Dialogtexte und Fehlermeldungen
 function __defLocalizeStrings() {
-  
-  _global.uiHead = { 
-		en:"Color Script 1.0.8", 
-    de:"Color Script 1.0.8" 
-	};
-                   
-  _global.adjust = { 
-		en:"Set", 
-    de:"Einstellen" 
-	};                 
-                   
-  _global.update = { 
-		en:"Adapt", 
-    de:"Angleichen" 
-	};
-  
-  _global.check = { 
-		en:"Check", 
-    de:"Prüfen" 
-	};
-  
-  _global.correct = { 
-		en:"Correct", 
-    de:"Korrigieren" 
-	};
-  
-  _global.workingSpaces = { 
-		en:" Working Spaces ", 
-    de:" Arbeitsfarbräume " 
-	};
-                          
-  _global.workingSpacesHT = { 
-		en:"Working Spaces for the Active Dokument", 
-    de:"Arbeitsfarbräume für das aktive Dokument" 
-	};
-  
-  _global.colorManagementPolicies = { 
-		en:" Color Management Policies ", 
-    de:" Farbmanagement-Richtlinien " 
-	};
-                                    
-  _global.colorManagementPoliciesHT = { 
-		en:"Color Management Policies for the Active Dokument", 
-    de:"Farbmanagement-Richtlinien für das aktive Dokument" 
-	};
-  
-  _global.colorManagementPoliciesRGBDropdownOff = { 
-		en:"Off", 
-    de:"Aus" 
-	};
-  
-  _global.colorManagementPoliciesRGBDropdownPreserveProfiles = { 
-		en:"Preserve Embedded Profiles", 
-    de:"Eingebettete Profile beibehalten" 
-	};
-                                               
-  _global.colorManagementPoliciesRGBDropdownConvert = { 
-		en:"Convert to Working Space", 
-    de:"In Arbeitsfarbraum umwandeln" 
-	};
-                                                                                            
-  _global.colorManagementPoliciesCMYKDropdownOff = { 
-		en:"Off", 
-    de:"Aus" 
-	};
-  
-  _global.colorManagementPoliciesCMYKDropdownPreserveNumbers = { 
-		en:"Preserve Numbers (Ignore Linked Profiles)", 
-    de:"Werte beibehalten (Profile in Verknüpfungen ignorieren)" 
-	};
-                                                              
-  _global.colorManagementPoliciesCMYKDropdownPreserveProfiles = { 
-		en:"Preserve Embedded Profiles", 
-    de:"Eingebettete Profile beibehalten" 
-	};
-                                               
-  _global.colorManagementPoliciesCMYKDropdownConvert = { 
-		en:"Convert to Working Space", 
-    de:"In Arbeitsfarbraum umwandeln" 
-	};
-  
-  _global.conversionOptions = { 
-		en:" Conversion Options ", 
-    de:" Konvertierungsoptionen " 
-	};
-  
-  _global.conversionOptionsHT = { 
-		en:"Current Conversion Options of InDesign", 
-    de:"Aktuelle Konvertierungsoptionen von InDesign" 
-	};
-   
-  _global.engine = { 
-		en:"Engine:", 
-    de:"Engine:" 
-	};
-   
-  _global.intent = { 
-		en:"Intent:", 
-    de:"Priorität:" 
-	};
-  
-  _global.useBlackPointCompensation = { 
-		en:"Use Black Point Compensation:", 
-    de:"Tiefenkompensierung verwenden:" 
-	};
 
-  _global.perceptual = { 
-		en:"Perceptual", 
-    de:"Perzeptiv" 
-	};
-  
-  _global.saturation = { 
-		en:"Saturation", 
-    de:"Sättigung" 
-	};
-  
-  _global.relativeColorimetric = { 
-		en:"Relative Colorimetric", 
-    de:"Relativ farbmetrisch" 
-	};
-  
-  _global.absoluteColorimetric = { 
-		en:"Absolute Colorimetric", 
-    de:"Absolut farbmetrisch" 
-	};
+  _global.uiHead = {
+    en: "Color Script 1.0.8",
+    de: "Color Script 1.0.8",
+    es: "Color Script 1.0.8"
+  };
 
-  _global.yes = { 
-		en:"Yes", 
-    de:"Ja" 
-	};
+  _global.adjust = {
+    en: "Set",
+    de: "Einstellen",
+    es: "Colocar"
+  };
 
-  _global.no = { 
-		en:"No", 
-    de:"Nein" 
-	};
+  _global.update = {
+    en: "Adapt",
+    de: "Angleichen",
+    es: "Adaptar"
+  };
 
-  _global.placeGraphicsAgain = { 
-		en:" Place Images Again ", 
-    de:" Bilder neu platzieren " 
-	};                             
-                               
-  _global.adaptPolicies = { 
-		en:" Adapt Policies ", 
-    de:" Richtlinien angleichen " 
-	}; 
-                          
-  _global.adaptPoliciesHT = { 
-		en:"Adjust color management policies for already placed images to the modified policies of the document.", 
-    de:"Farbmanagement-Richtlinien für bereits platzierte Bilder an die geänderten Richtlinien des Dokuments angleichen." 
-	};
+  _global.check = {
+    en: "Check",
+    de: "Prüfen",
+    es: "Controlar"
+  };
 
-  _global.moreInfo = { 
-		en:"More Infos",
-    de:"Mehr Informationen"
-	};
-  
-  _global.adaptPoliciesInfo = { 
-		en:"Adjust color management policies for already placed images to the modified policies of the document.\r\rCorresponds to following options when opening the document:\r\r1: »Placed content: Enable all profiles« for the policy »Preserve Embedded Profiles«\r\ror\r\r2: »Disable all profiles« for the policy »Preserve Numbers (Ignore Linked Profiles).«", 
-    de:"Farbmanagement-Richtlinien für bereits platzierte Bilder an die geänderten Richtlinien des Dokuments angleichen.\r\rEntspricht folgenden Optionen beim Öffnen eines Dokuments:\r\r1: »Platzierter Inhalt: Alle Profile aktivieren« für die Richtlinie »Eingebettete Profile beibehalten«\r\roder\r\r2: »Alle Profile deaktivieren« für die Richtlinie »Werte beibehalten (Profile in Verknüpfungen ignorieren)«.\r\r" 
-	};
+  _global.correct = {
+    en: "Correct",
+    de: "Korrigieren",
+    es: "Corregir"
+  };
 
-  _global.placeGraphicsAgainActionTitle = { 
-		en:"Operation", 
-    de:"Aktion" 
-	};
+  _global.workingSpaces = {
+    en: " Working Spaces ",
+    de: " Arbeitsfarbräume ",
+    es: " Espacios de trabajo "
+  };
 
-  _global.placeGraphicsAgainActionText = { 
-		en:"Place all linked images and graphic files in the active document again.", 
-    de:"Alle verknüpften Bild- und Grafikdateien im aktiven Dokument neu platzieren." 
-	};
-  
-  _global.adaptPoliciesActionDescription = { 
-		en:"Adapt the color management policies for all images and graphic files in the document.", 
-    de:"Die Farbmanagement-Richtlinien für alle Bild- und Grafikdateien im Dokument angleichen." 
-	};
-  
-  _global.placeGraphicsAgainDescriptionTitle = { 
-		en:"Description", 
-    de:"Beschreibung" 
-	}; 
-  
-  _global.placeGraphicsAgainDescriptionTextPara1 = { 
-		en:"If the Color Management Policies were changed in a document, this only affects to newly placed files. For already placed pictures the previously established policy still takes effect.", 
-    de:"Werden die Farbmanagement-Richtlinien eines Dokuments verändert, betrifft dies nur neu platzierte Dateien. Für alle bereits platzierten Bilder gilt weiterhin die zuvor festgelegte Richtlinie." 
-	};
- 
-  _global.placeGraphicsAgainDescriptionTextPara2 = { 
-		en:"Beware of any existing EPS files with OPI links! (See help.adobe.com)", 
-    de:"Vorsicht bei eventuell vorhandenen EPS-Dateien mit OPI-Verknüpfungen! (Siehe help.adobe.com)" 
-	};
+  _global.workingSpacesHT = {
+    en: "Working Spaces for the Active Dokument",
+    de: "Arbeitsfarbräume für das aktive Dokument",
+    es: "Espacios de trabajo para el documento activo"
+  };
 
-  _global.placeAllUndo = { 
-		en:"Place Images Again", 
-    de:"Bilder neu platzieren" 
-	};
-  
-  _global.couldNotPlace = { 
-		en:"Following objects could not be placed again:", 
-    de:"Folgende Objekte konnten nicht neu platziert werden:" 
-	};
-                          
-  _global.allPlaced = { 
-		en:"images and graphics have been placed again.", 
-    de:"Dateien wurden neu platziert." 
-	};
-                      
-  _global.allPoliciesAdjusted = { 
-		en:"The policies have been adjusted.", 
-    de:"Die Richtlinien wurden angeglichen." 
-	};
+  _global.colorManagementPolicies = {
+    en: " Color Management Policies ",
+    de: " Farbmanagement-Richtlinien ",
+    es: " Políticas de gestión del color "
+  };
 
-  _global.checkTabOverviewPanelHead = { 
-		en:" Overview ", 
-    de:" Übersicht " 
-	};
-  
-  _global.checkTabRGBImagesPanelHead = { 
-		en:"RGB Images", 
-    de:"RGB-Bilder" 
-	};
+  _global.colorManagementPoliciesHT = {
+    en: "Color Management Policies for the Active Dokument",
+    de: "Farbmanagement-Richtlinien für das aktive Dokument",
+    es: "Políticas de gestión del color para el documento activo"
+  };
 
-  _global.checkTabCMYKImagesPanelHead = { 
-		en:"CMYK Images", 
-    de:"CMYK-Bilder" 
-	};
+  _global.colorManagementPoliciesRGBDropdownOff = {
+    en: "Off",
+    de: "Aus",
+    es: "Desactivado"
+  };
 
-  _global.checkTabGraphicsPanelHead = { 
-		en:"Graphics (pdf, indd, ai)", 
-    de:"Grafikdateien (pdf, indd, ai, eps)" 
-	};
-  
-  _global.links = { 
-		en:"Links", 
-    de:"Verknüpfungen" 
-	};
-  
-  _global.images = { 
-		en:"Images", 
-    de:"Bilddateien" 
-	};
-  
-  _global.graphics = { 
-		en:"Graphics", 
-    de:"Grafikdateien" 
-	};
-  
-  _global.singleViewRGBTabLabel = { 
-		en:"RGB", 
-    de:"RGB" 
-	};
-  
-  _global.singleViewCMYKTabLabel = { 
-		en:"CMYK", 
-    de:"CMYK" 
-	};
-  
-  _global.singleViewGreyTabLabel = { 
-		en:"Gray", 
-    de:"Graustufen" 
-	};
-  
-  _global.singleViewGraphicsTabLabel = { 
-		en:"Graphics", 
-    de:"Grafikdateien" 
-	};
-  
-  _global.singleViewTabPanelRGBTabAllRGBLabel = { 
-		en:"Images in RGB colors:", 
-    de:"Bilder in RGB-Farben:" 
-	};
-  
-  _global.singleViewTabPanelDocRGBProfileLabel = { 
-		en:"Identical Profile:", 
-    de:"Identisches Profil:" 
-	};  
-    
-  _global.singleViewTabPanelDiffRGBProfileLabel = { 
-		en:"Different Profile:", 
-    de:"Abweichendes Profil:" 
-	};
-    
-  _global.singleViewTabPanelNoneRGBProfileLabel = { 
-		en:"Missing Profile:", 
-    de:"Fehlendes Profil:" 
-	};
-                                                  
-  _global.singleViewTabPanelAssignedRGBProfileLabel = { 
-		en:"Assigned Profile:", 
-    de:"Zugewiesenes Profil:" 
-	};                                                
-    
-  _global.singleViewTabPanelCMYKTabAllCMYKLabel = { 
-		en:"Images in CMYK colors:", 
-    de:"Bilder in CMYK-Farben:" 
-	};
-  
-  _global.singleViewTabPanelDocCMYKProfileLabel = { 
-		en:"Identical Profile:", 
-    de:"Identisches Profil:" 
-	};
-     
-  _global.singleViewTabPanelDiffCMYKProfileLabel = { 
-		en:"Different Profile:", 
-    de:"Abweichendes Profil:" 
-	};
-    
-  _global.singleViewTabPanelNoneCMYKProfileLabel = { 
-		en:"Missing Profile:", 
-    de:"Fehlendes Profil:" 
-	};
-                                                   
-  _global.singleViewTabPanelAssignedCMYKProfileLabel = { 
-		en:"Assigned Profile:", 
-    de:"Zugewiesenes Profil:" 
-	};                                                 
-  
-  _global.singleViewTabPanelGreyTabAllGreyLabel = { 
-		en:"Images in Grayscales:", 
-    de:"Bilder in Graustufen:" 
-	};
-     
-  _global.singleViewTabPanelDiffGreyProfileLabel = { 
-		en:"Embedded Profile:", 
-    de:"Eingebettetes Profil:" 
-	};
-    
-  _global.singleViewTabPanelNoneGreyProfileLabel = { 
-		en:"Missing Profile:", 
-    de:"Fehlendes Profil:" 
-	};
+  _global.colorManagementPoliciesRGBDropdownPreserveProfiles = {
+    en: "Preserve Embedded Profiles",
+    de: "Eingebettete Profile beibehalten",
+    es: "Conservar perfiles integrados"
+  };
 
-  _global.singleViewTabPanelGraphicsTabAllGraphicsLabel = { 
-		en:"Graphics Files:", 
-    de:"Grafikdateien:" 
-	};
-  
-  _global.singleViewTabPanelPDFAILabel = { 
-		en:"PDF, Illustrator Files:", 
-    de:"PDF, Illustrator-Dateien:" 
-	};
-     
-  _global.singleViewTabPanelINDDLabel = { 
-		en:"InDesign Files:", 
-    de:"InDesign-Dateien:" 
-	};
-    
-  _global.singleViewTabPanelEPSLabel = { 
-		en:"EPS:", 
-    de:"EPS:" 
-	};
+  _global.colorManagementPoliciesRGBDropdownConvert = {
+    en: "Convert to Working Space",
+    de: "In Arbeitsfarbraum umwandeln",
+    es: "Convertir a espacio de trabajo"
+  };
 
-  _global.singleViewTabPanelFaultyLabel = { 
-		en:"Not classifiable:", 
-    de:"Nicht zuordenbar:" 
-	};
+  _global.colorManagementPoliciesCMYKDropdownOff = {
+    en: "Off",
+    de: "Aus",
+    es: "Desactivado"
+  };
 
-  _global.imageColorSettingsPanelHead = { 
-		en:" Image Colour Settings ", 
-    de:" Farbeinstellungen für Bild " 
-	};
+  _global.colorManagementPoliciesCMYKDropdownPreserveNumbers = {
+    en: "Preserve Numbers (Ignore Linked Profiles)",
+    de: "Werte beibehalten (Profile in Verknüpfungen ignorieren)",
+    es: "Conservar valores (ignorar perfiles vinculados)"
+  };
 
-  _global.imageColorSettingsHT = { 
-		en:"Change Image colour settings for selected image.", 
-    de:"Farbeinstellungen für das ausgewählte Bild ändern." 
-	};
+  _global.colorManagementPoliciesCMYKDropdownPreserveProfiles = {
+    en: "Preserve Embedded Profiles",
+    de: "Eingebettete Profile beibehalten",
+    es: "Conservar perfiles integrados"
+  };
 
-  _global.imageColorSettingsProfilLabel = { 
-		en:"Profile:", 
-    de:"Profil:" 
-	}; 
+  _global.colorManagementPoliciesCMYKDropdownConvert = {
+    en: "Convert to Working Space",
+    de: "In Arbeitsfarbraum umwandeln",
+    es: "Convertir a espacio de trabajo"
+  };
 
-  _global.imageColorSettingsRenderLabel = { 
-		en:"Rendering Intent:", 
-    de:"Renderpriorität:" 
-	};
+  _global.conversionOptions = {
+    en: " Conversion Options ",
+    de: " Konvertierungsoptionen ",
+    es: " Opciones de conversión "
+  };
 
-  _global.profileNotEvaluable = { 
-		en:"Profile not evaluable", 
-    de:"Profil nicht auswertbar" 
-	};
+  _global.conversionOptionsHT = {
+    en: "Current Conversion Options of InDesign",
+    de: "Aktuelle Konvertierungsoptionen von InDesign",
+    es: "Opciones de conversión actuales de InDesign"
+  };
 
-  _global.useDocumentDefault = { 
-		en:"Use Document Default", 
-    de:"Dokumentstandard verwenden" 
-	};
+  _global.engine = {
+    en: "Engine:",
+    de: "Engine:",
+    es: "Motor:"
+  };
 
-  _global.useDocumentDefaultWithoutProfile = { 
-		en:"Use Document Default", 
-    de:"Dokumentstandard verwenden" 
-	};
-                                             
-  _global.withoutProfile = { 
-		en:"(Without embedded Profile)", 
-    de:"(Ohne eingebettes Profil)" 
-	}; 
-                           
-  _global.noEmbeddedProfile = { 
-		en:"No embedded Profile", 
-    de:"Kein eingebettes Profil" 
-	}; 
-                                             
-  _global.passProfile = { 
-		en:"Pass profile", 
-    de:"Profil übergehen" 
-	};                                          
+  _global.intent = {
+    en: "Intent:",
+    de: "Priorität:",
+    es: "Propósito:"
+  };
 
-  _global.renderingIntentUseColorSettings = { 
-		en:"Use Document Rendering Intent", 
-    de:"Dokumentbildpriorität verwenden" 
-	};
-                                 
-  _global.renderingIntentPerceptual = { 
-		en:"Perceptual", 
-    de:"Perzeptiv (Bilder)" 
-	};
-                                 
-  _global.renderingIntentSaturation = { 
-		en:"Saturation", 
-    de:"Sättigung (Grafiken)" 
-	};
-                                 
-  _global.renderingIntentRelColorimetric = { 
-		en:"Relative Colorimetric", 
-    de:"Relativ farbmetrisch" 
-	};
-                                 
-  _global.renderingIntentAbsColorimetric = { 
-		en:"Absolute Colorimetric", 
-    de:"Absolut farbmetrisch" 
-	};
-                                 
-  _global.renderingIntentNotEvaluable = { 
-		en:"Not Evaluable", 
-    de:"Nicht eruierbar" 
-	};
+  _global.useBlackPointCompensation = {
+    en: "Use Black Point Compensation:",
+    de: "Tiefenkompensierung verwenden:",
+    es: "Usar la compensación de puntos negros:"
+  };
 
-  _global.changeColorSettingsOfSelectedImgae = { 
-		en:"Change Color Settings", 
-    de:"Farbeinstellungen ändern" 
-	};
+  _global.perceptual = {
+    en: "Perceptual",
+    de: "Perzeptiv",
+    es: "Percepción"
+  };
 
-  _global.onlyForRGBAndCMYKImages = { 
-		en:"This Action is available only for RGB or CMYK images.", 
-    de:"Diese Aktion steht nur für RGB- oder CMYK-Bilder zur Verfügung." 
-	};
+  _global.saturation = {
+    en: "Saturation",
+    de: "Sättigung",
+    es: "Saturación"
+  };
 
-  _global.vectorPoliciesChangePanelHead = { 
-		en:" Vektor file Policies (PDF, AI, EPS) ", 
-    de:" Richtlinien für Vektordatei  (PDF, AI, EPS) " 
-	};
-  
-  _global.vectorPoliciesChangePanelHT = { 
-		en:"Change color management policies for placed PDF, Illustrator or EPS files.", 
-    de:"Farbmanagement-Richtlinien für plazierte PDF-, Illustrator oder EPS-Dateien ändern." 
-	};
+  _global.relativeColorimetric = {
+    en: "Relative Colorimetric",
+    de: "Relativ farbmetrisch",
+    es: "Colorimétrico relativo"
+  };
 
-  _global.rgbVectorPolicyLabel = { 
-		en:"RGB:", 
-    de:"RGB:" 
-	};
+  _global.absoluteColorimetric = {
+    en: "Absolute Colorimetric",
+    de: "Absolut farbmetrisch",
+    es: "Colorimétrico absoluto"
+  };
 
-  _global.cmykVectorPolicyLabel = { 
-		en:"CMYK:", 
-    de:"CMYK:" 
-	};
-  
-  _global.grayVectorPolicyLabel = { 
-		en:"Gray:", 
-    de:"Grau:" 
-	};
+  _global.yes = {
+    en: "Yes",
+    de: "Ja",
+    es: "Sí"
+  };
 
-  _global.containedImagesLabel = { 
-		en:"", 
-    de:"" 
-	};
-                                 
-  _global.grayscaleImages =  { 
-		en:"Grayscale images", 
-    de:"Graustufenbilder" 
-	};                              
-  
-  _global.vectorPoliciesChangeButton = { 
-		en:"Change Policies", 
-    de:"Richtlinien ändern" 
-	};
+  _global.no = {
+    en: "No",
+    de: "Nein",
+    es: "No"
+  };
 
-  _global.honorAllProfiles = { 
-		en:"Honor profiles and OI", 
-    de:"Profile und OI berücksichtigen" 
-	};
-                                            
-  _global.ignoreAll  = { 
-		en:"Ignore profiles and OI", 
-    de:"Profile und OI ignorieren" 
-	};
-                                            
-  _global.ignoreOutputIntent = { 
-		en:"Ignore Output Intent", 
-    de:"Output Intent ignorieren" 
-	};
+  _global.placeGraphicsAgain = {
+    en: " Place Images Again ",
+    de: " Bilder neu platzieren ",
+    es: " Volver a colocar imágenes "
+  };
 
-  _global.notEvaluable = { 
-		en:"(Not evaluable)", 
-    de:"(Nicht auswertbar)" 
-	};
-  
-  _global.changeVectorPoliciesHeader = { 
-		en:"Change Policies of graphic file", 
-    de:"Richtlinien für Grafikdatei ändern" 
-	};
-  
-  _global.changeRGBVectorPolicyLabel = { 
-		en:"RGB:", 
-    de:"RGB:" 
-	};
-  
-  _global.changeCMYKVectorPolicyLabel = { 
-		en:"CMYK:", 
-    de:"CMYK:" 
-	};
-  
-  _global.changeGrayVectorPolicyLabel = { 
-		en:"Grayscale:", 
-    de:"Graustufen:" 
-	};
-  
-  _global.changeVectorPolicyHonorAllProfiles = { 
-		en:"Honor profiles and Output Intent", 
-    de:"Profile und Output Intent berücksichtigen" 
-	};
-                                            
-  _global.changeVectorPolicyIgnoreAll  = { 
-		en:"Ignore profiles and Output Intent", 
-    de:"Profile und Output Intent ignorieren" 
-	};
-                                            
-  _global.changeVectorPolicyIgnoreOutputIntent = { 
-		en:"Ignore Output Intent", 
-    de:"Output Intent ignorieren" 
-	};
-  
-  _global.onlyForPDFandEPS = { 
-		en:"This Action is available only for PDF, EPS or Illustrator files.", 
-    de:"Diese Aktion steht nur für PDF-, EPS- oder Illustrator-Dateien zur Verfügung." 
-	};
-  
-  _global.show = { 
-		en:"Show", 
-    de:"Zeigen" 
-	};
-                 
-  _global.moreOptions = { 
-		en:"More Options", 
-    de:"Mehr Optionen" 
-	};
-  
-  _global.transBlendSpaceLable = { 
-		en:"Transparency Blend Space:", 
-    de:"Transparenzfarbraum:" 
-	};
-                   
-  _global.refresh = { 
-		en:"Refresh display", 
-    de:"Anzeige aktualisieren" 
-	};                 
-  
-	_global.refreshUIButtonLabel = { 
-		en:"Refresh", 
-    de:"Aktualisieren" 
-	};
-  _global.cancelButtonLabel = { 
-		en:"Close", 
-    de:"Schließen" 
-	};       
-  
-  _global.activeTextModus = { 
-		en:"Story editor is active!", 
-    de:"Der Textmodus ist aktiviert!" 
-	};
-                            
-  _global.objectCanNotSel = { 
-		en:"Object can not be selected!", 
-    de:"Objekt kann nicht ausgewählt werden!" 
-	};  
-                            
-  _global.objectName = { 
-		en:"Object:", 
-    de:"Objektname:" 
-	};
-  
-  _global.pleaseRefreshDisplay = { 
-		en:"Please refresh display!", 
-    de:"Bitte Anzeige aktualisieren!"
-	};
+  _global.adaptPolicies = {
+    en: " Adapt Policies ",
+    de: " Richtlinien angleichen ",
+    es: " Adaptar políticas "
+  };
 
-	_global.colorManagementDeactivated = { 
-		en:"Color management deactivated!", 
-    de:"Farbmanagement deaktiviert!" 
-	};
+  _global.adaptPoliciesHT = {
+    en: "Adjust color management policies for already placed images to the modified policies of the document.",
+    de: "Farbmanagement-Richtlinien für bereits platzierte Bilder an die geänderten Richtlinien des Dokuments angleichen.",
+    es: "Ajustar las políticas de gestión de color de las imágenes ya colocadas a las políticas modificadas del documento."
+  };
 
-	_global.colorProofProfileHelpTip = { 
-		en:"Color profile for the device to be simulated in the color proof settings.", 
-    de:"Farbprofil für das zu simulierende Gerät in den Farbproof-Einstellungen." 
-	};
-         
+  _global.moreInfo = {
+    en: "More Infos",
+    de: "Mehr Informationen",
+    es: "Más información"
+  };
+
+  _global.adaptPoliciesInfo = {
+    en: "Adjust color management policies for already placed images to the modified policies of the document.\r\rCorresponds to following options when opening the document:\r\r1: »Placed content: Enable all profiles« for the policy »Preserve Embedded Profiles«\r\ror\r\r2: »Disable all profiles« for the policy »Preserve Numbers (Ignore Linked Profiles).«",
+    de: "Farbmanagement-Richtlinien für bereits platzierte Bilder an die geänderten Richtlinien des Dokuments angleichen.\r\rEntspricht folgenden Optionen beim Öffnen eines Dokuments:\r\r1: »Platzierter Inhalt: Alle Profile aktivieren« für die Richtlinie »Eingebettete Profile beibehalten«\r\roder\r\r2: »Alle Profile deaktivieren« für die Richtlinie »Werte beibehalten (Profile in Verknüpfungen ignorieren)«.\r\r",
+    es: "Ajuste de las políticas de gestión de color de las imágenes\rya colocadas a las políticas modificadas del documento.\r\rCorresponde a las siguientes opciones al abrir el documento:\r\r1: «Contenido ubicado: Habilitar todos los perfiles»\rpara la política «Preservar perfiles integrados»\r\ro\r\r2: «Deshabilitar todos los perfiles» para la política\r«Preservar números (Ignorar perfiles vinculados)»."
+  };
+
+  _global.placeGraphicsAgainActionTitle = {
+    en: "Operation",
+    de: "Aktion",
+    es: "Operación"
+  };
+
+  _global.placeGraphicsAgainActionText = {
+    en: "Place all linked images and graphic files in the active document again.",
+    de: "Alle verknüpften Bild- und Grafikdateien im aktiven Dokument neu platzieren.",
+    es: "Colocar nuevamente todas las imágenes y archivos gráficos vinculados en el documento activo."
+  };
+
+  _global.adaptPoliciesActionDescription = {
+    en: "Adapt the color management policies for all images and graphic files in the document.",
+    de: "Die Farbmanagement-Richtlinien für alle Bild- und Grafikdateien im Dokument angleichen.",
+    es: "Adaptar las políticas de gestión de color para todas las imágenes y archivos gráficos del documento."
+  };
+
+  _global.placeGraphicsAgainDescriptionTitle = {
+    en: "Description",
+    de: "Beschreibung",
+    es: "Descripción"
+  };
+
+  _global.placeGraphicsAgainDescriptionTextPara1 = {
+    en: "If the Color Management Policies were changed in a document, this only affects to newly placed files. For already placed pictures the previously established policy still takes effect.",
+    de: "Werden die Farbmanagement-Richtlinien eines Dokuments verändert, betrifft dies nur neu platzierte Dateien. Für alle bereits platzierten Bilder gilt weiterhin die zuvor festgelegte Richtlinie.",
+    es: "Si se modificaron las políticas de gestión de color de un documento, esto solo afectará a los archivos recién colocados. En el caso de las imágenes ya colocadas, la política establecida anteriormente seguirá vigente."
+  };
+
+  _global.placeGraphicsAgainDescriptionTextPara2 = {
+    en: "Beware of any existing EPS files with OPI links! (See help.adobe.com)",
+    de: "Vorsicht bei eventuell vorhandenen EPS-Dateien mit OPI-Verknüpfungen! (Siehe help.adobe.com)",
+    es: "¡Tenga cuidado con los archivos EPS existentes con enlaces OPI! (Consulte help.adobe.com)"
+  };
+
+  _global.placeAllUndo = {
+    en: "Place Images Again",
+    de: "Bilder neu platzieren",
+    es: "Colocar las imágenes de nuevo"
+  };
+
+  _global.couldNotPlace = {
+    en: "Following objects could not be placed again:",
+    de: "Folgende Objekte konnten nicht neu platziert werden:",
+    es: "Los siguientes objetos no pudieron volver a colocarse:"
+  };
+
+  _global.allPlaced = {
+    en: "images and graphics have been placed again.",
+    de: "Dateien wurden neu platziert.",
+    es: " imágenes y gráficos se colocaron de nuevo."
+  };
+
+  _global.allPoliciesAdjusted = {
+    en: "The policies have been adjusted.",
+    de: "Die Richtlinien wurden angeglichen.",
+    es: "Se ajustaron las políticas."
+  };
+
+  _global.checkTabOverviewPanelHead = {
+    en: " Overview ",
+    de: " Übersicht ",
+    es: " Descripción general "
+  };
+
+  _global.checkTabRGBImagesPanelHead = {
+    en: "RGB Images",
+    de: "RGB-Bilder",
+    es: "Imágenes RGB"
+  };
+
+  _global.checkTabCMYKImagesPanelHead = {
+    en: "CMYK Images",
+    de: "CMYK-Bilder",
+    es: "Imágenes CMYK"
+  };
+
+  _global.checkTabGraphicsPanelHead = {
+    en: "Graphics (pdf, indd, ai)",
+    de: "Grafikdateien (pdf, indd, ai, eps)",
+    es: "Gráficos (pdf, indd, ai)"
+  };
+
+  _global.links = {
+    en: "Links",
+    de: "Verknüpfungen",
+    es: "Vínculos"
+  };
+
+  _global.images = {
+    en: "Images",
+    de: "Bilddateien",
+    es: "Imágenes"
+  };
+
+  _global.graphics = {
+    en: "Graphics",
+    de: "Grafikdateien",
+    es: "Gráficos"
+  };
+
+  _global.singleViewRGBTabLabel = {
+    en: "RGB",
+    de: "RGB",
+    es: "RGB"
+  };
+
+  _global.singleViewCMYKTabLabel = {
+    en: "CMYK",
+    de: "CMYK",
+    es: "CMYK"
+  };
+
+  _global.singleViewGreyTabLabel = {
+    en: "Gray",
+    de: "Graustufen",
+    es: "Escala de grises"
+  };
+
+  _global.singleViewGraphicsTabLabel = {
+    en: "Graphics",
+    de: "Grafikdateien",
+    es: "Gráficos"
+  };
+
+  _global.singleViewTabPanelRGBTabAllRGBLabel = {
+    en: "Images in RGB colors:",
+    de: "Bilder in RGB-Farben:",
+    es: "Imágenes con colores RGB"
+  };
+
+  _global.singleViewTabPanelDocRGBProfileLabel = {
+    en: "Identical Profile:",
+    de: "Identisches Profil:",
+    es: "Perfil idéntico:"
+  };
+
+  _global.singleViewTabPanelDiffRGBProfileLabel = {
+    en: "Different Profile:",
+    de: "Abweichendes Profil:",
+    es: "Perfil diferente:"
+  };
+
+  _global.singleViewTabPanelNoneRGBProfileLabel = {
+    en: "Missing Profile:",
+    de: "Fehlendes Profil:",
+    es: "Perfil faltante:"
+  };
+
+  _global.singleViewTabPanelAssignedRGBProfileLabel = {
+    en: "Assigned Profile:",
+    de: "Zugewiesenes Profil:",
+    es: "Perfil asignado:"
+  };
+
+  _global.singleViewTabPanelCMYKTabAllCMYKLabel = {
+    en: "Images in CMYK colors:",
+    de: "Bilder in CMYK-Farben:",
+    es: "Imágenes con colores CMYK"
+  };
+
+  _global.singleViewTabPanelDocCMYKProfileLabel = {
+    en: "Identical Profile:",
+    de: "Identisches Profil:",
+    es: "Perfil idéntico:"
+  };
+
+  _global.singleViewTabPanelDiffCMYKProfileLabel = {
+    en: "Different Profile:",
+    de: "Abweichendes Profil:",
+    es: "Perfil diferente:"
+  };
+
+  _global.singleViewTabPanelNoneCMYKProfileLabel = {
+    en: "Missing Profile:",
+    de: "Fehlendes Profil:",
+    es: "Perfil faltante:"
+  };
+
+  _global.singleViewTabPanelAssignedCMYKProfileLabel = {
+    en: "Assigned Profile:",
+    de: "Zugewiesenes Profil:",
+    es: "Perfil asignado:"
+  };
+
+  _global.singleViewTabPanelGreyTabAllGreyLabel = {
+    en: "Images in Grayscales:",
+    de: "Bilder in Graustufen:",
+    es: "Imágenes en escala de grises"
+  };
+
+  _global.singleViewTabPanelDiffGreyProfileLabel = {
+    en: "Embedded Profile:",
+    de: "Eingebettetes Profil:",
+    es: "Perfil incrustado:"
+  };
+
+  _global.singleViewTabPanelNoneGreyProfileLabel = {
+    en: "Missing Profile:",
+    de: "Fehlendes Profil:",
+    es: "Perfil faltante:"
+  };
+
+  _global.singleViewTabPanelGraphicsTabAllGraphicsLabel = {
+    en: "Graphics Files:",
+    de: "Grafikdateien:",
+    es: "Archivos gráficos:"
+  };
+
+  _global.singleViewTabPanelPDFAILabel = {
+    en: "PDF, Illustrator Files:",
+    de: "PDF, Illustrator-Dateien:",
+    es: "PDF, archivos de Illustrator:"
+  };
+
+  _global.singleViewTabPanelINDDLabel = {
+    en: "InDesign Files:",
+    de: "InDesign-Dateien:",
+    es: "Documentos de InDesign"
+  };
+
+  _global.singleViewTabPanelEPSLabel = {
+    en: "EPS:",
+    de: "EPS:",
+    es: "EPS"
+  };
+
+  _global.singleViewTabPanelFaultyLabel = {
+    en: "Not classifiable:",
+    de: "Nicht zuordenbar:",
+    es: "No clasificable"
+  };
+
+  _global.imageColorSettingsPanelHead = {
+    en: " Image Colour Settings ",
+    de: " Farbeinstellungen für Bild ",
+    es: " Configuración de color de la imagen "
+  };
+
+  _global.imageColorSettingsHT = {
+    en: "Change Image colour settings for selected image.",
+    de: "Farbeinstellungen für das ausgewählte Bild ändern.",
+    es: "Cambiar la configuración de color de la imagen seleccionada."
+  };
+
+  _global.imageColorSettingsProfilLabel = {
+    en: "Profile:",
+    de: "Profil:",
+    es: "Perfil"
+  };
+
+  _global.imageColorSettingsRenderLabel = {
+    en: "Rendering Intent:",
+    de: "Renderpriorität:",
+    es: "Prioridad de renderizado:"
+  };
+
+  _global.profileNotEvaluable = {
+    en: "Profile not evaluable",
+    de: "Profil nicht auswertbar",
+    es: "Perfil no evaluable"
+  };
+
+  _global.useDocumentDefault = {
+    en: "Use Document Default",
+    de: "Dokumentstandard verwenden",
+    es: "Usar el estándar de documento"
+  };
+
+  _global.useDocumentDefaultWithoutProfile = {
+    en: "Use Document Default",
+    de: "Dokumentstandard verwenden",
+    es: "Usar el estándar sin perfil"
+  };
+
+  _global.withoutProfile = {
+    en: "(Without embedded Profile)",
+    de: "(Ohne eingebettes Profil)",
+    es: "(Sin perfil incrustado)"
+  };
+
+  _global.noEmbeddedProfile = {
+    en: "No embedded Profile",
+    de: "Kein eingebettes Profil",
+    es: "Ningún perfil incrustado"
+  };
+
+  _global.passProfile = {
+    en: "Pass profile",
+    de: "Profil übergehen",
+    es: "Saltar perfil"
+  };
+
+  _global.renderingIntentUseColorSettings = {
+    en: "Use Document Rendering Intent",
+    de: "Dokumentbildpriorität verwenden",
+    es: "Usar la prioridad de imagen de documento"
+  };
+
+  _global.renderingIntentPerceptual = {
+    en: "Perceptual",
+    de: "Perzeptiv (Bilder)",
+    es: "Percepción"
+  };
+
+  _global.renderingIntentSaturation = {
+    en: "Saturation",
+    de: "Sättigung (Grafiken)",
+    es: "Saturación"
+  };
+
+  _global.renderingIntentRelColorimetric = {
+    en: "Relative Colorimetric",
+    de: "Relativ farbmetrisch",
+    es: "Colorimétrico relativo"
+  };
+
+  _global.renderingIntentAbsColorimetric = {
+    en: "Absolute Colorimetric",
+    de: "Absolut farbmetrisch",
+    es: "Colorimétrco absoluto"
+  };
+
+  _global.renderingIntentNotEvaluable = {
+    en: "Not Evaluable",
+    de: "Nicht eruierbar",
+    es: "No evaluable"
+  };
+
+  _global.changeColorSettingsOfSelectedImgae = {
+    en: "Change Color Settings",
+    de: "Farbeinstellungen ändern",
+    es: "Cambiar la configuración de color"
+  };
+
+  _global.onlyForRGBAndCMYKImages = {
+    en: "This Action is available only for RGB or CMYK images.",
+    de: "Diese Aktion steht nur für RGB- oder CMYK-Bilder zur Verfügung.",
+    es: "Esta acción solo está disponible para imágenes RGB o CMYK."
+  };
+
+  _global.vectorPoliciesChangePanelHead = {
+    en: " Vector file Policies (PDF, AI, EPS) ",
+    de: " Richtlinien für Vektordatei  (PDF, AI, EPS) ",
+    es: " Políticas de archivos vectoriales (PDF, AI, EPS) "
+  };
+
+  _global.vectorPoliciesChangePanelHT = {
+    en: "Change color management policies for placed PDF, Illustrator or EPS files.",
+    de: "Farbmanagement-Richtlinien für plazierte PDF-, Illustrator oder EPS-Dateien ändern.",
+    es: "Cambiar las políticas de gestión de color para archivos PDF, de Illustrator o EPS colocados."
+  };
+
+  _global.rgbVectorPolicyLabel = {
+    en: "RGB:",
+    de: "RGB:",
+    es: "RGB"
+  };
+
+  _global.cmykVectorPolicyLabel = {
+    en: "CMYK:",
+    de: "CMYK:",
+    es: "CMYK"
+  };
+
+  _global.grayVectorPolicyLabel = {
+    en: "Gray:",
+    de: "Grau:",
+    es: "Escala de grises"
+  };
+
+  _global.containedImagesLabel = {
+    en: "",
+    de: "",
+    es: ""
+  };
+
+  _global.grayscaleImages = {
+    en: "Grayscale images",
+    de: "Graustufenbilder",
+    es: "Imágenes en escala de grises"
+  };
+
+  _global.vectorPoliciesChangeButton = {
+    en: "Change Policies",
+    de: "Richtlinien ändern",
+    es: "Cambiar políticas"
+  };
+
+  _global.honorAllProfiles = {
+    en: "Honor profiles and OI",
+    de: "Profile und OI berücksichtigen",
+    es: "Considerar perfiles y calidad de salida"
+  };
+
+  _global.ignoreAll = {
+    en: "Ignore profiles and OI",
+    de: "Profile und OI ignorieren",
+    es: "Ignorar perfiles y calidad de salida"
+  };
+
+  _global.ignoreOutputIntent = {
+    en: "Ignore Output Intent",
+    de: "Output Intent ignorieren",
+    es: "Ignorar calidad de salida"
+  };
+
+  _global.notEvaluable = {
+    en: "(Not evaluable)",
+    de: "(Nicht auswertbar)",
+    es: "(No evaluable)"
+  };
+
+  _global.changeVectorPoliciesHeader = {
+    en: "Change Policies of graphic file",
+    de: "Richtlinien für Grafikdatei ändern",
+    es: "Cambiar las políticas de archivo gráfico"
+  };
+
+  _global.changeRGBVectorPolicyLabel = {
+    en: "RGB:",
+    de: "RGB:",
+    es: "RGB"
+  };
+
+  _global.changeCMYKVectorPolicyLabel = {
+    en: "CMYK:",
+    de: "CMYK:",
+    es: "CMYK"
+  };
+
+  _global.changeGrayVectorPolicyLabel = {
+    en: "Grayscale:",
+    de: "Graustufen:",
+    es: "Escala de grises"
+  };
+
+  _global.changeVectorPolicyHonorAllProfiles = {
+    en: "Honor profiles and Output Intent",
+    de: "Profile und Output Intent berücksichtigen",
+    es: "Considerar perfiles y calidad de salida"
+  };
+
+  _global.changeVectorPolicyIgnoreAll = {
+    en: "Ignore profiles and Output Intent",
+    de: "Profile und Output Intent ignorieren",
+    es: "Ignorar perfiles y calidad de salida"
+  };
+
+  _global.changeVectorPolicyIgnoreOutputIntent = {
+    en: "Ignore Output Intent",
+    de: "Output Intent ignorieren",
+    es: "Ignorar calidad de salida"
+  };
+
+  _global.onlyForPDFandEPS = {
+    en: "This Action is available only for PDF, EPS or Illustrator files.",
+    de: "Diese Aktion steht nur für PDF-, EPS- oder Illustrator-Dateien zur Verfügung.",
+    es: "Esta acción solo está disponible para archivos PDF, EPS o de Illustrator."
+  };
+
+  _global.show = {
+    en: "Show",
+    de: "Zeigen",
+    es: "Mostrar"
+  };
+
+  _global.moreOptions = {
+    en: "More Options",
+    de: "Mehr Optionen",
+    es: "Más opciones"
+  };
+
+  _global.transBlendSpaceLable = {
+    en: "Transparency Blend Space:",
+    de: "Transparenzfarbraum:",
+    es: "Espacio de mezcla de transparencia:"
+  };
+
+  _global.refresh = {
+    en: "Refresh display",
+    de: "Anzeige aktualisieren",
+    es: "Actualizar pantalla"
+  };
+
+  _global.refreshUIButtonLabel = {
+    en: "Refresh",
+    de: "Aktualisieren",
+    es: "Actualizar"
+  };
+  _global.cancelButtonLabel = {
+    en: "Close",
+    de: "Schließen",
+    es: "Cerrar"
+  };
+
+  _global.activeTextModus = {
+    en: "Story editor is active!",
+    de: "Der Textmodus ist aktiviert!",
+    es: "¡El editor de artículos está activo!"
+  };
+
+  _global.objectCanNotSel = {
+    en: "Object can not be selected!",
+    de: "Objekt kann nicht ausgewählt werden!",
+    es: "¡No se puede seleccionar el objeto!"
+  };
+
+  _global.objectName = {
+    en: "Object:",
+    de: "Objektname:",
+    es: "Objeto:"
+  };
+
+  _global.pleaseRefreshDisplay = {
+    en: "Please refresh display!",
+    de: "Bitte Anzeige aktualisieren!",
+    es: "¡Actualice la pantalla!"
+  };
+
+  _global.colorManagementDeactivated = {
+    en: "Color management deactivated!",
+    de: "Farbmanagement deaktiviert!",
+    es: "¡Gestión de color desactivada!"
+  };
+
+  _global.colorProofProfileHelpTip = {
+    en: "Color profile for the device to be simulated in the color proof settings.",
+    de: "Farbprofil für das zu simulierende Gerät in den Farbproof-Einstellungen.",
+    es: "Perfil de color del dispositivo que se simulará en la configuración de prueba de color."
+  };
+
 } // END function __defLocalizeStrings

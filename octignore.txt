@@ -1,7 +1,9 @@
 test.jsx
 script-template.html
-octignore.txt
+Artikel-test.jsx
 jsonify.jsx
+octignore.txt
+Octopus4-Fill-Starter.jsxOctopus4-Starter-Huelle.jsxOctopus4-Starter.jsx
 help-pages
 index.html
 .vscode

@@ -2,6 +2,8 @@
 
 Eine selbstaktualisierende Scriptsammlung für Adobe InDesign, die Workflows im Bereich Satz, Typografie und barrierefreie PDF-Erstellung optimiert.
 
+[Projekt Webseite](http://project-octopus.net/)
+
 ## Was ist Octopus?
 
 Octopus ist eine umfangreiche Sammlung von InDesign-Scripten, die sich automatisch auf dem neuesten Stand hält. Einmal installiert, aktualisieren sich die Scripte selbstständig und stehen direkt im Scripts-Panel von InDesign zur Verfügung.

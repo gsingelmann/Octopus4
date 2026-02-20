@@ -1,5 +1,6 @@
 .claude
-.vscode/
+.vscode
+vscode
 help-pages/
 .DS_Store
 Thumbs.db

@@ -48,6 +48,7 @@ function show_dashboard( cfgs, prefs ) {
   //  Fenster und zwei Tabs
   // -----------------------------------------------------------------------------------------------------
   var w = new Window("dialog", "Dahboard", undefined /*, {closeButton: false} */);
+  __insert_head(w, script_id)
   w.tabbed_panel = w.add("tabbedpanel {alignChildren: ['fill', 'fill']}");
   w.tabbed_panel.alignChildren = ['fill', 'fill'];
   w.script_tab = w.tabbed_panel.add("tab {text: '" +  __('tab1') + "', orientation: 'column', alignChildren: 'fill'}");
@@ -80,7 +81,7 @@ function show_dashboard( cfgs, prefs ) {
     a.checked = ! prefs.ignore.hasOwnProperty( cfgs[n].id );
     a.ix = n;
     a.sid = cfgs[n].id;
-    a.url = cfgs[n].help_url;
+    a.url = cfgs[n].help_url; 
   }
   // -----------------------------------------------------------------------------------------------------
   //  Buttons
@@ -89,6 +90,8 @@ function show_dashboard( cfgs, prefs ) {
   w.activate_btn = w.script_btns.add("button", undefined, __('activate'));
   w.deactivate_btn = w.script_btns.add("button", undefined, __('deactivate'));
   w.help_btn = w.script_btns.add("button", undefined, __('help'));
+  w.showfolder_btn = w.script_btns.add("button", undefined, __('show-folder'));
+
   w.activate_btn.enabled = false;
   w.deactivate_btn.enabled = false;
   w.help_btn.enabled = false;
@@ -119,6 +122,7 @@ function show_dashboard( cfgs, prefs ) {
   w.activate_btn.onClick = toggle_active;
   w.deactivate_btn.onClick = toggle_active;
   w.help_btn.onClick = call_url;
+  w.showfolder_btn.onClick = open_folders
 
   // -----------------------------------------------------------------------------------------------------
   // -----------------------------------------------------------------------------------------------------
@@ -287,6 +291,15 @@ function show_dashboard( cfgs, prefs ) {
     if ( ! w.script_list.selection ) return;
     __open_website( w.script_list.selection.url );
   }
+  function open_folders() {
+    this.window.close();
+    var f1 = new Folder( PATH_SCRIPT_PARENT + "/Scripts Panel/Octopus"),
+        f2 = new Folder( PATH_SCRIPT_PARENT + "/Startup Scripts/Octopus"),
+        f3 = new Folder( PATH_DATA_FOLDER );
+    f1.execute();
+    f2.execute();
+    f3.execute();
+  }
   function calc_width(pct) {
     return Math.round(w_width * pct / 100);
   }
@@ -361,16 +374,12 @@ function get_configs() {
 
 function __( id ) {
   var txt = "";
-  try {
-    var a = loc_strings;
-  } catch(e) {
     loc_strings = __readJson( get_script_folder_path() + "/Strings.json");
     if ( ! loc_strings || ! loc_strings.hasOwnProperty(script_id) ) {
       return id;
     }
     loc_strings = loc_strings[ script_id ];
     if (DBG) $.writeln("loaded loc-strings");
-  }
 
   if (loc_strings.hasOwnProperty(id)) {
     txt = localize(loc_strings[id]);

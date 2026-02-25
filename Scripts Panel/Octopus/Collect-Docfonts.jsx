@@ -51,8 +51,10 @@ function open_config() {
 	w.active_rb.value = true;
 	// ---------------------------------------------------------------------------------------------------
 	// Pfadliste
+	var _paths = prefs.paths.join("\n");
+	$.writeln( "paths: \n" +  _paths );
 	w.add_row = w.add("group {orientation: 'row', alignChildren: ['fill', 'fill']}");
-	w.add_et = w.add_row.add("edittext", [undefined, undefined, 500, 200], prefs.path ? prefs.paths.join("\n") : "", {multiline: true, scrolling: true});
+	w.add_et = w.add_row.add("edittext", [undefined, undefined, 500, 200], _paths, {multiline: true, scrolling: true});
 
 	// ---------------------------------------------------------------------------------------------------
 	// Listbutton
@@ -83,15 +85,19 @@ function open_config() {
 		try {
 			this.window.close();
 			var paths = w.add_et.text;
-			paths.replace(/\r/g, "\n").replace(/^\n+/, "").replace(/\n+$/, "").replace(/\n+/g, "\n");
+			paths = paths.replace(/\r/g, "\n").replace(/^\n+/, "").replace(/\n+$/, "").replace(/\n+/g, "\n");
 			paths = paths.split("\n");
-			for ( var n = 0; n < paths.length; n++ ) paths[n] = trim( paths[n] );
+			for ( var n = paths.length-1; n >= 0 ; n-- ) {
+				paths[n] = trim( paths[n] );
+				if ( paths[n] == "" ) paths.splice(n,1);
+			}
 			config_data = {
 				"onoff": w.toggle.state,
 				"switch": w.active_rb.value ? "active" : "blocking",
 				"paths": paths
 			};
 			app.insertLabel( "octopus_collect_fonts", JSON.stringify(config_data) );
+			__writeJson( PATH_DATA_FOLDER + "/prefs/" + script_id + ".json", config_data );
 		} catch(e) {
 			alert( e.message + " on " + e.line );
 		}
@@ -169,8 +175,11 @@ function open_config() {
 	}
   
 	function read_prefs( ) {
-    var prefs = app.extractLabel( "octopus_collect_fonts" );
-    if ( prefs ) {
+		var prefs = __readJson( PATH_DATA_FOLDER + "/prefs/" + script_id + ".json" );
+		if ( ! prefs ) {
+			prefs = app.extractLabel( "octopus_collect_fonts" );
+		}
+    if ( prefs && typeof prefs == "string" ) {
       try {
         prefs = JSON.parse( prefs );
       } catch ( e ) {

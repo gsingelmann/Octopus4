@@ -26,16 +26,16 @@ function install() {
   // -------------------------------------------------------------------------------------------
   var basisurl = "https://daten.project-octopus.net/Octopus4";
   var config_paths = [
-    // {
-    //   type: "url",
-    //   path: "Main",
-    //   name: "Default-Set"
-    // },
     {
-      type: "file",
-      path: "/Users/singel/Dropbox/PARA/01-Projekte/Satzkiste/Octopus/ScripteV4/Octopus",
+      type: "url",
+      path: "Main",
       name: "Default-Set"
-    }
+    },
+    // {
+    //   type: "file",
+    //   path: Folder.myDocuments.fullName + "/Octopus",
+    //   name: "Default-Set"
+    // }
   ]
   var package_name = "Octopus4";
 
@@ -179,10 +179,12 @@ function install() {
                 failed.push(c.id);
               } else {
                 __log("info", tgt_path + " installiert", "installer");
-                if (is_new) {
-                  nu.push(c.id);
-                } else {
-                  updated.push(c.id);
+                if ( c.id != "index" ) {  // Ich will nicht sehen, ob das JSON wackelt
+                  if (is_new) {
+                    nu.push(c.id);
+                  } else {
+                    updated.push(c.id);
+                  }
                 }
               }
             } else {
@@ -240,6 +242,13 @@ function install() {
             menu.menuItems.add(action, LocationOptions.AFTER, a_item);
           } else {
             menu.menuItems.add(action);
+          }
+          // ----------------------------------------------------------------------
+          // 2026-02-23: Alle Menüeinträge, die custom sind, werden zusätzlich
+          //  ins Octopus-Menü gepackt.
+          if ( c.set == "Octopus" && c.menu != "Octopus" ) {
+            var omenu = get_submenu( "Octopus", undefined, "$ID/Table" );
+            omenu.menuItems.add( action );
           }
         } catch (e) {
           __log("error", "MenuItem-Erstellung fehlgeschlagen (" + menuLabel + "): " + e.message + " on " + e.line, "installer");

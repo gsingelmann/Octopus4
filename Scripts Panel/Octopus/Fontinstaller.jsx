@@ -790,16 +790,12 @@ function show_ready_dialog(msg, msec) {
 
 function __( id ) {
   var txt = "";
-  try {
-    var a = loc_strings;
-  } catch(e) {
     loc_strings = __readJson( get_script_folder_path() + "/Strings.json");
     if ( ! loc_strings || ! loc_strings.hasOwnProperty(script_id) ) {
       return id;
     }
     loc_strings = loc_strings[ script_id ];
     if (DBG) $.writeln("loaded loc-strings");
-  }
 
   if (loc_strings.hasOwnProperty(id)) {
     txt = localize(loc_strings[id]);

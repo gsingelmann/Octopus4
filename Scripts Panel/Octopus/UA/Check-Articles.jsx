@@ -78,6 +78,10 @@ function show_panel() {
   panel.sequence_btn.onClick = function() {
     show_sequence();
   }
+  panel.double_btn = panel.add("button", undefined, __("double booking"));
+  panel.double_btn.onClick = function() {
+    show_double_booking();
+  }
   panel.rm_layers_btn = panel.add("button", undefined, __("remove layers"));
   panel.rm_layers_btn.onClick = function() {
     if ( ! app.documents.length ) return;
@@ -144,6 +148,61 @@ function show_panel() {
     }
   }
 
+  function show_double_booking() {
+    $.writeln("los");
+    var doc = app.activeDocument;
+    var layer_name = "ᴥ " + __("sequence");
+    var layer = doc.layers.item(layer_name);
+    if ( ! layer.isValid ) {
+      layer = doc.layers.add({ name: layer_name });
+    }
+
+    var stories = {};
+    for ( var n = 0; n < doc.stories.length; n++ ) {
+      stories[ "_" + doc.stories[n].id ] = [];
+    }
+    for ( var na = 0; na < doc.articles.length; na++ ) {
+      var a = doc.articles[na];
+      for ( var nm = 0; nm < a.articleMembers.length; nm++ ) {
+        var ref = a.articleMembers[nm].itemRef;
+        if ( ref.hasOwnProperty("parentStory") ) {
+          stories[ "_" + ref.parentStory.id ].push( a.id );
+        }
+      }
+    }
+    $.bp();
+    var _w = new Window( "palette" );
+    _w.t1 = _w.add("statictext", [undefined, undefined, 400, 20 ], "story");
+    _w.t2 = _w.add("statictext", [undefined, undefined, 400, 20 ], "frame");
+    _w.show();
+    try {
+      for ( var sid in stories ) {
+        _w.t1.text = sid
+        if ( stories[sid].length < 2 ) continue;
+        var names= [];
+        for ( var n = 0; n < stories[sid].length; n++ ) {
+          names.push( doc.articles.itemByID( stories[sid][n] ).name );
+        }
+        var s = doc.stories.itemByID( Number( sid.substr(1) ) );
+        var ntfs = s.textContainers.length;
+        for ( var ntf = 0; ntf < ntfs; ntf++ ) {
+          _w.t2.text = "frame " + (ntf+1);
+          var tf = s.textContainers[ntf];
+          var dup = tf.duplicate( layer );
+          // dup.textFramePreferences.ignoreWrap = true;
+          // dup.textWrapPreferences.textWrapMode = TextWrapModes.NONE;
+          dup.strokeColor = "Magenta";
+          dup.fillColor = "Paper";
+          dup.fillTransparencySettings.blendingSettings.opacity = 80;
+          dup.parentStory.contents = names.join("\n");
+        }
+      }
+    } catch(e) {
+      alert( e.message + " on " + e.line );
+    } finally {
+      _w.close();
+    }
+  }
   function collect_orphans() {
     if ( ! app.documents.length ) return;
     var doc = app.activeDocument;
@@ -362,17 +421,13 @@ function show_panel() {
 
 function __( id ) {
   var txt = "";
-  try {
-    var a = loc_strings;
-  } catch(e) {
-    // loc_strings = __readJson( get_script_folder_path() + "/Strings.json");
-    loc_strings = __readJson( PATH_SCRIPT_PARENT + "/Scripts Panel/Octopus/Strings.json");
-    if ( ! loc_strings || ! loc_strings.hasOwnProperty(script_id) ) {
-      return id;
-    }
-    loc_strings = loc_strings[ script_id ];
-    if (DBG) $.writeln("loaded loc-strings");
+  // loc_strings = __readJson( get_script_folder_path() + "/Strings.json");
+  loc_strings = __readJson( PATH_SCRIPT_PARENT + "/Scripts Panel/Octopus/Strings.json");
+  if ( ! loc_strings || ! loc_strings.hasOwnProperty(script_id) ) {
+    return id;
   }
+  loc_strings = loc_strings[ script_id ];
+  if (DBG) $.writeln("loaded loc-strings");
 
   if (loc_strings.hasOwnProperty(id)) {
     txt = localize(loc_strings[id]);

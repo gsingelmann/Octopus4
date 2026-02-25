@@ -9,7 +9,7 @@
 // wir können nicht garantieren, dass das Script nicht mal unerwartete Ergebnisse erzeugt
 // 
 #targetengine "octopus-2" 
-#include "Octopus-Include-su.jsxinc";
+#include "Octopus-Include-2.jsxinc";
 var script_id = "assign-decoration";
 __init();
 
@@ -17,25 +17,6 @@ var dbg = false;
 
 AssignDecoration(); 
 function AssignDecoration(){ 
-	
-	var sMenuName = { en: "ᴥ Assign Decoration", de: "ᴥ Als Dekoration kennzeichnen" };
-
-	var myLayoutContextMenu = app.menus.item("$ID/RtMouseLayout"); 
-
-	try{ 
-		var myAssignAction = app.scriptMenuActions.item(localize(sMenuName)); 
-		myAssignAction.name; 
-	} 
-	catch(myError){
-		var myAssignAction = app.scriptMenuActions.add(localize(sMenuName)); 
-	} 
-	var myEventListener = myAssignAction.eventListeners.add("onInvoke", myAssignHandler, false); 
-	myAssignAction.eventListeners.add("beforeDisplay", function(){ myAssignAction.enabled = (app.selection.length > 0) }, false);
-
-	var myLSep = myLayoutContextMenu.menuSeparators.add();
-	var myLAssignMenuItem = myLayoutContextMenu.menuItems.add(myAssignAction); 
-
-	function myAssignHandler(myEvent){ 
 		__log("run", script_id, script_id)
 		try {
 			//-----------------------
@@ -55,5 +36,4 @@ function AssignDecoration(){
 		} catch(e) {
 			__log("error", "Error in loop: " + e.message + " on " + e.line, script_id);
 		}
-	}
 }

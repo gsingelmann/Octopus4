@@ -1,52 +1,80 @@
-#include "./Octopus-include-2.jsxinc"
+script_id = "check-articles"
+
+#include "./Scripts Panel/Octopus/Octopus-include-2.jsxinc"
 __init();
 $.writeln( "guid: " + app.extractLabel("octopus_guid"));
-enc();
+test();
 function test() {
-    var prefs = app.extractLabel( "octopus_collect_fonts" );
-    var scriptPath, scriptFolderPath;
+  var doc = app.activeDocument;
+  var layer_name = "ᴥ " + __("sequence");
+  var layer = doc.layers.item(layer_name);
+  if ( ! layer.isValid ) {
+    layer = doc.layers.add({ name: layer_name });
+  }
+
+  var stories = {};
+  for ( var n = 0; n < doc.stories.length; n++ ) {
+    stories[ "_" + doc.stories[n].id ] = [];
+  }
+  for ( var na = 0; na < doc.articles.length; na++ ) {
+    var a = doc.articles[na];
+    for ( var nm = 0; nm < a.articleMembers.length; nm++ ) {
+      var ref = a.articleMembers[nm].itemRef;
+      if ( ref.hasOwnProperty("parentStory") ) {
+        stories[ "_" + ref.parentStory.id ].push( a.id );
+      }
+    }
+  }
+  $.bp();
+  for ( var sid in stories ) {
+    if ( stories[sid].length < 2 ) continue;
+    var names= [];
+    for ( var n = 0; n < stories[sid].length; n++ ) {
+      names.push( doc.articles.itemByID( stories[sid][n] ).name );
+    }
+    var s = doc.stories.itemByID( Number( sid.substr(1) ) );
+    var tf = s.textContainers[0];
+    var dup = tf.duplicate( layer );
+    dup.strokeColor = "Magenta";
+    dup.fillColor = "Paper";
+    dup.fillTransparencySettings.blendingSettings.opacity = 80;
+    dup.parentStory.contents = names.join("\n");
+  }
+}
+function __( id ) {
+  var txt = "";
+  try {
+    var a = loc_strings;
+  } catch(e) {
+    // loc_strings = __readJson( get_script_folder_path() + "/Strings.json");
+    loc_strings = __readJson( PATH_SCRIPT_PARENT + "/Scripts Panel/Octopus/Strings.json");
+    if ( ! loc_strings || ! loc_strings.hasOwnProperty(script_id) ) {
+      return id;
+    }
+    loc_strings = loc_strings[ script_id ];
+    if (DBG) $.writeln("loaded loc-strings");
+  }
+
+  if (loc_strings.hasOwnProperty(id)) {
+    txt = localize(loc_strings[id]);
+  } else {
+    txt = id
+  }
+	var re;
+	for ( var n = 1; n < arguments.length; n++ ) {
+		try {
+			re = new RegExp( "_" + n.toString() + "_" );
+			txt = txt.replace( re,  arguments[n].toString() );
+		} catch(e) {
+			__log( "error", e.message + " on " + e.line, script_id);
+		}
+	}
+	return txt;
+}
+function get_script_folder_path() {
     try {
       return app.activeScript.parent.fullName;
     } catch (e) { 
       return e.fileName.replace(/\/[^\/]+$/, "");
     }
-    return scriptPath;
-  return;
-  var a = '{"PATH_SCRIPT_PARENT":"/Users/singel/Library/Preferences/Adobe InDesign/Version 21.0/en_GB/Scripts","PATH_USER_FOLDER":"~/Library/Application Support/Octopus4","PATH_DATA_FOLDER":"~/Library/Application Support/Octopus4/Data","PATH_LOG_FILE":"~/Library/Application Support/Octopus4/Data/_log.json"}'
-  app.insertLabel("Octopus4-Paths", a);
-  return;
-  var j = __readJson( "/Users/singel/Dropbox/PARA/01-Projekte/Satzkiste/Octopus/ScripteV4/Octopus/index.json" );
-  for ( var n = 0; n < j.length; n++ ) {
-    if ( j[n].id ) $.writeln( j[n].id );
-  }
 }
-function enc() {
-  var paths = [
-    "/Users/singel/Desktop/encodings/utf.txt",
-    "/Users/singel/Desktop/encodings/utf.txt",
-    "/Users/singel/Desktop/encodings/utf.txt",
-  ];
-  var encs = [
-    "utf-8",
-    "Macintosh",
-    "Windows-1252"
-  ]
-  var rows = [];
-  for ( var i = 0; i < paths.length; i++ ) {
-    var f = new File( paths[i] );
-    f.encoding = encs[i];
-    f.open("r");
-    var c = f.read();
-    f.close();
-    rows.push( "Encoding: " + encs[i] + " - " + c.length + " chars" + ": " + c  );
-    $.writeln( "Encoding: " + encs[i] + " - " + c.length + " chars" + ": " + c );
-  }
-
-  // alert( "enc: \n" + rows.join("\n") );
-  // var w = new Window("dialog", "Encodings");
-  // var l = w.add("statictext", undefined, rows.join("\n"), {multiline: true} );
-  // w.cancelElement = w.add("button", undefined, "OK");
-  // w.show();
-  __alert( "info", rows.join("\n"), "Encodings", "OK", true );
-}
-// function __alert( level, msg, titel, btn, is_palette )

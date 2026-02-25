@@ -44,6 +44,11 @@
       "de": "Indikatorebene entfernen",
       "en": "Remove indicator layer",
       "es": "Eliminar capa indicadora"
+    },
+    "double booking": {
+      "de": "Rahmen in mehr als einem Artikel anzeigen",
+      "en": "Display frames in more than one article",
+      "es": "Mostrar marcos en más de un artículo"
     }
   },
   "check-alt-text": {
@@ -478,6 +483,10 @@
     "help": {
       "de": "Handbuch",
       "en": "Manual"
+    },
+    "show.folder": {
+      "de": "Octopus-Ordner anzeigen",
+      "en": "Show Octopus folders"
     },
     "last updated": {
       "de": "Letztes Update ",

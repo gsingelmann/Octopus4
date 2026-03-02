@@ -6,6 +6,7 @@ octignore.txt
 help-pages
 index.html
 index
+Include-dbg.jsxinc
 .vscode
 .gitignore
 .git

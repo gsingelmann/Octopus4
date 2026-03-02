@@ -169,6 +169,7 @@ function install() {
       if ( me == "offline" ) {
         w.src1.text = f.fullName;
         w.cb1.value = true;
+        cfg.base_url = "";
         jsons[0] = cfg;
       } else {
         if ( offer_fileserver_option ) {

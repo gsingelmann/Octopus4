@@ -6,7 +6,6 @@ help-pages/
 Thumbs.db
 .idea/
 *.log
-Octopus4-Fill-Starter.jsx
-Octopus4-Starter-Huelle.jsx
 script-template.html
 test.jsx
+Include-dbg.jsxinc

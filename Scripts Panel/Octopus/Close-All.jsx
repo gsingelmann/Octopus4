@@ -26,7 +26,7 @@
 		FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
 		DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------- */
-#include "./Octopus-include-2.jsxinc"
+#include "Startup Scripts/Octopus/Include.jsxinc"
 __init();
 var script_id = "close-all";
 __log( "run", script_id, script_id);

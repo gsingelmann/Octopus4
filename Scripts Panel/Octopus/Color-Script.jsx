@@ -20,7 +20,7 @@
 	Überprüfen: __getProfile -> "No Meta Data" Zeile: 1893
   
 */
-#include "./Octopus-include-2.jsxinc"
+#include "Startup Scripts/Octopus/Include.jsxinc"
 __log( "run", "color-script", "color-script");
 
 var _global = {};

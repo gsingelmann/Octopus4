@@ -457,7 +457,11 @@ function __call_request( url, command, type, tgt_path, replace ) {
 }
 
 function __init() {
-  
+  PATH_SCRIPT_PARENT = app.scriptPreferences.scriptsFolder.parent.fullName;
+  PATH_DATA_FOLDER = Folder.userData.fullName + "/Octopus4";
+  PATH_LOG_FILE = PATH_DATA_FOLDER + "/Logs/log.json";
+  __ensureFolder(PATH_LOG_FILE);
+
   // ------------------------------------------------------------------------------------------------
   // JSON
   // ------------------------------------------------------------------------------------------------
@@ -734,19 +738,6 @@ function __init() {
       };
     }
   }());
-  
-  // ------------------------------------------------------------------------------------------------
-  //  Die Pfade zu den Ordnern habe ich global im Installer als Label gesetzt
-  // ------------------------------------------------------------------------------------------------
-  var paths = app.extractLabel("Octopus4-Paths");
-  if ( paths ) {
-    paths = JSON.parse( paths );
-    PATH_SCRIPT_PARENT = paths.PATH_SCRIPT_PARENT;
-    PATH_USER_FOLDER = paths.PATH_USER_FOLDER;
-    PATH_DATA_FOLDER = paths.PATH_DATA_FOLDER;
-    PATH_LOG_FILE = paths.PATH_LOG_FILE;
-  }
-
 
   // ------------------------------------------------------------------------------------------------
   // ------------------------------------------------------------------------------------------------

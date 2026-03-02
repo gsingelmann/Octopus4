@@ -27,7 +27,7 @@
 		DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------- */
 #targetengine octopus_fontinstaller
-#include "./Octopus-Include-2.jsxinc"
+#include "Startup Scripts/Octopus/Include.jsxinc"
 __init();
 var script_id = "fontinstaller";
 __log( "run", script_id, script_id);

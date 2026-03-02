@@ -27,7 +27,7 @@
 		DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------- */
 #targetengine "octopus-ua-checktypo";
-#include "../Octopus-include-2.jsxinc"
+#include "Startup Scripts/Octopus/Include.jsxinc"
 __init();
 var script_id = "check-endofline";
 var grep_list = list_greps();

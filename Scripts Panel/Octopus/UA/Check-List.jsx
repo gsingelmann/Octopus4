@@ -27,7 +27,7 @@
 		DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------- */
 #targetengine octopus_check_lists;
-#include "../Octopus-include-2.jsxinc"
+#include "Startup Scripts/Octopus/Include.jsxinc"
 
 var script_id = "check-list"
 __init();

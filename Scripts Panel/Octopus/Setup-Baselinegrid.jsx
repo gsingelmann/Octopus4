@@ -58,7 +58,7 @@
 		
 */
 
-#include "./Octopus-include-2.jsxinc"
+#include "Startup Scripts/Octopus/Include.jsxinc"
 __init();
 var script_id = "setup-baselinegrid";
 __log("run", script_id, script_id );

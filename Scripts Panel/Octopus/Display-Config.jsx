@@ -28,7 +28,7 @@
 // ---------------------------------------------------------------------------------------------------------------------- */
 // #targetengine octopus_displayconfig
 #targetengine octopus_display
-#include "./Octopus-include-2.jsxinc"
+#include "Startup Scripts/Octopus/Include.jsxinc"
 __init();
 
 var script_id = "display-config"

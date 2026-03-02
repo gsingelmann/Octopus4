@@ -27,7 +27,7 @@
 		DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------- */
 #targetengine "octopus-kontrolle-artikel"
-#include "../Octopus-include-2.jsxinc"
+#include "Startup Scripts/Octopus/Include.jsxinc"
 var script_id = "check-articles";
 __init();
 var panel;

@@ -35,8 +35,14 @@ function main() {
 		index_file.open("r");
 		var raw = index_file.read();
 		index_file.close();
-		var fileList = JSON.parse( raw );
+		var config = JSON.parse( raw );
+		fileList = config.configs;
 	} else {
+		var config = {
+			"project_name": "Octopus4",
+			"set_name": slugify( base_folder.name ),
+			"base_url": ""
+		};
 		var fileList = [];
 	}
 	var not_found = [];
@@ -73,7 +79,8 @@ function main() {
 	})
 
   // JSON erstellen
-  var jsonString = JSON.stringify(fileList, null, 2);
+	config.configs = fileList;
+  var jsonString = JSON.stringify(config, null, 2);
 
   // JSON-Datei schreiben
   if (index_file.open("w")) {
@@ -132,6 +139,7 @@ function main() {
 
   function scanFolder(folder, rootFolder, fileList) {
 		if (dbg) $.writeln( "->" + folder.name )
+		if ( folder.name.charAt(0) == "." ) return;
     var files = folder.getFiles();
 
 		var now = new Date();
@@ -161,7 +169,7 @@ function main() {
 					if (dbg) $.writeln( "     " + fileList[ix].subpath + " -> " + aux + " | " + fileList[ix].check + " -> " + files[i].length );
 					fileList[ix].subpath = aux;
 					fileList[ix].check = files[i].length;
-					fileList[ix].set = base_folder_name;
+					// fileList[ix].set = base_folder_name;
 					fileList[ix].updated = now_str;
 					for ( var n = not_found.length-1; n >= 0; n-- ) {
 						if ( not_found[n] == id ) {
@@ -186,7 +194,6 @@ function main() {
 							order: 100,
 							check: files[i].length,
 							updated: now_str,
-							set: base_folder_name
 						};
 					} else {
 						fileObj = {
@@ -195,7 +202,6 @@ function main() {
 							subpath: getSubpath(files[i], rootFolder),
 							check: files[i].length,
 							updated: now_str,
-							set: base_folder_name
 						};
 					}
 					fileList.push(fileObj);

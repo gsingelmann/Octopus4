@@ -32,7 +32,7 @@
 // ---------------------------------------------------------------------------------------------------------------------- */
 #targetengine collect_docfonts
 
-#include "./Octopus-include-su.jsxinc"
+#include "./Include.jsxinc"
 
 script_id = "collect-docfonts-daemon";
 

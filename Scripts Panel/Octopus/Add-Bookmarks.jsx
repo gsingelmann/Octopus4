@@ -20,7 +20,7 @@
 */
 
 
-#include "../Octopus-include-2.jsxinc"
+#include "Startup Scripts/Octopus/Include.jsxinc"
 var script_id = "add_bookmarks";
 __log("run", script_id, script_id);
 

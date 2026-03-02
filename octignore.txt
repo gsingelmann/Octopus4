@@ -3,9 +3,9 @@ script-template.html
 Artikel-test.jsx
 jsonify.jsx
 octignore.txt
-Octopus4-Fill-Starter.jsxOctopus4-Starter-Huelle.jsxOctopus4-Starter.jsx
 help-pages
 index.html
+index
 .vscode
 .gitignore
 .git

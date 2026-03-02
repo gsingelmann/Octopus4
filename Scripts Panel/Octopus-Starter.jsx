@@ -1,85 +1,477 @@
+// =============================================================================
+// OCTOPUS Starter
+// =============================================================================
+// Version: 1.0.0
+// =============================================================================
+__init();
 
-DBG = true;
-
-/**
- * Gibt einen ISO-Timestamp zurück (vereinfacht, ohne Zeitzonen-Offset)
- */
-function __pad(n) { return (n < 10) ? "0" + n : "" + n; }
-function __getTimestamp() {
-  var d = new Date();
-  return d.getFullYear() + "-" + __pad(d.getMonth() + 1) + "-" + __pad(d.getDate()) +
-        "T" + __pad(d.getHours()) + ":" + __pad(d.getMinutes()) + ":" + __pad(d.getSeconds()) + "Z";
-}
-function __getDayString() {
-  var d = new Date();
-  return d.getFullYear() + "-" + __pad(d.getMonth() + 1) + "-" + __pad(d.getDate())
+var base_path;
+var nu = [], old = [], updated = [], failed = [];
+if ( pre_check() ) {
+  install();
 }
 
-/**
- * Loggt eine Nachricht lokal (in die Datei)
- * @param {String} level  – INFO, WARN, ERROR, FATAL
- * @param {String} msg    – Nachricht
- */
-function __log(level, msg, active_script) {
-  if ( ! active_script ) active_script = "includes";
-  if ( level == "reset_log" && PATH_LOG_FILE ) {
-    var f = new File( PATH_LOG_FILE );
-    f.rename( __getDayString() + ".json");
+function pre_check() {
+  var f1 = new Folder( PATH_SCRIPT_PARENT + "/Scripts Panel/Octopus");
+  var f2 = new Folder( PATH_SCRIPT_PARENT + "/Startup Scripts/Octopus");
+  if ( f1.exists || f2.exists ) {
+    if ( File( f2.fullName + "/Octopus-Installer.jsx" ).exists ) {
+      var abort = confirm( __('already-there') );
+      if ( abort ) {
+        if ( f1.exissts ) f1.execute();
+        if ( f2.exists ) f2.execute();
+        return false;
+      } 
+    }
   }
-  try {
-    var entry = {
-      time: __getTimestamp(),
-      level: level,
-      msg:  msg,
-      script: active_script
+  return true;
+}
+function install() {
+  var json;
+  var _set = select_source();
+  if (!_set) return;
+  __writeJson(PATH_DATA_FOLDER + "/Sets/" + _set.set_name + ".json", _set);
+  var configs = [];
+  for (var m = 0; m < _set.configs.length; m++) {
+    // Set-Info in die einzelnen Configs schreiben
+    _set.configs[m].set_name = _set.set_name;
+    _set.configs[m].base_url = _set.base_url;
+    _set.configs[m].project_name = _set.project_name;
+    configs.push(_set.configs[m]);
+  }
+  for (var n = 0; n < configs.length; n++) {
+    configs[n].ix = n;
+    if (!configs[n].hasOwnProperty("order")) configs[n].order = Infinity;
+  }
+  configs.sort(function (a, b) {
+    if (a.order < b.order) return -1;
+    if (a.order > b.order) return 1;
+    return a.ix - b.ix;
+  })
+
+  update_resources( configs );
+
+  show_log( 
+    [
+      { a: nu, key: "nu-script" },
+      { a: old, key: "old-script" },
+      { a: updated, key: "updated-script" },
+      { a: failed, key: "failed-script" },
+    ],
+    _set
+  )
+
+  return;
+
+  function select_source( offer_fileserver_option ) {
+    var jsons = [ null, null, null];
+
+    var w = new Window ( "dialog" );
+    w.row = w.add("group {orientation: 'row', alignChildren: ['fill', 'fill']}");
+    w.panels = w.row.add("group {orientation: 'column', alignChildren: ['fill', 'fill']}");
+    w.lpanel = w.row.add("panel {text: '" + __('content') + "', alignChildren: ['fill', 'fill']}");
+    w.list = w.lpanel.add("listbox");
+    w.list.minimumSize.width = 350;
+    w.panel1 = w.panels.add("panel {text: 'Offline', alignChildren: ['fill', 'fill']}");
+    if ( offer_fileserver_option ) {
+      w.panel2 = w.panels.add("panel {text: 'Local', alignChildren: ['fill', 'fill']}");
+    }
+    w.panel3 = w.panels.add("panel {text: 'Online', alignChildren: ['fill', 'fill']}");
+    w.cb1 = w.panel1.add("checkbox", undefined, __('offline'))
+    if ( offer_fileserver_option ) {
+      w.cb2 = w.panel2.add("checkbox", undefined, __('server'))
+    }
+    w.cb3 = w.panel3.add("checkbox", undefined, __('remote'))
+    w.cb3.value = true;
+
+    w.srcrow1 = w.panel1.add("group {orientation: 'row', alignChildren: ['fill', 'fill']}");
+    w.src1 = w.srcrow1.add("edittext", [undefined, undefined, 350, 20] );
+    w.sel_btn1 = w.srcrow1.add("button", undefined, "?");
+    w.sel_btn1.id = "offline"
+    w.sel_btn1.onClick = select_folder;
+
+    if ( offer_fileserver_option ) {
+      w.srcrow2 = w.panel2.add("group {orientation: 'row', alignChildren: ['fill', 'fill']}");
+      w.src2 = w.srcrow2.add("edittext", [undefined, undefined, 350, 20] );
+      w.sel_btn2 = w.srcrow2.add("button", undefined, "?");
+      w.sel_btn2.id = "server"
+      w.sel_btn2.onClick = select_folder;
     }
 
-    var guid = app.userGuid.split('@').shift();
-    if ( !guid ) {
-      guid = app.extractLabel("octopus_guid");
+    w.srcrow3 = w.panel3.add("group {orientation: 'row', alignChildren: ['fill', 'fill']}");
+    w.src3 = w.srcrow3.add("edittext", [undefined, undefined, 350, 20], "https://daten.project-octopus.net/Octopus4", {readonly: true, enabled: false} );
+    w.sel_btn3 = w.srcrow3.add("button", undefined, "?");
+    w.sel_btn3.id = "online"
+    w.sel_btn3.onClick = function() {
+      make_request();
+      display_config( jsons[2] );
     }
-    var _log = __readJson( PATH_LOG_FILE );
-    if ( ! _log ) {
-      _log = {
-        guid: guid,
-        locale: $.locale,
-        os: $.os,
-        version: app.version,
-        entries: []
+
+    w.btns = w.add("group {orientation: 'row', alignChildren: ['center', 'fill']}");
+    w.cancelElement = w.btns.add("button", undefined, __('cancel'));
+    w.defaultElement = w.btns.add("button", undefined, __('install-online'));
+
+
+    w.cb1.onClick = cb_click;
+    if ( offer_fileserver_option ) w.cb2.onClick = cb_click;
+    w.cb3.onClick = cb_click;
+    
+    make_request();
+
+    var do_what = w.show();
+    if ( do_what == 2 ) {
+      return false;
+    }
+    if ( w.cb1.value ) {
+      return jsons[0]
+    } else if ( offer_fileserver_option && w.cb2.value ) {
+      return jsons[1]
+    } else {
+      return jsons[2]
+    }
+
+    function cb_click() {
+      w.cb1.value = false;
+      if ( offer_fileserver_option ) w.cb2.value = false;
+      w.cb3.value = false;
+      this.value = true;
+      fix_btn_and_set_basepath();
+    }
+    function fix_btn_and_set_basepath() {
+      if ( w.cb1.value ) {
+        w.defaultElement.text = __('install-offline')
+        base_path = w.src1.text;
+      } else if ( offer_fileserver_option && w.cb2.value ) {
+        w.defaultElement.text = __('install-server')
+        base_path = w.src2.text;
+      } else {
+        w.defaultElement.text = __('install-online')
+        base_path = w.src3.text;
       }
     }
-    _log.entries.push( entry );
-    __writeJson( PATH_LOG_FILE, _log );
-  } catch(e) {
-    if (DBG) $.writeln( "logging: " + e.message + " on " + e.line );
+    function select_folder() {
+      var me = this.id;
+      var f = Folder.selectDialog( __('where-is') );
+      if ( ! f ) return;
+
+      w.cb1.value = false;
+      if ( offer_fileserver_option ) w.cb2.value = false;
+      w.cb3.value = false;
+
+      var cfg = __readJson( f.fullName + "/index.json" );
+      if ( ! cfg ) {
+        alert( __('no-index'))
+        return;
+      }
+      base_path = f.fullName;
+      display_config( cfg )
+
+      if ( me == "offline" ) {
+        w.src1.text = f.fullName;
+        w.cb1.value = true;
+        jsons[0] = cfg;
+      } else {
+        if ( offer_fileserver_option ) {
+          w.src2.text = f.fullName;
+          w.cb2.value = true;
+          jsons[1] = cfg;
+        }
+      }
+      fix_btn_and_set_basepath();
+    }
+    function make_request( default_url ) {
+      if ( ! default_url ) default_url = w.src3.text;
+      if ( ! check_url( default_url ) ) return;
+      try {
+        var raw = __call_request( default_url, "index.json" );
+        jsons[2] = JSON.parse(raw);
+      } catch(e) {
+        alert( __('failed-download') + "\n" + e.message + " on " + e.line );
+      }
+    }
+    function check_url( url ) {
+      if ( ! url || url.search(/^http/i) == -1 ) {
+        alert( __('no-url') );
+        return false;
+      }
+      return true;
+    }
+    function display_config( cfg ) {
+      if ( typeof cfg == "string" ) cfg = JSON.parse( cfg );
+      w.list.removeAll();
+      for ( var n = 0; n < cfg.configs.length; n++ ) {
+        w.list.add("item", cfg.configs[n].filename);
+      }
+    }
+  }   // get source
+
+
+  function update_resources(configs) {
+    try {
+
+      for (var _nc = 0; _nc < configs.length; _nc++) {
+        var c = configs[_nc];
+
+        try {
+          var tgt_path = get_tgt_path(c);
+          __ensureFolder(tgt_path);
+        } catch (e) {
+          $.writeln( e.message + " on " + e.line );
+          continue;
+        }
+        var tgt_file = new File(tgt_path), done;
+        var is_new = !tgt_file.exists;
+        if (is_new || !eq_filesize(c.check, tgt_path)) {
+          
+          // --------------------------------------------------------------------
+          // ------------------------------------------------------- URL
+          if (c.base_url.search(/^http/i) != -1) {
+            var src_path = (c.base_url + "/" + c.subpath).replace(/\/$/, "");
+            install_from_url( c, src_path, tgt_path );
+            
+          } else {
+            // --------------------------------------------------------------------
+            // ----------------------------------------------------- File
+            var src_path = (base_path + "/" + c.subpath).replace(/\/$/, "");
+            install_from_fileserver( c, src_path, tgt_path );
+          }
+        } else {
+          old.push( c.filename );
+        }
+      }
+    } catch (e) {
+  
+    } finally {
+      _pbw.close();
+    }
+
+    function install_from_url( c, src_path, tgt_path ) {
+      try {
+    
+        var tgt_file = __call_request(
+          src_path,
+          c.filename,
+          "file",
+          tgt_path,
+          true
+        )
+        if ( ! tgt_file.exists ) throw new Error( "Download gescheitert" );
+    
+        if (is_new) {
+          nu.push(c.filename);
+        } else {
+          updated.push(c.filename);
+        }
+      } catch (e) {
+        $.writeln( e.message + " on " + e.line );
+        failed.push(c.filename);
+      }
+      $.sleep(100);
+
+    }
+    function install_from_fileserver( c, src_path, tgt_path ) {
+      try {
+        var src = new File(src_path + "/" + c.filename);
+        if (src.exists) {
+          var done = src.copy(tgt_path);
+          if (!done) {
+        
+            failed.push(c.filename);
+          } else {
+        
+            if (c.id != "index") {  // Ich will nicht sehen, ob das JSON wackelt
+              if (is_new) {
+                nu.push(c.filename);
+              } else {
+                updated.push(c.filename);
+              }
+            }
+          }
+        } else {
+          $.writeln( e.message + " on " + e.line );
+          failed.push(c.filename);
+        }
+      } catch (e) {
+        $.writeln( e.message + " on " + e.line );
+        failed.push(c.filename);
+      }
+    }
+  }   // update_resources
+
+  function show_log( what, set ) {
+    try {
+      var w = new Window("dialog {orientation: 'column', alignChildren: ['left', 'top']}");
+      var lb;
+      for ( var n = 0; n < what.length; n++ ) {
+        var i = what[n];
+        if ( i.a.length ) {
+          w.add("statictext", undefined, __(i.key));
+          lb = w.add("listbox", undefined, i.a);
+          lb.preferredSize = [300, Math.min(180, (i.a.length * 20) + 20)];
+        }
+      }
+      w.defaultElement = w.add("button", undefined, "OK");
+      w.show();
+    } catch(e) {
+      $.writeln( e.message + " on " + e.line)
+    }
   }
+
+  // -------------------------------------------------------------------------------------------
+  //  Get Installation-Path
+  // -------------------------------------------------------------------------------------------
+  function get_tgt_path(cfg) {
+    var p;
+    if (cfg.subpath.search(/^Scripts Panel/i) != -1 || cfg.subpath.search(/^Startup Scripts/i) != -1) {
+      p = PATH_SCRIPT_PARENT + "/" + cfg.subpath;
+    } else {
+      if (!cfg.subpath) {
+        p = PATH_DATA_FOLDER;
+      } else {
+        p = PATH_DATA_FOLDER + "/" + cfg.subpath;
+      }
+    }
+    p += "/" + cfg.filename;
+    return p;
+  }
+  function eq_filesize(check, tgt_path) {
+    var tgt_file = new File(tgt_path);
+    var tgt_size = tgt_file.length;
+    // $.writeln("Vergleiche: " + check + " mit " + tgt_size + " für " + tgt_path);
+    // Ich weiß nicht, ob "exakt identische Länge" zu restriktiv ist
+    return Math.abs(tgt_size - check) < 4;
+  }
+
 }
 
-function __deep_copy( o ) {
-  if ( ! o ) return o;
-  var c = o.constructor.name;
-  var rs;
-  if ( " String Number Boolean ".indexOf(c) != -1 ) {
-    return o
-  } else if ( c == "Array" ) {
-    rs = [];
-    for ( var n = 0; n < o.length; n++ ) {
-      rs.push( __deep_copy( o[n] ) );
+
+
+
+
+
+  function __(key) {
+    switch(key) {
+      case "abc": 
+        return localize({
+          "de": "abc",
+          "en": "def"
+        });
+      case "where-is": 
+        return localize({
+          "de": "Wo liegt das entpackte Paket?",
+          "en": "Where is the unzipped package?"
+        });
+      case "cancel": 
+        return localize({
+          "de": "Abbrechen",
+          "en": "Cancel"
+        });
+      case "local": 
+        return localize({
+          "de": "lokale Installation",
+          "en": "Local Installation"
+        })
+      case "remote": 
+        return localize({
+          "de": "Online Installation",
+          "en": "Online Installation"
+        })
+      case "offline": 
+        return localize({
+          "de": "Offline Installation",
+          "en": "Offline Installation"
+        })
+      case "server": 
+        return localize({
+          "de": "Fileserver Installation",
+          "en": "Fileserver Installation"
+        })
+      case "online": 
+        return localize({
+          "de": "Online Quelle benutzens",
+          "en": "Use Online Source"
+        })
+      case "local_desc": 
+        return localize({
+          "de": "Sie können ein lokal geladenes Paket installieren",
+          "en": "You can install from a downloaded, local package"
+        })
+      case "online_desc": 
+        return localize({
+          "de": "Sie können von der Online-Quelle installieren",
+          "en": "You can install from our Online-Repository"
+        })
+      case "no-url": 
+        return localize({
+          "de": "Error\nGeben Sie bitte eine URL ein, bevor Sie die Config laden",
+          "en": "Error\nPlease enter a URL before attempting to load the config"
+        })
+      case "failed-download": 
+        return localize({
+          "de": "Unter dieser Adresse konnte keine Config geladen werden",
+          "en": "No config could be loaded with this address"
+        })
+      case "no-index": 
+        return localize({
+          "de": "Dieser Ordner enthält keine index.json",
+          "en": "No index.json in this folder"
+        })
+      case "content": 
+        return localize({
+          "de": "Inhalt des ausgewählten Pakets",
+          "en": "Content of the selected package"
+        })
+      case "install-online": 
+        return localize({
+          "de": "Online-Paket installieren",
+          "en": "Install online-package"
+        })
+      case "install-offline": 
+        return localize({
+          "de": "Offline-Paket installieren",
+          "en": "Install offline-package"
+        })
+      case "install-server": 
+        return localize({
+          "de": "Server-Paket installieren",
+          "en": "Install server-package"
+        })
+      case "already-there": 
+        return localize({
+          "de": "Anscheinend existiert bereits die alte Version von Octopus\n\nWollen Sie abbrechen, um diese zu entfernen?",
+          "en": "Apparently an old version of Octopus already exists\n\nDo you want to cancel to remove it?"
+        })
+      case "nu-script": 
+        return localize({
+          "de": "Folgende Dateien wurden installiert",
+          "en": "The following files have been installed"
+        })
+      case "old-script": 
+        return localize({
+          "de": "Folgende Dateien waren bereits installiert",
+          "en": "The following files were already installed"
+        })
+      case "updated-script": 
+        return localize({
+          "de": "Folgende Dateien wurden aktualisiert",
+          "en": "The following files have been updated."
+        })
+      case "failed-script": 
+        return localize({
+          "de": "Folgende Dateien konnten nicht installiert werden",
+          "en": "The following files could not be installed"
+        })
+        
+      default:
+        return key;
     }
-    return rs;
-  } else if ( c == "Object" ) {
-    rs = {};
-    for ( var p in o ) {
-      rs[p] = __deep_copy( o[p] );
-    }
-    return rs;
   }
-} 
 
 
-// =============================================================================
-// HILFSFUNKTIONEN – Dateien lesen/schreiben
-// =============================================================================
+
+
+
+
 
 /**
  * Liest eine Datei und gibt den Inhalt als String zurück.
@@ -94,8 +486,8 @@ function __readFile(filePath) {
     var content = f.read();
     return content;
   } catch(e) {
-    __log("error", "Datei konnte nicht gelesen werden (" + filePath + "): " + e.message, "includes");
-    if (DBG) $.writeln("__readFile Fehler: " + e.message);
+
+    $.writeln("__readFile Fehler: " + e.message);
     return null;
   } finally {
     try { f.close(); } catch(e) {}
@@ -117,7 +509,7 @@ function __writeFile(filePath, content, mode) {
     f.write(content);
     f.close();
   } catch(e) {
-    if (DBG) $.writeln("__writeFile Fehler: " + e.message + " (" + filePath + ")");
+    $.writeln("__writeFile Fehler: " + e.message + " (" + filePath + ")");
     throw e;
   }
 }
@@ -132,8 +524,7 @@ function __readJson(filePath) {
   try {
     return JSON.parse(content);
   } catch (e) {
-    __log("ERROR", "JSON-Parse fehlgeschlagen: " + filePath + " – " + e.message);
-    if (DBG) $.writeln( e.message + " on " + e.line );
+    $.writeln( e.message + " on " + e.line );
     return null;
   }
 }
@@ -169,259 +560,11 @@ function __ensureFolder(folderPath) {
     }
     return f;
   } catch(e) {
-    __log("error", "Ordner konnte nicht erstellt werden (" + folderPath + "): " + e.message, "includes");
+    // __log("error", "Ordner konnte nicht erstellt werden (" + folderPath + "): " + e.message, "includes");
     throw e; // Exception weiterwerfen - Installation MUSS abbrechen
   }
 }
 
-/**
- * Move File, wenn Zielpfad noch nicht existiert
- */
-function __moveFile(srcFile, tgtPath) {
-    if (!srcFile.exists) {
-        __log("warn", "Quelldatei für Move existiert nicht: " + srcFile.fsName, "includes");
-        return false;
-    }
-    var tgtFile = new File(tgtPath);
-    if ( tgtFile.exists ) {
-        __log("warn", "Zieldatei existiert bereits: " + tgtPath, "includes");
-        return false;
-    }
-
-    try {
-        if (!srcFile.copy(tgtFile)) {
-            __log("error", "Kopieren fehlgeschlagen: " + srcFile.fsName + " -> " + tgtPath, "includes");
-            return false;
-        }
-    } catch(e) {
-        __log("error", "Kopieren Exception: " + srcFile.fsName + " -> " + tgtPath + ": " + e.message, "includes");
-        return false;
-    }
-
-    try {
-        if (!srcFile.remove()) {
-            __log("error", "Löschen der Quelldatei fehlgeschlagen: " + srcFile.fsName, "includes");
-            try { tgtFile.remove(); } catch(e2) {}
-            return false;
-        }
-    } catch(e) {
-        __log("error", "Löschen Exception: " + srcFile.fsName + ": " + e.message, "includes");
-        try { tgtFile.remove(); } catch(e2) {}
-        return false;
-    }
-
-    return true;
-}
-
-// =============================================================================
-// HILFSFUNKTIONEN – UserInterface
-// =============================================================================
-function __alert( level, msg, titel, btn, is_palette ) {
-  var rs = true;
-  var kind = is_palette ? "palette" : "dialog"
-  try {
-    if ( ! btn ) btn = "OK";
-
-    if ( ! titel ) titel = localize( {"de": "Obacht", "en": "be mindful"} );
-    var w = new Window( kind + " {text: '" + titel + "'}");
-    w.g = w.add("group {orientation: 'row', alignChildren: ['left', 'top']}")
-    w.g.spacing = 20;
-
-    var icon = new File( PATH_DATA_FOLDER + "/images/icons/" + level + ".png" );
-    if ( icon.exists ) {
-      try {
-        w.g.add("image", undefined, icon);
-      } catch(e) {
-        __log("error", "loading alert-icon: " + e.message, "alert");
-      }
-    }
-
-    // Schätzen, wie breit das Fenster sein muss
-    var aux = msg.split("\n");
-    var len = 0;
-    for ( var n = 0; n < aux.length; n++ ) {
-      len = Math.max( len, aux[n].length );
-    }
-    var width = Math.min( 400, len * 7 + 45 )
-    w.msg = w.g.add("statictext", undefined, msg, {multiline: true} );
-    w.msg.preferredSize.width = width;
-
-    if ( btn.constructor.name == "Array") {
-      w.btns = [];
-      w.btn_group = w.add("group {orientation: 'row', alignChildren: ['center', 'top'] }");
-      for ( var n = 0; n < btn.length; n++ ) {
-        w.btns.push( w.btn_group.add("button", undefined, btn[n].text ));
-        (function( _button, _value ) {
-          _button.onClick = function() { rs = _value; this.window.close() } 
-        })( w.btns[n], btn[n].value )
-      }
-    } else {
-      w.btn = w.add( "button", undefined, btn )
-      w.btn.onClick = function() {
-        w.close();
-      }
-    }
-    w.show();
-  } catch(e) {
-    __log("error", e.message + " on " + e.line, "alert");
-  }
-	return rs;
-}
-function __move_scriptui_to( p, x, y ) {
-	var c = switch_coords_system( x, y );
-	var screen_matches = [];
-	// Is there a screen, that contains the target coordinates?
-	// If not, is there a screen that is the same longi- or latitude?
-  for ( var n = 0; n < $.screens.length; n++ ) {
-		var is_inside = 0;
-		if ( $.screens[n].left < c[0] &&  c[0] + p.bounds.width < $.screens[n].right ) {
-			is_inside += 1;
-		}
-		// screen.bottom is the higher value in a cartesian coords
-		if ( $.screens[n].top < c[1] - p.bounds.height &&  c[1] < $.screens[n].bottom ) {
-			is_inside += 2;
-		}
-		if ( is_inside == 3 ) {
-			p.location = [x,y];
-			return [x,y];
-		} else {
-			screen_matches[n] = is_inside;
-		}
-	}
-	var x1 = null, y1 = null, c1;
-	for ( var n = 0; n < $.screens.length; n++ ) {
-		if ( screen_matches[n] == 1 ) {
-			x1 = c[0];
-			y1 = ($.screens[n].bottom < c[1] ) ? ($.screens[n].bottom - 20) : ($.screens[n].top + p.bounds.height);
-			c1 = switch_coords_system( x1, y1 );
-			p.location = c1;
-			return c1;
-		}
-		if ( screen_matches[n] == 2 ) {
-			x1 = ($.screens[n].right < c[0] ) ? ($.screens[n].right - p.bounds.width - 20) : ($.screens[n].left + 20);
-			y1 = c[1];
-			c1 = switch_coords_system( x1, y1 );
-			p.location = c1;
-			return c1;
-		}
-	}
-	c1 = switch_coords_system( $.screens[n].left, $.screens[n].bottom );
-	p.location = c1;
-	return c1;
-
-  function switch_coords_system( x, y ) {
-    var ps;
-    for ( var n = 0; n < $.screens.length; n++ ) {
-      if ( $.screens[n].primary ) ps = $.screens[n];
-    }
-    return [ x, ps.bottom - y ]
-  }  
-}
-function __insert_head( w, script_id ) {
-  if ( ! script_id ) return;
-  try {
-    // ------------------------------  Kopfbild -------------------------------
-    w.fish = w.add( 'group {orientation: "stack", alignChildren: ["fill", "center"]}');
-    var _fl = w.fish.add("group {alignChildren: ['left', 'bottom']}");
-    var hd = __get_head_png( script_id );
-    try {
-      if ( hd ) _fl.add("image", undefined, hd );
-    } catch(e) {
-      // Beim Download kann was kaputt gegangen sein. Dann weg damit.
-      __log("error", e.message + " on " + e.line, "inserting png");
-      if ( hd.exists) hd.remove();
-    }
-    // ------------------------------  Fragezeichen -------------------------------
-    var _fr = w.fish.add("group {alignChildren: ['right', 'bottom']}");
-    var qm = new File( PATH_DATA_FOLDER + "/images/icons/qm.png" );
-    var help = qm.exists ?
-              _fr.add( 'iconbutton', undefined, qm, {style: 'toolbutton'}) :
-              _fr.add( 'button', undefined, '?');
-    help.onClick = function() { 
-      var sn = this.window.hasOwnProperty("script_name") ? this.window.script_name : null;
-      var url = __get_help_url( sn );
-      __log("info", "Calling help-url: " + url, script_id);
-      __open_website( url ) 
-    };
-  } catch(e) {
-    __log("error", e.message + " on " + e.line,  "Insert Head");
-  }
-}
-function __get_help_url( script_id ) {
-  try {
-    var cfg = readJson( PATH_DATA_FOLDER + "/config.json" );
-    for ( var n = 0; n < cfg.length; n++ ) {
-      if ( cfg[n].id == script_id && cfg[n].hasOwnProperty("help_url") ) {
-        return cfg[n].help_url;
-      }
-    }
-  } catch(e) {
-    __log("error", e.message + " on " + e.line, "get help")
-  }
-  return "https://www.project-octopus.net";
-}
-function __get_head_png( script_id ) {
-  try {
-    // -------------------------------------------------------------------------------------
-    //  Name/URL zusammensetzen
-    var base = PATH_DATA_FOLDER + "/images/heads"
-    var sfmap = { "0": "32", "0.5": "5e", "0.51": "c2", "1": "f0"};
-    var uib = app.generalPreferences.uiBrightnessPreference;
-    var suffix = sfmap.hasOwnProperty(uib) ? sfmap[ uib ] : "5e";
-    var name = script_id + "-" + suffix + ".png";
-    var path = base + "/" + name;
-
-    var hd_file = new File( path );
-    if ( hd_file.exists ) {
-      return hd_file;
-    }
-  } catch(e) {
-    __log("error", e.message + " on " + e.line, "insert-head");
-  }
-}
-function __open_website(url) {
-	url = url.split(" ");
-	url = url.join("+");
-	url = encodeURI( url );
-	if (File.fs == "Macintosh") {
-		var tempFile = File( Folder.myDocuments.fullName + "/tempurl.webloc");
-		tempFile.open("w");
-		tempFile.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\
-		<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\
-		<plist version=\"1.0\">\
-			<dict>\
-				<key>URL</key>\
-				<string>"+url+"</string>\
-			</dict>\
-		</plist>");
-		tempFile.close();
-		tempFile.execute();
-		for (var aux = 0; aux < 100; aux++) {
-			$.sleep(10);
-		}
-		tempFile.remove();
-	} else {
-		var tempFile = File(Folder.myDocuments.fullName + "/temp.url");
-		tempFile.open("w");
-		tempFile.write("[InternetShortcut]\
-URL="+url);
-		tempFile.close();
-		tempFile.execute();
-		for (var aux = 0; aux < 100; aux++) {
-			$.sleep(10);
-		}
-		tempFile.remove();
-	}
-}
-
-
-
-
-// --------------------------------------------------------------------------------------------
-// --------------------------------------------------------------------------------------------
-//  JSON und RESTIX
-// --------------------------------------------------------------------------------------------
-// --------------------------------------------------------------------------------------------
 function __call_request( url, command, type, tgt_path, replace ) {
   if (typeof JSON !== "object") {
     __init();
@@ -438,11 +581,10 @@ function __call_request( url, command, type, tgt_path, replace ) {
   if (type == "data") {
     var response = restix.fetch(request);
     if (response.error) {
-      __log("error", "HTTP Request fehlgeschlagen: " + url + "/" + command + " - " + response.errorMsg, "includes");
-      throw new Error(response.error + "\n" + response.errorMsg);
+      throw new Error("HTTP Request fehlgeschlagen: " + url + "/" + command + " - " + response.errorMsg);
     }
     if (response.httpStatus >= 400) {
-      __log("error", "HTTP Status " + response.httpStatus + ": " + url + "/" + command, "includes");
+      throw new Error("HTTP Status " + response.httpStatus + ": " + url + "/" + command);
     }
 
     if ( tgt_path && (replace || !File(tgt_path).exists) ) {
@@ -461,29 +603,20 @@ function __call_request( url, command, type, tgt_path, replace ) {
       var temp = new File(tgt_path);
       var response = restix.fetchFile(request, temp);
       if ( response.httpStatus == 404 ) {
-        __log("error", "Datei nicht gefunden (404): " + url + "/" + command, "includes");
         throw new Error( "File '" + url + "' not found");
       }
       if (response.error) {
-        __log("error", "File Download fehlgeschlagen: " + url + "/" + command + " - " + response.errorMsg, "includes");
         throw new Error(response.error + "\n" + response.errorMsg);
       }
       return temp;
     }
   }
 }
-
 function __init() {
-
-  // alert( "guid: " + app.userGuid );
-  var guid = app.userGuid.split('@').shift();
-  if ( guid ) {
-    app.insertLabel("octopus_guid", guid);
-  } else {
-    app.insertLabel("octopus_guid", "huba")
-  }
-
-
+  PATH_SCRIPT_PARENT = app.scriptPreferences.scriptsFolder.parent.fullName;
+  PATH_DATA_FOLDER = Folder.userData.fullName + "/Octopus4";
+  PATH_LOG_FILE = PATH_DATA_FOLDER + "/Logs/log.json";
+  __ensureFolder(PATH_LOG_FILE);
 
   // ------------------------------------------------------------------------------------------------
   // JSON
@@ -761,18 +894,6 @@ function __init() {
       };
     }
   }());
-  
-  // ------------------------------------------------------------------------------------------------
-  //  Die Pfade zu den Ordnern habe ich global im Installer als Label gesetzt
-  // ------------------------------------------------------------------------------------------------
-  var paths = app.extractLabel("Octopus4-Paths");
-  if ( paths ) {
-    paths = JSON.parse( paths );
-    PATH_SCRIPT_PARENT = paths.PATH_SCRIPT_PARENT;
-    PATH_USER_FOLDER = paths.PATH_USER_FOLDER;
-    PATH_DATA_FOLDER = paths.PATH_DATA_FOLDER;
-    PATH_LOG_FILE = paths.PATH_LOG_FILE;
-  }
 
   // ------------------------------------------------------------------------------------------------
   // ------------------------------------------------------------------------------------------------
@@ -784,16 +905,6 @@ function __init() {
   * HTTPS supported 
   * Works form CS4 to CC 2022 (ExtendScript based library)
   * Based on VBScript/ServerXMLHTTP (Win) AppleScript/curl (Mac) relies on app.doScript()
-  * https://github.com/grefel/restix
-
-  var request = {
-    url:"String",
-    command:"String", // defaults to ""
-    port:443, // defaults to ""
-    method:"GET|POST", // defaults to GET
-    headers:[{name:"String", value:"String"}], // defaults to []
-    body:"" // defaults to ""
-  }  
 
   ## Getting started
   See examples/connect.jsx

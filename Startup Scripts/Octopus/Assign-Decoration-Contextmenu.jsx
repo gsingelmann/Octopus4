@@ -9,7 +9,7 @@
 // wir können nicht garantieren, dass das Script nicht mal unerwartete Ergebnisse erzeugt
 // 
 #targetengine "assign-decoration" 
-#include "Octopus-Include-su.jsxinc";
+#include "Include.jsxinc";
 var script_id = "assign-decoration-cm";
 __init();
 

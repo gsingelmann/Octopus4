@@ -6,7 +6,7 @@
 //Contact: Gregor Fellenz - http://www.publishingx.de
 
 #targetengine "octopus-ua-checktypo";
-#include "../Octopus-include-2.jsxinc"
+#include "Startup Scripts/Octopus/Include.jsxinc"
 __init();
 var script_id = "add_hyperlinks";
 __log("run", script_id, script_id);

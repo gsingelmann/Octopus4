@@ -1049,67 +1049,36 @@ function main() {
 
 
 
-
-
-	function __(id) {
-		localization_strings = get_translation_strings();
-		if (localization_strings.hasOwnProperty(id)) {
-			return localize(localization_strings[id]);
-		} else {
-			return id
+	function __( id ) {
+		var txt = "";
+		loc_strings = __readJson( get_script_folder_path() + "/Strings.json");
+		if ( ! loc_strings || ! loc_strings.hasOwnProperty(script_id) ) {
+			return id;
 		}
+		loc_strings = loc_strings[ script_id ];
+
+		if (loc_strings.hasOwnProperty(id)) {
+			txt = localize(loc_strings[id]);
+		} else {
+			txt = id
+		}
+		var re;
+		for ( var n = 1; n < arguments.length; n++ ) {
+			try {
+				re = new RegExp( "_" + n.toString() + "_" );
+				txt = txt.replace( re,  arguments[n].toString() );
+			} catch(e) {
+				__log( "error", e.message + " on " + e.line, script_id);
+			}
+		}
+		return txt;
 	}
-	function get_translation_strings() {
-		var _def = {
-			"Pink": {"de": "Pink", "en": "Pink"},
-			"Blue": {"de": "Blau", "en": "Blue"},
-			"Orange": {"de": "Orange", "en": "Reddish"},
-			"Green": {"de": "Grün", "en": "Green"},
-			"Sand": {"de": "Beige", "en": "Sand"},
-			"Petrol": {"de": "Petrol", "en": "Petrol"},
-			"Purple": {"de": "Lila", "en": "Purple"},
-			"Gras": {"de": "Gras", "en": "Gras"},
-		
-			"Overflow": {"de": "Übersatz", "en": "Overflow"},
-		
-			"Show-Overflow-Head-en": {"de": "Show-Overflow-Head-de", "en": "Show-Overflow-Head-en"},
-		
-			"win_title": {"de": "Übersatz zeigen", "en": "Show Overflows"},
-			"Options": {"de": "Optionen", "en": "Options"},
-			"Colors": {"de": "Farben", "en": "Colors"},
-			"Position": {"de": "Position", "en": "Position"},
-		
-			"Mark Textframes": {"de": "Rahmen markieren", "en": "Mark Textframes"},
-			"Show Char-Count": {"de": "Zeichenzahl zeigen", "en": "Show Char-Count"},
-			"Show Threadlines": {"de": "Verbindungslinien zeigen", "en": "Show Threadlines"},
-			"Inspect Tablecells": {"de": "Tabellenzellen berücksichtigen", "en": "Inspect Tablecells"},
-			"Mirror Layout": {"de": "Übersatzrahmen spiegeln Seitenlayout", "en": "Mirror Layout"},
-		
-			"Right of Page": {"de": "Neben der Seite", "en": "Beside Page"},
-			"Right of Frame": {"de": "Neben dem Rahmen", "en": "Beside Frame"},
-			"Below Page": {"de": "Unter der Seite", "en": "Below Page"},
-			"Below Frame": {"de": "Unter dem Rahmen", "en": "Below Frame"},
-			
-			"Go": {"de": "Anlegen", "en": "Go"},
-			"Update": {"de": "Aktualisieren", "en": "Update"},
-			"Remove": {"de": "Entfernen" , "en": "Remove"},
-			"Cancel": {"de": "Abbrechen" , "en": "Cancel"},
-			"All On": {"de": "Alle an", "en": "All On"},
-			"All Off": {"de": "Alle aus", "en": "All Off"},
-		
-			"OF-Frames": { "de": "Übersatz", "en": "Overflow"},
-		
-			"dec_sep": {"de": ".", "en": ","},
-		
-			"Table": {"de": "Tabelle", "en": "Table"},
-			"Anchored Object": {"de": "Verankertes Objekt", "en": "Anchored Object"},
-			"ColumnBreak": {"de": "<spaltenumbruch>", "en": "<ColumnBreak>"},
-			"FrameBreak": {"de": "<rahmenumbruch>", "en": "<FrameBreak>"},
-			"PageBreak": {"de": "<seitenumbruch>", "en": "<PageBreak>"},
-			"OddPageBreak": {"de": "<ungeradeseiteumbruch>", "en": "<OddPageBreak>"},
-			"EvenPageBreak": {"de": "<geradeseiteumbruch>", "en": "<EvenPageBreak>"}
-		};
-		return _def;
+	function get_script_folder_path() {
+			try {
+				return app.activeScript.parent.fullName;
+			} catch (e) { 
+				return e.fileName.replace(/\/[^\/]+$/, "");
+			}
 	}
 }
 

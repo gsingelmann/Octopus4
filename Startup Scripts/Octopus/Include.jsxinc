@@ -39,8 +39,11 @@ function __log(level, msg, active_script) {
     }
 
     var guid = app.userGuid.split('@').shift();
+    // Während des Startups steht die GUID anscheinend nicht zur Verfügung.
     if ( !guid ) {
       guid = app.extractLabel("octopus_guid");
+    } else {
+      app.insertLabel("octopus_guid", guid);
     }
     var _log = __readJson( PATH_LOG_FILE );
     if ( ! _log ) {
@@ -59,6 +62,26 @@ function __log(level, msg, active_script) {
   }
 }
 
+function __deep_copy( o ) {
+  if ( ! o ) return o;
+  var c = o.constructor.name;
+  var rs;
+  if ( " String Number Boolean ".indexOf(c) != -1 ) {
+    return o
+  } else if ( c == "Array" ) {
+    rs = [];
+    for ( var n = 0; n < o.length; n++ ) {
+      rs.push( __deep_copy( o[n] ) );
+    }
+    return rs;
+  } else if ( c == "Object" ) {
+    rs = {};
+    for ( var p in o ) {
+      rs[p] = __deep_copy( o[p] );
+    }
+    return rs;
+  }
+} 
 
 // =============================================================================
 // HILFSFUNKTIONEN – Dateien lesen/schreiben

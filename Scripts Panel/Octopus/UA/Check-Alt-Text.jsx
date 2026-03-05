@@ -26,7 +26,8 @@
 		FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
 		DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------- */
-#include "Startup Scripts/Octopus/Include.jsxinc"
+// #include "Startup Scripts/Octopus/Include.jsxinc"
+#include "../../../Startup Scripts/Octopus/Include.jsxinc"
 #targetengine "octopus-ua-checkalttext"
 var script_id = "check-alt-text";
 __init();

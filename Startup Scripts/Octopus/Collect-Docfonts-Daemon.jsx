@@ -39,10 +39,11 @@ script_id = "collect-docfonts-daemon";
 __init();
 
 app.addEventListener( "afterSaveAs", saveas_handler );
+app.addEventListener( "afterSave", saveas_handler );
 
 function saveas_handler(event) {
 	try {
-		__log("info", "save-as event", script_id)
+		// __log("info", "save-as event", script_id)
 		if ( ! get_info(event, "after-save-as") ) return;
 		collect_doc_main( event.target);
 	} catch(e) {
@@ -109,7 +110,7 @@ function collect_doc_main( doc ) {
 			}
 
 			if ( do_collect ) {	
-				__log("info", "Schriften für '" + doc.name.replace(/\.indd/i,"") + "' sollen gesammelt werden", script_id)
+				__log("info", "Schriften fuer '" + doc.name.replace(/\.indd/i,"") + "' sollen gesammelt werden", script_id)
 				var tgt_path = doc.filePath + "/Document fonts";
 				var tgt_folder = new Folder( tgt_path );
 				if ( ! tgt_folder.exists ) {
@@ -145,7 +146,7 @@ function collect_doc_main( doc ) {
 					__alert( "krake", __("Collect-Fonts", script_id) + "\n\n" + msgs.join("\n"), "", "OK", false );
 				}
 			} else {
-				__log("info", "Doc erfüllt die Kriterien nicht", script_id)
+				__log("info", "Doc erfuellt die Kriterien nicht", script_id)
 			}				// do collect
 		} catch(e) {
 			__log("error", e.message + " on " + e.line )

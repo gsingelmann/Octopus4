@@ -6,7 +6,7 @@
 +   Author: Gerald Singelmann, gs@cuppascript.com
 +   Supported by: Satzkiste GmbH, post@satzkiste.de
 
-+    Modified: 2023-04-26
++    Modified: 2023-04-26 
 
 +    License (MIT) 
 		Copyright 2023 Gerald Singelmann/Satzkiste GmbH
@@ -58,7 +58,7 @@ try {
 }
 
 // ----------------------------------------------------------------------------------------------------------------
-//   Prefs beziehen sich auf das, was automstisch passieren soll
+//   Prefs beziehen sich auf das, was automatisch passieren soll
 // ----------------------------------------------------------------------------------------------------------------
 var prefs = __readJson( PATH_DATA_FOLDER + "/prefs/" + script_id + "-pref.json" );
 if ( ! prefs ) {
@@ -164,100 +164,122 @@ function preset_manager() {
     this.window.close();
   }
   w.new_btn.onClick = function() {
-    
-    var p = null;
-    if ( w.lb.selection ) {
-      p = __deep_copy( presets[ w.lb.selection.index ] );
-    }
-    var neu = main( "new", p );
-    if ( neu ) {
-      var new_name = neu.config.name.toLowerCase().replace(/ /g, "-").replace(/[^a-z0-9]/g, "") + "_cfg.json";
-      var tgt = new File( cfg_folder_path + "/" + new_name );
-      var do_write = true;
-      if (tgt.exists) {
-        do_write = __alert(
-          "stop", 
-          __('file_exists'), undefined, 
-          [
-            {text: __('ui_ok'), value: true},
-            {text: __('ui_cancel'), value: false},
-          ]
-        )
+    try {
+      var p = null;
+      if ( w.lb.selection ) {
+        p = __deep_copy( presets[ w.lb.selection.index ] );
       }
-      if (do_write ) {
-        __writeJson( tgt, neu.config );
-      }
-      var aux = w.lb.add("item", neu.config.name);
-      aux.file = tgt;
+      var neu = main( "new", p );
+      if ( neu ) {
+        var new_name = neu.config.name.toLowerCase().replace(/ /g, "-").replace(/[^a-z0-9]/g, "") + "_cfg.json";
+        var tgt = new File( cfg_folder_path + "/" + new_name );
+        var do_write = true;
+        if (tgt.exists) {
+          do_write = __alert(
+            "stop", 
+            __('file_exists'), undefined, 
+            [
+              {text: __('ui_ok'), value: true},
+              {text: __('ui_cancel'), value: false},
+            ]
+          )
+        }
+        if (do_write ) {
+          __writeJson( tgt, neu.config );
+        }
+        var aux = w.lb.add("item", neu.config.name);
+        aux.file = tgt;
 
-      if ( neu.apply ) {
-        this.window.apply_this = neu.config.name;
-        this.window.close();
+        if ( neu.apply ) {
+          this.window.apply_this = neu.config.name;
+          this.window.close();
+        }
       }
+    } catch(e) {
+      __log("error", e.message + " on " + e.line, script_id );
     }
     $.bp(false);
   }
   w.edit_btn.onClick = function() {
-    if ( ! w.lb.selection ) return;
-    var p = __deep_copy( presets[ w.lb.selection.index ] );
-    var anders = main( "edit", p );
-    if ( anders ) {
-      w.lb.selection.text = anders.config.name;
-      presets[ w.lb.selection.index ] = anders.config;
-      __writeJson( w.lb.selection.file, anders.config );
-      // $.writeln( "config geschrieben: " + aux);
-      if ( anders.apply ) {
-        w.apply_this = anders.config.name;
-        w.close();
+    try {
+      if ( ! w.lb.selection ) return;
+      var p = __deep_copy( presets[ w.lb.selection.index ] );
+      var anders = main( "edit", p );
+      if ( anders ) {
+        w.lb.selection.text = anders.config.name;
+        presets[ w.lb.selection.index ] = anders.config;
+        __writeJson( w.lb.selection.file, anders.config );
+        // $.writeln( "config geschrieben: " + aux);
+        if ( anders.apply ) {
+          w.apply_this = anders.config.name;
+          w.close();
+        }
       }
+    } catch(e) {
+      __log("error", e.message + " on " + e.line, script_id );
     }
-
   }
   w.delete_btn.onClick = function() {
-    var do_delete = __alert(
-      "stop", 
-      __('really_delete'), undefined, 
-      [
-        {text: __('ui_ok'), value: true},
-        {text: __('ui_cancel'), value: false},
-      ]
-    )
-    if ( do_delete ) {
-      if ( w.lb.selection.text == prefs.default_cfg ) {
-        prefs.default_cfg = "";
-        w.options.use_default.enabled = false;
-        __writeJson( PATH_DATA_FOLDER + "/prefs/" + script_id + "-pref.json", prefs );
+    try {
+      var do_delete = __alert(
+        "stop", 
+        __('really_delete'), undefined, 
+        [
+          {text: __('ui_ok'), value: true},
+          {text: __('ui_cancel'), value: false},
+        ]
+      )
+      if ( do_delete ) {
+        if ( w.lb.selection.text == prefs.default_cfg ) {
+          prefs.default_cfg = "";
+          w.options.use_default.enabled = false;
+          __writeJson( PATH_DATA_FOLDER + "/prefs/" + script_id + "-pref.json", prefs );
+        }
+        w.lb.selection.file.remove();
+        w.lb.remove(w.lb.selection);
       }
-      w.lb.selection.file.remove();
-      w.lb.remove(w.lb.selection);
+    } catch(e) {
+      __log("error", e.message + " on " + e.line, script_id );
     }
   }
 
   w.import_btn.onClick = function() {
-    var fp = File.openDialog( __('import_from_where'), "*_cfg.json", true );
-    var aux = fp.constructor.name;
-    if ( ! fp ) return;
-    for ( var n = 0; n < fp.length; n++ ) {
-      var tgt = cfg_folder_path + "/" + fp[n].name;
-      fp[n].copy( tgt );
-      var aux = w.lb.add("item", fp[n].name.replace(/\.json/, "") );
-      aux.file = new File( tgt );
+    try {
+      var fp = File.openDialog( __('import_from_where'), "*_cfg.json", true );
+      var aux = fp.constructor.name;
+      if ( ! fp ) return;
+      for ( var n = 0; n < fp.length; n++ ) {
+        var tgt = cfg_folder_path + "/" + fp[n].name;
+        fp[n].copy( tgt );
+        var aux = w.lb.add("item", fp[n].name.replace(/\.json/, "") );
+        aux.file = new File( tgt );
+      }
+    } catch(e) {
+      __log("error", e.message + " on " + e.line, script_id );
     }
   }
   w.export_btn.onClick = function() {
-    var fp = Folder.selectDialog( __('export_to_where') );
-    if ( ! fp ) return;
-    var tgt = fp.fullName + "/" + w.lb.selection.file.name;
-    w.lb.selection.file.copy( File( tgt ) );
+    try {
+      var fp = Folder.selectDialog( __('export_to_where') );
+      if ( ! fp ) return;
+      var tgt = fp.fullName + "/" + w.lb.selection.file.name;
+      w.lb.selection.file.copy( File( tgt ) );
+    } catch(e) {
+      __log("error", e.message + " on " + e.line, script_id );
+    }
   }
 
   w.set_btn.onClick = function() {
-    if ( ! w.lb.selection ) return;
-    prefs.default_cfg = w.lb.selection.text;
-    w.options.use_default.enabled = true;
-    __writeJson( PATH_DATA_FOLDER + "/prefs/" + script_id + "-pref.json", prefs );
-    var _t = __('ui_usedefault').replace(/___/, prefs.default_cfg )
-    w.options.use_default.text = _t;
+    try {
+      if ( ! w.lb.selection ) return;
+      prefs.default_cfg = w.lb.selection.text;
+      w.options.use_default.enabled = true;
+      __writeJson( PATH_DATA_FOLDER + "/prefs/" + script_id + "-pref.json", prefs );
+      var _t = __('ui_usedefault').replace(/___/, prefs.default_cfg )
+      w.options.use_default.text = _t;
+    } catch(e) {
+      __log("error", e.message + " on " + e.line, script_id );
+    }
   }
   w.onMove = function() {
     app.insertLabel( "octopus_panelpos_displaycfg", JSON.stringify( w.location ));
@@ -278,199 +300,202 @@ function preset_manager() {
 //  Edit Preset
 // ----------------------------------------------------------------------------------------------------------------
 function main( what_to_do, preset ) {
-  
-  // In config stehen meine Default-Werte und die Struktur der Optionen
-  // Die Struktur nehme ich, um die Werte aus den gespeicherten Configs in `configs` abzugleichen
-  var config, enums;
-  init_cfg();
-  // Falls im Vorgabe-config localized vorkommt, jetzt übersetzen
-  for ( var m = 0; m < config.optiongroups.length; m++ ) {
-    for ( n = 0; n < config.optiongroups[m].options.length; n++ ) {
-      var v = config.optiongroups[m].options[n].value;
-      if ( v.constructor.name == "String" && v.substr(0,2) == "__" ) {
-        config.optiongroups[m].options[n].value = eval( v );
-      }
-    }
-  }
-  
-  // Die controlgroups etc werden unten von saved_prefs in config übertragen, der Name nicht.
-  if ( what_to_do == "new" ) {
-    if ( preset ) {
-      saved_prefs = __deep_copy( preset );
-      config.name = preset.name + "-1";
-    } else {
-      saved_prefs = __deep_copy( config );
-      config.name = __('new_preset');
-    }
-  } else if ( what_to_do == "edit" ) {
-    saved_prefs = __deep_copy( preset );
-    config.name = preset.name;
-  }
-  
-  // ----------------------------------  Array abgleichen ------------------
-  // Es kann sein, dass neues Script = geänderte Default-Struktur
-  // -> Wir mappen die gespeicherten Werte in die neue Struktur und speichern die dann
-  for ( var a = 0; a < saved_prefs.optiongroups.length; a++ ) {
+  try {
+    // In config stehen meine Default-Werte und die Struktur der Optionen
+    // Die Struktur nehme ich, um die Werte aus den gespeicherten Configs in `configs` abzugleichen
+    var config, enums;
+    init_cfg();
+    // Falls im Vorgabe-config localized vorkommt, jetzt übersetzen
     for ( var m = 0; m < config.optiongroups.length; m++ ) {
-      if ( config.optiongroups[m].id == saved_prefs.optiongroups[a].id ) {
-        for ( b = 0; b < saved_prefs.optiongroups[a].options.length; b++ ) {
-          for ( n = 0; n < config.optiongroups[m].options.length; n++ ) {
-            if ( config.optiongroups[m].options[n].id == saved_prefs.optiongroups[a].options[b].id ) {
-              // Ich brauche für die Workspaces die Option, localized als Value zu haben
-              var v = saved_prefs.optiongroups[a].options[b].value
-              if ( typeof v == "string" && v.substring(0,2) == "__" ) {
-                var aux = saved_prefs.optiongroups[a].options[b].value,
-                    aux2 = eval( saved_prefs.optiongroups[a].options[b].value );
-                config.optiongroups[m].options[n].value = eval(v);
-              } else {
-                config.optiongroups[m].options[n].value = v;
-              }
-              config.optiongroups[m].options[n].aktiv = saved_prefs.optiongroups[a].options[b].aktiv;
-            } // option-id ==
-          }   // options loop
-        }     // saved options loop
-      }       // group-id ==
-    }         // group loop
-  }           // saved group loop
-
-
-  var lblw = 180;
-  var editw = 200;
-
-  var w = new Window('dialog {text: "' + __("ui_config") + '", opacity: 1, orientation: "column", alignChildren: ["fill", "fill"]}');
-  // ---------------------- rows ----------------------------------------------------------
-  w.rows = {};
-  // ---------------------- Octopus-CI ----------------------------------------------------------
-  __insert_head( w, "Display-Config-v2" );
-
-  w.name_group = w.add("panel {alignChildren: ['fill', 'bottom'], orientation: 'row', text: '" + __('new_preset_name') + "'}");
-  w.main = w.add("group {preferredWidth: 600, alignChildren: ['fill', 'fill']}");
-  w.btnarea = w.add("group {alignment: ['right', 'top'], orientation: 'row'}");
-
-  w.opac = w.add("slider", undefined, 1, 0.1, 1);
-  w.opac.onChanging = function () {
-    this.window.opacity = this.value;
-  }
-
-  // w.name_group.add("statictext", undefined, __('new_preset_name'));
-  w.preset_name = w.name_group.add("edittext", undefined, config.name);
-  w.preset_name.onChange = function() {
-    config.name = this.text;
-  }
-
-  w.main.row = w.main.add("group {alignment: ['fill', 'fill'], alignChildren: 'fill', orientation: 'row'}");
-  w.main.columns = [];
-  w.main.columns[0] = w.main.row.add("group {alignment: ['fill', 'fill'], alignChildren: 'fill', orientation: 'column'}");
-  w.main.columns[1] = w.main.row.add("group {alignment: ['fill', 'fill'], alignChildren: 'fill', orientation: 'column'}");
-//  w.main.columns[2] = w.main.row.add("group {alignment: ['fill', 'fill'], alignChildren: 'fill', orientation: 'column'}");
-
-  for (var n_group = 0; n_group < config.optiongroups.length; n_group++) {
-    var column = w.main.columns[config.optiongroups[n_group].column];
-    var pnl = column.add("panel {alignChildren: ['fill', 'fill'], text: '" + config.optiongroups[n_group].name + "'}");
-
-    for (var n_option = 0; n_option < config.optiongroups[n_group].options.length; n_option++) {
-      var option = config.optiongroups[n_group].options[n_option];
-
-      var row = pnl.add("group {orientation: 'row'}")
-      row.option_id = option.id;
-      row.group_id = config.optiongroups[n_group].id;
-      row.kind = option.type;
-
-      row.add('statictext', [undefined, undefined, lblw, 20], option.name + ":");
-
-      // row.aktiv = row.add("checkbox {text: 'aktiv', value: " + option.aktiv + "}");
-      row.aktiv = row.add("checkbox {text: '" + __("ui_active") + "', value: " + option.aktiv + "}");
-      row.aktiv.onClick = function () {
-        var row = this.parent;
-        // state aktualisieren
-        update_state( row.group_id, row.option_id, undefined, this.value );
-        // alle felder (de)aktivieren
-        for (var n = 0; n < row.fields.length; n++) {
-          row.fields[n].enabled = this.value;
+      for ( n = 0; n < config.optiongroups[m].options.length; n++ ) {
+        var v = config.optiongroups[m].options[n].value;
+        if ( v.constructor.name == "String" && v.substr(0,2) == "__" ) {
+          config.optiongroups[m].options[n].value = eval( v );
         }
       }
+    }
+    
+    // Die controlgroups etc werden unten von saved_prefs in config übertragen, der Name nicht.
+    if ( what_to_do == "new" ) {
+      if ( preset ) {
+        saved_prefs = __deep_copy( preset );
+        config.name = preset.name + "-1";
+      } else {
+        saved_prefs = __deep_copy( config );
+        config.name = __('new_preset');
+      }
+    } else if ( what_to_do == "edit" ) {
+      saved_prefs = __deep_copy( preset );
+      config.name = preset.name;
+    }
+    
+    // ----------------------------------  Array abgleichen ------------------
+    // Es kann sein, dass neues Script = geänderte Default-Struktur
+    // -> Wir mappen die gespeicherten Werte in die neue Struktur und speichern die dann
+    for ( var a = 0; a < saved_prefs.optiongroups.length; a++ ) {
+      for ( var m = 0; m < config.optiongroups.length; m++ ) {
+        if ( config.optiongroups[m].id == saved_prefs.optiongroups[a].id ) {
+          for ( b = 0; b < saved_prefs.optiongroups[a].options.length; b++ ) {
+            for ( n = 0; n < config.optiongroups[m].options.length; n++ ) {
+              if ( config.optiongroups[m].options[n].id == saved_prefs.optiongroups[a].options[b].id ) {
+                // Ich brauche für die Workspaces die Option, localized als Value zu haben
+                var v = saved_prefs.optiongroups[a].options[b].value
+                if ( typeof v == "string" && v.substring(0,2) == "__" ) {
+                  var aux = saved_prefs.optiongroups[a].options[b].value,
+                      aux2 = eval( saved_prefs.optiongroups[a].options[b].value );
+                  config.optiongroups[m].options[n].value = eval(v);
+                } else {
+                  config.optiongroups[m].options[n].value = v;
+                }
+                config.optiongroups[m].options[n].aktiv = saved_prefs.optiongroups[a].options[b].aktiv;
+              } // option-id ==
+            }   // options loop
+          }     // saved options loop
+        }       // group-id ==
+      }         // group loop
+    }           // saved group loop
 
-      row.add("statictext", [undefined, undefined, 20, 20], "  ")
 
-      row.fields = [];
-      // ----------------------------------------------  BOOLEAN --------------------------------
-      if (option.type == "boolean") {
-        row.fields.push(row.add("radiobutton", undefined, __("ui_on")));
-        row.fields.push(row.add("radiobutton", undefined, __("ui_off")));
-        row.fields[0].onClick = handle_rb;
-        row.fields[1].onClick = handle_rb;
-        if (option.value) {
-          row.fields[0].value = true;
-        } else {
-          row.fields[1].value = true;
-        }
-        
-      } else if ( option.id == "workspace" ) {
-        // ----------------------------------------------  Workspace --------------------------------
-        var entries = [];
-        var aux = get_list_of_workspaces();
-        var sel = 0;
-        for (var n = 0; n < aux.length; n++) {
-          entries.push( aux[n] );
-          if (aux[n] == option.value) sel = n;
-        }
-        row.fields.push(row.add('dropdownlist', [undefined, undefined, editw, 20], entries));
-        row.fields[0].selection = sel;
-        row.fields[0].enabled = option.aktiv;
-        row.fields[0].onChange = function () {
-          var row = this.parent;
-          var id = row._id;
-          var n = this.selection.index;
-          update_state( row.group_id, row.option_id, get_list_of_workspaces()[n] , undefined);
-        }
+    var lblw = 180;
+    var editw = 200;
 
-      } else if (option.type == "string") {
-        // ----------------------------------------------  String --------------------------------
-        row.fields.push(row.add('edittext', [undefined, undefined, editw, 20], option.value));
-        row.fields[0].enabled = option.aktiv;
-        row.fields[0].onChange = function () {
+    var w = new Window('dialog {text: "' + __("ui_config") + '", opacity: 1, orientation: "column", alignChildren: ["fill", "fill"]}');
+    // ---------------------- rows ----------------------------------------------------------
+    w.rows = {};
+    // ---------------------- Octopus-CI ----------------------------------------------------------
+    __insert_head( w, "Display-Config-v2" );
+
+    w.name_group = w.add("panel {alignChildren: ['fill', 'bottom'], orientation: 'row', text: '" + __('new_preset_name') + "'}");
+    w.main = w.add("group {preferredWidth: 600, alignChildren: ['fill', 'fill']}");
+    w.btnarea = w.add("group {alignment: ['right', 'top'], orientation: 'row'}");
+
+    w.opac = w.add("slider", undefined, 1, 0.1, 1);
+    w.opac.onChanging = function () {
+      this.window.opacity = this.value;
+    }
+
+    // w.name_group.add("statictext", undefined, __('new_preset_name'));
+    w.preset_name = w.name_group.add("edittext", undefined, config.name);
+    w.preset_name.onChange = function() {
+      config.name = this.text;
+    }
+
+    w.main.row = w.main.add("group {alignment: ['fill', 'fill'], alignChildren: 'fill', orientation: 'row'}");
+    w.main.columns = [];
+    w.main.columns[0] = w.main.row.add("group {alignment: ['fill', 'fill'], alignChildren: 'fill', orientation: 'column'}");
+    w.main.columns[1] = w.main.row.add("group {alignment: ['fill', 'fill'], alignChildren: 'fill', orientation: 'column'}");
+  //  w.main.columns[2] = w.main.row.add("group {alignment: ['fill', 'fill'], alignChildren: 'fill', orientation: 'column'}");
+
+    for (var n_group = 0; n_group < config.optiongroups.length; n_group++) {
+      var column = w.main.columns[config.optiongroups[n_group].column];
+      var pnl = column.add("panel {alignChildren: ['fill', 'fill'], text: '" + config.optiongroups[n_group].name + "'}");
+
+      for (var n_option = 0; n_option < config.optiongroups[n_group].options.length; n_option++) {
+        var option = config.optiongroups[n_group].options[n_option];
+
+        var row = pnl.add("group {orientation: 'row'}")
+        row.option_id = option.id;
+        row.group_id = config.optiongroups[n_group].id;
+        row.kind = option.type;
+
+        row.add('statictext', [undefined, undefined, lblw, 20], option.name + ":");
+
+        // row.aktiv = row.add("checkbox {text: 'aktiv', value: " + option.aktiv + "}");
+        row.aktiv = row.add("checkbox {text: '" + __("ui_active") + "', value: " + option.aktiv + "}");
+        row.aktiv.onClick = function () {
           var row = this.parent;
-          var aux = this;
-          update_state( row.group_id, row.option_id, this.text , undefined);
-        }
-        
-      } else if (option.type == "number") {
-        // ----------------------------------------------  Number --------------------------------
-        row.fields.push(row.add('edittext', [undefined, undefined, editw, 20], option.value));
-        row.fields[0].enabled = option.aktiv;
-        row.fields[0].onChange = function () {
-          var row = this.parent;
-          this.text = this.text.replace(/,/, ".");
-          if (isNaN(Number(this.text))) {
-            this.text = get_state( row.group_id, row.option_id );
-          } else {
-            update_state( row.group_id, row.option_id, Number(this.text) , undefined);
+          // state aktualisieren
+          update_state( row.group_id, row.option_id, undefined, this.value );
+          // alle felder (de)aktivieren
+          for (var n = 0; n < row.fields.length; n++) {
+            row.fields[n].enabled = this.value;
           }
         }
-        
-      } else if (option.type == "enum") {
-        // ----------------------------------------------  Enum --------------------------------
-        var entries = [];
-        var sel = 0;
-        for (var n = 0; n < enums[option.enum_options_id].values.length; n++) {
-          entries.push(enums[option.enum_options_id].values[n].name);
-          if (enums[option.enum_options_id].values[n].value == option.value) sel = n;
+
+        row.add("statictext", [undefined, undefined, 20, 20], "  ")
+
+        row.fields = [];
+        // ----------------------------------------------  BOOLEAN --------------------------------
+        if (option.type == "boolean") {
+          row.fields.push(row.add("radiobutton", undefined, __("ui_on")));
+          row.fields.push(row.add("radiobutton", undefined, __("ui_off")));
+          row.fields[0].onClick = handle_rb;
+          row.fields[1].onClick = handle_rb;
+          if (option.value) {
+            row.fields[0].value = true;
+          } else {
+            row.fields[1].value = true;
+          }
+          
+        } else if ( option.id == "workspace" ) {
+          // ----------------------------------------------  Workspace --------------------------------
+          var entries = [];
+          var aux = get_list_of_workspaces();
+          var sel = 0;
+          for (var n = 0; n < aux.length; n++) {
+            entries.push( aux[n] );
+            if (aux[n] == option.value) sel = n;
+          }
+          row.fields.push(row.add('dropdownlist', [undefined, undefined, editw, 20], entries));
+          row.fields[0].selection = sel;
+          row.fields[0].enabled = option.aktiv;
+          row.fields[0].onChange = function () {
+            var row = this.parent;
+            var id = row._id;
+            var n = this.selection.index;
+            update_state( row.group_id, row.option_id, get_list_of_workspaces()[n] , undefined);
+          }
+
+        } else if (option.type == "string") {
+          // ----------------------------------------------  String --------------------------------
+          row.fields.push(row.add('edittext', [undefined, undefined, editw, 20], option.value));
+          row.fields[0].enabled = option.aktiv;
+          row.fields[0].onChange = function () {
+            var row = this.parent;
+            var aux = this;
+            update_state( row.group_id, row.option_id, this.text , undefined);
+          }
+          
+        } else if (option.type == "number") {
+          // ----------------------------------------------  Number --------------------------------
+          row.fields.push(row.add('edittext', [undefined, undefined, editw, 20], option.value));
+          row.fields[0].enabled = option.aktiv;
+          row.fields[0].onChange = function () {
+            var row = this.parent;
+            this.text = this.text.replace(/,/, ".");
+            if (isNaN(Number(this.text))) {
+              this.text = get_state( row.group_id, row.option_id );
+            } else {
+              update_state( row.group_id, row.option_id, Number(this.text) , undefined);
+            }
+          }
+          
+        } else if (option.type == "enum") {
+          // ----------------------------------------------  Enum --------------------------------
+          var entries = [];
+          var sel = 0;
+          for (var n = 0; n < enums[option.enum_options_id].values.length; n++) {
+            entries.push(enums[option.enum_options_id].values[n].name);
+            if (enums[option.enum_options_id].values[n].value == option.value) sel = n;
+          }
+          row.fields.push(row.add('dropdownlist', [undefined, undefined, editw, 20], entries));
+          row.fields[0].selection = sel;
+          row.fields[0].enabled = option.aktiv;
+          row.fields[0].enum_id = option.enum_options_id;
+          row.fields[0].onChange = function () {
+            var row = this.parent;
+            var id = row._id;
+            var n = this.selection.index;
+            update_state( row.group_id, row.option_id, enums[ this.enum_id ].values[n].value , undefined);
+          }
         }
-        row.fields.push(row.add('dropdownlist', [undefined, undefined, editw, 20], entries));
-        row.fields[0].selection = sel;
-        row.fields[0].enabled = option.aktiv;
-        row.fields[0].enum_id = option.enum_options_id;
-        row.fields[0].onChange = function () {
-          var row = this.parent;
-          var id = row._id;
-          var n = this.selection.index;
-          update_state( row.group_id, row.option_id, enums[ this.enum_id ].values[n].value , undefined);
-        }
-      }
-      // w.rows.push( row );
-      w.rows[row.group_id + "." + row.option_id] = row;
-    }   // option loop
-  }     // optiongroup loop
+        // w.rows.push( row );
+        w.rows[row.group_id + "." + row.option_id] = row;
+      }   // option loop
+    }     // optiongroup loop
+  } catch(e) {
+    __log("error", e.message + " on " + e.line, script_id );
+  }
 
 
   function update_state( group_id, option_id, value, aktiv ) {

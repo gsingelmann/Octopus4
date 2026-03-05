@@ -505,8 +505,8 @@
       "en": "Declared script folders"
     },
     "add_set": {
-      "de": "Ordner aufnehmen",
-      "en": "Add Folder"
+      "de": "Set importieren",
+      "en": "Import set"
     },
     "add_set_label": {
       "de": "Ordner hinzufügen",
@@ -533,8 +533,8 @@
       "en": "Path to the script folder"
     },
     "delete-set": {
-      "de": "Scripte deinstallieren",
-      "en": "Uninstall scripts"
+      "de": "Scriptset deinstallieren",
+      "en": "Uninstall scriptset"
     },
     "choose_folder": {
       "de": "Wählen Sie den Ordner, in dem sich die Skripte befinden, die Sie hinzufügen möchten.",
@@ -548,9 +548,17 @@
       "de": "Fehler beim Speichern der Einstellungen. ",
       "en": "Error saving preferences. "
     },
+    "show-folder": {
+      "de": "Lokale Octopus-Ordner anzeigen",
+      "en": "Show local Octopus folders"
+    },
     "no_scripts_found": {
       "de": "Die Config-Datei konnte nicht geladen werden.",
       "en": "Config-File could not be loaded."
+    },
+    "no-config-read": {
+      "de": "Es konnte keine Config eingelesen werden",
+      "en": "No config could be loaded"
     }
   },
   "display-config": {

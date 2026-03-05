@@ -88,6 +88,7 @@ function batch_export() {
   } else {  
     w.todo_selection = {
       pdf: true,
+      pdf2: false,
       saveas: false,
       idml: false,
       pckg: false,
@@ -135,10 +136,12 @@ function batch_export() {
   // w.pdf_btn = w.pdf_group.add("button", undefined, __('pdfexport'));
   w.preset_dd = w.pdf_group.add("dropdownlist", undefined, preset_names);
   try { w.preset_dd.selection = Number(preset_def); } catch(e){}
+  w.snd_pdf_yesno = w.pdf_group.add("checkbox", undefined, __('pdfexport'))
+  w.snd_pdf_yesno.value = w.todo_selection.pdf2;
   w.snd_preset_dd = w.pdf_group.add("dropdownlist", undefined, preset_names);
   try { w.snd_preset_dd.selection = Number(preset_snd_def); } catch(e){}
   w.preset_dd.enabled = w.pdf_yesno.value;
-  w.snd_preset_dd.enabled = w.pdf_yesno.value;
+  w.snd_preset_dd.enabled = w.snd_pdf_yesno.value;
 
   w.id_group = w.left_column.add("panel {orientation: 'column', text: 'InDesign', alignChildren: ['fill', 'top']} ")
   w.saveas_yesno = w.id_group.add("checkbox", undefined, __('saveas'));
@@ -196,6 +199,9 @@ function batch_export() {
   w.pdf_yesno.onClick = function () { 
     // w.todo_selection.pdf = this.value; 
     w.preset_dd.enabled = this.value;
+  }
+  w.snd_pdf_yesno.onClick = function () { 
+    // w.todo_selection.pdf = this.value; 
     w.snd_preset_dd.enabled = this.value;
   }
   // w.saveas_yesno.onClick = function () { w.todo_selection.saveas = this.value; }
@@ -208,6 +214,7 @@ function batch_export() {
 
   w.todo_selection = {
     pdf: w.pdf_yesno.value,
+    pdf2: w.snd_pdf_yesno.value,
     saveas: w.saveas_yesno.value,
     idml: w.idml_yesno.value,
     pckg: w.package_yesno.value,
@@ -342,10 +349,13 @@ function batch_export() {
       var tgt = get_target( docs[n], tgt_location, "pdf", tgt_is_relative )
       if ( ! tgt ) continue;
       docs[n].exportFile( ExportFormat.PDF_TYPE, tgt, false, pdf_preset_export )
-      if ( snd_pdf_preset_export.name != pdf_preset_export.name ) {
-        var tgt2 = new File( tgt.fullName.replace(/\.pdf/i, "-2.pdf") );
-        docs[n].exportFile( ExportFormat.PDF_TYPE, tgt2, false, snd_pdf_preset_export )
-      }
+    }
+    if ( choice == "pdf" || w.todo_selection.pdf2 ) {
+      app.pdfExportPreferences.viewPDF = false;
+      var tgt = get_target( docs[n], tgt_location, "pdf", tgt_is_relative )
+      if ( ! tgt ) continue;
+      var tgt2 = new File( tgt.fullName.replace(/\.pdf/i, "-2.pdf") );
+      docs[n].exportFile( ExportFormat.PDF_TYPE, tgt2, false, snd_pdf_preset_export )
     }
 
     if ( choice == "idml" || w.todo_selection.idml ) {

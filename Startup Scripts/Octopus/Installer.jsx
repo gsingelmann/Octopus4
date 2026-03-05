@@ -175,13 +175,13 @@ function install() {
         if ( ! tgt_file.exists ) throw new Error( "Download gescheitert" );
         __log("info", tgt_file.name + " installiert: " + tgt_file.exists, "installer")
         if (is_new) {
-          nu.push(c.id);
+          nu.push(c.filename);
         } else {
-          updated.push(c.id);
+          updated.push(c.filename);
         }
       } catch (e) {
         __log("error", "Download fehlgeschlagen (" + c.filename + "): " + e.message, "installer");
-        failed.push(c.id);
+        failed.push(c.filename);
       }
       $.sleep(100);
 
@@ -193,24 +193,24 @@ function install() {
           done = src.copy(tgt_path);
           if (!done) {
             __log("error", "Kopieren fehlgeschlagen: " + src.fsName + " -> " + tgt_path, "installer");
-            failed.push(c.id);
+            failed.push(c.filename);
           } else {
             __log("info", tgt_path + " installiert", "installer");
             if (c.id != "index") {  // Ich will nicht sehen, ob das JSON wackelt
               if (is_new) {
-                nu.push(c.id);
+                nu.push(c.filename);
               } else {
-                updated.push(c.id);
+                updated.push(c.filename);
               }
             }
           }
         } else {
           __log("error", "Quelldatei nicht gefunden: " + src.fsName, "installer");
-          failed.push(c.id);
+          failed.push(c.filename);
         }
       } catch (e) {
         __log("error", "Datei-Operation fehlgeschlagen (" + c.filename + "): " + e.message, "installer");
-        failed.push(c.id);
+        failed.push(c.filename);
       }
     }
   }   // update_resources
@@ -224,7 +224,8 @@ function install() {
       // --------------------------------------------------------------------
       // ------------------------------------------------------- Menu finden
       if (tgt_file.exists && c.menu) {
-        if ( ! c.menu.charAt(0) != "$" ) {
+        // $.writeln( c.menu )
+        if ( c.menu.substr(0,3).toLowerCase() != "$id" ) {
           custom_menus[ c.menu ] = true;
         }
         var menu = get_submenu(c.menu, undefined, "$ID/Table");
@@ -276,7 +277,7 @@ function install() {
           // ----------------------------------------------------------------------
           // 2026-02-23: Alle Menüeinträge, die custom sind, werden zusätzlich
           //  ins Octopus-Menü gepackt.
-          if ( c.set == "octopus" && c.menu != "Octopus" ) {
+          if ( c.set_name == "octopus" && c.menu != "Octopus" ) {
             var omenu = get_submenu( "Octopus", undefined, "$ID/Table" );
             omenu.menuItems.add( action );
           }
@@ -387,7 +388,7 @@ function install() {
   function eq_filesize(check, tgt_path) {
     var tgt_file = new File(tgt_path);
     var tgt_size = tgt_file.length;
-    $.writeln("Vergleiche: " + check + " mit " + tgt_size + " für " + tgt_path);
+    // $.writeln("Vergleiche: " + check + " mit " + tgt_size + " für " + tgt_path);
     // Ich weiß nicht, ob "exakt identische Länge" zu restriktiv ist
     return Math.abs(tgt_size - check) < 4;
   }
@@ -425,12 +426,14 @@ function onQuitHandler() {
     if ( ! custom ) return;
     custom = JSON.parse( custom );
     var _main = app.menus.item("$ID/Main");
-    for (var n in custom) {
-      var c = custom[n];
-      var hub_menu = _main.submenus.item(c);
-      if (hub_menu && hub_menu.isValid) {
-        hub_menu.remove();
-        __log("info", "Menü deinstalliert: " + c, "installer");
+    // custom ist `{"Octopus": true}`
+    for (var name in custom) {
+      if ( name.search(/\$ID/i) == -1 ) {
+        var hub_menu = _main.submenus.item(name);
+        if (hub_menu && hub_menu.isValid) {
+          // hub_menu.remove();
+          __log("info", "Menü deinstalliert: " + name, "installer");
+        }
       }
     }
   } catch (e) {

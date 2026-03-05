@@ -515,7 +515,9 @@ function __( id ) {
       return id;
     }
     loc_strings = loc_strings[ script_id ];
-    if (DBG) $.writeln("loaded loc-strings");
+    // if (DBG) $.writeln("loaded loc-strings");
+  } catch(e) {
+    __log( "error", e.message + " on " + e.line, script_id);
   }
 
   if (loc_strings.hasOwnProperty(id)) {

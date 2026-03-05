@@ -7,6 +7,7 @@ help-pages
 index.html
 index
 Include-dbg.jsxinc
+README.md
 .vscode
 .gitignore
 .git

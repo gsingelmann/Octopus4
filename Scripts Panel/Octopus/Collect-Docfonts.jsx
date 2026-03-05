@@ -187,7 +187,7 @@ function open_config() {
       }
     }
     if ( ! prefs ) {
-      prefs = { "onoff": "off", "switch": "active", "paths": "" };
+      prefs = { "onoff": "off", "switch": "active", "paths": [] };
     }
 		return prefs;
 	}

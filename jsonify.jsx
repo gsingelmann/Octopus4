@@ -168,9 +168,11 @@ function main() {
 					var aux = getSubpath( files[i], rootFolder );
 					if (dbg) $.writeln( "     " + fileList[ix].subpath + " -> " + aux + " | " + fileList[ix].check + " -> " + files[i].length );
 					fileList[ix].subpath = aux;
+					if ( fileList[ix].check !== files[i].length ) {
+						fileList[ix].updated = now_str;
+					}
 					fileList[ix].check = files[i].length;
 					// fileList[ix].set = base_folder_name;
-					fileList[ix].updated = now_str;
 					for ( var n = not_found.length-1; n >= 0; n-- ) {
 						if ( not_found[n] == id ) {
 							if (dbg) $.writeln( "      rm " + not_found[n] + " from nf");

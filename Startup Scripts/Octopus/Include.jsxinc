@@ -30,12 +30,24 @@ function __log(level, msg, active_script) {
     var f = new File( PATH_LOG_FILE );
     f.rename( __getMinuteString() + ".json");
   }
+  var script_version = 0;
+  try {
+    var global = __readJson( PATH_DATA_FOLDER + "/Global Set.json" );
+    for ( var n = 0; n < global.length; n++ ) {
+      if ( global[n].id == active_script ) {
+        script_version = global[n].version;
+        break;
+      }
+    }
+    if ( ! script_version ) script_version = 0;
+  } catch(e) {}
   try {
     var entry = {
       time: __getTimestamp(),
       level: level,
       msg:  msg,
-      script: active_script
+      script: active_script,
+      version: script_version
     }
 
     var guid = app.userGuid.split('@').shift();

@@ -284,6 +284,7 @@ function get_user_name() {
 function read_volumes_from_prefs() {
 	try {
 		var f_volumes = PATH_DATA_FOLDER + "/prefs/octolock.txt";
+		// Hier war ein Tippfehler
 		if ( ! File(f_volumes ).exists ) return [];
 		// var f_volumes = __get_config_path() + "/octolock.txt";
 		var volumes = __readFile( f_volumes );

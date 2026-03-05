@@ -249,6 +249,7 @@ function show_ui() {
       make_indic( frames.ok, "Alt-Text")
       make_indic( frames.nok, "no-Alt-Text")
       make_indic( frames.deco, "purely-decorative")
+      make_indic( frames.no_img_but_alt, "no_img_but_alt")
 
     } catch(e) {
       __log("error", e.message + " on "  + e.line, script_id );
@@ -270,7 +271,13 @@ function show_ui() {
             var dup = spread.textFrames.add({fillColor: "None", strokeColor: colour, strokeWeight: 4});
           }
           dup.itemLayer = layer;
-          dup.paths[0].entirePath = fr.paths[0].entirePath;
+          try {
+            dup.paths[0].entirePath = fr.paths[0].entirePath;
+          } catch(e) {
+            __log("dbg", dup.constructor.name + " ... " + e.message + " on " + e.line, script_id)
+            app.select( fr );
+            return;
+          }
           /*
           {frame: fr.id, kind: fr.constructor.name, link: link, altText: altText, actText: actualText, altDeco: (altTST == "SOURCE_DECORATIVE_IMAGE"), actDeko: (aTT == "TAG_ARTIFACT"), vstate: fr.visible }
           */
@@ -323,6 +330,8 @@ function show_ui() {
         c.colorValue = [255, 0, 0];
       } else if ( name == "purely-decorative") {
         c.colorValue = [0, 0, 255];
+      } else if ( name == "no_img_but_alt" ) {
+        c.colorValue = [255, 192, 0];
       }
       return c;
     }
@@ -352,7 +361,14 @@ function show_ui() {
 
 function handle_links( doc, page_items_too ) {
   if ( page_items_too ) {
-    var frames = doc.pageItems.everyItem().getElements();
+    // doc.pageItems kuckt nicht in Gruppen rein etc.
+    var frames = doc.allPageItems;
+    var c ;
+    for ( var n = frames.length-1; n >= 0; n-- ){
+      c = frames[n].constructor.name;
+      if ( c != "TextFrame" && c != "Rectangle" && c != "Oval" && c != "Polygon" && c != "GraphicLine" ) frames.splice(n,1);
+    }
+    // var frames = doc.splineItems.everyItem().getElements().concat( doc.textFrames.everyItem().getElements() );
     var links = [];
     for ( var n = 0; n < frames.length; n++ ) {
       if ( frames[n].allGraphics.length == 1 && frames[n].allGraphics[0].itemLink ) {
@@ -370,10 +386,12 @@ function handle_links( doc, page_items_too ) {
   }
   var has_alt = [],
       has_no_alt = [],
-      is_decorative = [];
+      is_decorative = [],
+      no_img_but_alt = [];
 
   for ( var nf = 0; nf < frames.length; nf++ ) {
     var fr = frames[nf],
+        cn = fr.constructor.name,
         link = links[nf],
         // xmp = link ? link.linkXmp : null,
         oeo = fr.objectExportOptions,
@@ -395,7 +413,7 @@ function handle_links( doc, page_items_too ) {
     if ( altTST == "SOURCE_DECORATIVE_IMAGE" || aTT == "TAG_ARTIFACT" ) {
       is_decorative.push( {
         frame: fr.id, 
-        kind: fr.constructor.name, 
+        kind: cn, 
         link: link, 
         altText: altText, 
         actText: actualText, 
@@ -405,72 +423,52 @@ function handle_links( doc, page_items_too ) {
       } );
     } else {
       if ( actualText || altText) {
-        has_alt.push( {
+        var o = {
           frame: fr.id, 
-          kind: fr.constructor.name, 
+          kind: cn, 
           link: link, 
           altText: altText, 
           actText: actualText, 
           altDeco: false, 
           actDeko: false, 
           vstate: fr.visible 
-        } );
+        };
+        if ( is_frame_wo_img( fr ) ) {
+          no_img_but_alt.push( o )
+        } else {
+          has_alt.push( o );
+        }
       } else {
-        has_no_alt.push( {
-          frame: fr.id, 
-          kind: fr.constructor.name, 
-          link: link, 
-          altText: altText, 
-          actText: actualText, 
-          altDeco: false, 
-          actDeko: false, 
-          vstate: fr.visible 
-        } );
+        if ( is_frame_wo_img( fr ) ) {
+          // Das ist OK
+        } else {
+          has_no_alt.push( {
+            frame: fr.id, 
+            kind: cn, 
+            link: link, 
+            altText: altText, 
+            actText: actualText, 
+            altDeco: false, 
+            actDeko: false, 
+            vstate: fr.visible 
+          } );
+        }
       }
     }
 
-    // if ( atst.toString() == "SOURCE_XML_STRUCTURE" ) {
-    //   var xnode = fr.associatedXMLElement;
-    //   if ( xnode && xnode.isValid ) {
-    //     var xatts = xnode.xmlAttributes.everyItem().getElements();
-    //     for ( n = 0; n < xatts.length; n++ ) {
-    //       if ( xatts[n].name.search(/Alt/) != -1 ) txt = xatts[n].value;
-    //     }
-    //   } 
-
-    // } else if ( atst.toString() == "SOURCE_CUSTOM" ) {
-    //   txt = cat;
-
-    // } else if ( atst.toString() == "SOURCE_XMP_TITLE" ) {
-    //   txt = xmp ? xmp.documentTitle : "";
-
-    // } else if ( atst.toString() == "SOURCE_XMP_DESCRIPTION" ) {
-    //   txt = xmp ? xmp.description : "";
-
-    // } else if ( atst.toString() == "SOURCE_XMP_HEADLINE" ) {
-    //   txt = get_custom_xmp( xmp, "photoshop:Headline");
-
-    // } else if ( atst.toString() == "SOURCE_XMP_EXTENDED_DESCRIPTION" ) {
-    //   txt = get_custom_xmp( xmp, "Iptc4xmpCore:ExtDescrAccessibility[1]");
-
-    // } else if ( atst.toString() == "SOURCE_XMP_OTHER" ) {
-    //   txt = get_custom_xmp( xmp, amp);
-
-    // } else if ( atst.toString() == "SOURCE_XMP_ALT_TEXT" ) {
-    //   txt = get_custom_xmp(xmp, ["Iptc4xmpCore", "AltTextAccessibility[1]"]);
-
-    // } else if ( atst.toString() == "SOURCE_DECORATIVE_IMAGE" ) {
-    //   txt = "decorative image"
-    // }
-    // if ( ! txt ) {
-    //   has_no_alt.push( {frame: fr.id, kind: fr.constructor.name, link: link, text: "", vstate: fr.visible } );
-    // } else if ( txt == "decorative image" ) {
-    //   is_decorative.push( {frame: fr.id, kind: fr.constructor.name, link: link, text: "deco", vstate: fr.visible } );
-    // } else {
-    //   has_alt.push( {frame: fr.id, kind: fr.constructor.name, link: link, text: txt, vstate: fr.visible } );
-    // }
   }
-  return {ok: has_alt, nok: has_no_alt, deco: is_decorative };
+  return {ok: has_alt, nok: has_no_alt, deco: is_decorative,no_img_but_alt: no_img_but_alt  };
+
+  function is_frame_wo_img( fr ) {
+    var c = fr.constructor.name;
+    if ( c == "TextFrame" ) return true;
+    if (( c == "Rectangle" || c == "Oval" || c == "Polygon" || c == "GraphicLine") ) {
+      if ( fr.contentType == ContentType.GRAPHIC_TYPE ) {
+        if ( fr.allGraphics.length == 0 ) return true;
+      }
+    }
+    return false;
+  }
 }
 
 

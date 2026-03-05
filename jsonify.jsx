@@ -170,7 +170,13 @@ function main() {
 					fileList[ix].subpath = aux;
 					if ( fileList[ix].check !== files[i].length ) {
 						fileList[ix].updated = now_str;
+						if ( fileList[ix].hasOwnProperty("version") ) {
+							try {
+								fileList[ix].version++;
+							} catch(e) {}
+						} 
 					}
+					if ( ! fileList[ix].hasOwnProperty("version") ) fileList[ix].version = 1;
 					fileList[ix].check = files[i].length;
 					// fileList[ix].set = base_folder_name;
 					for ( var n = not_found.length-1; n >= 0; n-- ) {
@@ -196,6 +202,7 @@ function main() {
 							order: 100,
 							check: files[i].length,
 							updated: now_str,
+							version: 1
 						};
 					} else {
 						fileObj = {

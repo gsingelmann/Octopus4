@@ -352,6 +352,7 @@ function batch_export() {
     }
     if ( choice == "pdf" || w.todo_selection.pdf2 ) {
       app.pdfExportPreferences.viewPDF = false;
+      // tgt setzen und rename ist einfacher
       var tgt = get_target( docs[n], tgt_location, "pdf", tgt_is_relative )
       if ( ! tgt ) continue;
       var tgt2 = new File( tgt.fullName.replace(/\.pdf/i, "-2.pdf") );

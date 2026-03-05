@@ -1366,25 +1366,34 @@ function getScriptFolderPath() {
     return skriptPath;
 }
 function __(id) {
-    loc_strings = load_translation();
-    if (loc_strings.hasOwnProperty(id)) {
-        return localize(loc_strings[id]);
-    } else {
-        return id
+    var txt = "";
+    loc_strings = __readJson( PATH_SCRIPT_PARENT + "/Scripts Panel/Octopus/Strings.json");
+    if (!loc_strings || !loc_strings.hasOwnProperty(script_id)) {
+        return id;
     }
-}
+    loc_strings = loc_strings[script_id];
+    if (DBG) $.writeln("loaded loc-strings");
 
-function load_translation() {
-    return {
-        "what links": { "de": "Welche Hyperlinks sollen erstellt werden?", "en": "What hyperlinks are to be created?", "es": "¿Qué hipervínculos se deben crear?" },
-        "create web": { "de": "Web Hyperlinks erstellen", "en": "Create Web Hyperlinks", "es": "Hipervínculos web" },
-        "create mailto": { "de": "Mailto Hyperlinks erstellen", "en": "Create Mailto Hyperlinks", "es": "Hipervínculos para correo" },
-        "long tld": { "de": "Lange/Neue TLDs erlauben (.koeln ...)", "en": "Allow long TLDs (.bingo…)", "es": "Permitir TLD largos (.bingo…)" },
-        "apply cs": { "de": "Soll ein Zeichenformat angewendet werden?", "en": "Apply character style?", "es": "¿Aplicar estilo de carácter?" },
-        "apply": { "de": "Zeichenformat anwenden", "en": "Apply character style", "es": "Estilo de carácter" },
-        "masterpage": { "de": "Sollen Hyperlinks auf Musterdruckbögen erstellt werden?", "en": "Create links on master-pages?", "es": "¿Crear vínculos en páginas maestras?" },
-        "include master": { "de": "Musterdruckbögen einbeziehen", "en": "Include master-pages", "es": "Incluir páginas maestras" },
-        "cancel": { "de": "Abbrechen", "en": "Cancel", "es": "Cancelar" },
-        "prev": { "de": "xxxxxx", "en": "yyyyyy", "es": "zzzzzz" },
+    if (loc_strings.hasOwnProperty(id)) {
+        txt = localize(loc_strings[id]);
+    } else {
+        txt = id
+    }
+    var re;
+    for (var n = 1; n < arguments.length; n++) {
+        try {
+            re = new RegExp("_" + n.toString() + "_");
+            txt = txt.replace(re, arguments[n].toString());
+        } catch (e) {
+            __log("error", e.message + " on " + e.line, script_id);
+        }
+    }
+    return txt;
+}
+function get_script_folder_path() {
+    try {
+        return app.activeScript.parent.fullName;
+    } catch (e) {
+        return e.fileName.replace(/\/[^\/]+$/, "");
     }
 }

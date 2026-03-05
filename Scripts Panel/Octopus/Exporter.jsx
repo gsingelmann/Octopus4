@@ -485,4 +485,4 @@ function get_script_folder_path() {
     } catch (e) { 
       return e.fileName.replace(/\/[^\/]+$/, "");
     }
-}
+} 

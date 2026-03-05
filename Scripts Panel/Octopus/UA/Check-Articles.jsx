@@ -232,7 +232,7 @@ function show_panel() {
       var c1 = get_coord(a.textContainers[0]),
           c2 = get_coord(b.textContainers[0]);
       if ( c1.spread.index == c2.spread.index ) {
-        if ( Math.abs(c1.x - c2.x) < 10 ) {
+        if ( Math.abs(c1.y - c2.y) > 10 ) {
           return c1.y - c2.y;
         }
         return c1.x - c2.x;
@@ -242,10 +242,12 @@ function show_panel() {
     // -----------------------------------------------------------------------------
     //  Alle gefundenen Stories in je einen Artikel aufnehmen
     // -----------------------------------------------------------------------------
-    for ( var no = 0; no < orphans.length; no++ ) {
+    if ( orphans.length ) {
       var a = doc.articles.add();
-      a.name = __("orphan") + no;
-      a.articleMembers.add(orphans[no].textContainers[0]);
+      for ( var no = 0; no < orphans.length; no++ ) {
+        a.name = __("orphan") + no;
+        a.articleMembers.add(orphans[no].textContainers[0]);
+      }
     }
     
   }

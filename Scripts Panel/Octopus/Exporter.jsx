@@ -6,7 +6,7 @@
 +   Author: Gerald Singelmann, gs@cuppascript.com
 +   Supported by: Satzkiste GmbH, post@satzkiste.de
 
-+    Modified: 2023-11-22
++    Modified: 2026-02-15
 
 +    License (MIT)
 		Copyright 2023 Gerald Singelmann/Satzkiste GmbH

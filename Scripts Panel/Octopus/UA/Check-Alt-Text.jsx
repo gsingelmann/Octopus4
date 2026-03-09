@@ -245,6 +245,7 @@ function show_ui() {
     }
   }
   function make_layer() {
+    $.bp();
     try {
       make_indic( frames.ok, "Alt-Text")
       make_indic( frames.nok, "no-Alt-Text")
@@ -348,7 +349,7 @@ function show_ui() {
       var _t = " " + types.join(" ") + " ";
       for ( var n = doc.eventListeners.length-1; n >= 0; n-- ) {
         var _e = doc.eventListeners[n];
-        if ( _t.indexOf( " " + _e.eventType + " ") != -1 && _e.handler.name == handler.name ) {
+        if ( _t.indexOf( " " + _e.eventType + " ") != -1 && _e.handler && _e.handler.name == handler.name ) {
           // $.writeln( "removing EL " + n );
           _e.remove();
         }
@@ -462,6 +463,7 @@ function handle_links( doc, page_items_too ) {
   function is_frame_wo_img( fr ) {
     var c = fr.constructor.name;
     if ( c == "TextFrame" ) return true;
+    if ( fr.contentType == ContentType.UNASSIGNED ) return true;
     if (( c == "Rectangle" || c == "Oval" || c == "Polygon" || c == "GraphicLine") ) {
       if ( fr.contentType == ContentType.GRAPHIC_TYPE ) {
         if ( fr.allGraphics.length == 0 ) return true;

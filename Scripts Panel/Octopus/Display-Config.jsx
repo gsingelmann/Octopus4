@@ -33,6 +33,7 @@ __init();
 
 var script_id = "display-config"
 __log( "run", script_id, script_id);
+loc_strings = null;
 
 // ----------------------------------------------------------------------------------------------------------------
 //   Wenn ich die Presets hier auslese, kann ich sie auch gleich anwenden.
@@ -300,6 +301,7 @@ function preset_manager() {
 //  Edit Preset
 // ----------------------------------------------------------------------------------------------------------------
 function main( what_to_do, preset ) {
+  var t = [ { ts: new Date().getTime(), what: "start" } ];
   try {
     // In config stehen meine Default-Werte und die Struktur der Optionen
     // Die Struktur nehme ich, um die Werte aus den gespeicherten Configs in `configs` abzugleichen
@@ -314,6 +316,7 @@ function main( what_to_do, preset ) {
         }
       }
     }
+    t.push( {ts: new Date().getTime(), what: "localised"})
     
     // Die controlgroups etc werden unten von saved_prefs in config übertragen, der Name nicht.
     if ( what_to_do == "new" ) {
@@ -355,6 +358,7 @@ function main( what_to_do, preset ) {
       }         // group loop
     }           // saved group loop
 
+    t.push( {ts: new Date().getTime(), what: "Monsterschleife"})
 
     var lblw = 180;
     var editw = 200;
@@ -497,6 +501,7 @@ function main( what_to_do, preset ) {
     __log("error", e.message + " on " + e.line, script_id );
   }
 
+  t.push( {ts: new Date().getTime(), what: "w aufgebaut"})
 
   function update_state( group_id, option_id, value, aktiv ) {
     for ( var n = 0; n < config.optiongroups.length; n++ ) {
@@ -548,6 +553,12 @@ function main( what_to_do, preset ) {
     this.window.close("done");
   }
 
+  var aux, tlog = [];
+  for ( var n = 1; n < t.length; n++ ) {
+    aux = t[n].ts - t[n-1].ts;
+    tlog.push( t[n].what + " - " + aux );
+  }
+  __log("dbg", tlog.join(" | "), script_id );
 
   var rs = w.show();
 
@@ -1258,12 +1269,14 @@ function main( what_to_do, preset ) {
 
 function __( id ) {
   var txt = "";
+  if ( ! loc_strings ) {
     loc_strings = __readJson( get_script_folder_path() + "/Strings.json");
     if ( ! loc_strings || ! loc_strings.hasOwnProperty(script_id) ) {
       return id;
     }
     loc_strings = loc_strings[ script_id ];
-    if (DBG) $.writeln("loaded loc-strings");
+    if (DBG) __log("dbg", "loaded loc-strings", script_id);
+  }
 
   if (loc_strings.hasOwnProperty(id)) {
     txt = localize(loc_strings[id]);

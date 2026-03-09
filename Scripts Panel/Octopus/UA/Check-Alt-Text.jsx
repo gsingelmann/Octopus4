@@ -261,7 +261,10 @@ function show_ui() {
         var _ro = doc.viewPreferences.rulerOrigin;
         doc.viewPreferences.rulerOrigin = RulerOrigin.SPREAD_ORIGIN;
         var layer = doc.layers.item("alt-text-indicator");
-        if ( ! layer.isValid ) layer = doc.layers.add({name: 'alt-text-indicator'});
+        if ( ! layer.isValid ) {
+          layer = doc.layers.add({name: 'alt-text-indicator'});
+          layer.move( LocationOptions.AT_BEGINNING );
+        }
         for ( var n = 0; n < list.length; n++ ) {
           var fr = doc.pageItems.itemByID(list[n].frame);
           var spread = get_spread(fr);

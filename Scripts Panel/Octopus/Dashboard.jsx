@@ -27,7 +27,7 @@
 // #targetengine octopus_dashboard
 #include "Startup Scripts/Octopus/Include.jsxinc"
 __init(); 
-script_id = "dashboard";
+script_id = "dashboard"; 
 
 // -----------------------------------------------------------------------------------------------------
 //  Status-Quo / Prefs laden

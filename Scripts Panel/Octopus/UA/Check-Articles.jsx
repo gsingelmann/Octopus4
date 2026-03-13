@@ -47,6 +47,8 @@ function show_panel() {
   doc.addEventListener( "beforeExport", restore_doc );
   doc.addEventListener( "beforeDeactivate", restore_doc );
 
+  panel_visibility( "$ID/Articles_WinMenu", true );
+
   var state_is_visible = (doc.extractLabel("octopus-checkarticles-state") !== "hidden")
 
   if (dbg) __log( "info", "state: " + state_is_visible, script_id)
@@ -453,4 +455,37 @@ function get_script_folder_path() {
     } catch (e) { 
       return e.fileName.replace(/\/[^\/]+$/, "");
     }
+}
+/**
+ * Merkt sich Sichtbarkeit aller Panels. Toggelt ein Panel. Checkt, welches Panel sich geändert hat. Setzt dessen Sichtbarkeit.
+ * @param {string} menu_action
+ * @param {boolean} visibility
+ * @returns {any} null=menu_action invalid, true=visibility set, false=error on setting visibility
+ */
+function panel_visibility ( menu_action, visibility ) {
+  visibility = !! visibility;
+
+  var panels = app.panels.everyItem().getElements();
+  var vis = [];
+  for ( var n = 0; n < panels.length; n++ ) {
+    try {
+      vis[n] = panels[n].visible;
+    } catch(e) {
+    }
+  }
+  var ma = app.menuActions.item(menu_action);
+  if ( ma && ma.isValid ) {
+    ma.invoke();
+  } else {
+    return null;
+  }
+  for ( var n = 0; n < panels.length; n++ ) {
+    try {
+      if ( vis[n] !== panels[n].visible ) {
+        panels[n].visible = true;
+        return true;
+      }
+    } catch(e) {}
+  }
+  return false;
 }

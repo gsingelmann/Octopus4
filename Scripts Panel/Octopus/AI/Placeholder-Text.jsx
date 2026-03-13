@@ -82,6 +82,8 @@ function _ui(title, tf, count) {
   // ----------------------------------------------------------------------------------------------------------------------
   w.main.add("statictext", undefined, __('what_topic'))
   w.topic = w.main.add('edittext', [undefined, undefined, width, 60], "", { multiline: true });
+  w.formatting = w.main.add("checkbox", undefined, __('use-formatting'));
+  w.formatting.value = false;
 
   w.defaultElement = w.btns.add('button', undefined, __("ui_ok"))
   w.cancelElement = w.btns.add('button', undefined, __('ui_cancel'))
@@ -96,12 +98,19 @@ function _ui(title, tf, count) {
   function do_the_work() {
     // __log("dbg", "clicked ok", script_id)
     this.enabled = false;
-    if (app.locale.toString() == "GERMAN_LOCALE") {
-      var _q = "Schreib einen Text. Der Text sollte etwa " + count + " Zeichen enthalten. Das Thema ist: " + w.topic.text;
-    } else {
-      var _q = "Write a text. It should contain about " + count + " characters. The topic is: " + w.topic.text;
+    // if (app.locale.toString() == "GERMAN_LOCALE") {
+    //   var _q = "Schreib einen Text. Der Text sollte etwa " + count + " Zeichen enthalten. Das Thema ist: " + w.topic.text;
+    // } else {
+      var _q = "Write a text using the language '" + app.locale.toString().toLowerCase().replace(/_locale/,"") + "'. It should contain about " + count + " characters. The topic is: '" + w.topic.text + "'. ";
+    // }
+    if ( w.formatting.value ) {
+      // if (app.locale.toString() == "GERMAN_LOCALE") {
+      //   _q += " Der Text sollte mit einfachen Markdown-Formatierungen versehen sein: Zwischenüberschriften, fett und kursiv, Punktlisten,; alles aber nur, wenn der Inhalt das erfordert."
+      // } else {
+        _q += " Use simple Markdown formatting, sparingly: subheadings, bold and italics, bulleted lists, tables; but only if it fits the content"
+      // }
+
     }
-    // _q += " Der Text sollte mit einfachen Markdown-Formatierungen versehen sein: Zwischenüberschriften, fett und kursiv, Punktlisten,; alles aber nur, wenn der Inhalt das erfordert."
     var request_string = JSON.stringify({ prompt: _q, huba: "hopp" });
     this.window.close();
     tf.contents = _q;
@@ -121,7 +130,7 @@ function _ui(title, tf, count) {
         // headers: [{ name: "Content-type", value: "application/json; charset=UTF-8" }]
       }
       response = restix.fetch(request);
-      // __log("dbg", "response0: " + JSON.stringify( response ) );
+      // __log("dbg", "response0: " + JSON.stringify( response ), script_id );
       pbwin.close();
       $.writeln( response.body );
       wait_to_write = app.idleTasks.add({ name: "cs_reopen_doc", sleep: 500 });
@@ -137,7 +146,7 @@ function _ui(title, tf, count) {
             aux = JSON.parse(aux);
             if ( aux.hasOwnProperty("text")) {
               aux = aux.text;
-              aux = aux.replace(/\n\n+/g, "\r");
+              aux = aux.replace(/\n/g, "\r");
               tf.contents = aux;
             }
           } catch (e) { 
@@ -153,9 +162,19 @@ function _ui(title, tf, count) {
             st.characters.itemByRange(tf.characters.lastItem().index + 1, st.characters.lastItem().index).remove();
           }
           // -------------------------------------------------------------------------------------------
+          //  Markdown formatieren
+          // -------------------------------------------------------------------------------------------
+          if (w.formatting.value) {
+            var format_script = new File( PATH_SCRIPT_PARENT + "/Scripts Panel/Octopus/Utilities/Format-Markdown.jsx");
+            if ( format_script.exists ) {
+              app.select( tf );
+              app.doScript( format_script, ScriptLanguage.JAVASCRIPT );
+            }
+          }
+
+          // -------------------------------------------------------------------------------------------
           //  Ggf als Platzhalter markieren
           // -------------------------------------------------------------------------------------------
-
           var prefs = null;
           var dprefs = doc.extractLabel("octopus_checkplaceholder_prefs");
           var aprefs = app.extractLabel("octopus_checkplaceholder_prefs");
@@ -170,7 +189,6 @@ function _ui(title, tf, count) {
           }
 
           if (prefs && prefs.aktiv) {
-
             var methods = ["USE_UNDERLINE", "USE_HIGHLIGHT"];
             var appearances = ["WAVY", "SOLID", "DASHED"];
             var cname = prefs.name;
@@ -185,7 +203,9 @@ function _ui(title, tf, count) {
                 underlineIndicatorAppearance: ConditionUnderlineIndicatorAppearance[appearances[prefs.underlineIndicatorAppearance]]
               });
             }
-            st.texts.everyItem().appliedConditions = [cond];
+            // 2026-03-13: Hier ist noch die rabiate Zuweisung drin, die andere Bedingungen überschreibt, das hatte ich schon mal besser...
+            // st.texts.everyItem().appliedConditions = [cond];
+            set_condition( st, cond );
           } else {
             // __log("dbg", "Mark nicht aktiv", script_id);
           }
@@ -197,6 +217,19 @@ function _ui(title, tf, count) {
     });
   }
 }
+  function set_condition( text, cond ) {
+    var rngs = text.textStyleRanges.everyItem().getElements();
+    // $.writeln( text.contents.substr(0,32) +  " - ranges: " + rngs.length );
+    for ( var n = 0; n < rngs.length; n++ ) {
+      var a = rngs[n].appliedConditions;
+      a.push( cond );
+      rngs[n].appliedConditions = a;
+      // for ( var m = 0; m < a.length; m++ ) {
+      //   $.write( a[m].name + " .. ");
+      // }
+      // $.writeln("   " + rngs[n].contents.substr(0,32) )
+    }
+  }
 
 function __(id) {
   loc_strings = load_translation();

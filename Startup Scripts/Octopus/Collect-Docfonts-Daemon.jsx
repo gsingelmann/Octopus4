@@ -137,10 +137,10 @@ function collect_doc_main( doc ) {
 					} else {
 						// Ich brauche mehr log
 						__log("dbg", "location: '" + l + "', font: '" + f.name + "', strg: '" + __("activated-adobe", script_id) + "', PATH_SCRIPT_PARENT: " + PATH_SCRIPT_PARENT, script_id)
-						if ( l == __("activated-adobe", script_id) ) {
-							msgs.push( __("adobe-fonts", script_id) + ": " + f.name );
+						if ( l.search(/adobe/i) != -1 && l.search(/fonts/i) != -1  ) {
+							msgs.push( __("adobe-fonts", script_id) + "\n\n" + f.name );
 						} else {
-							msgs.push( __("does-not-exist", script_id) + ": " + fname );
+							msgs.push( __("does-not-exist", script_id) + "\n\n" + fname );
 						}
 					}		// exists
 				}			// font loop
@@ -186,12 +186,17 @@ function __( id, script_id ) {
 		try {
 			var a = loc_strings;
 		} catch(e) {
+			__log("dbg", "loading loc_strings from '" +  PATH_SCRIPT_PARENT + "/Scripts Panel/Octopus/Strings.json" + ": " + File(  PATH_SCRIPT_PARENT + "/Scripts Panel/Octopus/Strings.json" ).exists, script_id );
 			loc_strings = __readJson( PATH_SCRIPT_PARENT + "/Scripts Panel/Octopus/Strings.json");
-			if ( ! loc_strings || ! loc_strings.hasOwnProperty(script_id) ) {
+			if ( ! loc_strings ) {
+				__log("error", "loc_Strings kann nicht geladen werden", script_id);
 				return id;
 			}
+			if ( ! loc_strings.hasOwnProperty(script_id) ) {
+				__log("error", script_id + " ist keine Property in strings.json", script_id );
+			}
 			loc_strings = loc_strings[ script_id ];
-			if (DBG) $.writeln("loaded loc-strings");
+			__log("dbg", "loaded loc-strings", script_id);
 		}
 
 		if (loc_strings.hasOwnProperty(id)) {
@@ -199,6 +204,7 @@ function __( id, script_id ) {
 		} else {
 			txt = id
 		}
+		__log("dbg", "got string: " + txt, script_id );
 		var re;
 		for ( var n = 1; n < arguments.length; n++ ) {
 			try {
@@ -210,7 +216,7 @@ function __( id, script_id ) {
 		}
 		return txt;
 	} catch(e) {
-		__log("error", e.message + " on " + e.line )
+		__log("error", e.message + " on " + e.line, script_id )
 		return id;
 	}	
 }

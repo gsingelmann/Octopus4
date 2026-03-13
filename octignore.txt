@@ -8,6 +8,9 @@ index.html
 index
 Include-dbg.jsxinc
 README.md
+Beta
+Todo
+CLAUDE.md
 .vscode
 .gitignore
 .git

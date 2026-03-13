@@ -122,7 +122,8 @@ function collect_doc_main( doc ) {
 					var f = fonts[n];
 					var l = f.location;
 					var fontfile = new File( l );
-					var fname = l.split("/").pop();
+					// l.split geht nicht wg Windows
+					var fname = fontfile.fullName.split("/").pop();
 					var tgt_file = new File( tgt_path + "/" + fname );
 					if (tgt_file.exists) {
 						continue;
@@ -134,7 +135,8 @@ function collect_doc_main( doc ) {
 							msgs.push( __("Collect-Error", script_id) + fname + ": " + e.message );
 						}
 					} else {
-						// __log("dbg", "location: '" + l + "', font: '" + f.name + "', strg: '" + __("activated-adobe", script_id) + "', PATH_SCRIPT_PARENT: " + PATH_SCRIPT_PARENT, script_id)
+						// Ich brauche mehr log
+						__log("dbg", "location: '" + l + "', font: '" + f.name + "', strg: '" + __("activated-adobe", script_id) + "', PATH_SCRIPT_PARENT: " + PATH_SCRIPT_PARENT, script_id)
 						if ( l == __("activated-adobe", script_id) ) {
 							msgs.push( __("adobe-fonts", script_id) + ": " + f.name );
 						} else {

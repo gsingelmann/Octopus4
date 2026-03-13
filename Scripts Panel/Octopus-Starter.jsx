@@ -28,7 +28,7 @@ function pre_check() {
 }
 function install() {
   var json;
-  var _set = select_source( false );
+  var _set = select_source( true );
   if (!_set) return;
   __writeJson(PATH_DATA_FOLDER + "/Sets/" + _set.set_name + ".json", _set);
   var configs = [];
@@ -220,7 +220,12 @@ function install() {
   function update_resources(configs) {
     try {
 
+      var pbw = new Window("palette");
+      pbw.pb = pbw.add("progressbar", [undefined, undefined, 400, 20]);
+      pbw.pb.maxvalue = configs.length; 
+      pbw.show();
       for (var _nc = 0; _nc < configs.length; _nc++) {
+        pbw.pb.value = _nc;
         var c = configs[_nc];
 
         try {
@@ -253,7 +258,7 @@ function install() {
     } catch (e) {
   
     } finally {
-      _pbw.close();
+      pbw.close();
     }
 
     function install_from_url( c, src_path, tgt_path ) {

@@ -417,6 +417,10 @@
     "message": {
       "de": "Sie haben _1_ geänderte und _2_ niemals gesicherte Dokumente offen.\n\nSollen die Änderungen soweit möglich gespeichert werden?",
       "en": "You have _1_ modified and _2_ unsaved documents open.\n\nShould the changes be saved as far as possible?"
+    },
+    "keep-unsaved": {
+      "de": "Die _1_ niemals gespeicherten Dokumente wurden nicht geschlossen.",
+      "en": "The _1_ unsaved documents were left open"
     }
   },
   "collect-docfonts": {

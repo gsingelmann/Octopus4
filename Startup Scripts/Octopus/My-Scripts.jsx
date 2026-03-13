@@ -36,7 +36,7 @@ function install_my_scripts() {
     // -----------------------------------------------------------------------------------------------------------------
     //  Menü erstellen
     // -----------------------------------------------------------------------------------------------------------------
-    // __log("dbg", scripts.length + " Scripte in MS", "my-scripts");
+    __log("dbg", scripts.length + " Scripte in MS", "my-scripts");
     if ( scripts.length ) {
       __log("run", "my-scripts", "my-scripts");
       
@@ -52,7 +52,7 @@ function install_my_scripts() {
 
       for ( var n = 0; n < scripts.length; n++ ) {
         var menu_label = scripts[n].name;
-        // __log("dbg", "try " + menu_label + " '" + scripts[n].file.fullName + "'", "my-scripts");
+        __log("dbg", "try " + menu_label + " '" + scripts[n].file.fullName + "'", "my-scripts");
         var tgt_path = scripts[n].file.fullName;
         var action = app.scriptMenuActions.add(menu_label);
         action.insertLabel("script-path", tgt_path);
@@ -67,8 +67,8 @@ function install_my_scripts() {
           });
         })(tgt_path, menu_label);
         ms_menu.menuItems.add( action );
-        // __log("dbg", "  success", "my-scripts");
       }
+      __log("dbg", "  success", "my-scripts");
     }
   } catch(e) {
     __log("error", e.message + " on " + e.line, "my-scripts");

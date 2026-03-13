@@ -127,6 +127,7 @@ function __readFile(filePath) {
  */
 function __writeFile(filePath, content, mode) {
   if ( ! mode ) mode = "w";
+  if ( filePath.constructor.name == "File" ) filePath = filePath.fullName;
   try {
     var f = new File(filePath);
     __ensureFolder( f.parent.fullName );
@@ -964,7 +965,7 @@ function __init() {
       }
       else { // Mac
         // -L follow redirects 
-        var curlString = 'curl --silent --max-time 30 --show-error -g -L ';
+        var curlString = 'curl --silent --max-time 60 --show-error -g -L ';
         for (var i = 0; i < request.headers.length; i++) {
           curlString += (' -H \'' + request.headers[i].name + ': ' + request.headers[i].value + '\'');
         }
@@ -1001,7 +1002,7 @@ function __init() {
           curlString += ' -w \'\n-----http-----%{http_code}\'';
         }
         curlString += ' \'' + request.fullURL + '\'';
-        // $.writeln( "\n\n=========curl==============\n" + curlString + "\n=========/curl==============\n\n");
+        __log("dbg", "\n=========curl==============\n" + curlString + "\n=========/curl==============\n", "restix");
         try {
           result = app.doScript('do shell script "' + curlString + '"', ScriptLanguage.APPLESCRIPT_LANGUAGE);
         }

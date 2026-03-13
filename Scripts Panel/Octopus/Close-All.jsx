@@ -39,6 +39,11 @@ function close_all() {
   } else {
     var docs = app.documents.everyItem().getElements();
     var n_unsaved = 0, n_modified = 0;
+    docs.sort( function(a,b) {
+      var av = a.saved ? 10 : 0 + a.modified ? 0 : 5,
+          bv = b.saved ? 10 : 0 + b.modified ? 0 : 5;
+      return av - bv;
+    })
     for ( var n = 0; n < docs.length; n++ ) {
       var nm = docs[n].name.replace(/\.indd$/i,"");
       var s = docs[n].saved;
@@ -61,7 +66,19 @@ function close_all() {
       if ( rs == "egal" ) {
         app.documents.everyItem().close( SaveOptions.NO );
       } else if ( rs == "save" ) {
-        app.documents.everyItem().close( SaveOptions.YES );
+        for ( var n = docs.length-1; n >= 0; n-- ) {
+          if ( docs[n].saved ) {
+            docs[n].close( SaveOptions.YES );
+          }
+        }
+        if ( n_unsaved ) {
+          __alert(
+            "info",
+            __("keep-unsaved", n_unsaved),
+            "",
+            "OK"
+          )
+        }
       } else if ( rs == "abbrechen" ) {
         return;
       }

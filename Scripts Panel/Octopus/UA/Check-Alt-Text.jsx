@@ -1,12 +1,9 @@
 ﻿/* ----------------------------------------------------------------------------------------------------------------------
-//DESCRIPTION:Toggles all display settings to your defaults
-
-+    This script is part of project-octopus.net
-
+//DESCRIPTION:Accessibility calls for certain objects to have Alt-Texts. This script checks.
++   This script is part of project-octopus.net
 +   Author: Gerald Singelmann, gs@cuppascript.com
 +   Supported by: Satzkiste GmbH, post@satzkiste.de
-
-+    Modified: 2023-04-26
++   Modified: 2026-03-13
 
 +    License (MIT)
 		Copyright 2023 Gerald Singelmann/Satzkiste GmbH

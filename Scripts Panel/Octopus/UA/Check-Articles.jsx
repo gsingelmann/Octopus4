@@ -1,5 +1,5 @@
 ﻿/* ----------------------------------------------------------------------------------------------------------------------
-//DESCRIPTION:Toggles all display settings to your defaults
+//DESCRIPTION:Accessibility calls for stories to be part of articles.
 
 +    This script is part of project-octopus.net
 

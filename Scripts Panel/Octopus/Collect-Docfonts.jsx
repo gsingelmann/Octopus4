@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------------------------------------------------
-//DESCRIPTION:Simple UI that defines which volumes should get Lock-Files
+//DESCRIPTION:Simple UI that defines which folders toggle a font collection on save
 
 +    This script is part of project-octopus.net
 

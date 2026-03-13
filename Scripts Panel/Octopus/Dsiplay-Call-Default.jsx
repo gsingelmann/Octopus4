@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------------------------------------------------
-//DESCRIPTION:Explains the workings of the MyScripts folder
+//DESCRIPTION:Calls the display script to apply the default settings. You can assign a keyboard shortcut to this
 +   This script is part of project-octopus.net
 +   Author: Gerald Singelmann, gs@cuppascript.com
 +   Supported by: Satzkiste GmbH, post@satzkiste.de
@@ -23,7 +23,19 @@
 		FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
 		DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------- */
-alert( localize({
-  "de": "Was ist \"My-Scripts\"?\n\nLege in den Ordner \"...\\Scripts Panel\\Octopus\\My-Scripts\" Deine eigenen Scripte, damit sie im Menü \"Octopus\" erscheinen.\n\n Mehr dazu unter project-octopus.net\/script-myscripts",
-  "en": "What is \"My-Scripts\"?\n\nPlace your own scripts in the folder \"...\\Scripts Panel\\Octopus\\My-Scripts\" so that they appear in the \"Octopus\" menu.\n\n More project-octopus.net\/script-myscripts"
-}))
+#include "Startup Scripts/Octopus/Include.jsxinc"
+__init();
+var script_id = "display"
+__log( "run", script_id, script_id );
+try {
+  var display_prefs = __readJson( PATH_DATA_FOLDER + "/Prefs/display-config-pref.json" );
+  if ( display_prefs && display_prefs.use_default ) {
+    var display_script = new File( PATH_SCRIPT_PARENT + "/Scripts Panel/Octopus/Display.jsx")
+    if ( display_script.exists ) {
+      app.insertLabel("octopus-display-argument", display_prefs.default_cfg)
+      app.doScript( display_script, ScriptLanguage.JAVASCRIPT );
+    }
+  }
+} catch(e) {
+  __log("error", e.message + " on " + e.line, script_id );
+}

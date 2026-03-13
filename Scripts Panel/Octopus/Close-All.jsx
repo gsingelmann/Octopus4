@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------------------------------------------------
-//DESCRIPTION:Exports a bunch of documents to PDF
+//DESCRIPTION:Closes all documents except for those never saved
 
 +    This script is part of project-octopus.net
 

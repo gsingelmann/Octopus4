@@ -32,7 +32,7 @@ function __log(level, msg, active_script) {
   }
   var script_version = 0;
   try {
-    var global = __readJson( PATH_DATA_FOLDER + "/Global Set.json" );
+    var global = __readJson( PATH_DATA_FOLDER + "/Asset-Directory.json" );
     for ( var n = 0; n < global.length; n++ ) {
       if ( global[n].id == active_script ) {
         script_version = global[n].version;

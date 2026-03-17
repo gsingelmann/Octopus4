@@ -428,7 +428,7 @@ function read_set_json( tgt_path ) {
 // -----------------------------------------------------------------------------------------------------
 function get_configs() {
   try {
-    var configs =  __readJson( PATH_DATA_FOLDER  + "/Global Set.json" );
+    var configs =  __readJson( PATH_DATA_FOLDER  + "/Asset-Directory.json" );
   } catch(e) {
     __log( "error", "configs konnten nicht geladen werden: " + e.message + " on " + e.line, script_id);
     return [];

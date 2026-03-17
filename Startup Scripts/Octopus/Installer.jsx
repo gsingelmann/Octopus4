@@ -70,7 +70,7 @@ function install() {
       return a.ix - b.ix;
     })
 
-    __writeJson( PATH_DATA_FOLDER  + "/Global Set.json", configs );
+    __writeJson( PATH_DATA_FOLDER  + "/Asset-Directory.json", configs );
     return configs;
 
     function load_local_sets() {

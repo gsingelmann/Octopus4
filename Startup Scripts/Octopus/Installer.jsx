@@ -115,12 +115,14 @@ function install() {
     if ( ! ignore_these ) ignore_these = [];
 
     var _pbw = new Window("palette");
+    _pbw.add("statictext", undefined, "Octopus Installer");
     _pbw.pb = _pbw.add("progressbar", [undefined, undefined, 400, 20]);
     _pbw.pb.maxvalue = configs.length;
     try {
       _pbw.show();
 
       for (var _nc = 0; _nc < configs.length; _nc++) {
+        _pbw.pb.value = _nc;
         var c = configs[_nc];
 
         if ( ! c.base_url ) {
@@ -431,7 +433,7 @@ function onQuitHandler() {
       if ( name.search(/\$ID/i) == -1 ) {
         var hub_menu = _main.submenus.item(name);
         if (hub_menu && hub_menu.isValid) {
-          // hub_menu.remove();
+          hub_menu.remove();
           __log("info", "Menü deinstalliert: " + name, "installer");
         }
       }

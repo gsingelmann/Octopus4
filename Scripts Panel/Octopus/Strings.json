@@ -49,7 +49,7 @@
       "de": "xxxxxx",
       "en": "yyyyyy",
       "es": "zzzzzz"
-    },
+    }
   },
   "check-articles": {
     "hide articles": {
@@ -1696,7 +1696,7 @@
       "en": "No"
     }
   },
-  "placeholder-text": {
+  "placeholder": {
     "select_text": {
       "de": "Bitte wählen Sie einen Textrahmen",
       "en": "Please select a textframe",
@@ -1726,6 +1726,16 @@
       "de": "Es muss ein Textrahmen markiert sein",
       "en": "You need to select a textframe first",
       "es": "Primero debe seleccionar un marco de texto"
+    },
+    "use-formatting": {
+      "de": "Formatierten Text erzeugen",
+      "en": "Generate formatted text",
+      "es": "Generar texto formateado"
+    },
+    "show-template": {
+      "de": "Vorlage anzeigen",
+      "en": "Show template",
+      "es": "Mostrar plantilla"
     }
   },
   "show-overflow": {

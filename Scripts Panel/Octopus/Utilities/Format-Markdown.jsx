@@ -44,7 +44,7 @@ function main(){
 	var texts = [];
 	if ( ! doc.selection.length ) {
 		texts = doc.stories.everyItem().getElements();
-	} else if ( doc.selection[0].constructor.name == "InsertionPoint" ) {
+	} else if ( doc.selection[0].constructor.name == "InsertionPoint" || doc.selection[0].constructor.name == "TextFrame" ) {
 		texts.push( doc.selection[0].parentStory );
 	} else {
 		for ( var n = 0; n < doc.selection.length; n++ ) {

@@ -28,7 +28,7 @@
 // ---------------------------------------------------------------------------------------------------------------------- */
 #targetengine "octopus_placeholder";
 #include "Startup Scripts/Octopus/Include.jsxinc"
-var script_id = "Placeholder-Text" 
+var script_id = "placeholder" 
 var response;
 __init();
 __log("run", script_id, script_id);
@@ -67,6 +67,7 @@ function _ui(title, tf, count) {
 
   var width = 500;
 
+  // var w = new Window('dialog', title);
   var w = new Window('palette', title);
   w.script_id = "Placeholder"
   w.orientation = 'column';
@@ -82,8 +83,11 @@ function _ui(title, tf, count) {
   // ----------------------------------------------------------------------------------------------------------------------
   w.main.add("statictext", undefined, __('what_topic'))
   w.topic = w.main.add('edittext', [undefined, undefined, width, 60], "", { multiline: true });
-  w.formatting = w.main.add("checkbox", undefined, __('use-formatting'));
+  w.main.add( "panel", [undefined, undefined, 300, 2])
+  w.frow = w.main.add("group {orientation: 'column', alignChildren: 'left', spacing: 4}")
+  w.formatting = w.frow.add("checkbox", undefined, __('use-formatting'));
   w.formatting.value = false;
+  w.show_template = w.frow.add("button", [undefined, undefined, 200, 20], __('show-template'))
 
   w.defaultElement = w.btns.add('button', undefined, __("ui_ok"))
   w.cancelElement = w.btns.add('button', undefined, __('ui_cancel'))
@@ -92,6 +96,14 @@ function _ui(title, tf, count) {
     this.window.close();
   }
   w.defaultElement.onClick = do_the_work
+  w.show_template.onClick = function() {
+    var fld = new Folder( PATH_DATA_FOLDER + "/Assets" );
+    if (fld.exists) {
+      fld.execute();
+    } else {
+      alert("template not found");
+    }
+  }
 
   w.show();
 
@@ -101,7 +113,7 @@ function _ui(title, tf, count) {
     // if (app.locale.toString() == "GERMAN_LOCALE") {
     //   var _q = "Schreib einen Text. Der Text sollte etwa " + count + " Zeichen enthalten. Das Thema ist: " + w.topic.text;
     // } else {
-      var _q = "Write a text using the language '" + app.locale.toString().toLowerCase().replace(/_locale/,"") + "'. It should contain about " + count + " characters. The topic is: '" + w.topic.text + "'. ";
+      var _q = "Write a text using the language '" + app.locale.toString().toLowerCase().replace(/_locale/,"") + "'. It should contain about " + ( w.formatting.value ? count * 1.3 : count ) + " characters. The topic is: '" + w.topic.text + "'. ";
     // }
     if ( w.formatting.value ) {
       // if (app.locale.toString() == "GERMAN_LOCALE") {
@@ -232,39 +244,48 @@ function _ui(title, tf, count) {
   }
 
 function __(id) {
-  loc_strings = load_translation();
-  if (loc_strings.hasOwnProperty(id)) {
-    return localize(loc_strings[id]);
-  } else {
-    return id
+  var txt = "";
+  // Nach Möglichkeit nur einmal laden
+  try {
+    if ( undefined === loc_strings ) {
+      loc_strings = __readJson(get_script_folder_path() + "/Strings.json");
+    }
+  } catch(e) {
+    // `undefined == loc_Strings`  wirft mitunter einen Fehler. k.A. warum
+    loc_strings = __readJson(get_script_folder_path() + "/Strings.json");
   }
-}
-function load_translation() {
-  return {
-    "select_text": {
-      "de": "Bitte wählen Sie einen Textrahmen",
-      "en": "Please select a textframe"
-    },
-    "ui_ok": {
-      "de": "Anfrage senden",
-      "en": "Send Request"
-    },
-    "ui_cancel": {
-      "de": "Schließen",
-      "en": "Close"
-    },
-    "what_topic": {
-      "de": "Worum geht's?",
-      "en": "What's the topic?"
-    },
-    "wait": {
-      "de": "Die Anfrage wird über einen einfachen Account gestellt. Das kann je nach Auslastungen zwischen 5 und 20sec dauern.",
-      "en": "The request is made with a low-prio account. This can take between 5 and 20 seconds"
-    },
-    "no_frame": {
-      "de": "Es muss ein Textrahmen markiert sein",
-      "en": "You need to select a textframe first"
+  // Beim Debuggen wurde die ID mitunter nachträglich hinzugefügt
+  if (!loc_strings.hasOwnProperty(script_id)) {
+    loc_strings = __readJson(get_script_folder_path() + "/Strings.json");
+  }
+  // Fallback, wenn die ID nicht da ist
+  if (!loc_strings.hasOwnProperty(script_id)) {
+    return id;
+  }
+  loc_strings = loc_strings[script_id];
+  if (DBG) $.writeln("loaded loc-strings");
+
+  if (loc_strings.hasOwnProperty(id)) {
+    txt = localize(loc_strings[id]);
+  } else {
+    txt = id
+  }
+  var re;
+  for (var n = 1; n < arguments.length; n++) {
+    try {
+      re = new RegExp("_" + n.toString() + "_");
+      txt = txt.replace(re, arguments[n].toString());
+    } catch (e) {
+      __log("error", e.message + " on " + e.line, script_id);
     }
   }
+  return txt;
 }
-
+function get_script_folder_path() {
+  try {
+    return app.scriptPreferences.scriptsFolder.fullName + "/Octopus";
+    // return app.activeScript.parent.fullName;
+  } catch (e) {
+    return e.fileName.replace(/\/[^\/]+$/, "");
+  }
+}

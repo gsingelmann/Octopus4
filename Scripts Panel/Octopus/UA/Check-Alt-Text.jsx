@@ -510,6 +510,7 @@ var dbg = false;
 
 function __( id ) {
   var txt = "";
+	try { var aux = loc_strings } catch(e) { loc_strings = null }  // Sonst wirft `! loc_strings` einen Fehler
   if ( ! loc_strings ) {
     try {
       loc_strings = __readJson( PATH_SCRIPT_PARENT + "/Scripts Panel/Octopus/Strings.json");

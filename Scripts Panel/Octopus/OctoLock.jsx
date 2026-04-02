@@ -170,6 +170,7 @@ function octolock_config() {
 
 function __( id ) {
   var txt = "";
+	try { var aux = loc_strings } catch(e) { loc_strings = null }  // Sonst wirft `! loc_strings` einen Fehler
   if ( ! loc_strings ) {
     loc_strings = __readJson( get_script_folder_path() + "/Strings.json");
     if ( ! loc_strings || ! loc_strings.hasOwnProperty(script_id) ) {

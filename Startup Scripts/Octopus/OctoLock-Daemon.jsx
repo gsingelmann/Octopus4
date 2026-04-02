@@ -318,6 +318,7 @@ function get_info( event, str ) {
 
 function __( id ) {
   var txt = "";
+	try { var aux = loc_strings } catch(e) { loc_strings = null }  // Sonst wirft `! loc_strings` einen Fehler
   if ( ! loc_strings ) {
     // loc_strings = __readJson( get_script_folder_path() + "/Strings.json");
 		loc_strings = __readJson( PATH_SCRIPT_PARENT + "/Scripts Panel/Octopus/Strings.json");

@@ -29,7 +29,7 @@
 #targetengine "octopus_watermark"
 #include "Startup Scripts/Octopus/Include.jsxinc"
 __init(); 
-var script_id = "Watermark"
+var script_id = "watermark"
 
 if ( app.documents.length ) {
 	__log("run", script_id, script_id );
@@ -475,6 +475,7 @@ function get_working_fonts() {
 
 function __( id ) {
   var txt = "";
+	try { var aux = loc_strings } catch(e) { loc_strings = null }  // Sonst wirft `! loc_strings` einen Fehler
   if ( ! loc_strings ) {
     loc_strings = __readJson( get_script_folder_path() + "/Strings.json");
     if ( ! loc_strings || ! loc_strings.hasOwnProperty(script_id) ) {

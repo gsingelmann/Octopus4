@@ -40,7 +40,7 @@ var w_width = 750;
 show_dashboard( cfgs, prefs );
 
 function show_dashboard( cfgs, prefs ) {
-  if ( cfgs.length == 0 ) {
+  if ( cfgs && cfgs.length == 0 ) {
     __alert( "warnung", __('no_scripts_found'), script_id, "ok", false );
     return;
   }

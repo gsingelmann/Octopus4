@@ -218,6 +218,7 @@ function list_greps() {
 
 function __( id ) {
   var txt = "";
+  if ( ! loc_strings ) {
     // loc_strings = __readJson( get_script_folder_path() + "/Strings.json");
     loc_strings = __readJson( PATH_SCRIPT_PARENT + "/Scripts Panel/Octopus/Strings.json");
     if ( ! loc_strings || ! loc_strings.hasOwnProperty(script_id) ) {
@@ -225,7 +226,7 @@ function __( id ) {
     }
     loc_strings = loc_strings[ script_id ];
     if (DBG) $.writeln("loaded loc-strings");
-
+  }
   if (loc_strings.hasOwnProperty(id)) {
     txt = localize(loc_strings[id]);
   } else {

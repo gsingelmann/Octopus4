@@ -510,16 +510,18 @@ var dbg = false;
 
 function __( id ) {
   var txt = "";
-  try {
-    loc_strings = __readJson( PATH_SCRIPT_PARENT + "/Scripts Panel/Octopus/Strings.json");
-    // loc_strings = __readJson( get_script_folder_path() + "/Strings.json");
-    if ( ! loc_strings || ! loc_strings.hasOwnProperty(script_id) ) {
-      return id;
+  if ( ! loc_strings ) {
+    try {
+      loc_strings = __readJson( PATH_SCRIPT_PARENT + "/Scripts Panel/Octopus/Strings.json");
+      // loc_strings = __readJson( get_script_folder_path() + "/Strings.json");
+      if ( ! loc_strings || ! loc_strings.hasOwnProperty(script_id) ) {
+        return id;
+      }
+      loc_strings = loc_strings[ script_id ];
+      // if (DBG) $.writeln("loaded loc-strings");
+    } catch(e) {
+      __log( "error", e.message + " on " + e.line, script_id);
     }
-    loc_strings = loc_strings[ script_id ];
-    // if (DBG) $.writeln("loaded loc-strings");
-  } catch(e) {
-    __log( "error", e.message + " on " + e.line, script_id);
   }
 
   if (loc_strings.hasOwnProperty(id)) {

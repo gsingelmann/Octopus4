@@ -1002,7 +1002,7 @@ function __init() {
           curlString += ' -w \'\n-----http-----%{http_code}\'';
         }
         curlString += ' \'' + request.fullURL + '\'';
-        __log("dbg", "\n=========curl==============\n" + curlString + "\n=========/curl==============\n", "restix");
+        // __log("dbg", "\n=========curl==============\n" + curlString + "\n=========/curl==============\n", "restix");
         try {
           result = app.doScript('do shell script "' + curlString + '"', ScriptLanguage.APPLESCRIPT_LANGUAGE);
         }

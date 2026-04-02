@@ -18,7 +18,7 @@ Die Scriptsammlung deckt verschiedene Themenbereiche ab:
 
 ## Installation
 
-1. Lade die Datei [Octopus4-Starter.jsx](Octopus4-Starter.jsx) herunter
+1. Lade die Datei [Octopus4-Starter.jsx](https://raw.githubusercontent.com/gsingelmann/Project-Octopus-4/refs/heads/master/Scripts%20Panel/Octopus-Starter.jsx) herunter
 2. Kopiere die Datei in deinen InDesign Scripts Panel Ordner:
    - **macOS**: `~/Library/Preferences/Adobe InDesign/[Version]/[Sprache]/Scripts/Scripts Panel/`
    - **Windows**: `C:\Users\[Benutzername]\AppData\Roaming\Adobe\InDesign\[Version]\[Sprache]\Scripts\Scripts Panel\`
@@ -35,7 +35,6 @@ Das **Dashboard** bietet einen zentralen Überblick über alle verfügbaren Octo
 ## Systemanforderungen
 
 - Adobe InDesign (kompatibel mit aktuellen Versionen)
-- Schreibrechte im Scripts Panel Ordner
 
 ## Lizenz
 

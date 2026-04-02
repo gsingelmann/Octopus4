@@ -97,8 +97,6 @@ function collect_doc_main( doc ) {
 			if ( prefs.onoff != "on" ) return;
 			if ( prefs.switch == "active" && ! prefs.paths ) return;
 
-			__log( "run", script_id, script_id );
-
 			var do_collect = prefs.switch == "blocking" ? true : false;
 			var dpath = doc.fullName.fullName;
 			for ( var n = 0; n < prefs.paths.length; n++ ) {
@@ -110,6 +108,7 @@ function collect_doc_main( doc ) {
 			}
 
 			if ( do_collect ) {	
+				__log( "run", script_id, script_id );
 				__log("info", "Schriften fuer '" + doc.name.replace(/\.indd/i,"") + "' sollen gesammelt werden", script_id)
 				var tgt_path = doc.filePath + "/Document fonts";
 				var tgt_folder = new Folder( tgt_path );

@@ -255,7 +255,7 @@ function show_dashboard( cfgs, prefs ) {
     write_prefs( prefs );
     for ( var id in prefs.ignore ) {
       $.writeln( "ignoring " + id );
-      __log("info", "Script '" + id + "' wird ignoriert/deinstalliert")
+      __log("info", "Script " + id + " wird ignoriert/deinstalliert")
       uninstall( id );
     }
     for ( var n = 0; n < changes.sets.length; n++ ) {

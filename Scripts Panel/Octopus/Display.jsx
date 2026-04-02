@@ -53,7 +53,7 @@ function handle_doc() {
     var cfg_folder_path = PATH_DATA_FOLDER + "/prefs/display-configs",
         cfg_folder = new Folder( cfg_folder_path ),
         cfg_files = cfg_folder.getFiles( "*.json" );
-    __log("info", cfg_files.length + " config files found in '" + cfg_folder_path + "'", script_id);
+    __log("info", cfg_files.length + " config files found in " + cfg_folder_path + "", script_id);
   } catch(e) {
     __alert('stop', __('alert_wrong_params') + "\n\n" + e, "Stop", "OK");
     return;
@@ -75,7 +75,7 @@ function handle_doc() {
       var config = __readJson( cfg_files[nf] );
       configs[config.name] = config;
     } catch(e) {
-      __log("error", "Fehler beim Einlesen der Config-Datei '" + cfg_files[nf].name + "': " + e.message + " on " + e.line);
+      __log("error", "Fehler beim Einlesen der Config-Datei " + cfg_files[nf].name + ": " + e.message + " on " + e.line);
     }
   }
 
@@ -183,7 +183,7 @@ function apply_config( config, doc ) {
           
           } else if ( option.id == "workspace" ) {
             try {
-              __log("Apply Workspace '" + option.value + "'")
+              __log("Apply Workspace " + option.value + "")
               app.applyWorkspace( option.value );
             } catch(e) {
               __log_error( e );

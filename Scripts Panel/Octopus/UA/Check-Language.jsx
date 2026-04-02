@@ -100,7 +100,7 @@ function handle() {
   //     unset_condition( found[0][na], c );
   //   }
   // } catch(e) {
-  //   __log_error(e, "hiding 'most' language")
+  //   __log_error(e, "hiding most language")
   //   alert(e);
   // }
   interaktion();

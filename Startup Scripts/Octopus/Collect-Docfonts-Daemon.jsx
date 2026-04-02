@@ -109,7 +109,7 @@ function collect_doc_main( doc ) {
 
 			if ( do_collect ) {	
 				__log( "run", script_id, script_id );
-				__log("info", "Schriften fuer '" + doc.name.replace(/\.indd/i,"") + "' sollen gesammelt werden", script_id)
+				__log("info", "Schriften fuer " + doc.name.replace(/\.indd/i,"") + " sollen gesammelt werden", script_id)
 				var tgt_path = doc.filePath + "/Document fonts";
 				var tgt_folder = new Folder( tgt_path );
 				if ( ! tgt_folder.exists ) {
@@ -135,7 +135,7 @@ function collect_doc_main( doc ) {
 						}
 					} else {
 						// Ich brauche mehr log
-						__log("dbg", "location: '" + l + "', font: '" + f.name + "', strg: '" + __("activated-adobe", script_id) + "', PATH_SCRIPT_PARENT: " + PATH_SCRIPT_PARENT, script_id)
+						__log("dbg", "location: >" + l + "<, font: >" + f.name + "<, strg: >" + __("activated-adobe", script_id) + "<, PATH_SCRIPT_PARENT: " + PATH_SCRIPT_PARENT, script_id)
 						if ( l.search(/adobe/i) != -1 && l.search(/fonts/i) != -1  ) {
 							msgs.push( __("adobe-fonts", script_id) + "\n\n" + f.name );
 						} else {
@@ -185,7 +185,7 @@ function __( id, script_id ) {
 		try {
 			var a = loc_strings;
 		} catch(e) {
-			__log("dbg", "loading loc_strings from '" +  PATH_SCRIPT_PARENT + "/Scripts Panel/Octopus/Strings.json" + ": " + File(  PATH_SCRIPT_PARENT + "/Scripts Panel/Octopus/Strings.json" ).exists, script_id );
+			__log("dbg", "loading loc_strings from >" +  PATH_SCRIPT_PARENT + "/Scripts Panel/Octopus/Strings.json<" + ": " + File(  PATH_SCRIPT_PARENT + "/Scripts Panel/Octopus/Strings.json" ).exists, script_id );
 			loc_strings = __readJson( PATH_SCRIPT_PARENT + "/Scripts Panel/Octopus/Strings.json");
 			if ( ! loc_strings ) {
 				__log("error", "loc_Strings kann nicht geladen werden", script_id);

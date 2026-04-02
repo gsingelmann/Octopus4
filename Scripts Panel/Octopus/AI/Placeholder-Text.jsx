@@ -6,8 +6,8 @@
 +   Author: Gerald Singelmann, gs@cuppascript.com
 +   Supported by: Satzkiste GmbH, post@satzkiste.de
 
-+    Modified: 2023-04-26
- 
++    Modified: 2026-03-26
+  
 +    License (MIT)
     Copyright 2023 Gerald Singelmann/Satzkiste GmbH
     Permission is hereby granted, free of charge, to any person obtaining 
@@ -40,31 +40,15 @@ function main() {
     && (app.selection[0].constructor.name == "TextFrame"
       || (app.selection[0].hasOwnProperty("baseline") && app.selection[0].parentTextFrames.length))
   ) {
-    var tf = app.selection[0];
-    if (tf.hasOwnProperty("baseline")) tf = tf.parentTextFrames[0]
-    var _vorher = tf.contents;
-    tf.contents = TextFrameContents.PLACEHOLDER_TEXT;
-    var count = tf.characters.length,
-        n_lines = tf.lines.length,
-        n_per_line = Math.round( count / n_lines );
-
-    var a = _vorher.length, b = tf.contents.length;
-    try {
-      tf.characters.itemByRange(_vorher.length, tf.contents.length - 1).remove();
-    } catch (e) {
-      tf.contents = _vorher;
-    }
-    _ui("Octopus Placeholder", tf, count);
+    // ui is a palette, selection can be changed while it's open, so we have to check the selection again when the button is clicked. 
+    _ui("Octopus Placeholder");
   } else {
-    // alert( "Es muss ein Textrahmen markiert sein")
     __alert("stop", __('no_frame'), "no selection", "OK")
   }
 }
 
 
-function _ui(title, tf, count) {
-  count = Math.floor(count / 10) * 10;
-
+function _ui(title) {
   var width = 500;
 
   // var w = new Window('dialog', title);
@@ -107,21 +91,40 @@ function _ui(title, tf, count) {
 
   w.show();
 
-  function do_the_work() {
-    // __log("dbg", "clicked ok", script_id)
-    this.enabled = false;
-    // if (app.locale.toString() == "GERMAN_LOCALE") {
-    //   var _q = "Schreib einen Text. Der Text sollte etwa " + count + " Zeichen enthalten. Das Thema ist: " + w.topic.text;
-    // } else {
-      var _q = "Write a text using the language '" + app.locale.toString().toLowerCase().replace(/_locale/,"") + "'. It should contain about " + ( w.formatting.value ? count * 1.3 : count ) + " characters. The topic is: '" + w.topic.text + "'. ";
-    // }
-    if ( w.formatting.value ) {
-      // if (app.locale.toString() == "GERMAN_LOCALE") {
-      //   _q += " Der Text sollte mit einfachen Markdown-Formatierungen versehen sein: Zwischenüberschriften, fett und kursiv, Punktlisten,; alles aber nur, wenn der Inhalt das erfordert."
-      // } else {
-        _q += " Use simple Markdown formatting, sparingly: subheadings, bold and italics, bulleted lists, tables; but only if it fits the content"
-      // }
 
+  function do_the_work() {
+    var dbg = true;
+    // __log("dbg", "clicked ok", script_id)
+    if (app.documents.length
+      && app.selection.length
+      && (app.selection[0].constructor.name == "TextFrame"
+        || (app.selection[0].hasOwnProperty("baseline") && app.selection[0].parentTextFrames.length))
+    ) {
+      var tf = app.selection[0];
+      if (tf.hasOwnProperty("baseline")) tf = tf.parentTextFrames[0]
+      var _vorher = tf.contents;
+      tf.contents = TextFrameContents.PLACEHOLDER_TEXT;
+      var count = tf.characters.length,
+          n_lines = tf.lines.length,
+          n_per_line = Math.round( count / n_lines );
+      count = Math.floor(count / 10) * 10;
+      $.writeln("Zeichen: " + count + ", Zeilen: " + n_lines + ", pro Zeile: " + n_per_line);
+
+      try {
+        tf.characters.itemByRange(_vorher.length, tf.contents.length - 1).remove();
+      } catch (e) {
+        tf.contents = _vorher;
+      }
+    } else {
+      $.writeln("Kein Textfeld ausgewählt");
+      __alert("stop", __('no_frame'), "no selection", "OK")
+      return;
+    }
+
+    this.enabled = false;
+    var _q = "Write a text using the language '" + app.locale.toString().toLowerCase().replace(/_locale/,"") + "'. It should contain about " + ( w.formatting.value ? count * 1.3 : count ) + " characters. The topic is: '" + w.topic.text + "'. ";
+    if ( w.formatting.value ) {
+        _q += " Use simple Markdown formatting, sparingly: subheadings, bold and italics, bulleted lists, tables; but only if it fits the content"
     }
     var request_string = JSON.stringify({ prompt: _q, huba: "hopp" });
     this.window.close();
@@ -129,10 +132,12 @@ function _ui(title, tf, count) {
     var pbwin = new Window("palette");
     pbwin.add("statictext", undefined, "...waiting...")
     pbwin.show();
+    $.writeln("Wating to send");
     wait_to_send = app.idleTasks.add({ name: "wait_to_send", sleep: 500 });
     wait_to_send.addEventListener("onIdle", function () {
-      // __log("dbg", "sending: '" + request_string + "'", script_id)
+      // __log("dbg", "sending: " + request_string + "", script_id)
       wait_to_send.sleep = 0;
+      $.writeln("Sending request: " + request_string);
       var request = {
         url: "https://www.cuppascript.com/stuff",
         command: "call_openai.php", // defaults to ""
@@ -144,9 +149,10 @@ function _ui(title, tf, count) {
       response = restix.fetch(request);
       // __log("dbg", "response0: " + JSON.stringify( response ), script_id );
       pbwin.close();
-      $.writeln( response.body );
+      $.writeln( "response: " + response.body );
       wait_to_write = app.idleTasks.add({ name: "cs_reopen_doc", sleep: 500 });
       wait_to_write.addEventListener("onIdle", function () {
+        $.writeln("Trying to write text...");
         try {
           // __log("dbg", "Writing text", script_id)
           var doc = app.activeDocument;
@@ -228,7 +234,7 @@ function _ui(title, tf, count) {
       });
     });
   }
-}
+
   function set_condition( text, cond ) {
     var rngs = text.textStyleRanges.everyItem().getElements();
     // $.writeln( text.contents.substr(0,32) +  " - ranges: " + rngs.length );
@@ -242,6 +248,7 @@ function _ui(title, tf, count) {
       // $.writeln("   " + rngs[n].contents.substr(0,32) )
     }
   }
+}
 
 function __(id) {
   var txt = "";
@@ -263,7 +270,7 @@ function __(id) {
     return id;
   }
   loc_strings = loc_strings[script_id];
-  if (DBG) $.writeln("loaded loc-strings");
+  $.writeln("loaded loc-strings");
 
   if (loc_strings.hasOwnProperty(id)) {
     txt = localize(loc_strings[id]);

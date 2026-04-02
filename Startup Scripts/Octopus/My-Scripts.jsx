@@ -15,7 +15,7 @@ function install_my_scripts() {
 
     var scripts = [];
     var files = my_scripts_folder.getFiles( )
-    // __log("dbg", files.length + " files in '" + my_scripts_folder.fullName + "'", "my-scripts");
+    // __log("dbg", files.length + " files in >" + my_scripts_folder.fullName + "<", "my-scripts");
     for ( var n = 0; n < files.length; n++ ) {
       if ( files[n].name.charAt(0) =="." ) continue;
       var aux = files[n].name.search(/\.(js|jsx|jsbin|jsxbin|idjs)(\.lnk)?$/i );
@@ -52,7 +52,7 @@ function install_my_scripts() {
 
       for ( var n = 0; n < scripts.length; n++ ) {
         var menu_label = scripts[n].name;
-        __log("dbg", "try " + menu_label + " '" + scripts[n].file.fullName + "'", "my-scripts");
+        __log("dbg", "try " + menu_label + " - >" + scripts[n].file.name + "<", "my-scripts");
         var tgt_path = scripts[n].file.fullName;
         var action = app.scriptMenuActions.add(menu_label);
         action.insertLabel("script-path", tgt_path);

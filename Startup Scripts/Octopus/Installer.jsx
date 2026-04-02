@@ -29,7 +29,7 @@ function install() {
   var configs = load_configuration();
   update_resources( configs );
   install_menus( configs );
-  send_log();
+  // send_log();
 
   function load_configuration() {
     // ---------------------------------------------------------------------------------
@@ -95,7 +95,7 @@ function install() {
             var remote = __call_request( cfg.base_url, "index.json" );
             if (remote) remote = JSON.parse( remote );
           } catch(e) {
-            __log("error", "Fehler beim Download von Set '" + cfg.set_name + "':  " + e.message + " on " + e.line );
+            __log("error", "Fehler beim Download von Set >" + cfg.set_name + "<:  " + e.message + " on " + e.line );
             remote = cfg;
           }
         } else {
@@ -103,7 +103,7 @@ function install() {
         }
       }
       if ( ! remote ) {
-        __log("error", "'" + cfg.base_url + "' enthält kein parse-bares JSON", "installer");
+        __log("error", ">" + cfg.base_url + "< enthält kein parse-bares JSON", "installer");
         return cfg;
       }
       return remote;
@@ -424,6 +424,11 @@ function install() {
 
 function onQuitHandler() {
   try {
+    send_log();
+  } catch(e) {
+    __log("error", "Fehler im Quit-Handler: " + e.message + " on " + e.line, "installer");
+  }
+  try {
     var custom = app.extractLabel("octopus_custom_menus");
     if ( ! custom ) return;
     custom = JSON.parse( custom );
@@ -442,4 +447,39 @@ function onQuitHandler() {
     __log("error", "Fehler beim Aufräumen: " + e.message + " on " + e.line, "installer");
     if (DBG) $.writeln(e.message + " on " + e.line);
   }
+
+  function send_log() {
+    // -------------------------------------------------------------------------------------------
+    //  Logs zum Server und Reset
+    // -------------------------------------------------------------------------------------------
+    try {
+      var _data = __readJson(PATH_LOG_FILE);
+      if ( _data ) {
+        if ( ! _data.guid ) _data.guid = "na";
+        _data = JSON.stringify( _data );
+        var log_url = "https://singels.info/Octopus/Octopus4Log";
+        var request = {
+          url: log_url,
+          method: "POST",
+          body: "{\"data\": \"" + encodeURIComponent(_data) + "\"}",
+          headers: [
+            {name:"Content-Type", value:"application/json; charset=UTF-8"},
+            {name: "x-project-octopus", value: "true"}
+          ]
+        }
+        var response = restix.fetch(request);
+        if ($.getenv("USER") == "singel") {
+          try {
+            __writeJson( PATH_DATA_FOLDER + "/Logs/last_response.json", response );
+          } catch(e) {
+            __log("error", "Fehler beim Schreiben der letzten Server-Antwort: " + e.message, "installer");
+          }
+        }
+      }
+    } catch (e) {
+      __log("error", "Fehler beim Pushen  der Log-Datei: " + e.message + " on " + e.line, "installer");
+    }
+    __log("reset_log", "Log zurückgesetzt", "installer");
+  }
+
 }

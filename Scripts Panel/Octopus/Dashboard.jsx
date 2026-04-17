@@ -343,7 +343,7 @@ function show_dashboard( cfgs, prefs ) {
     // __ensureFolder(tgt_path);
     // if (__moveFile(f, tgt_path) ) {
     if ( f.remove() ) {
-      __log("info", "Script deinstalliert: " + path, script_id);
+      //__log("info", "Script deinstalliert: " + path, script_id);
     } else {
       __log("error", "Script konnte nicht deinstalliert werden: " + path, script_id);
     }

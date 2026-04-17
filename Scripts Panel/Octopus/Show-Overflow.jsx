@@ -1051,6 +1051,7 @@ function main() {
 
 	function __( id ) {
 		var txt = "";
+		try { var aux = loc_strings } catch(e) { var loc_strings = null }
 		if ( ! loc_strings ) {
 			loc_strings = __readJson( get_script_folder_path() + "/Strings.json");
 			if ( ! loc_strings || ! loc_strings.hasOwnProperty(script_id) ) {

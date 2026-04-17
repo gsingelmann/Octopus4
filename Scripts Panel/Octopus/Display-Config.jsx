@@ -558,7 +558,7 @@ function main( what_to_do, preset ) {
     aux = t[n].ts - t[n-1].ts;
     tlog.push( t[n].what + " - " + aux );
   }
-  __log("dbg", tlog.join(" | "), script_id );
+  //__log("dbg", tlog.join(" | "), script_id );
 
   var rs = w.show();
 

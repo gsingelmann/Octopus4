@@ -36,10 +36,8 @@ function install_my_scripts() {
     // -----------------------------------------------------------------------------------------------------------------
     //  Menü erstellen
     // -----------------------------------------------------------------------------------------------------------------
-    __log("dbg", scripts.length + " Scripte in MS", "my-scripts");
-    if ( scripts.length ) {
-      __log("run", "my-scripts", "my-scripts");
-      
+    // __log("dbg", scripts.length + " Scripte in MS", "my-scripts");
+    if ( scripts.length ) {      
       scripts.sort( function(a,b) { 
         if ( a.name < b.name ) return -1;
         if ( a.name > b.name ) return 1;
@@ -60,6 +58,7 @@ function install_my_scripts() {
           action.eventListeners.add("onInvoke", function (event) {
             try {
               app.doScript(new File(sPath), undefined, undefined, UndoModes.ENTIRE_SCRIPT, mtxt);
+              __log("run", "my-scripts", "my-scripts");
             } catch (e) {
               __log("error", "Script-Aufruf fehlgeschlagen (" + sPath + "): " + e.message + " on " + e.line, "installer");
               __alert("warnung", "Script-Aufruf fehlgeschlagen (" + sPath + "): " + e.message + " on " + e.line, "OK", false)

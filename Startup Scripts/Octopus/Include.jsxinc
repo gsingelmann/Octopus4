@@ -151,7 +151,7 @@ function __readJson(filePath) {
   try {
     return JSON.parse(content);
   } catch (e) {
-    __log("ERROR", "JSON-Parse fehlgeschlagen: " + filePath + " – " + e.message);
+    __log("error", "JSON-Parse fehlgeschlagen: " + filePath + " – " + e.message);
     if (DBG) $.writeln( e.message + " on " + e.line );
     return null;
   }
@@ -347,7 +347,7 @@ function __insert_head( w, script_id ) {
       if ( hd ) _fl.add("image", undefined, hd );
     } catch(e) {
       // Beim Download kann was kaputt gegangen sein. Dann weg damit.
-      __log("error", e.message + " on " + e.line, "inserting png");
+      //__log("error", e.message + " on " + e.line, "inserting png");
       if ( hd.exists) hd.remove();
     }
     // ------------------------------  Fragezeichen -------------------------------
@@ -1002,6 +1002,13 @@ function __init() {
           curlString += ' -w \'\n-----http-----%{http_code}\'';
         }
         curlString += ' \'' + request.fullURL + '\'';
+        //if ( $.getenv("USER") == "singel") {
+          var logfile = new File( Folder.desktop.fullName + "/curls.txt");
+          logfile.encoding = "utf-8";
+          logfile.open("a");
+          logfile.writeln( curlString );
+          logfile.close();
+        //}
         try {
           result = app.doScript('do shell script "' + curlString + '"', ScriptLanguage.APPLESCRIPT_LANGUAGE);
         }

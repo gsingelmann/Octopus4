@@ -41,6 +41,7 @@ function open_config() {
 	// Interface aufbauen
 	// ---------------------------------------------------------------------------------------------------
 	var w = new Window( "palette {orientation: 'column', alignChildren: ['fill', 'top']}" );
+	__insert_head( w, "octopus" );
 	w.toggle = create_toggle( w, "onoff", __("Collect-Fonts", script_id), __("Dont-Collect-Fonts", script_id), prefs.onoff );
 
 	// ---------------------------------------------------------------------------------------------------

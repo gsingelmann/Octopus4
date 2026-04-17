@@ -147,7 +147,7 @@ function collect_doc_main( doc ) {
 					__alert( "krake", __("Collect-Fonts", script_id) + "\n\n" + msgs.join("\n"), "", "OK", false );
 				}
 			} else {
-				__log("info", "Doc erfuellt die Kriterien nicht", script_id)
+				//__log("info", "Doc erfuellt die Kriterien nicht", script_id)
 			}				// do collect
 		} catch(e) {
 			__log("error", e.message + " on " + e.line )

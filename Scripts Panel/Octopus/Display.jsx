@@ -183,10 +183,10 @@ function apply_config( config, doc ) {
           
           } else if ( option.id == "workspace" ) {
             try {
-              __log("Apply Workspace " + option.value + "")
+              __log("info", "Apply Workspace " + option.value + "", script_id);
               app.applyWorkspace( option.value );
             } catch(e) {
-              __log_error( e );
+              __log("error", e.message + " on " + e.line, script_id);
             }
 
           } else {

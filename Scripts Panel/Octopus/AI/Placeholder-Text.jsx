@@ -115,14 +115,27 @@ function _ui(title) {
       } catch (e) {
         tf.contents = _vorher;
       }
+
     } else {
       $.writeln("Kein Textfeld ausgewählt");
       __alert("stop", __('no_frame'), "no selection", "OK")
       return;
     }
 
-    this.enabled = false;
-    var _q = "Write a text using the language '" + app.locale.toString().toLowerCase().replace(/_locale/,"") + "'. It should contain about " + ( w.formatting.value ? count * 1.3 : count ) + " characters. The topic is: '" + w.topic.text + "'. ";
+    var locale = app.locale.toString().toLowerCase().replace(/_locale/,"");
+    var s = app.selection[0];
+    try {
+      if ( s.hasOwnProperty("baseline") ) {
+        locale = s.appliedLanguage.icuLocaleName;
+      } else if ( s.constructor.name == "TextFrame" ) {
+        locale = s.insertionPoints.firstItem().appliedLanguage.icuLocaleName;
+      }
+    } catch(e) {
+    }
+
+
+    this.enabled = false; 
+    var _q = "Write a text using the language '" + locale + "'. It should contain about " + ( w.formatting.value ? count * 1.3 : count ) + " characters. The topic is: '" + w.topic.text + "'. ";
     if ( w.formatting.value ) {
         _q += " Use simple Markdown formatting, sparingly: subheadings, bold and italics, bulleted lists, tables; but only if it fits the content"
     }
@@ -176,7 +189,7 @@ function _ui(title) {
           // -------------------------------------------------------------------------------------------
           var st = tf.parentStory;
           if (st.characters.length > tf.characters.length) {
-            __log(("dbg", st.characters.length - tf.characters.length) + " Zeichen Übersatz", script_id)
+            __log("dbg", (st.characters.length - tf.characters.length) + " Zeichen Übersatz", script_id)
             st.characters.itemByRange(tf.characters.lastItem().index + 1, st.characters.lastItem().index).remove();
           }
           // -------------------------------------------------------------------------------------------

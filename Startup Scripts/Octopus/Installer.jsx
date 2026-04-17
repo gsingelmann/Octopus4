@@ -166,7 +166,7 @@ function install() {
 
     function install_from_url( c, src_path, tgt_path ) {
       try {
-        __log("dbg", "Request: " + JSON.stringify({ url: src_path, filename: c.filename, tgt: tgt_path }), "installer");
+        //__log("dbg", "Request: " + JSON.stringify({ url: src_path, filename: c.filename, tgt: tgt_path }), "installer");
         var tgt_file = __call_request(
           src_path,
           c.filename,
@@ -424,7 +424,7 @@ function install() {
 
 function onQuitHandler() {
   try {
-    send_log();
+    _send_log();
   } catch(e) {
     __log("error", "Fehler im Quit-Handler: " + e.message + " on " + e.line, "installer");
   }
@@ -448,7 +448,7 @@ function onQuitHandler() {
     if (DBG) $.writeln(e.message + " on " + e.line);
   }
 
-  function send_log() {
+  function _send_log() {
     // -------------------------------------------------------------------------------------------
     //  Logs zum Server und Reset
     // -------------------------------------------------------------------------------------------

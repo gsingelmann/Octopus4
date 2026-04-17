@@ -23,8 +23,8 @@
 		FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
 		DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------- */
-// #include "Startup Scripts/Octopus/Include.jsxinc"
-#include "../../../Startup Scripts/Octopus/Include.jsxinc"
+#include "Startup Scripts/Octopus/Include.jsxinc"
+// #include "../../../Startup Scripts/Octopus/Include.jsxinc"
 #targetengine "octopus-ua-checkalttext"
 var script_id = "check-alt-text";
 __init();
@@ -276,7 +276,7 @@ function show_ui() {
           try {
             dup.paths[0].entirePath = fr.paths[0].entirePath;
           } catch(e) {
-            __log("dbg", dup.constructor.name + " ... " + e.message + " on " + e.line, script_id)
+            __log("error", dup.constructor.name + " ... " + e.message + " on " + e.line, script_id)
             app.select( fr );
             return;
           }

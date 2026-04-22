@@ -8,7 +8,7 @@
 #targetengine "octopus-ua-checktypo";
 #include "Startup Scripts/Octopus/Include.jsxinc"
 __init();
-var script_id = "add_hyperlinks";
+var script_id = "add-hyperlinks";
 __log("run", script_id, script_id);
 
 

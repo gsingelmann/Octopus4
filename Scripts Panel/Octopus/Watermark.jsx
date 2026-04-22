@@ -202,7 +202,7 @@ function set_watermark( title, version ) {
 			// -----------------------------------------------------------------------------------------------------
 			var crnt_color = 0,
 					crnt_tones = get_crnt_tones( crnt_color ),
-					crnt_tone = 0;
+					crnt_tone = 4;
 			if ( state.hasOwnProperty( p.name + '_color') && state.hasOwnProperty( p.name + '_tone') ) {
 				for ( var n = 0; n <  color_names.length; n++ ) {
 					if ( color_names[n] == state[p.name + "_color"] ) {

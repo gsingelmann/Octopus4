@@ -8,7 +8,7 @@
 // Abhängigkeiten:
 //   Include.jsxinc  – muss im selben Ordner wie diese Datei liegen
 //
-// Version: 1.0.0
+// 2026-04-21: Ausführlicheres Logging, Installerupdates sind noch wackelig
 // =============================================================================
 #targetengine "octopus4"
   // #include "Startup Scripts/Octopus/Include.jsxinc"
@@ -424,11 +424,6 @@ function install() {
 
 function onQuitHandler() {
   try {
-    _send_log();
-  } catch(e) {
-    __log("error", "Fehler im Quit-Handler: " + e.message + " on " + e.line, "installer");
-  }
-  try {
     var custom = app.extractLabel("octopus_custom_menus");
     if ( ! custom ) return;
     custom = JSON.parse( custom );
@@ -446,6 +441,11 @@ function onQuitHandler() {
   } catch (e) {
     __log("error", "Fehler beim Aufräumen: " + e.message + " on " + e.line, "installer");
     if (DBG) $.writeln(e.message + " on " + e.line);
+  }
+  try {
+    _send_log();
+  } catch(e) {
+    __log("error", "Fehler im Quit-Handler: " + e.message + " on " + e.line, "installer");
   }
 
   function _send_log() {
@@ -467,14 +467,16 @@ function onQuitHandler() {
             {name: "x-project-octopus", value: "true"}
           ]
         }
+        __log("dbg", "Sende Log", "installer");
         var response = restix.fetch(request);
-        if ($.getenv("USER") == "singel") {
+        // if ($.getenv("USER") == "singel") {
           try {
             __writeJson( PATH_DATA_FOLDER + "/Logs/last_response.json", response );
           } catch(e) {
             __log("error", "Fehler beim Schreiben der letzten Server-Antwort: " + e.message, "installer");
           }
-        }
+        // }
+        __log("dbg", "Log gesendet, Server-Antwort: " + response.status + " " + response.statusText, "installer");
       }
     } catch (e) {
       __log("error", "Fehler beim Pushen  der Log-Datei: " + e.message + " on " + e.line, "installer");

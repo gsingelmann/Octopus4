@@ -1,3 +1,9 @@
+// =============================================================================
+//  OCTOPUS – Include.jsxinc
+//  Alle Funktionen, die von mehreren Skripten benötigt werden, kommen hier rein.
+//  2026-04-21: Logging von http-Requests hinzugefügt
+//              Noch mehr Logging
+// =============================================================================
 
 DBG = true;
 
@@ -30,11 +36,19 @@ function __log(level, msg, active_script) {
     var f = new File( PATH_LOG_FILE );
     f.rename( __getMinuteString() + ".json");
   }
+
+  if ( level == "rest" ) {
+    if ( ! DBG ) return;
+    __writeFile( PATH_DATA_FOLDER + "/Logs/requests-" + __getDayString() + ".log", msg + "\n\n----------\n\n", "a" );
+    return;
+  }
+  
   var script_version = 0;
   try {
+    // Die Liste aller Assets, wird im Installer geschrieben, damit ich die Scriptversionen auch hier verfügbar habe.
     var global = __readJson( PATH_DATA_FOLDER + "/Asset-Directory.json" );
     for ( var n = 0; n < global.length; n++ ) {
-      if ( global[n].id == active_script ) {
+      if ( global[n].id == active_script ) {
         script_version = global[n].version;
         break;
       }
@@ -952,12 +966,16 @@ function __init() {
 
         scriptCommands = scriptCommands.join("\r\n");
 
+        __log("rest", "Executing script: \n" + scriptCommands, "includes" );
+
         try {
           result = app.doScript(scriptCommands, ScriptLanguage.VISUAL_BASIC);
         }
         catch (e) {
+          __log("rest", "doScriptError: " + e.message + " #" + e.number, "includes" );
           result = "doScriptError: " + e.message + " #" + e.number;
           if (e.number == 104705) {
+            __log("rest", "Administrator rights needed for HTTP Requests on Windows", "includes" );
             result += " Please start InDesign once with administrator rights. Close it and start it again as a normal user.";
           }
         }
@@ -1002,23 +1020,28 @@ function __init() {
           curlString += ' -w \'\n-----http-----%{http_code}\'';
         }
         curlString += ' \'' + request.fullURL + '\'';
+
+        __log("rest", curlString, "includes" );
         //if ( $.getenv("USER") == "singel") {
-          var logfile = new File( Folder.desktop.fullName + "/curls.txt");
-          logfile.encoding = "utf-8";
-          logfile.open("a");
-          logfile.writeln( curlString );
-          logfile.close();
+          // var logfile = new File( Folder.desktop.fullName + "/curls.txt");
+          // logfile.encoding = "utf-8";
+          // logfile.open("a");
+          // logfile.writeln( curlString );
+          // logfile.close();
         //}
         try {
           result = app.doScript('do shell script "' + curlString + '"', ScriptLanguage.APPLESCRIPT_LANGUAGE);
+          __log("rest", "curl result: " + result, "includes" );
         }
         catch (e) {
           result = "doScriptError: " + e.message + " #" + e.number;
+          __log("rest", "doScriptError: " + e.message + " #" + e.number, "includes" );
         }
       }
 
       // Fill response 
       if (typeof result == 'undefined') {
+        __log("rest", "No result value. Probably System Script could not run?", "includes" );
         throw Error("No result value. Probably System Script could not run?");
       }
       if (result.match(/^xHttpError|^curl: \(\d+\)|^doScriptError:/)) {

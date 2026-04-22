@@ -622,6 +622,10 @@
     "no-config-read": {
       "de": "Es konnte keine Config eingelesen werden",
       "en": "No config could be loaded"
+    },
+    "delete_set_confirm": {
+      "de": "Wollen Sie das Scriptset wirklich deinstallieren?",
+      "en": "Do you really want to uninstall this set?"
     }
   },
   "display-config": {

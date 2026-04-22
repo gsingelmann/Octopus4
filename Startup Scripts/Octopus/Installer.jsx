@@ -469,19 +469,21 @@ function onQuitHandler() {
         }
         __log("dbg", "Sende Log", "installer");
         var response = restix.fetch(request);
-        // if ($.getenv("USER") == "singel") {
-          try {
-            __writeJson( PATH_DATA_FOLDER + "/Logs/last_response.json", response );
-          } catch(e) {
-            __log("error", "Fehler beim Schreiben der letzten Server-Antwort: " + e.message, "installer");
-          }
-        // }
-        __log("dbg", "Log gesendet, Server-Antwort: " + response.status + " " + response.statusText, "installer");
+        try {
+          __writeJson( PATH_DATA_FOLDER + "/Logs/last_response.json", response );
+        } catch(e) {
+          __log("error", "Fehler beim Schreiben der letzten Server-Antwort: " + e.message, "installer");
+        }
+        if ( response.error ) {
+          __log("error", "Fehler beim Senden der Log-Datei: " + response.errorMsg  + " - Code " + response.httpStatus, "installer");
+        } else {
+          __log("dbg", "Log gesendet, Server-Antwort: " + response.httpStatus, "installer");
+          __log("reset_log", "Log zurückgesetzt", "installer");
+        }
       }
     } catch (e) {
       __log("error", "Fehler beim Pushen  der Log-Datei: " + e.message + " on " + e.line, "installer");
     }
-    __log("reset_log", "Log zurückgesetzt", "installer");
   }
 
 }

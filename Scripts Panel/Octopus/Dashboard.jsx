@@ -24,8 +24,8 @@
 		FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
 		DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------- */
-// #targetengine octopus_dashboard
-#include "Startup Scripts/Octopus/Include.jsxinc"
+#targetengine octopus_dashboard;
+#include "Startup Scripts/Octopus/Include.jsxinc";
 __init(); 
 script_id = "dashboard"; 
 
@@ -152,9 +152,9 @@ function show_dashboard( cfgs, prefs ) {
   w.sl_row1.add("statictext", [undefined, undefined, lblwidth, 20], __('settype'));
   w.sl_row2.add("statictext", [undefined, undefined, lblwidth, 20], __('setname'));
   w.sl_row3.add("statictext", [undefined, undefined, lblwidth, 20], __('setpath'));
-  w.crnt_type_txt = w.sl_row1.add("statictext", [undefined, undefined, valuewidth, 20], "");
-  w.crnt_name_txt = w.sl_row2.add("statictext", [undefined, undefined, valuewidth, 20], "");
-  w.crnt_path_txt = w.sl_row3.add("statictext", [undefined, undefined, valuewidth, 20], "");
+  w.crnt_type_txt = w.sl_row1.add("statictext", [undefined, undefined, valuewidth, 20], prefs.config_paths[0].type);
+  w.crnt_name_txt = w.sl_row2.add("statictext", [undefined, undefined, valuewidth, 20], prefs.config_paths[0].name);
+  w.crnt_path_txt = w.sl_row3.add("statictext", [undefined, undefined, valuewidth, 20], prefs.config_paths[0].path);
 
   w.setlist_dd.onChange = function() {
     if ( ! this.selection ) {
@@ -167,6 +167,7 @@ function show_dashboard( cfgs, prefs ) {
     w.crnt_type_txt.text = prefs.config_paths[sel].type;
     w.crnt_name_txt.text = prefs.config_paths[sel].name;
     w.crnt_path_txt.text = prefs.config_paths[sel].path;
+    w.rm_set_btn.enabled = (w.crnt_name_txt.text.toLowerCase() !== "octopus"); // Octopus-Set darf nicht gelöscht werden
   }
 
   w.rm_set_btn = w.setlist.add("button", undefined, __('delete-set'));
@@ -250,8 +251,43 @@ function show_dashboard( cfgs, prefs ) {
   //  Änderungen ausführen
   // -----------------------------------------------------------------------------------------------------
 
-  w.defaultElement.onClick = function() {
-    $.bp();
+  // w.defaultElement.onClick = function() {
+  //   $.bp();
+  //   w.close();
+  //   $.sleep(50);
+
+  //   wait_to_act = app.idleTasks.add({ name: "wait_to_act", sleep: 500 });
+  //   wait_to_act.addEventListener("onIdle", function () {
+  //     // __log("dbg", "sending: " + request_string + "", script_id)
+  //     wait_to_act.sleep = 0;
+  //     write_prefs( prefs );
+  //     for ( var id in prefs.ignore ) {
+  //       $.writeln( "ignoring " + id );
+  //       __log("info", "Script " + id + " wird ignoriert/deinstalliert")
+  //       uninstall( id );
+  //     }
+  //     for ( var n = 0; n < changes.sets.length; n++ ) {
+  //       if ( changes.sets[n].action == "rm" ) {
+  //         var f = new File( PATH_DATA_FOLDER + "/Sets/" + changes.sets[n].name + ".json");
+  //         if ( f.exists ) f.remove();
+  //       }
+  //     }
+  //   })
+  // }
+  // w.cancelElement.onClick = function() {
+  //   $.bp();
+  //   var no_changes = JSON.stringify({ toggles: {}, sets: [] }),
+  //       str_changes = JSON.stringify(changes);
+  //   if ( no_changes != str_changes ) {
+  //     if ( ! confirm( __('cancel_confirm') ) ) return;
+  //   }
+  //   w.close(2);
+  // }
+
+
+
+  var rs = w.show();
+  if ( rs == 1 ) {
     write_prefs( prefs );
     for ( var id in prefs.ignore ) {
       $.writeln( "ignoring " + id );
@@ -260,27 +296,38 @@ function show_dashboard( cfgs, prefs ) {
     }
     for ( var n = 0; n < changes.sets.length; n++ ) {
       if ( changes.sets[n].action == "rm" ) {
-        var f = new File( PATH_DATA_FOLDER + "/Sets/" + changes.sets[n].name + ".json");
-        if ( f.exists ) f.remove();
+        __log("dbg", "deleting set: " + changes.sets[n].set_name);
+        var f = new File( PATH_DATA_FOLDER + "/Sets/" + changes.sets[n].set_name + ".json");
+        if ( f.exists ) {
+          var ft = new File( PATH_DATA_FOLDER + "/Sets-Off/" + changes.sets[n].set_name + ".json");
+          if ( __moveFile(f, ft) ) {
+            __log("info", "Set deinstalliert: " + changes.sets[n].set_name, script_id);
+          } else {
+            __log("error", "Set konnte nicht deinstalliert werden: " + changes.sets[n].set_name, script_id);
+          }
+        }
+          // try {
+          //   f.copy(ft);
+          // } catch(e) {
+          //   __log("error", "Set konnte nicht gesichert werden: " + changes.sets[n].set_name + " - " + e.message, script_id);
+          // }
+          // if (f.remove() ) {
+          //   __log("info", "Set deinstalliert: " + changes.sets[n].set_name, script_id);
+          // } else {
+          //   __log("error", "Set konnte nicht deinstalliert werden: " + changes.sets[n].set_name, script_id);
+          // }
+        // }
       }
     }
-    w.close(1);
-
-  }
-  w.cancelElement.onClick = function() {
-    $.bp();
+  } else {
     var no_changes = JSON.stringify({ toggles: {}, sets: [] }),
         str_changes = JSON.stringify(changes);
     if ( no_changes != str_changes ) {
-      if ( ! confirm( __('cancel_confirm') ) ) return;
+      if ( ! confirm( __('cancel_confirm') ) ) {
+        return
+      };
     }
-    w.close(2);
   }
- 
-
-
-  w.show();
-
   function toggle_active() {
     try {
       w.script_list.selection.checked = ! w.script_list.selection.checked;
@@ -336,17 +383,21 @@ function show_dashboard( cfgs, prefs ) {
     }
     var f = new File(path);
     if (!f.exists) {
-      __log("error", "Script kann nicht deinstalliert werden: " + path, script_id);
+      __log("error", "Zu deinstallierendes Script existiert nicht: " + path, script_id);
       return;
     }
-    // var tgt_path = path.replace(/\/Scripts Panel\//, "/Scripts Panel Off/").replace(/\/Startup Scripts\//, "/Startup Scripts Off/");
-    // __ensureFolder(tgt_path);
-    // if (__moveFile(f, tgt_path) ) {
-    if ( f.remove() ) {
-      //__log("info", "Script deinstalliert: " + path, script_id);
+    var tgt_path = path.replace(/\/Scripts Panel\//, "/Scripts Panel Off/").replace(/\/Startup Scripts\//, "/Startup Scripts Off/");
+    __ensureFolder(tgt_path);
+    if (__moveFile(f, tgt_path) ) {
+      __log("info", "Script deinstalliert: " + path, script_id);
     } else {
       __log("error", "Script konnte nicht deinstalliert werden: " + path, script_id);
     }
+    // if ( f.remove() ) {
+    //   __log("info", "Script deinstalliert: " + path, script_id);
+    // } else {
+    //   __log("error", "Script konnte nicht deinstalliert werden: " + path, script_id);
+    // }
   }
 }
 
@@ -367,7 +418,9 @@ function get_prefs() {
     for ( var n = 0; n < sets.length; n++ ) {
       var aux = __readJson( sets[n] );
       if ( aux ) {
-        prefs.config_paths.push( {name: aux.set_name, path: aux.base_url, type: (aux.base_url.search(/^http/i) == -1 ? "file" : "url")})
+        var _type = aux.base_url.search(/^http/i) == -1 ? "file" : "url";
+        if ( aux.base_url == "" ) _type = "offline";
+        prefs.config_paths.push( {name: aux.set_name, path: aux.base_url, type: (_type) } );
       }
     }
   } catch(e) {
@@ -376,7 +429,7 @@ function get_prefs() {
   return prefs;
 }
 function write_prefs( prefs ) {
-  $.bp();
+  $.bp(false);
   try {
     var setpath = PATH_DATA_FOLDER + "/Sets";
     var copied = [];

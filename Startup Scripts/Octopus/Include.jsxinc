@@ -3,6 +3,7 @@
 //  Alle Funktionen, die von mehreren Skripten benötigt werden, kommen hier rein.
 //  2026-04-21: Logging von http-Requests hinzugefügt
 //              Noch mehr Logging
+//  2026-04-23: msg in __alert hat jetzt eine Max-Höhe
 // =============================================================================
 
 DBG = true;
@@ -278,6 +279,7 @@ function __alert( level, msg, titel, btn, is_palette ) {
     var width = Math.min( 400, len * 7 + 45 )
     w.msg = w.g.add("statictext", undefined, msg, {multiline: true} );
     w.msg.preferredSize.width = width;
+    w.msg.maximumSize.height = 700;
 
     if ( btn.constructor.name == "Array") {
       w.btns = [];

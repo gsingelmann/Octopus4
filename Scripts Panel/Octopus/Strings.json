@@ -1,4 +1,7 @@
 {
+  "comments":{
+    "0423": "Adobe-Fonts Text geändert"
+  },
   "add-hyperlinks": {
     "what links": {
       "de": "Welche Hyperlinks sollen erstellt werden?",
@@ -494,7 +497,7 @@
       "de": "Schriften sammeln",
       "en": "Collect fonts",
       "it": "Raccogli i font",
-      "fr": "Collecter les polices"
+      "fr": "Collecter les polices" 
     },
     "Collect-Error": {
       "de": "Fehler beim Kopieren von ",
@@ -506,14 +509,14 @@
       "de": "Aktiviert von Adobe Fonts",
       "en": "Added from Adobe Fonts"
     },
-    "adobe-fonts": {
+    "adobe-fonts-verbose": {
       "de": "Das Script 'Document fonts sammeln' versucht die Schriften zu sammeln. Leider ist das bei den genutzten Adobe Fonts nicht möglich.\nGgf. benutzte andere Schriften wurden im Ordner 'Document fonts' abgelegt.",
       "en": "The script 'Collect Document Fonts' attempts to collect the fonts. Unfortunately, this is not possible with the Adobe Fonts used. Any other fonts used are located in the 'Document Fonts' folder.",
       "it": "Lo script 'Collect Document Fonts' tenta di raccogliere i font. Purtroppo, ciò non è possibile con i font Adobe utilizzati. Tutti gli altri font utilizzati si trovano nella cartella 'Document Fonts'.",
       "fr": "Le script « Collect Document Fonts » tente de récupérer les polices. Malheureusement, cela est impossible avec les polices Adobe utilisées. Toutes les autres polices utilisées se trouvent dans le dossier « Document Fonts ».",
       "es": "El script «Recopilar fuentes del documento» intenta recopilar las fuentes. Lamentablemente, esto no es posible con las fuentes de Adobe utilizadas. Las demás fuentes se encuentran en la carpeta «Fuentes del documento»."
     },
-    "adobe-fonts-gs": {
+    "adobe-fonts": {
       "de": "Adobe Fonts, die über die Creative Cloud hinzugefügt wurden, können nicht kopiert werden",
       "en": "Adobe Fonts added via Creative Cloud cannot be copied",
       "it": "I font Adobe aggiunti tramite Creative Cloud non possono essere copiati",

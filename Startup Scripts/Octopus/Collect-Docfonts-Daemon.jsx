@@ -108,6 +108,11 @@ function collect_doc_main( doc ) {
 			}
 
 			if ( do_collect ) {	
+				var fonts = doc.fonts.everyItem().getElements();
+				if ( fonts.length == 0 ) {
+					__log("info", "Keine Schriften in " + doc.name.replace(/\.indd/i,""), script_id)
+					return;
+				}
 				__log( "run", script_id, script_id );
 				__log("info", "Schriften fuer " + doc.name.replace(/\.indd/i,"") + " sollen gesammelt werden", script_id)
 				var tgt_path = doc.filePath + "/Document fonts";
@@ -116,7 +121,6 @@ function collect_doc_main( doc ) {
 					tgt_folder.create();
 				}
 				var msgs = [];
-				var fonts = doc.fonts.everyItem().getElements();
 				for ( var n = 0; n < fonts.length; n++ ) {
 					var f = fonts[n];
 					var l = f.location;

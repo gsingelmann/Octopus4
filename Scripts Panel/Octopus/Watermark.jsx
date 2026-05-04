@@ -202,7 +202,8 @@ function set_watermark( title, version ) {
 			// -----------------------------------------------------------------------------------------------------
 			var crnt_color = 0,
 					crnt_tones = get_crnt_tones( crnt_color ),
-					crnt_tone = 4;
+					crnt_tone = 0;
+			var aux = state[p.name].constructor.name;
 			if ( state.hasOwnProperty( p.name + '_color') && state.hasOwnProperty( p.name + '_tone') ) {
 				for ( var n = 0; n <  color_names.length; n++ ) {
 					if ( color_names[n] == state[p.name + "_color"] ) {
@@ -218,6 +219,13 @@ function set_watermark( title, version ) {
 					state[p.name] = hexToRgb( color_values['black']['_100'] );
 					state[p.name + "_color"] = color_names[ crnt_color ];
 					state[p.name + "_tone"] = crnt_tones[ crnt_tone ];
+				} else if ( state[p.name].constructor.name == "Array" ) {
+					var nnb = findClosestMaterialColor( state[p.name], color_values, color_names );
+					crnt_color = indexOf( color_names, nnb.colorName );
+					crnt_color = (crnt_color == -1) ? 0 : crnt_color;
+					crnt_tones = get_crnt_tones( crnt_color );
+					crnt_tone = indexOf( crnt_tones, nnb.tone );
+					crnt_tone = (crnt_tone == -1) ? 0 : crnt_tone;
 				}
 			}
 		
@@ -528,6 +536,62 @@ function hexToRgb(hex) {
 		b = ( parseInt(result[3], 16) );
 	}
 	return [ r, g, b ];
+}
+
+function rgbToHex(rgb) {
+    // Handle invalid input
+    if (!rgb || rgb.length < 3) return "#000000";
+
+    var r = Math.max(0, Math.min(255, Math.round(rgb[0])));
+    var g = Math.max(0, Math.min(255, Math.round(rgb[1])));
+    var b = Math.max(0, Math.min(255, Math.round(rgb[2])));
+
+    var toHex = function(n) {
+        var hex = n.toString(16);
+        return hex.length == 1 ? "0" + hex : hex;
+    };
+
+    return "#" + toHex(r) + toHex(g) + toHex(b);
+}
+
+function findClosestMaterialColor(rgb, colorValues, colorNames) {
+    var targetHex = rgbToHex(rgb);
+    var targetRgb = hexToRgb(targetHex); // Normalize values
+
+    var minDistance = Infinity;
+    var closestColor = "black";
+    var closestTone = "_100";
+
+    // Iterate through all Material colors
+    for (var colorName in colorValues) {
+        for (var tone in colorValues[colorName]) {
+            var hex = colorValues[colorName][tone];
+            var currentRgb = hexToRgb(hex);
+
+            // Calculate Euclidean distance in RGB space
+            var dr = targetRgb[0] - currentRgb[0];
+            var dg = targetRgb[1] - currentRgb[1];
+            var db = targetRgb[2] - currentRgb[2];
+            var distance = Math.sqrt(dr*dr + dg*dg + db*db);
+
+            if (distance < minDistance) {
+                minDistance = distance;
+                closestColor = colorName;
+                closestTone = tone;
+            }
+        }
+    }
+
+    return {
+        colorName: closestColor,
+        tone: closestTone.substr(1) // Remove underscore prefix
+    };
+}
+
+function indexOf( a, v ) {
+	if ( ! a.constructor.name == "Array" ) return -1;
+	for ( var i = 0; i < a.length; i++ ) if ( a[i] == v ) return i;
+	return -1;
 }
 
 function color_init() {

@@ -29,6 +29,9 @@
 		Application Event: : afterSaveAs
 		Target: : Document, 567.indd
 		Current: : Application, Adobe InDesign
+
+		2026-04-24: Adobe Font Handling
+								Auf Listbox umgestellt, diverse bugs
 // ---------------------------------------------------------------------------------------------------------------------- */
 #targetengine collect_docfonts
 
@@ -110,11 +113,11 @@ function collect_doc_main( doc ) {
 			if ( do_collect ) {	
 				var fonts = doc.fonts.everyItem().getElements();
 				if ( fonts.length == 0 ) {
-					__log("info", "Keine Schriften in " + doc.name.replace(/\.indd/i,""), script_id)
+					__log("info", "Keine Schriften in " + doc.name.replace(/\.indd/i,""), "collect-docfonts-daemon")
 					return;
 				}
-				__log( "run", script_id, script_id );
-				__log("info", "Schriften fuer " + doc.name.replace(/\.indd/i,"") + " sollen gesammelt werden", script_id)
+				__log( "run", script_id, "collect-docfonts-daemon" );
+				__log("info", "Schriften fuer " + doc.name.replace(/\.indd/i,"") + " sollen gesammelt werden", "collect-docfonts-daemon")
 				var tgt_path = doc.filePath + "/Document fonts";
 				var tgt_folder = new Folder( tgt_path );
 				if ( ! tgt_folder.exists ) {
@@ -122,33 +125,39 @@ function collect_doc_main( doc ) {
 				}
 				var msgs = [];
 				for ( var n = 0; n < fonts.length; n++ ) {
-					var f = fonts[n];
-					var l = f.location;
-					var fontfile = new File( l );
-					// l.split geht nicht wg Windows
-					var fname = fontfile.fullName.split("/").pop();
-					var tgt_file = new File( tgt_path + "/" + fname );
-					if (tgt_file.exists) {
-						continue;
-					}
-					if ( fontfile.exists  ) {
-						try {
-							fontfile.copy( tgt_file.fullName );
-						} catch ( e ) {
-							msgs.push( __("Collect-Error", script_id) + fname + ": " + e.message );
+					try {
+						var f = fonts[n];
+						var l = f.location;
+						var fontfile = new File( l );
+						// l.split geht nicht wg Windows
+						var fname = fontfile.fullName.split("/").pop();
+						var tgt_file = new File( tgt_path + "/" + fname );
+						if (tgt_file.exists) {
+							continue;
 						}
-					} else {
-						// Ich brauche mehr log
-						__log("dbg", "location: >" + l + "<, font: >" + f.name + "<, strg: >" + __("activated-adobe", script_id) + "<, PATH_SCRIPT_PARENT: " + PATH_SCRIPT_PARENT, script_id)
-						if ( l.search(/adobe/i) != -1 && l.search(/fonts/i) != -1  ) {
-							msgs.push( __("adobe-fonts", script_id) + "\n\n" + f.name );
+						if ( fontfile.exists  ) {
+							try {
+								fontfile.copy( tgt_file.fullName );
+							} catch ( e ) {
+								msgs.push( [fname, __("Collect-Error", script_id) + ": " +e.message ] );
+							}
 						} else {
-							msgs.push( __("does-not-exist", script_id) + "\n\n" + fname );
-						}
-					}		// exists
+							// Ich brauche mehr log
+							__log("dbg", "location: >" + l + "<, font: >" + f.name + "<, strg: >" + __("activated-adobe", script_id) + "<, PATH_SCRIPT_PARENT: " + PATH_SCRIPT_PARENT, "collect-docfonts-daemon")
+							if ( l.search(/adobe/i) != -1 && l.search(/fonts/i) != -1  ) {
+								msgs.push( [f.name, __("adobe-fonts", script_id)] );
+							} else {
+								msgs.push( [fname, __("does-not-exist", script_id)] );
+							}
+						}		// exists
+					} catch(e) {
+						__log("error", e.message + " on " + e.line, script_id )
+						msgs.push( [ "", e.message ] );
+					}
 				}			// font loop
 				if ( msgs.length > 0 ) {
-					__alert( "krake", __("Collect-Fonts", script_id) + "\n\n" + msgs.join("\n"), "", "OK", false );
+					show_warnings( msgs );
+					// __alert( "krake", __("Collect-Fonts", script_id) + "\n\n" + msgs.join("\n"), "", "OK", false );
 				}
 			} else {
 				//__log("info", "Doc erfuellt die Kriterien nicht", script_id)
@@ -158,6 +167,23 @@ function collect_doc_main( doc ) {
 		}
   }
 
+	function show_warnings( msgs ) {
+		var w = new Window("dialog", "Test");
+		__insert_head( w, "octopus" );
+		w.add("statictext", undefined, __("warnings", script_id));
+		var lb = w.add("listbox", undefined, "", {numberOfColumns: 2 });
+		lb.maximumSize.height = 500;
+		lb.preferredSize = { width: 800, height: 400 };
+		for ( var n = 0; n < msgs.length; n++ ) {
+			with ( lb.add("item", msgs[n][0]) ) {
+				subItems[0].text = msgs[n][1];
+				// subItems[1].text = msgs[n][2];
+			}
+		}
+		w.defaultElement = w.add("button", undefined, "OK");
+		w.show();
+
+	}
 
 	function read_prefs( ) {
 		try {
@@ -207,7 +233,7 @@ function __( id, script_id ) {
 		} else {
 			txt = id
 		}
-		__log("dbg", "got string: " + txt, script_id );
+		// __log("dbg", "got string: " + txt, script_id );
 		var re;
 		for ( var n = 1; n < arguments.length; n++ ) {
 			try {

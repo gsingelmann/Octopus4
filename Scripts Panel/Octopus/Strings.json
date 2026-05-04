@@ -499,6 +499,12 @@
       "it": "Raccogli i font",
       "fr": "Collecter les polices" 
     },
+    "warnings": {
+      "de": "Warnungen",
+      "en": "Warnings",
+      "it": "Avvertimenti",
+      "fr": "Avertissements"
+    },
     "Collect-Error": {
       "de": "Fehler beim Kopieren von ",
       "en": "Error copying ",

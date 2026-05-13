@@ -7,30 +7,66 @@ __init();
 
 var base_path;
 var nu = [], old = [], updated = [], failed = [], show_imgs = false;
-if ( pre_check() ) {
-  install();
-}
+install();
 
-function pre_check() {
-  var f1 = new Folder( PATH_SCRIPT_PARENT + "/Scripts Panel/Octopus");
-  var f2 = new Folder( PATH_SCRIPT_PARENT + "/Startup Scripts/Octopus");
-  if ( f1.exists || f2.exists ) {
-    if ( File( f2.fullName + "/Octopus-Installer.jsx" ).exists ) {
-      var abort = confirm( __('already-there') );
-      if ( abort ) {
-        if ( f1.exists ) f1.execute();
-        if ( f2.exists ) f2.execute();
-        return false;
-      } 
+function remove_old_version() {
+  var panel_folder = new Folder(PATH_SCRIPT_PARENT + "/Scripts Panel/Octopus");
+  var startup_folder = new Folder(PATH_SCRIPT_PARENT + "/Startup Scripts/Octopus");
+  if (panel_folder.exists) {
+    var files = [
+      //     "CleanContentTypes.jsx",
+      //     "Color-Script.jsx",
+      //     "Dashboard.jsx",
+      //     "Display-Config.jsx",
+      "Display-Config2.jsx",
+      //     "Display.jsx",
+      "Display2.jsx",
+      //     "Exporter.jsx",
+      //     "Fontinstaller.jsx",
+      "InDesign-Help.jsx",
+      //     "OctoLock.jsx",
+      "Octopus-include.jsxinc",
+      //     "OpenType-Features.jsx",
+      "Placeholder-Text.jsx",
+      //     "Setup-Baselinegrid.jsx",
+      //     "Show-Overflow.jsx",
+      //     "UA/Add-Bookmarks.jsx",
+      //     "UA/Add-Hyperlinks.jsx",
+      //     "UA/Check-Alt-Text.jsx",
+      //     "UA/Check-Articles.jsx",
+      //     "UA/Check-Endofline.jsx",
+      //     "UA/Check-Language.jsx",
+      //     "UA/Check-List.jsx",
+      //     "UA/Check-Tags.jsx",
+      //     "Watermark.jsx"
+    ];
+    for (var i = 0; i < files.length; i++) {
+      var f = File(panel_folder.fullName + "/" + files[i]);
+      if (f.exists) {
+        f.remove();
+      }
     }
+    if (startup_folder.exists) {
+      var f = new File(startup_folder.fullName + "/Octopus-Installer.jsx");
+      if (f.exists) {
+        f.remove();
+      }
+      var f = new File(startup_folder.fullName + "/Octopus-include.jsxinc");
+      if (f.exists) {
+        f.remove();
+      }
+    }
+    return true;
   }
-  return true;
 }
 function install() {
   try {
     var json;
     var _set = select_source( false, false );
     if (!_set) return;
+
+    remove_old_version();
+
     __writeJson(PATH_DATA_FOLDER + "/Sets/" + _set.set_name + ".json", _set);
     var configs = [];
     for (var m = 0; m < _set.configs.length; m++) {
@@ -96,13 +132,13 @@ function install() {
     if (show_asset_list) w.list.maximumSize.height = 700;
 
     // 
-    w.offline_row = w.offline_panel.add("group {orientation: 'column', alignChildren: ['fill', 'fill']}");
-    w.offline_src = w.offline_row.add("edittext", [undefined, undefined, 450, 20] );
-    w.offline_btn = w.offline_row.add("button", undefined, __('where-is'));
+    // w.offline_row = w.offline_panel.add("group {orientation: 'column', alignChildren: ['fill', 'fill']}");
+    w.offline_description = w.offline_panel.add("statictext", [undefined, undefined, 350, 200], __('offline-explainer'), {multiline: true});
+    w.offline_panel.add("statictext", undefined, " ");
+    w.offline_btn = w.offline_panel.add("button", undefined, __('where-is'));
     w.offline_btn.id = "offline"
     w.offline_btn.onClick = select_folder;
-    w.offline_panel.add("statictext", undefined, " ");
-    w.offline_description = w.offline_panel.add("statictext", [undefined, undefined, 350, 200], __('offline-explainer'), {multiline: true});
+    w.offline_src = w.offline_panel.add("edittext", [undefined, undefined, 450, 20] );
 
     if ( offer_fileserver_option ) {
       w.fileserver_row = w.fileserver_panel.add("group {orientation: 'column', alignChildren: ['fill', 'fill']}");
@@ -320,15 +356,18 @@ function install() {
   function show_log( what, set ) {
     try {
       var w = new Window("dialog {orientation: 'column', alignChildren: ['left', 'top']}");
-      var lb;
+      var r = w.add("group {orientation: 'row', alignChildren: ['fill', 'fill']}");
+      var lb, g;
       for ( var n = 0; n < what.length; n++ ) {
+        g = r.add("group {orientation: 'column', alignChildren: ['left', 'top']}");
         var i = what[n];
         if ( i.a.length ) {
-          w.add("statictext", undefined, __(i.key));
-          lb = w.add("listbox", undefined, i.a);
+          g.add("statictext", undefined, __(i.key));
+          lb = g.add("listbox", undefined, i.a);
           lb.preferredSize = [300, Math.min(180, (i.a.length * 20) + 20)];
         }
       }
+      w.add("statictext", undefined, __("do_restart"));
       w.defaultElement = w.add("button", undefined, "OK");
       w.show();
     } catch(e) {
@@ -505,6 +544,11 @@ function install() {
           "de": decodeURI("Die%20Offline-Installation%20setzt%20voraus%2C%20dass%20Sie%20sich%20das%20Octopus-Paket%20von%20project-octopus.net%20oder%20von%20Github%20runtergeladen%20haben.%0A%0ADie%20Dateien%20werden%20dann%20einmal%20an%20den%20richtigen%20Ort%20kopiert%20und%20in%20Ruhe%20gelassen.%0A%0AFuer%20Updates%20muessten%20Sie%20den%20Prozess%20wiederholen%3A%20Paket%20runterladen%20und%20dieses%20Script%20starten."),
           "en": "Offline installation requires that you have downloaded the Octopus package from project-octopus.net or GitHub. \n\nThe files are then copied to the correct location and left alone. \n\nFor updates, you would need to repeat the process: download the package and run this script."
         })
+      case "do_restart": 
+        return localize({
+          "de": "InDesign muss neu gestartet werden, damit die Installation wirksam wird.\n",
+          "en": "InDesign must be restarted for the installation to take effect.\n"
+        });
       default:
         return key;
     }

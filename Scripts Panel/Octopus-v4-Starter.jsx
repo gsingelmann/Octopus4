@@ -539,8 +539,8 @@ function install() {
         })
       case "only-online-explainer": 
         return localize({
-          "de": decodeURI("Bei%20der%20Installation%20werden%20die%20Skripte%20und%20Daten%20vom%20Project-Octopus-Server%20geladen%20und%20bei%20jedem%20Start%20von%20InDesign%20aktualisiert.%5CnEinige%20anonymisierte%20Daten%20wie%20Nutzungsdaten%20und%20aufgetretene%20Fehlermeldungen%2C%20werden%20dabei%20an%20den%20Project-Octopus-Server%20gesendet%2C%20um%20die%20Entwicklung%20von%20Project%20Octopus%20zu%20unterst%C3%BCtzen.%20Es%20werden%20keine%20personenbezogenen%20Daten%20gesammelt%20oder%20gespeichert."),
-          "en": "During installation, the scripts and data are loaded from the Project Octopus server and updated each time InDesign is started.\nSome anonymized data such as usage data and error messages are sent to the Project Octopus server to support the development of Project Octopus. No personal data is collected or stored."
+          "de": decodeURI("Bei%20der%20Installation%20werden%20die%20Skripte%20und%20Daten%20vom%20Project-Octopus-Server%20geladen%20und%20bei%20jedem%20Start%20von%20InDesign%20aktualisiert.%0AEinige%20anonymisierte%20Daten%20wie%20Nutzungsdaten%20und%20aufgetretene%20Fehlermeldungen%2C%20werden%20dabei%20an%20den%20Project-Octopus-Server%20gesendet%2C%20um%20die%20Entwicklung%20von%20Project%20Octopus%20zu%20unterst%C3%BCtzen.%20%0A%0AEs%20werden%20keine%20personenbezogenen%20Daten%20gesammelt%20oder%20gespeichert."),
+          "en": "During installation, the scripts and data are loaded from the Project Octopus server and updated each time InDesign is started.\nSome anonymized data such as usage data and error messages are sent to the Project Octopus server to support the development of Project Octopus.\n\nNo personal data is collected or stored."
         })
       case "online-explainer": 
         return localize({

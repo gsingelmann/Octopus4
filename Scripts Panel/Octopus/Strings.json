@@ -464,6 +464,12 @@
       "fr": "Liste active ou liste de blocage"
     },
     "close": {
+      "de": "OK",
+      "en": "OK",
+      "it": "OK",
+      "fr": "OK"
+    },
+    "close_org": {
       "de": "Schließen",
       "en": "Close",
       "it": "Chiudi",

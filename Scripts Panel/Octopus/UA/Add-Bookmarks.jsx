@@ -22,6 +22,7 @@
 
 #include "Startup Scripts/Octopus/Include.jsxinc"
 var script_id = "add_bookmarks";
+__init();
 __log("run", script_id, script_id);
 
 

@@ -21,7 +21,8 @@
   
 */
 #include "Startup Scripts/Octopus/Include.jsxinc"
-__log( "run", "color-script", "color-script");
+__init();
+__log( "run", "color-script", "color-script"); 
 
 var _global = {};
 

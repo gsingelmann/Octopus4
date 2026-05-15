@@ -28,6 +28,7 @@
 #include "Startup Scripts/Octopus/Include.jsxinc";
 __init(); 
 script_id = "dashboard"; 
+__log("run", script_id, script_id);
 
 // -----------------------------------------------------------------------------------------------------
 //  Status-Quo / Prefs laden

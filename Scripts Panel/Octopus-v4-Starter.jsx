@@ -62,7 +62,7 @@ function remove_old_version() {
 function install() {
   try {
     var json;
-    var _set = select_source( false, false );
+    var _set = select_source( /* offer_offline_option */ false, /* offer_fileserver_option */ false, /* show_asset_list */false );
     if (!_set) return;
 
     remove_old_version();
@@ -103,7 +103,7 @@ function install() {
 
   return;
 
-  function select_source( offer_fileserver_option, show_asset_list ) {
+  function select_source( offer_offline_option, offer_fileserver_option, show_asset_list ) {
     var jsons = [ null, null, null];
 
     var w = new Window ( "dialog" );
@@ -111,34 +111,37 @@ function install() {
 
     // --- Links Tabs, Rechts Liste
     w.row = w.add("group {orientation: 'row', alignChildren: ['fill', 'fill']}");
-    w.panels = w.row.add("tabbedpanel {alignChildren: ['fill', 'fill']}");
-    if (show_asset_list) w.listpanel = w.row.add("panel {text: '" + __('content') + "', alignChildren: ['fill', 'fill']}");
-
-    // --- Online Tab
-    w.online_panel = w.panels.add("tab {text: 'Online', alignChildren: ['fill', 'fill']}");
-
-    // --- Fileserver Tab
-    if ( offer_fileserver_option ) {
-      w.fileserver_panel = w.panels.add("tab {text: 'Fileserver', alignChildren: ['fill', 'fill']}");
-    }
-
-    // --- Offline Tab
-    w.offline_panel = w.panels.add("tab {text: 'Offline', alignChildren: ['fill', 'fill']}");
-
-    // -- Liste Inhalt
-    if (show_asset_list) w.list = w.listpanel.add("listbox");
-    if (show_asset_list) w.list.minimumSize.width = 350;
-    if (show_asset_list) w.list.minimumSize.height = 300;
-    if (show_asset_list) w.list.maximumSize.height = 700;
-
+    if ( ! offer_fileserver_option && ! offer_offline_option ) {
+      // --- Nur Online -> default
+      w.row.add("statictext", [undefined, undefined, 350, 200], __('only-online-explainer'), {multiline: true});
+      // Wenn ich panels habe, hab ich ein edittext feld...
+      w.online_src = w.add("statictext", undefined, "https://daten.project-octopus.net/Octopus4" );
+      w.online_src.visible = false;
+    } else {
+      w.panels = w.row.add("tabbedpanel {alignChildren: ['fill', 'fill']}");
+  
+      // --- Online Tab
+      w.online_panel = w.panels.add("tab {text: 'Online', alignChildren: ['fill', 'fill']}");
+  
+      // --- Fileserver Tab
+      if ( offer_fileserver_option ) {
+        w.fileserver_panel = w.panels.add("tab {text: 'Fileserver', alignChildren: ['fill', 'fill']}");
+      }
+  
+      // --- Offline Tab
+      if ( offer_offline_option ) {
+        w.offline_panel = w.panels.add("tab {text: 'Offline', alignChildren: ['fill', 'fill']}");
+      }
     // 
-    // w.offline_row = w.offline_panel.add("group {orientation: 'column', alignChildren: ['fill', 'fill']}");
-    w.offline_description = w.offline_panel.add("statictext", [undefined, undefined, 350, 200], __('offline-explainer'), {multiline: true});
-    w.offline_panel.add("statictext", undefined, " ");
-    w.offline_btn = w.offline_panel.add("button", undefined, __('where-is'));
-    w.offline_btn.id = "offline"
-    w.offline_btn.onClick = select_folder;
-    w.offline_src = w.offline_panel.add("edittext", [undefined, undefined, 450, 20] );
+    if ( offer_offline_option ) {
+      // w.offline_row = w.offline_panel.add("group {orientation: 'column', alignChildren: ['fill', 'fill']}");
+      w.offline_description = w.offline_panel.add("statictext", [undefined, undefined, 350, 200], __('offline-explainer'), {multiline: true});
+      w.offline_panel.add("statictext", undefined, " ");
+      w.offline_btn = w.offline_panel.add("button", undefined, __('where-is'));
+      w.offline_btn.id = "offline"
+      w.offline_btn.onClick = select_folder;
+      w.offline_src = w.offline_panel.add("edittext", [undefined, undefined, 450, 20] );
+    }
 
     if ( offer_fileserver_option ) {
       w.fileserver_row = w.fileserver_panel.add("group {orientation: 'column', alignChildren: ['fill', 'fill']}");
@@ -167,6 +170,17 @@ function install() {
         display_config( jsons[2] );
       }
     }
+  }
+
+    // -- Liste Inhalt
+    if (show_asset_list) {
+      w.listpanel = w.row.add("panel {text: '" + __('content') + "', alignChildren: ['fill', 'fill']}");
+      w.list = w.listpanel.add("listbox");
+      w.list.minimumSize.width = 350;
+      w.list.minimumSize.height = 300;
+      w.list.maximumSize.height = 700;
+    }
+
 
     w.btns = w.add("group {orientation: 'row', alignChildren: ['center', 'fill']}");
     w.cancelElement = w.btns.add("button", undefined, __('cancel'));
@@ -519,6 +533,11 @@ function install() {
           "de": "Folgende Dateien konnten nicht installiert werden",
           "en": "The following files could not be installed"
         })
+      case "only-online-explainer": 
+        return localize({
+          "de": decodeURI("Bei%20der%20Installation%20werden%20die%20Skripte%20und%20Daten%20vom%20Project-Octopus-Server%20geladen%20und%20bei%20jedem%20Start%20von%20InDesign%20aktualisiert.%5CnEinige%20anonymisierte%20Daten%20wie%20Nutzungsdaten%20und%20aufgetretene%20Fehlermeldungen%2C%20werden%20dabei%20an%20den%20Project-Octopus-Server%20gesendet%2C%20um%20die%20Entwicklung%20von%20Project%20Octopus%20zu%20unterst%C3%BCtzen.%20Es%20werden%20keine%20personenbezogenen%20Daten%20gesammelt%20oder%20gespeichert."),
+          "en": "During installation, the scripts and data are loaded from the Project Octopus server and updated each time InDesign is started.\nSome anonymized data such as usage data and error messages are sent to the Project Octopus server to support the development of Project Octopus. No personal data is collected or stored."
+        })
       case "online-explainer": 
         return localize({
           "de": "Bei der Online-Installation werden die Daten vom Project-Octopus-Server geladen und bei jedem Start von InDesign aktualisiert.\nDies ist die bevorzugte Installationsart.",
@@ -536,7 +555,7 @@ function install() {
         })
       case "offline-explainer": 
         return localize({
-          "de": decodeURI("Die%20Offline-Installation%20wendest%20du%20nur%20an%2C%20wenn%20die%20Online-Installation%20Probleme%20bereitet.%0ASie%20setzt%20voraus%2C%20dass%20Du%20das%20Octopus-Paket%20von%20Github%20heruntergeladen%20hast.%0ADas%20heruntergeladene%20Octopus-Paket%20legst%20du%20irgendwo%20ab%20(vielleicht%20der%20Ordner%20%E2%80%9EDokumente%E2%80%9C%3F)%20und%20l%C3%A4sst%20sie%20dort%20unangetastet%20liegen!%0ANat%C3%BCrlich%20funktioniert%20das%20automatische%20Updaten%20der%20Octopus-Scripte%20nach%20der%20Offline-Installation%20nicht.%20Du%20musst%20das%20Octopus-Paket%20um%20neue%20Scripte%20zu%20bekommen%20erneut%20herunterladen%20und%20dieses%20Starter-Script%20erneut%20ausf%C3%BChren.%0AUm%20%C3%BCber%20Updates%20informiert%20zu%20werden%20abonniere%20den%20Newsletter%20auf%20project-octopus.net"),
+          "de": decodeURI("Die%20Offline-Installation%20wendest%20du%20nur%20an%2C%20wenn%20die%20Online-Installation%20Probleme%20bereitet.%0ASie%20setzt%20voraus%2C%20dass%20Du%20das%20Octopus-Paket%20von%20Github%20heruntergeladen%20hast.%0ADas%20heruntergeladene%20Octopus-Paket%20legst%20du%20irgendwo%20ab%20(vielleicht%20der%20Ordner%20%E2%80%9EDokumente%E2%80%9C%3F)%20und%20l%C3%A4sst%20sie%20dort%20unangetastet%20liegen!%0ANat%C3%BCrlich%20funktioniert%20das%20automatische%20Updaten%20der%20Octopus-Scripte%20nach%20der%20Offline-Installation%20nicht.%20Du%20musst%20das%20Octopus-Paket%2C%20um%20neue%20Scripte%20zu%20bekommen%20erneut%20herunterladen%20und%20dieses%20Starter-Script%20erneut%20ausf%C3%BChren.%0AUm%20%C3%BCber%20Updates%20informiert%20zu%20werden%20abonniere%20den%20Newsletter%20auf%20project-octopus.net"),
           "en": "You should only use the offline installation if the online installation causes problems. \nIt requires that you have downloaded the Octopus package from GitHub. \nPlace the downloaded Octopus package somewhere (perhaps the “Documents” folder?) and leave it there untouched! Of course, automatic updates of the Octopus scripts will not work after an offline installation. You will need to download the Octopus package again to get new scripts and run this starter script again. \nTo be informed about updates, subscribe to the newsletter at project-octopus.net"
         })
       case "offline-explainer-1": 

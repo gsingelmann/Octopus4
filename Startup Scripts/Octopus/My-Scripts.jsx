@@ -58,7 +58,7 @@ function install_my_scripts() {
           action.eventListeners.add("onInvoke", function (event) {
             try {
               app.doScript(new File(sPath), undefined, undefined, UndoModes.ENTIRE_SCRIPT, mtxt);
-              __log("run", "my-scripts", "my-scripts");
+              __log("run", mtxt, "my-scripts");
             } catch (e) {
               __log("error", "Script-Aufruf fehlgeschlagen (" + sPath + "): " + e.message + " on " + e.line, "installer");
               __alert("warnung", "Script-Aufruf fehlgeschlagen (" + sPath + "): " + e.message + " on " + e.line, "OK", false)

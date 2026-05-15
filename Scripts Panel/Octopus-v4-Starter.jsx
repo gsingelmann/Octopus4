@@ -164,7 +164,7 @@ function install() {
       fix_btn_and_set_basepath( this.selection.text );
       if ( this.selection.text == "Offline") {
         display_config( jsons[0] );
-      } else if ( this.selection.text == "Offline") {
+      } else if ( this.selection.text == "Fileserver") {
         display_config( jsons[1] );
       } else {
         display_config( jsons[2] );
@@ -194,12 +194,16 @@ function install() {
     if ( do_what == 2 ) {
       return false;
     }
-    if ( w.panels.selection.text == "Online" ) {
-      return jsons[2]
-    } else if ( w.panels.selection.text == "Fileserver" ) {
-      return jsons[1]
+    if ( offer_offline_option || offer_fileserver_option ) {
+      if ( w.panels.selection.text == "Online" ) {
+        return jsons[2]
+      } else if ( w.panels.selection.text == "Fileserver" ) {
+        return jsons[1]
+      } else {
+        return jsons[0]
+      }
     } else {
-      return jsons[0]
+      return jsons[2];
     }
 
     function fix_btn_and_set_basepath( lbl ) {

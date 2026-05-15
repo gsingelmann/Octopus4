@@ -49,7 +49,15 @@ function open_config() {
 	w.active_or_block_group = w.add("panel { text: '" + __("active-or-blocking", script_id) + "', orientation: 'column', alignChildren: ['left', 'fill']}");
 	w.active_rb = w.active_or_block_group.add("radiobutton", undefined, __("Paths-active", script_id));
 	w.block_rb = w.active_or_block_group.add("radiobutton", undefined, __("Paths-blocking", script_id));
-	w.active_rb.value = true;
+	try {
+		if ( prefs.switch == "blocking" ) {
+			w.block_rb.value = true;
+		} else  {
+			w.active_rb.value = true;
+		}
+	} catch(e) {
+		w.active_rb.value = true;
+	}
 	// ---------------------------------------------------------------------------------------------------
 	// Pfadliste
 	var _paths = prefs.paths.join("\n");

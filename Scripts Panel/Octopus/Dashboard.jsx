@@ -48,7 +48,7 @@ function show_dashboard( cfgs, prefs ) {
   // -----------------------------------------------------------------------------------------------------
   //  Fenster und zwei Tabs
   // -----------------------------------------------------------------------------------------------------
-  var w = new Window("dialog", "Dahboard", undefined /*, {closeButton: false} */);
+  var w = new Window("dialog", "Dashboard", undefined /*, {closeButton: false} */);
   __insert_head(w, script_id)
   w.tabbed_panel = w.add("tabbedpanel {alignChildren: ['fill', 'fill']}");
   w.tabbed_panel.alignChildren = ['fill', 'fill'];

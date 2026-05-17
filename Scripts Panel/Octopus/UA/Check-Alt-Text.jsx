@@ -3,7 +3,8 @@
 +   This script is part of project-octopus.net
 +   Author: Gerald Singelmann, gs@cuppascript.com
 +   Supported by: Satzkiste GmbH, post@satzkiste.de
-+   Modified: 2026-03-13
+
++   2026-05-17: Problem bei Erstellung des Indicator-Layers behoben.
 
 +    License (MIT)
 		Copyright 2023 Gerald Singelmann/Satzkiste GmbH
@@ -72,7 +73,7 @@ function show_ui() {
   
   w.toggle_alts = w.hidegroup.add("button", undefined, __('hide alts'));
   w.toggle_decos = w.hidegroup.add("button", undefined, __('hide deco'));
-  w.make_layer = w.layergroup.add("button", undefined, __('make layer'));
+  w.make_layer_btn = w.layergroup.add("button", undefined, __('make layer'));
   w.cancelElement = w.okgroup.add("button", undefined, "OK");
 
   w.toggle_alts.state = "shown"
@@ -117,13 +118,14 @@ function show_ui() {
       __log("error", e.message + " on "  + e.line, script_id );
     }
   }
-  w.make_layer.onClick = function() {
+  w.make_layer_btn.onClick = function() {
     try {
       toggle_visibility( "ok", true );
       toggle_visibility( "deco", true );
       make_layer()
       this.window.close();
     } catch(e) {
+      alert( e.message + " on "  + e.line );
       __log("error", e.message + " on "  + e.line, script_id );
     }
   }
@@ -253,24 +255,29 @@ function show_ui() {
       __log("error", e.message + " on "  + e.line, script_id );
     }
     function make_indic( list, name ) {
-      // __log("indicatorlayer: " + name, "make indic");
+      var _dbg = false;
+      if (_dbg) __log("indicatorlayer: " + name + " for " + list.length + " items", "make indic", script_id);
       try {
         var _ro = doc.viewPreferences.rulerOrigin;
         doc.viewPreferences.rulerOrigin = RulerOrigin.SPREAD_ORIGIN;
-        var layer = doc.layers.item("alt-text-indicator");
-        if ( layer.isValid ) {
-          layer.remove();
+        var layer = doc.layers.item("alttext-indicator-layer");
+        if ( ! layer.isValid ) {
+          layer = doc.layers.add({name: "alttext-indicator-layer"});
+          layer.move( LocationOptions.AT_BEGINNING );
         }
-        layer = doc.layers.add({name: 'alt-text-indicator'});
-        layer.move( LocationOptions.AT_BEGINNING );
+        if (_dbg) __log("made layer", "make indic", script_id);
         for ( var n = 0; n < list.length; n++ ) {
+          if (_dbg) __log("item " + n, "make indic", script_id);
           var fr = doc.pageItems.itemByID(list[n].frame);
+          if (_dbg) __log("fr type: " + fr.constructor.name + ", " + fr.paths[0].entirePath.join(" - "), "make indic", script_id);
           var spread = get_spread(fr);
           var colour = get_color( name );
           if ( name == "no-Alt-Text" ) {
             var dup = spread.polygons.add({fillColor: "None", strokeColor: colour, strokeWeight: 4});
+            if (_dbg) __log("duplicated polygon " + dup.isValid, "make indic", script_id);
           } else {
             var dup = spread.textFrames.add({fillColor: "None", strokeColor: colour, strokeWeight: 4});
+            if (_dbg) __log("duplicated text frame " + dup.isValid, "make indic", script_id);
           }
           dup.itemLayer = layer;
           try {
@@ -280,6 +287,7 @@ function show_ui() {
             app.select( fr );
             return;
           }
+          
           /*
           {frame: fr.id, kind: fr.constructor.name, link: link, altText: altText, actText: actualText, altDeco: (altTST == "SOURCE_DECORATIVE_IMAGE"), actDeko: (aTT == "TAG_ARTIFACT"), vstate: fr.visible }
           */
@@ -298,6 +306,7 @@ function show_ui() {
             dup.fillTransparencySettings.blendingSettings.opacity = 70;
           }
         }
+        if (_dbg) __log("done", "make indic", script_id);
       } catch(e) {
         __log("error", e.message + " on "  + e.line, script_id );
       } finally {

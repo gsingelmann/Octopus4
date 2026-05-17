@@ -6,7 +6,7 @@
 +   Author: Gerald Singelmann, gs@cuppascript.com
 +   Supported by: Satzkiste GmbH, post@satzkiste.de
 
-+    Modified: 2023-04-26
++    2026-05-17: Progressbar für das Durchlaufen der Artikel hinzugefügt
 
 +    License (MIT)
 		Copyright 2023 Gerald Singelmann/Satzkiste GmbH
@@ -133,7 +133,12 @@ function show_panel() {
     }
   
     var articles = doc.articles.everyItem().getElements();
+    var wpb = new Window("palette");
+    wpb.pb = w.add("progressbar", [undefined, undefined, 300, 20]);
+    wpb.pb.maxvalue = articles.length;
+    wpb.show();
     for ( var na = 0; na < articles.length; na++ ) {
+      wpb.pb.value = na;
       var article = articles[na];
       for ( var nm = 0; nm < article.articleMembers.length; nm++ ) {
         var member = article.articleMembers[nm];
@@ -145,10 +150,11 @@ function show_panel() {
           }
         } else {
           ref.visible = sichtbar;
-        }
-      }
-    }
-  }
+        } // if
+      }   // member loop
+    }     // article loop
+    wpb.close();
+  }       // show_frames
 
   function show_double_booking() {
     $.writeln("los");

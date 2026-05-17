@@ -9,6 +9,7 @@
 //   Include.jsxinc  – muss im selben Ordner wie diese Datei liegen
 //
 // 2026-04-21: Ausführlicheres Logging, Installerupdates sind noch wackelig
+// 2026-05-17: Eventlistener (u.a. für Display)  eingebaut
 // =============================================================================
 #targetengine "octopus4"
   // #include "Startup Scripts/Octopus/Include.jsxinc"
@@ -367,6 +368,47 @@ function install() {
     }
     w.show();
   }
+
+  // -------------------------------------------------------------------------------------------
+  //  Startup-Extrawürste (show panels etc)
+  // -------------------------------------------------------------------------------------------
+
+  // -------  Calling on Startup
+  wait_to_act = app.idleTasks.add({ name: "wait_to_act", sleep: 1000 });
+  wait_to_act.addEventListener("onIdle", function (evt) {
+    wait_to_act.sleep = 0;
+    try {
+      var display_prefs = __readJson( PATH_DATA_FOLDER + "/Prefs/display-config-pref.json" );
+      if ( display_prefs && display_prefs.show_panel) { 
+        var display_script = new File( PATH_SCRIPT_PARENT + "/Scripts Panel/Octopus/Display.jsx")
+        if ( display_script.exists ) {
+          app.doScript( display_script, ScriptLanguage.JAVASCRIPT );
+        }
+      }
+    } catch(e) {
+      __log("error", e.message + " on " + e.line, "calling-display");
+    }
+  });
+
+  app.eventListeners.add('afterOpen', function (evt) {
+
+    // -------  Display call default
+    try {
+      if (evt.target.constructor.name.toLowerCase().indexOf("window") != -1) {
+        var display_prefs = __readJson( PATH_DATA_FOLDER + "/Prefs/display-config-pref.json" );
+        if (display_prefs && display_prefs.use_default) {
+          var display_script = new File( PATH_SCRIPT_PARENT + "/Scripts Panel/Octopus/Display-Call-Default.jsx")
+          if ( display_script.exists ) {
+            app.doScript( display_script, ScriptLanguage.JAVASCRIPT );
+          }
+
+        }
+      }
+    } catch (e) {
+      alert(evt.target.toString() + "\n" + e);
+    }
+  })
+
 
 
 

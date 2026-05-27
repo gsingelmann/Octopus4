@@ -6,7 +6,7 @@
 +   Author: Gerald Singelmann, gs@cuppascript.com
 +   Supported by: Satzkiste GmbH, post@satzkiste.de
 
-+    Modified: 2026-03-26
++    2026-05-17: Text geändert, der nach dem Prompting im Frame angezeigt wird
   
 +    License (MIT)
     Copyright 2023 Gerald Singelmann/Satzkiste GmbH
@@ -141,7 +141,7 @@ function _ui(title) {
     }
     var request_string = JSON.stringify({ prompt: _q, huba: "hopp" });
     this.window.close();
-    tf.contents = _q;
+    tf.contents = __("wait") + "\nprompt: " + _q;
     var pbwin = new Window("palette");
     pbwin.add("statictext", undefined, "...waiting...")
     pbwin.show();

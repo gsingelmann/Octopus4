@@ -6,7 +6,7 @@
 +   Author: Gerald Singelmann, gs@cuppascript.com
 +   Supported by: Satzkiste GmbH, post@satzkiste.de
 
-+    2026-05-17: Progressbar für das Durchlaufen der Artikel hinzugefügt
++    2026-05-17: Progressbar für das Durchlaufen der Artikel hinzugefügt. Sollte beim Schließen Feedback geben
 
 +    License (MIT)
 		Copyright 2023 Gerald Singelmann/Satzkiste GmbH
@@ -64,7 +64,7 @@ function show_panel() {
   panel.btn.onClick = function () {
     this.active = false;
     state_is_visible = ! state_is_visible
-    if (dbg) __log( "info", "clicked button: " + state_is_visible, script_id)
+    if (dbg) __log( "info", "clicked hide button: " + state_is_visible, script_id)
     show_frames( panel.doc, state_is_visible )
     if ( state_is_visible ) {
       this.text = __('hide articles');
@@ -125,35 +125,39 @@ function show_panel() {
   }
 
   function show_frames( doc, sichtbar ) {
-    if ( ! app.documents.length ) return;
-    if (sichtbar) {
-      doc.insertLabel("octopus-checkarticles-state", "shown");
-    } else {
-      doc.insertLabel("octopus-checkarticles-state", "hidden");
+    try {
+      if ( ! app.documents.length ) return;
+      if (sichtbar) {
+        doc.insertLabel("octopus-checkarticles-state", "shown");
+      } else {
+        doc.insertLabel("octopus-checkarticles-state", "hidden");
+      }
+    
+      var articles = doc.articles.everyItem().getElements();
+      var wpb = new Window("palette");
+      wpb.pb = wpb.add("progressbar", [undefined, undefined, 300, 20]);
+      wpb.pb.maxvalue = articles.length;
+      wpb.show();
+      for ( var na = 0; na < articles.length; na++ ) {
+        wpb.pb.value = na;
+        var article = articles[na];
+        for ( var nm = 0; nm < article.articleMembers.length; nm++ ) {
+          var member = article.articleMembers[nm];
+          var ref = member.itemRef
+          if ( ref.constructor.name == "TextFrame") {
+            var story = ref.parentStory;
+            for ( var nt = 0; nt < story.textContainers.length; nt++ ) {
+              story.textContainers[nt].visible = sichtbar;
+            }
+          } else {
+            ref.visible = sichtbar;
+          } // if
+        }   // member loop
+      }     // article loop
+      wpb.close();
+    } catch(e) {
+      __log( "error", e.message + " on " + e.line, script_id);
     }
-  
-    var articles = doc.articles.everyItem().getElements();
-    var wpb = new Window("palette");
-    wpb.pb = w.add("progressbar", [undefined, undefined, 300, 20]);
-    wpb.pb.maxvalue = articles.length;
-    wpb.show();
-    for ( var na = 0; na < articles.length; na++ ) {
-      wpb.pb.value = na;
-      var article = articles[na];
-      for ( var nm = 0; nm < article.articleMembers.length; nm++ ) {
-        var member = article.articleMembers[nm];
-        var ref = member.itemRef
-        if ( ref.constructor.name == "TextFrame") {
-          var story = ref.parentStory;
-          for ( var nt = 0; nt < story.textContainers.length; nt++ ) {
-            story.textContainers[nt].visible = sichtbar;
-          }
-        } else {
-          ref.visible = sichtbar;
-        } // if
-      }   // member loop
-    }     // article loop
-    wpb.close();
   }       // show_frames
 
   function show_double_booking() {

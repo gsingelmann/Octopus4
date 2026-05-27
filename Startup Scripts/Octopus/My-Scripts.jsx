@@ -18,6 +18,7 @@ function install_my_scripts() {
     // __log("dbg", files.length + " files in >" + my_scripts_folder.fullName + "<", "my-scripts");
     for ( var n = 0; n < files.length; n++ ) {
       if ( files[n].name.charAt(0) =="." ) continue;
+      if ( files[n].name.search(/what-is-my-scripts/i) != -1 ) continue;
       var aux = files[n].name.search(/\.(js|jsx|jsbin|jsxbin|idjs)(\.lnk)?$/i );
       // __log("dbg", files[n].name + " -> " + aux );
       if ( aux == -1 ) continue;

@@ -10,6 +10,7 @@
 //
 // 2026-04-21: Ausführlicheres Logging, Installerupdates sind noch wackelig
 // 2026-05-17: Eventlistener (u.a. für Display)  eingebaut
+// 2026-05-27: index.json hat jetzt die property "default_menu". Das wird hier honoriert
 // =============================================================================
 #targetengine "octopus4"
   // #include "Startup Scripts/Octopus/Include.jsxinc"
@@ -25,7 +26,7 @@ app.eventListeners.add("beforeQuit", onQuitHandler);
 function install() {
   __log("info", "Installation gestartet", "installer");
 
-  var nu = [], updated = [], failed = [], removed = [];
+  var nu = [], updated = [], failed = [], removed = [], default_menu = "Octopus";
 
   var configs = load_configuration();
   update_resources( configs );
@@ -42,6 +43,9 @@ function install() {
     var configs = [];
     for ( var n = 0; n < locals.length; n++ ) {
       var _set = check_set_4_update( locals[n] );
+      if ( _set.set_name == "octopus" ) {
+        if ( _set.default_menu ) default_menu = _set.default_menu;
+      }
 
       // -------------------------------------------
       // Aktualisiertes abspeichern
@@ -54,6 +58,7 @@ function install() {
         _set.configs[m].set_name = _set.set_name;
         _set.configs[m].base_url = _set.base_url;
         _set.configs[m].project_name = _set.project_name;
+        if ( _set.default_menu ) _set.configs[m].default_menu = _set.default_menu;
         configs.push( _set.configs[m] );
       }
     }
@@ -280,8 +285,14 @@ function install() {
           // ----------------------------------------------------------------------
           // 2026-02-23: Alle Menüeinträge, die custom sind, werden zusätzlich
           //  ins Octopus-Menü gepackt.
-          if ( c.set_name == "octopus" && c.menu != "Octopus" ) {
-            var omenu = get_submenu( "Octopus", undefined, "$ID/Table" );
+          // if ( c.set_name == "octopus" && c.menu != "Octopus" ) {
+          //   var omenu = get_submenu( "Octopus", undefined, "$ID/Table" );
+          //   omenu.menuItems.add( action );
+          // }
+          // ----------------------------------------------------------------------
+          // 2026-05-27: CS wollte Octopus⁴ als Menüname, also muss ich Festverdrahtetes rausnehmen
+          if ( c.default_menu && c.menu != default_menu ) {
+            var omenu = get_submenu( default_menu, undefined, "$ID/Table" );
             omenu.menuItems.add( action );
           }
         } catch (e) {
@@ -294,7 +305,7 @@ function install() {
 
     // --------------------------------------------------------------------------
     //  Separator vors Dashboard
-    var _octmenu = app.menus.item("$ID/Main").menuElements.item("Octopus");
+    var _octmenu = app.menus.item("$ID/Main").menuElements.item(default_menu);
     if (_octmenu && _octmenu.isValid) {
       var _db_item = _octmenu.menuElements.lastItem();
       if (_db_item || _db_item.isValid) {

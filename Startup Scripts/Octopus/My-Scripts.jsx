@@ -1,3 +1,14 @@
+// =============================================================================
+// My Scripts
+// =============================================================================
+//  Sucht im Ordner Octopus/My-Scripts nach Script-Dateien, die dann im 
+//  Octopus Menü angeboten werden.
+//
+//  Abhängigkeiten:
+//  Include.jsxinc  – muss im selben Ordner wie diese Datei liegen
+//
+// =============================================================================
+#targetengine "octopus4"
 #targetengine "octopus-2"
 
 #include "Include.jsxinc"
@@ -45,7 +56,14 @@ function install_my_scripts() {
         return 0;
       })
 
-      var o_menu = get_submenu( "Octopus", undefined, "$ID/Table");
+      // -----------------------------------------------------------------------------------
+      // Menü-Name steht im Set.
+      // -----------------------------------------------------------------------------------
+      var set = __readJson( PATH_DATA_FOLDER + "/Sets/octopus.json" );
+      var menu_name = (set && set.default_menu ) ? set.default_menu : "Octopus"
+
+
+      var o_menu = get_submenu( menu_name, undefined, "$ID/Table");
       var ms_menu = get_submenu( "My-Scripts", o_menu );
       o_menu.menuSeparators.add(LocationOptions.BEFORE, ms_menu);
 

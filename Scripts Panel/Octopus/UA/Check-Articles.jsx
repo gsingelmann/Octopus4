@@ -41,15 +41,17 @@ if ( app.documents.length > 0 ) {
 function show_panel() {
 
   var doc = app.activeDocument;
-  doc.addEventListener( "beforeSave", restore_doc );
-  doc.addEventListener( "beforeClose", restore_doc );
-  doc.addEventListener( "beforeSaveAs", restore_doc );
-  doc.addEventListener( "beforeExport", restore_doc );
-  doc.addEventListener( "beforeDeactivate", restore_doc );
+  // doc.addEventListener( "beforeSave", restore_doc );
+  // doc.addEventListener( "beforeClose", restore_doc );
+  // doc.addEventListener( "beforeSaveAs", restore_doc );
+  // doc.addEventListener( "beforeExport", restore_doc );
+  // doc.addEventListener( "beforeDeactivate", restore_doc );
 
   panel_visibility( "$ID/Articles_WinMenu", true );
 
-  var state_is_visible = (doc.extractLabel("octopus-checkarticles-state") !== "hidden")
+  // 2026-06-02: Die Verantwortung über den State des Docs wird auf den User verlagert. Keine EventListener mehr, nur ein Warnhinweis on close
+  // var state_is_visible = (doc.extractLabel("octopus-checkarticles-state") !== "hidden")
+  var state_is_visible = true;
 
   if (dbg) __log( "info", "state: " + state_is_visible, script_id)
 
@@ -78,14 +80,18 @@ function show_panel() {
   }
   panel.sequence_btn = panel.add("button", undefined, __("show sequence"));
   panel.sequence_btn.onClick = function() {
+    panel.rm_layers_btn.visible = true;
     show_sequence();
   }
   panel.double_btn = panel.add("button", undefined, __("double booking"));
   panel.double_btn.onClick = function() {
+      panel.rm_layers_btn.visible = true;
     show_double_booking();
   }
   panel.rm_layers_btn = panel.add("button", undefined, __("remove layers"));
+  panel.rm_layers_btn.visible = false;
   panel.rm_layers_btn.onClick = function() {
+    panel.rm_layers_btn.visible = false;
     if ( ! app.documents.length ) return;
     var l = app.activeDocument.layers.item("ᴥ " + __("sequence"));
     if ( l.isValid ) {
@@ -94,7 +100,12 @@ function show_panel() {
   }
   panel.onClose = function() {
     if (dbg) __log( "info", "panel.onClose", script_id);
-    restore_doc()
+    if ( panel.btn.text == __('show articles') || panel.rm_layers_btn.visible ) {
+    // if ( state_is_visible || ! panel.rm_layers_btn.visible ) {
+      if ( confirm( __("need-to-restore") ) ) {
+        restore_doc()
+      }
+    }
 
     // show_frames( panel.doc, true )
     // state_is_visible = true;
@@ -115,12 +126,18 @@ function show_panel() {
   panel.show();
 
   function restore_doc( e ) {
+    __log("dbg", "restoring doc",script_id)
     show_frames( panel.doc, true );
-    try { panel.doc.removeEventListener( "beforeSave", restore_doc ); } catch(e) {}
-    try { panel.doc.removeEventListener( "beforeClose", restore_doc ); } catch(e) {}
-    try { panel.doc.removeEventListener( "beforeSaveAs", restore_doc ); } catch(e) {}
-    try { panel.doc.removeEventListener( "beforeExport", restore_doc ); } catch(e) {}
-    try { panel.doc.removeEventListener( "beforeDeactivate", restore_doc ); } catch(e) {}
+    var layer_name = "ᴥ " + __("sequence");
+    var layer = doc.layers.item(layer_name);
+    if ( layer.isValid ) {
+      layer.remove();
+    }
+    // try { panel.doc.removeEventListener( "beforeSave", restore_doc ); } catch(e) {}
+    // try { panel.doc.removeEventListener( "beforeClose", restore_doc ); } catch(e) {}
+    // try { panel.doc.removeEventListener( "beforeSaveAs", restore_doc ); } catch(e) {}
+    // try { panel.doc.removeEventListener( "beforeExport", restore_doc ); } catch(e) {}
+    // try { panel.doc.removeEventListener( "beforeDeactivate", restore_doc ); } catch(e) {}
     panel.close();
   }
 

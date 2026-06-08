@@ -104,6 +104,11 @@
       "de": "Rahmen in mehr als einem Artikel anzeigen",
       "en": "Display frames in more than one article",
       "es": "Mostrar marcos en más de un artículo"
+    },
+    "need-to-restore": {
+      "de": "Dokument geändert\nEs sind noch Rahmen ausgeblendet oder Indikatoren sichtbar.\n\nWollen Sie das Dokument jetzt wiederherstellen?",
+      "en": "Document modified\nFrames are still hidden or indicators are visible.\n\nDo you want to restore the document now?",
+      "es": "Documento modificado\nLos marcos siguen ocultos o los indicadores son visibles.\n\n¿Desea restaurar el documento ahora?"
     }
   },
   "check-alt-text": {

@@ -3,7 +3,8 @@
 +   This script is part of project-octopus.net
 +   Author: Gerald Singelmann, gs@cuppascript.com
 +   Supported by: Satzkiste GmbH, post@satzkiste.de
-+   Modified: 2026-03-13
++   Modified: 2026-06-18
+-		catch(e)  zu log(dbg) geändert <- Hatte einen InsertionPoint im Log.
 
 +    License (MIT)
 		Copyright 2023 Gerald Singelmann/Satzkiste GmbH
@@ -33,9 +34,10 @@ var dbg = false;
 AssignDecoration(); 
 function AssignDecoration(){ 
 		__log("run", script_id, script_id)
-		try {
+
+		try { 
 			//-----------------------
-			var n = 0;
+			var n = 0, m = 0;
 			for ( var ns = 0; ns < app.selection.length; ns++ ) {
 				try {
 					var sel = app.selection[ns];
@@ -43,10 +45,14 @@ function AssignDecoration(){
 					sel.objectExportOptions.applyTagType = TagType.TAG_ARTIFACT;
 					n++;
 				} catch(e) {
-					__log("error", "Could not set decoration for object " + sel.constructor.name + ": " + e.message + " on " + e.line, script_id);
+					__log("dbg", "Could not set decoration for object " + sel.constructor.name + ": " + e.message + " on " + e.line, script_id);
+					m++;
 				}
 			}
-			__alert("info", localize({ en: n + " object(s) marked as decoration.", de: n + " Objekt(e) als Dekoration gekennzeichnet." }), "", "OK", false);
+			__alert("info", localize({ 
+				en: n + " object(s) marked as decoration.\n" + m + " object(s) failed", 
+				de: n + " Objekt(e) als Dekoration gekennzeichnet.\n" + m + " Objekt(e) konnten nicht geändert werden." 
+			}), "", "OK", false);
 			//-----------------------
 		} catch(e) {
 			__log("error", "Error in loop: " + e.message + " on " + e.line, script_id);

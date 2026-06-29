@@ -143,7 +143,7 @@ function show_panel() {
 
   function show_frames( doc, sichtbar ) {
     try {
-      if ( ! app.documents.length ) return;
+      if ( ! app.documents.length || ! doc ) return;
       if (sichtbar) {
         doc.insertLabel("octopus-checkarticles-state", "shown");
       } else {

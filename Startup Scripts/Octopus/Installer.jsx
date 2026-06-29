@@ -11,12 +11,14 @@
 // 2026-04-21: Ausführlicheres Logging, Installerupdates sind noch wackelig
 // 2026-05-17: Eventlistener (u.a. für Display)  eingebaut
 // 2026-05-27: index.json hat jetzt die property "default_menu". Das wird hier honoriert
+// 2026-06-08: Ein Asset mit `check==0` wird jetzt nicht mehr überschrieben
+// 2026-06-12: index.json hat jetzt `obsolete` als property. Damit können Assets gelöscht werden.
 // =============================================================================
 #targetengine "octopus4"
   // #include "Startup Scripts/Octopus/Include.jsxinc"
   #include "Include.jsxinc"
 __init();
-
+ 
 
 
 
@@ -27,7 +29,7 @@ function install() {
   __log("info", "Installation gestartet", "installer");
 
   var nu = [], updated = [], failed = [], removed = [], default_menu = "Octopus";
-
+ 
   var configs = load_configuration();
   update_resources( configs );
   install_menus( configs );
@@ -139,8 +141,30 @@ function install() {
           __log("info", c.id + " wird ignoriert", "installer");
           continue;
         }
+        if ( c.hasOwnProperty("obsolete") && c.obsolete ) {
+          try {
+            var src_path = get_asset_path(c),
+                src_file = new File( src_path );
+
+            var rm_path = src_path.replace(/\/Scripts Panel\//, "/Scripts Panel Off/")
+                                    .replace(/\/Startup Scripts\//, "/Startup Scripts Off/");
+            if ( src_file.exists && src_path != rm_path ) {
+              __ensureFolder(rm_path);
+              if (__moveFile(src_file, rm_path) ) {
+                __log("info", "Script deinstalliert: " + src_path, "installer");
+                removed.push( c.filename )
+              } else {
+                __log("error", "Script konnte nicht deinstalliert werden: " + src_path, "installer");
+              }
+            }
+            continue;
+          } catch(e) {
+            __log("error", "Obsolete-Check gescheitert: " + e.message + " auf " + e.line, "installer");
+            continue;
+          }
+        }
         try {
-          var tgt_path = get_tgt_path(c);
+          var tgt_path = get_asset_path(c);
           __ensureFolder(tgt_path);
         } catch (e) {
           __log("error", "Ordner für " + c.filename + " konnte nicht erstellt werden: " + e.message, "installer");
@@ -226,7 +250,7 @@ function install() {
     var custom_menus = {};
     for (var _nc = 0; _nc < configs.length; _nc++) {
       var c = configs[_nc];
-      var tgt_path = get_tgt_path(c);
+      var tgt_path = get_asset_path(c);
       var tgt_file = new File( tgt_path );
 
       // --------------------------------------------------------------------
@@ -369,6 +393,11 @@ function install() {
       failed = ("  " + failed.join("\n  ")).split("\n");
       msg = msg.concat(failed);
     }
+    if ( removed.lenth > 0 ) {
+      msg.push("Removed: ");
+      removed = ( "  " + removed.join("\n  ")).split("\n");
+      msg = msg.concat( removed );
+    }
     var w = new Window("palette");
     __insert_head(w, "installer")
     var _lb = w.add("listbox", undefined, msg);
@@ -426,7 +455,7 @@ function install() {
   // -------------------------------------------------------------------------------------------
   //  Get Installation-Path
   // -------------------------------------------------------------------------------------------
-  function get_tgt_path(cfg) {
+  function get_asset_path(cfg) {
     var p;
     if (cfg.subpath.search(/^Scripts Panel/i) != -1 || cfg.subpath.search(/^Startup Scripts/i) != -1) {
       p = PATH_SCRIPT_PARENT + "/" + cfg.subpath;
@@ -442,6 +471,10 @@ function install() {
   }
   function eq_filesize(check, tgt_path) {
     var tgt_file = new File(tgt_path);
+    if ( check == 0 && tgt_file.exists ) {
+      // check=0 im JSON bedeutet: Asset soll nicht aktualisiert werden, weil der User das Asset an seine Bedürfnisse anpassen kann
+      return true;
+    }
     var tgt_size = tgt_file.length;
     // $.writeln("Vergleiche: " + check + " mit " + tgt_size + " für " + tgt_path);
     // Ich weiß nicht, ob "exakt identische Länge" zu restriktiv ist

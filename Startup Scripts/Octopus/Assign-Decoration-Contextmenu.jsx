@@ -38,7 +38,7 @@ function AssignDecoration(){
 		__log("run", script_id, script_id)
 		try { 
 			//-----------------------
-			var n = 0;
+			var n = 0, m = 0;
 			for ( var ns = 0; ns < app.selection.length; ns++ ) {
 				try {
 					var sel = app.selection[ns];
@@ -46,10 +46,14 @@ function AssignDecoration(){
 					sel.objectExportOptions.applyTagType = TagType.TAG_ARTIFACT;
 					n++;
 				} catch(e) {
-					__log("error", "Could not set decoration for object " + sel.constructor.name + ": " + e.message + " on " + e.line, script_id);
+					__log("dbg", "Could not set decoration for object " + sel.constructor.name + ": " + e.message + " on " + e.line, script_id);
+					m++;
 				}
 			}
-			__alert("info", localize({ en: n + " object(s) marked as decoration.", de: n + " Objekt(e) als Dekoration gekennzeichnet." }), "", "OK", false);
+			__alert("info", localize({ 
+				en: n + " object(s) marked as decoration.\n" + m + " object(s) failed", 
+				de: n + " Objekt(e) als Dekoration gekennzeichnet.\n" + m + " Objekt(e) konnten nicht geändert werden." 
+			}), "", "OK", false);
 			//-----------------------
 		} catch(e) {
 			__log("error", "Error in loop: " + e.message + " on " + e.line, script_id);

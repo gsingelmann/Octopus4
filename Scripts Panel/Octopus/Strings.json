@@ -1,5 +1,5 @@
 {
-  "comments":{
+  "comments": {
     "0423": "Adobe-Fonts Text geändert"
   },
   "add-hyperlinks": {
@@ -16,7 +16,7 @@
     "create mailto": {
       "de": "Mailto Hyperlinks erstellen",
       "en": "Create Mailto Hyperlinks",
-      "es": "Hipervínculos para correo"
+      "es": "Hipervínculos de correo"
     },
     "long tld": {
       "de": "Lange/Neue TLDs erlauben (.koeln ...)",
@@ -83,7 +83,7 @@
     "next-spread": {
       "de": "Nächste Seite",
       "en": "Next Spread",
-      "es": "Siguiente página"
+      "es": "Siguiente pliego"
     },
     "collect orphans": {
       "de": "Unzugewiesene Textrahmen sammeln",
@@ -95,7 +95,7 @@
       "en": "Show sequence",
       "es": "Mostrar secuencia"
     },
-    "remove layers": {  
+    "remove layers": {
       "de": "Indikatorebene entfernen",
       "en": "Remove indicator layer",
       "es": "Eliminar capa indicadora"
@@ -238,39 +238,48 @@
   "check-hyphenation": {
     "prev": {
       "de": "Vorherige Fundstelle",
-      "en": "Previous"
+      "en": "Previous",
+      "es": "Previo"
     },
     "next": {
       "de": "Nachfolgende Fundstelle",
-      "en": "Next"
+      "en": "Next",
+      "es": "Siguiente"
     },
     "fix": {
       "de": "Korrigieren",
-      "en": "Fix"
+      "en": "Fix",
+      "es": "Corregir"
     },
     "found": {
       "de": "Fundstelle: ",
-      "en": "Match: "
+      "en": "Match: ",
+      "es": "Coincidencias: "
     },
     "type": {
       "de": "Art: ",
-      "en": "Type: "
+      "en": "Type: ",
+      "es": "Tipo: "
     },
     "hyphen": {
       "de": "Harte Trennung",
-      "en": "Rigid hyphen"
+      "en": "Rigid hyphen",
+      "es": "Signo menos"
     },
     "break": {
       "de": "Harter Zeilenumbruch",
-      "en": "Hard linebreak"
+      "en": "Hard linebreak",
+      "es": "Salto de línea forzado"
     },
     "schwobbl": {
       "de": "Zahlschwobbl",
-      "en": "Shwobbl with digit"
+      "en": "Shwobbl with digit",
+      "es": "Shwobbl con número"
     },
     "nothing found": {
       "de": "Nichts gefunden",
-      "en": "Nothing found"
+      "en": "Nothing found",
+      "es": "Nada encontrado"
     }
   },
   "check-language": {
@@ -318,54 +327,65 @@
       "de": "Treffer im Übersatz",
       "en": "Text in Overflow",
       "es": "Texto desbordado"
-    },
+    }
   },
   "check-lists": {
     "nothing-found": {
       "de": "Keine Fundstellen",
-      "en": " Nothing found"
+      "en": " Nothing found",
+      "es": "Nada encontrado"
     },
     "previous": {
       "de": "Vorherige Fundstelle",
-      "en": " Previous list"
+      "en": " Previous list",
+      "es": " Lista previa"
     },
     "next": {
       "de": "Nachfolgende Fundstelle",
-      "en": " Next list"
+      "en": " Next list",
+      "es": " Siguiente lista"
     },
     "refresh": {
       "de": "Neu durchsuchen",
-      "en": " Refresh"
+      "en": " Refresh",
+      "es": "Refrescar"
     },
     "paragraphs": {
       "de": "Abs\u00e4tze",
-      "en": "paragraphs"
+      "en": "paragraphs",
+      "es": "Párrafos"
     }
   },
   "check-tags": {
     "locked-stories": {
       "de": "Textabschnitte sind abgeschlossen",
-      "en": " Stories are locked"
+      "en": " Stories are locked",
+      "es": " Artículos bloqueados"
     },
     "locked-layers": {
       "de": "Ebenen sind abgeschlossen",
-      "en": " Layers are locked"
+      "en": " Layers are locked",
+      "es": " Capas bloqueadas"
     },
     "hidden-layers": {
       "de": "Ebenen sind ausgeblendet",
-      "en": " Layers are hidden"
+      "en": " Layers are hidden",
+      "es": " Capas ocultas"
     },
     "add-btn": {
       "de": "Tags markieren",
-      "en": "Add markings for tags"
+      "en": "Add markings for tags",
+      "es": "Agregar marcas para etiquetas"
     },
     "rm-btn": {
       "de": "Markierungen entfernen",
-      "en": "Remove markings for tags"
+      "en": "Remove markings for tags",
+      "es": "Eliminar marcas para etiquetas"
     },
     "cancel": {
       "de": "Abbrechen",
-      "en": "Cancel"
+      "en": "Cancel",
+      "es": "Cancelar"
     }
   },
   "cleancontenttypes": {
@@ -382,7 +402,7 @@
     "remove": {
       "de": "Löschen",
       "en": "Remove",
-      "es": "Remover"
+      "es": "Eliminar"
     },
     "cancel": {
       "de": "Abbrechen",
@@ -408,97 +428,115 @@
   "close-all": {
     "save": {
       "de": "Speichern",
-      "en": "Save"
+      "en": "Save",
+      "es": "Guardar"
     },
     "discard": {
       "de": "Verwerfen",
-      "en": "Discard"
+      "en": "Discard",
+      "es": "Descartar"
     },
     "cancel": {
       "de": "Abbrechen",
-      "en": "Cancel"
+      "en": "Cancel",
+      "es": "Cancelar"
     },
     "question": {
       "de": "Watt nu?",
-      "en": "What now?"
+      "en": "What now?",
+      "es": "¿Ahora qué?"
     },
     "message": {
       "de": "Sie haben _1_ geänderte und _2_ niemals gesicherte Dokumente offen.\n\nSollen die Änderungen soweit möglich gespeichert werden?",
-      "en": "You have _1_ modified and _2_ unsaved documents open.\n\nShould the changes be saved as far as possible?"
+      "en": "You have _1_ modified and _2_ unsaved documents open.\n\nShould the changes be saved as far as possible?",
+      "es": "Tiene abiertos _1_ documento(s) modificado(s) y _2_ documento(s) sin guardar.\n\n¿Deberían guardarse los cambios en la medida de lo posible?"
     },
     "keep-unsaved": {
       "de": "Die _1_ niemals gespeicherten Dokumente wurden nicht geschlossen.",
-      "en": "The _1_ unsaved documents were left open"
+      "en": "The _1_ unsaved documents were left open",
+      "es": "Hay _1_ documento(s) abierto(s) sin guardar"
     }
   },
   "collect-docfonts": {
     "Collect-Fonts": {
       "de": "Schriften sammeln",
       "en": "Collect fonts",
+      "es": "Recopilar fuentes",
       "it": "Raccogli i font",
       "fr": "Collecter les polices"
     },
     "Dont-Collect-Fonts": {
       "de": "Schriften nicht sammeln",
       "en": "Do not collect fonts",
+      "es": "No recopilar fuentes",
       "it": "Non raccogliere i font",
       "fr": "Ne pas collecter les polices"
     },
     "Paths-active": {
       "de": "Sammle Schriften, wenn in diesen Pfaden gespeichert wird",
       "en": "Collect fonts when saving to these paths",
+      "es": "Recopilar fuentes al guardar en estas rutas",
       "it": "Raccogli i font quando si salva in questi percorsi",
       "fr": "Collecter les polices lors de l'enregistrement dans ces chemins"
     },
     "Paths-blocking": {
       "de": "Sammle keine Schriften, wenn in diesen Pfaden gespeichert wird",
       "en": "Do not collect fonts when saving to these paths",
+      "es": "No recopilar fuentes al guardar en estas rutas",
       "it": "Non raccogliere i font quando si salva in questi percorsi",
       "fr": "Ne pas collecter les polices lors de l'enregistrement dans ces chemins"
     },
     "help-text": {
       "de": "Sie können Pfade eingeben, bei denen das Skript beim Speichern des Dokuments entscheidet, ob Schriften gesammelt werden sollen oder nicht. Geben Sie jeden Pfad in eine neue Zeile ein.",
       "en": "You can enter paths where the script will decide whether to collect fonts or not when saving the document. \nEnter each path on a new line.",
+      "es": "Puede introducir rutas donde el guion decidirá si recopilar o no las fuentes al guardar el documento. \nIntroduzca cada ruta en una línea nueva.",
       "it": "È possibile inserire i percorsi in cui lo script deciderà se raccogliere o meno i font durante il salvataggio del documento. Inserisci ogni percorso su una nuova riga.",
       "fr": "Vous pouvez entrer des chemins où le script décidera de collecter ou non les polices lors de l'enregistrement du document. Entrez chaque chemin sur une nouvelle ligne."
     },
     "active-or-blocking": {
       "de": "Aktive Liste oder Blockliste",
       "en": "Active list or blocklist",
+      "es": "Lista activa o lista de bloqueo",
       "it": "Elenco attivo o elenco di blocco",
       "fr": "Liste active ou liste de blocage"
     },
     "close": {
       "de": "OK",
       "en": "OK",
+      "es": "OK",
       "it": "OK",
       "fr": "OK"
     },
     "close_org": {
       "de": "Schließen",
       "en": "Close",
+      "es": "Cerrar",
       "it": "Chiudi",
       "fr": "Fermer"
     },
     "Collect-Error": {
       "de": "Fehler beim Kopieren von ",
       "en": "Error copying ",
+      "es": "Error al copiar de ",
       "it": "Errore durante la copia di ",
       "fr": "Erreur lors de la copie de "
     },
     "activated-adobe": {
       "de": "Aktiviert von Adobe Fonts",
-      "en": "Added from Adobe Fonts"
+      "en": "Added from Adobe Fonts",
+      "es": "Agregada desde Adobe Fonts"
     },
     "adobe-fonts": {
       "de": "Adobe Fonts, die über die Creative Cloud hinzugefügt wurden, können nicht kopiert werden",
       "en": "Adobe Fonts added via Creative Cloud cannot be copied",
+      "es": "Las fuentes de Adobe añadidas desde Creative Cloud no se pueden copiar",
       "it": "I font Adobe aggiunti tramite Creative Cloud non possono essere copiati",
       "fr": "Les polices Adobe ajoutées via Creative Cloud ne peuvent pas être copiées"
     },
     "does-not-exist": {
       "de": "Die Schriftdatei existiert nicht",
       "en": "The font file does not exist",
+      "es": "El archivo de la fuente no existe",
       "it": "Il file del font non esiste",
       "fr": "Le fichier de police n'existe pas"
     }
@@ -507,41 +545,47 @@
     "Collect-Fonts": {
       "de": "Schriften sammeln",
       "en": "Collect fonts",
+      "es": "Recolectar fuentes",
       "it": "Raccogli i font",
-      "fr": "Collecter les polices" 
+      "fr": "Collecter les polices"
     },
     "warnings": {
       "de": "Warnungen",
       "en": "Warnings",
+      "es": "Advertencias",
       "it": "Avvertimenti",
       "fr": "Avertissements"
     },
     "Collect-Error": {
       "de": "Fehler beim Kopieren von ",
       "en": "Error copying ",
+      "es": "Error al copiar de ",
       "it": "Errore durante la copia di ",
       "fr": "Erreur lors de la copie de "
     },
     "activated-adobe": {
       "de": "Aktiviert von Adobe Fonts",
-      "en": "Added from Adobe Fonts"
+      "en": "Added from Adobe Fonts",
+      "es": "Agregada desde Adobe Fonts"
     },
     "adobe-fonts-verbose": {
       "de": "Das Script 'Document fonts sammeln' versucht die Schriften zu sammeln. Leider ist das bei den genutzten Adobe Fonts nicht möglich.\nGgf. benutzte andere Schriften wurden im Ordner 'Document fonts' abgelegt.",
       "en": "The script 'Collect Document Fonts' attempts to collect the fonts. Unfortunately, this is not possible with the Adobe Fonts used. Any other fonts used are located in the 'Document Fonts' folder.",
+      "es": "El guion 'Recopilar fuentes del documento' intenta recopilar las fuentes. Lamentablemente, esto no es posible con las fuentes de Adobe utilizadas. Las demás fuentes se encuentran en la carpeta 'Fuentes del documento'.",
       "it": "Lo script 'Collect Document Fonts' tenta di raccogliere i font. Purtroppo, ciò non è possibile con i font Adobe utilizzati. Tutti gli altri font utilizzati si trovano nella cartella 'Document Fonts'.",
-      "fr": "Le script « Collect Document Fonts » tente de récupérer les polices. Malheureusement, cela est impossible avec les polices Adobe utilisées. Toutes les autres polices utilisées se trouvent dans le dossier « Document Fonts ».",
-      "es": "El script «Recopilar fuentes del documento» intenta recopilar las fuentes. Lamentablemente, esto no es posible con las fuentes de Adobe utilizadas. Las demás fuentes se encuentran en la carpeta «Fuentes del documento»."
+      "fr": "Le script « Collect Document Fonts » tente de récupérer les polices. Malheureusement, cela est impossible avec les polices Adobe utilisées. Toutes les autres polices utilisées se trouvent dans le dossier « Document Fonts »."
     },
     "adobe-fonts": {
       "de": "Adobe Fonts, die über die Creative Cloud hinzugefügt wurden, können nicht kopiert werden",
       "en": "Adobe Fonts added via Creative Cloud cannot be copied",
+      "es": "Las fuentes de Adobe añadidas desde Creative Cloud no se pueden copiar",
       "it": "I font Adobe aggiunti tramite Creative Cloud non possono essere copiati",
       "fr": "Les polices Adobe ajoutées via Creative Cloud ne peuvent pas être copiées"
     },
     "does-not-exist": {
       "de": "Die Schriftdatei existiert nicht",
       "en": "The font file does not exist",
+      "es": "El archivo de la fuente no existe",
       "it": "Il file del font non esiste",
       "fr": "Le fichier de police n'existe pas"
     }
@@ -549,650 +593,809 @@
   "dashboard": {
     "tab1": {
       "de": "Verfügbare Scripte",
-      "en": "Available Scripts"
+      "en": "Available Scripts",
+      "es": "Guiones disponibles"
     },
     "tab2": {
       "de": "Scriptsets",
-      "en": "Scriptsets"
+      "en": "Scriptsets",
+      "es": "Conjuntos de guiones"
     },
     "activate": {
       "de": "Aktivieren",
-      "en": "activate"
+      "en": "activate",
+      "es": "activar"
     },
     "deactivate": {
       "de": "Deaktivieren",
-      "en": "deactivate"
+      "en": "deactivate",
+      "es": "desactivar"
     },
     "help": {
       "de": "Handbuch",
-      "en": "Manual"
+      "en": "Manual",
+      "es": "Manual"
     },
     "show.folder": {
       "de": "Octopus-Ordner anzeigen",
-      "en": "Show Octopus folders"
+      "en": "Show Octopus folders",
+      "es": "Mostrar carpetas de Octopus"
     },
     "last updated": {
       "de": "Letztes Update ",
-      "en": "Last updated on "
+      "en": "Last updated on ",
+      "es": "Última actualización: "
     },
     "cancel": {
       "de": "Abbrechen",
-      "en": "Cancel"
+      "en": "Cancel",
+      "es": "Cancelar"
     },
     "ok": {
       "de": "OK",
-      "en": "OK"
+      "en": "OK",
+      "es": "OK"
     },
     "setlist": {
       "de": "Deklarierte Scriptordner",
-      "en": "Declared script folders"
+      "en": "Declared script folders",
+      "es": "Carpetas de guiones declaradas"
     },
     "add_set": {
       "de": "Set importieren",
-      "en": "Import set"
+      "en": "Import set",
+      "es": "Importar conjunto"
     },
     "add_set_label": {
       "de": "Ordner hinzufügen",
-      "en": "Add Folder Path"
+      "en": "Add Folder Path",
+      "es": "Agregar la ruta de la carpeta"
     },
     "path": {
       "de": "Pfad",
-      "en": "Path"
+      "en": "Path",
+      "es": "Ruta"
     },
     "choose-folder": {
       "de": "Ordner auswählen",
-      "en": "Choose folder"
+      "en": "Choose folder",
+      "es": "Elegir carpeta"
     },
     "settype": {
       "de": "Typ der Sammlung",
-      "en": "Type of the set"
+      "en": "Type of the set",
+      "es": "Tipo de conjunto"
     },
     "setname": {
       "de": "Name der Sammlung",
-      "en": "Name of the set"
+      "en": "Name of the set",
+      "es": "Nombre del conjunto"
     },
     "setpath": {
       "de": "Pfad zum Skriptordner",
-      "en": "Path to the script folder"
+      "en": "Path to the script folder",
+      "es": "Ruta a la carpeta de guiones"
     },
     "delete-set": {
       "de": "Scriptset deinstallieren",
-      "en": "Uninstall scriptset"
+      "en": "Uninstall scriptset",
+      "es": "Desinstalar el conjunto de guiones"
     },
     "choose_folder": {
       "de": "Wählen Sie den Ordner, in dem sich die Skripte befinden, die Sie hinzufügen möchten.",
-      "en": "Choose the folder where the scripts you want to add are located."
+      "en": "Choose the folder where the scripts you want to add are located.",
+      "es": "Elija la carpeta donde están los guiones que quiere agregar"
     },
     "cancel_confirm": {
       "de": "Es wurden Änderungen vorgenommen. Wollen Sie wirklich abbrechen und alle Änderungen verwerfen?",
-      "en": "Changes have been made. Do you really want to cancel and discard all changes?"
+      "en": "Changes have been made. Do you really want to cancel and discard all changes?",
+      "es": "Se hicieron los cambios. ¿Desea cancelarlos y descartarlos?"
     },
     "prefs_save_error": {
       "de": "Fehler beim Speichern der Einstellungen. ",
-      "en": "Error saving preferences. "
+      "en": "Error saving preferences. ",
+      "es": "Error al guardar las preferencias. "
     },
     "show-folder": {
       "de": "Lokale Octopus-Ordner anzeigen",
-      "en": "Show local Octopus folders"
+      "en": "Show local Octopus folders",
+      "es": "Mostrar las carpetas locales de Octopus"
     },
     "no_scripts_found": {
       "de": "Die Config-Datei konnte nicht geladen werden.",
-      "en": "Config-File could not be loaded."
+      "en": "Config-File could not be loaded.",
+      "es": "No se pudo cargar el archivo de configuración"
     },
     "no-config-read": {
       "de": "Es konnte keine Config eingelesen werden",
-      "en": "No config could be loaded"
+      "en": "No config could be loaded",
+      "es": "No se pudo cargar la configuración"
     },
     "delete_set_confirm": {
       "de": "Wollen Sie das Scriptset wirklich deinstallieren?",
-      "en": "Do you really want to uninstall this set?"
+      "en": "Do you really want to uninstall this set?",
+      "es": "¿Realmente quiere desintalar este conjunto?"
     }
   },
   "display-config": {
     "ui_ok": {
       "de": "OK",
-      "en": "OK"
+      "en": "OK",
+      "es": "OK"
     },
     "ui_done": {
       "de": "Fertig",
-      "en": "Done"
+      "en": "Done",
+      "es": "¡Hecho!"
     },
     "ui_apply": {
       "de": "Schließen und anwenden",
-      "en": "Close and apply"
+      "en": "Close and apply",
+      "es": "Cerrar y aplicar"
     },
     "ui_cancel": {
       "de": "Abbrechen",
-      "en": "Cancel"
+      "en": "Cancel",
+      "es": "Cancelar"
     },
     "ui_on": {
       "de": "An",
-      "en": "On"
+      "en": "On",
+      "es": "Sí"
     },
     "ui_off": {
       "de": "Aus",
-      "en": "Off"
+      "en": "Off",
+      "es": "No"
     },
     "ui_active": {
       "de": "aktiv",
-      "en": "active"
+      "en": "active",
+      "es": "activar"
     },
     "ui_setdefault": {
       "de": "Setze Default",
-      "en": "Set default"
+      "en": "Set default",
+      "es": "Establecer predeterminado"
     },
     "ui_usedefault": {
       "de": "Wende '___' beim Öffnen von Dokumenten an",
-      "en": "Use default '___' when document opens"
+      "en": "Use default '___' when document opens",
+      "es": "Usar el valor predeterminado '___' al abrir el documento"
     },
     "show_on_startup": {
       "de": "Anzeige-Panel beim Start anzeigen",
-      "en": "Show Display panel on startup"
+      "en": "Show Display panel on startup",
+      "es": "Mostrar panel de visualización al iniciar"
     },
     "export_to_where": {
       "de": "Wo soll das Preset gespeichert werden?",
-      "en": "Where do you want to save the preset?"
+      "en": "Where do you want to save the preset?",
+      "es": "¿Dónde quiere guardar el ajuste preestablecido?"
     },
     "view_proof": {
       "de": "Proof",
-      "en": "Proof"
+      "en": "Proof",
+      "es": "Prueba"
     },
     "view_overprintpreview": {
       "de": "Überdruckenvorschau",
-      "en": "Overprintpreview"
+      "en": "Overprintpreview",
+      "es": "Vista previa de sobreimpresión"
     },
     "view_windowsettings": {
       "de": "Fenster-Einstellungen",
-      "en": "Window-Settings"
+      "en": "Window-Settings",
+      "es": "Configuración de la ventana"
     },
     "ui_config": {
       "de": "Anzeige konfigurieren",
-      "en": "Configure Display-Settings"
+      "en": "Configure Display-Settings",
+      "es": "Configurar ajustes de pantalla"
     },
     "alert_wrong_params": {
       "de": "Beim Einlesen der gespeicherten Parameter ist etwas schief gegangen\\nSie sehen die Default-Parameter",
-      "en": "Error occurred loading parameters"
+      "en": "Error occurred loading parameters",
+      "es": "Error al cargar los parámetros"
     },
     "display_threshold": {
       "de": "Anzeigeschwellenwert",
-      "en": "Threshold"
+      "en": "Threshold",
+      "es": "Umbral"
     },
     "smart_guides": {
       "de": "Intelligente Hilfslinien",
-      "en": "Smart Guides"
+      "en": "Smart Guides",
+      "es": "Guías inteligentes"
     },
     "guides_color": {
       "de": "Hilfslinienfarbe",
-      "en": "Guide Colour"
+      "en": "Guide Colour",
+      "es": "Color de las guías"
     },
     "guides_lock": {
       "de": "Hilfslinien sperren",
-      "en": "Lock Guides"
+      "en": "Lock Guides",
+      "es": "Bloquear las guías"
     },
     "guides_inback": {
       "de": "Hilfslinien im Hintergrund",
-      "en": "Guides in Back"
+      "en": "Guides in Back",
+      "es": "Guías al fondo"
     },
     "guides_show": {
       "de": "Hilfslinien einblenden",
-      "en": "Show Guides"
+      "en": "Show Guides",
+      "es": "Mostrar guías"
     },
     "guides_guides": {
       "de": "Hilfslinien",
-      "en": "Guides"
+      "en": "Guides",
+      "es": "Guías"
     },
     "grid_inback": {
       "de": "Raster im Hintergrund",
-      "en": "Grid in Back"
+      "en": "Grid in Back",
+      "es": "Cuadrícula al fondo"
     },
     "grid_color": {
       "de": "Dokumentrasterfarbe",
-      "en": "Grid Colour"
+      "en": "Grid Colour",
+      "es": "Color de la cuadrícula"
     },
     "grid_grid": {
       "de": "Dokumentraster",
-      "en": "Document Grid"
+      "en": "Document Grid",
+      "es": "Cuadrícula del documento"
     },
     "grid_baselinecolor": {
       "de": "Grundlinienfarbe",
-      "en": "Baselinegrid Colour"
+      "en": "Baselinegrid Colour",
+      "es": "Color de líneas de base"
     },
     "grid_threshold": {
       "de": "Schwellenwert GLR",
-      "en": "Baselinegrid Threshold"
+      "en": "Baselinegrid Threshold",
+      "es": "Umbral de líneas de base"
     },
     "grid_baseline": {
       "de": "Grundlinienraster",
-      "en": "Baselinegrid"
+      "en": "Baselinegrid",
+      "es": "Líneas de base"
     },
     "grid_grid1": {
       "de": "Raster",
-      "en": "Grid"
+      "en": "Grid",
+      "es": "Guías"
     },
     "styles_reset": {
       "de": "Formatvorgaben auf Null",
-      "en": "Reset"
+      "en": "Reset",
+      "es": "Restaurar"
     },
     "styles_hiddenchars": {
       "de": "Verborgene Zeichen",
-      "en": "Hidden Characters"
+      "en": "Hidden Characters",
+      "es": "caracteres ocultos"
     },
     "styles_show_diverge": {
       "de": "Abweichung markieren",
-      "en": "Show Overrides"
+      "en": "Show Overrides",
+      "es": "Mostrar anulaciones"
     },
     "show_kerning": {
       "de": "Laufweite/Kerning",
-      "en": "Show Kerning"
+      "en": "Show Kerning",
+      "es": "Tracking/Kerning"
     },
     "show_hjviolation": {
       "de": "Silbentrennung etc",
-      "en": "Show HJ Violations"
+      "en": "Show HJ Violations",
+      "es": "Excepciones de sep./just."
     },
     "show_subst_glyphs": {
       "de": "Ersetzte Glyphen",
-      "en": "Show substituted Glyphs"
+      "en": "Show substituted Glyphs",
+      "es": "Glifos sustituidos"
     },
     "show_subst_fonts": {
       "de": "Ersetzte Schriftarten",
-      "en": "Show substituted Fonts"
+      "en": "Show substituted Fonts",
+      "es": "Fuentes sustituidas"
     },
     "show_keeps": {
       "de": "Absatzumbruchverletzungen",
-      "en": "Show Keepviolations"
+      "en": "Show Keepviolations",
+      "es": "Excepciones de separación"
     },
     "show_typo": {
       "de": "Typographie",
-      "en": "Typography"
+      "en": "Typography",
+      "es": "Tipografía"
     },
     "show_rulers": {
       "de": "Lineale einblenden",
-      "en": "Show Rulers"
+      "en": "Show Rulers",
+      "es": "Mostrar reglas"
     },
     "show_notes": {
       "de": "Notizen einblenden",
-      "en": "Show Notes"
+      "en": "Show Notes",
+      "es": "Mostrar notas"
     },
     "show_frame_edges": {
       "de": "Rahmenkanten einblenden",
-      "en": "Show Edges"
+      "en": "Show Edges",
+      "es": "Mostrar bordes"
     },
     "show_ruler_enum": {
       "de": "Lineal",
-      "en": "Rulers"
+      "en": "Rulers",
+      "es": "Reglas"
     },
     "ruler_unit_vert": {
       "de": "Linealeinheit vertikal",
-      "en": "Units vertical"
+      "en": "Units vertical",
+      "es": "Unidades verticales"
     },
     "ruler_unit_horz": {
       "de": "Linealeinheit horizontal",
-      "en": "Units horizontal"
+      "en": "Units horizontal",
+      "es": "Unidades horizontales"
     },
     "view_view": {
       "de": "Ansicht",
-      "en": "Display"
+      "en": "Display",
+      "es": "Pantalla"
     },
     "view_zoom": {
       "de": "Zoom",
-      "en": "Zoom"
+      "en": "Zoom",
+      "es": "Zum"
     },
     "view_quality": {
       "de": "Anzeigeleistung",
-      "en": "Display Performance"
+      "en": "Display Performance",
+      "es": "Rendimiento de visualización"
     },
     "view_screenmode": {
       "de": "Bildschirmmodus",
-      "en": "Screen Mode"
+      "en": "Screen Mode",
+      "es": "Modo de pantalla"
     },
     "view_trp": {
       "de": "Referenzpunkt",
-      "en": "Transform Reference Point"
+      "en": "Transform Reference Point",
+      "es": "Variar punto de referencia"
     },
     "preview_sim_paper": {
       "de": "Papier simulieren",
-      "en": "Simulate Paper"
+      "en": "Simulate Paper",
+      "es": "Simular papel"
     },
     "preview_sim_black": {
       "de": "Schwarz simulieren",
-      "en": "Simulate Black"
+      "en": "Simulate Black",
+      "es": "Simular negro"
     },
     "preview_preserve_cmyk": {
       "de": "CMYK-Werte beibehalten",
-      "en": "Preserve CMYK"
+      "en": "Preserve CMYK",
+      "es": "Preservar CMYK"
     },
     "preview_profile": {
       "de": "Proof-Profil",
-      "en": "Proof-Profile"
+      "en": "Proof-Profile",
+      "es": "Perfil de prueba"
     },
     "preview_proof": {
       "de": "Proof",
-      "en": "Proof"
+      "en": "Proof",
+      "es": "Prueba"
     },
     "view_page_1": {
       "de": "Seite 1 aktiv",
-      "en": "Show Page 1"
+      "en": "Show Page 1",
+      "es": "Mostrar página 1"
     },
     "preview_oppreview": {
       "de": "Überdruckenvorschau",
-      "en": "Overprintpreview"
+      "en": "Overprintpreview",
+      "es": "Previsualizar sobreimpresión"
     },
     "window_settings": {
       "de": "Fenster-Einstellungen",
-      "en": "Windows-Settings"
+      "en": "Windows-Settings",
+      "es": "Configuración de la ventana"
     },
     "colors_white": {
       "de": "Weiß",
-      "en": "White"
+      "en": "White",
+      "es": "Blanco"
     },
     "colors_gridgreen": {
       "de": "Rastergrün",
-      "en": "Grid Green"
+      "en": "Grid Green",
+      "es": "Verde jaspeado"
     },
     "colors_suplhur": {
       "de": "Schwefel",
-      "en": "Sulphur"
+      "en": "Sulphur",
+      "es": "Azufre"
     },
     "colors_cuteteal": {
       "de": "Helltürkis",
-      "en": "Cute Teal"
+      "en": "Cute Teal",
+      "es": "Verdoso"
     },
     "colors_lipstick": {
       "de": "Lippenstift",
-      "en": "Lipstick"
+      "en": "Lipstick",
+      "es": "Lápiz labial"
     },
     "colors_lightolive": {
       "de": "Helloliv",
-      "en": "Light Olive"
+      "en": "Light Olive",
+      "es": "Verde oliva claro"
     },
     "colors_fiesta": {
       "de": "Feuerrot",
-      "en": "Fiesta"
+      "en": "Fiesta",
+      "es": "Fiesta"
     },
     "colors_gridorange": {
       "de": "Rasterorange",
-      "en": "Grid Orange"
+      "en": "Grid Orange",
+      "es": "Naranja jaspeado"
     },
     "colors_gridblue": {
       "de": "Rasterblau",
-      "en": "Grid Blue"
+      "en": "Grid Blue",
+      "es": "Azul jaspeado"
     },
     "colors_charcoal": {
       "de": "Anthrazit",
-      "en": "Charcoal"
+      "en": "Charcoal",
+      "es": "Carboncillo"
     },
     "colors_lightgrey": {
       "de": "Hellgrau",
-      "en": "Light Grey"
+      "en": "Light Grey",
+      "es": "Gris claro"
     },
     "colors_purple": {
       "de": "Lila",
-      "en": "Purple"
+      "en": "Purple",
+      "es": "Púrpura"
     },
     "colors_ochre": {
       "de": "Ocker",
-      "en": "Ochre"
+      "en": "Ochre",
+      "es": "Ocre"
     },
     "colors_grassgreen": {
       "de": "Grasgrün",
-      "en": "Grass Green"
+      "en": "Grass Green",
+      "es": "Verde hierba"
     },
     "colors_burgundy": {
       "de": "Weinrot",
-      "en": "Burgundy"
+      "en": "Burgundy",
+      "es": "Burdeos"
     },
     "colors_peach": {
       "de": "Aprikot",
-      "en": "Peach"
+      "en": "Peach",
+      "es": "Melocotón"
     },
     "colors_olivegreen": {
       "de": "Olivgrün",
-      "en": "Olive Green"
+      "en": "Olive Green",
+      "es": "Verde oliva"
     },
     "colors_brick": {
       "de": "Rotbraun",
-      "en": "Brick Red"
+      "en": "Brick Red",
+      "es": "Marrón rojizo"
     },
     "colors_lavender": {
       "de": "Lavendel",
-      "en": "Lavender"
+      "en": "Lavender",
+      "es": "Lavanda"
     },
     "colors_pink": {
       "de": "Rosa",
-      "en": "Pink"
+      "en": "Pink",
+      "es": "Rosa"
     },
     "colors_darkblue": {
       "de": "Dunkelblau",
-      "en": "Dark Blue"
+      "en": "Dark Blue",
+      "es": "Azul oscuro"
     },
     "colors_gold": {
       "de": "Gold",
-      "en": "Gold"
+      "en": "Gold",
+      "es": "Dorado"
     },
     "colors_violet": {
       "de": "Violett",
-      "en": "Violet"
+      "en": "Violet",
+      "es": "Violeta"
     },
     "colors_brown": {
       "de": "Braun",
-      "en": "Brown"
+      "en": "Brown",
+      "es": "Marrón"
     },
     "colors_tan": {
       "de": "Hellbraun",
-      "en": "Tan"
+      "en": "Tan",
+      "es": "Canela"
     },
     "colors_teal": {
       "de": "Türkis",
-      "en": "Teal"
+      "en": "Teal",
+      "es": "Verde azulado"
     },
     "colors_darkgreen": {
       "de": "Dunkelgrün",
-      "en": "Dark Green"
+      "en": "Dark Green",
+      "es": "Verde oscuro"
     },
     "colors_orange": {
       "de": "Orange",
-      "en": "Orange"
+      "en": "Orange",
+      "es": "Naranja"
     },
     "colors_black": {
       "de": "Schwarz",
-      "en": "Black"
+      "en": "Black",
+      "es": "Negro"
     },
     "colors_grey": {
       "de": "Grau",
-      "en": "Grey"
+      "en": "Grey",
+      "es": "Gris"
     },
     "colors_cyan": {
       "de": "Cyan",
-      "en": "Cyan"
+      "en": "Cyan",
+      "es": "Cian"
     },
     "colors_magenta": {
       "de": "Magenta",
-      "en": "Magenta"
+      "en": "Magenta",
+      "es": "Magenta"
     },
     "colors_yellow": {
       "de": "Gelb",
-      "en": "Yellow"
+      "en": "Yellow",
+      "es": "Amarillo"
     },
     "colors_blue": {
       "de": "Blau",
-      "en": "Blue"
+      "en": "Blue",
+      "es": "Azul"
     },
     "colors_green": {
       "de": "Grün",
-      "en": "Green"
+      "en": "Green",
+      "es": "Verde"
     },
     "colors_red": {
       "de": "Rot",
-      "en": "Red"
+      "en": "Red",
+      "es": "Rojo"
     },
     "colors_lightblue": {
       "de": "Hellblau",
-      "en": "Light Blue"
+      "en": "Light Blue",
+      "es": "Azul claro"
     },
     "origin_spine": {
       "de": "Bund",
-      "en": "Spine"
+      "en": "Spine",
+      "es": "Lomo"
     },
     "origin_spread": {
       "de": "Druckbogen",
-      "en": "Spread"
+      "en": "Spread",
+      "es": "Pliego"
     },
     "origin_page": {
       "de": "Seite",
-      "en": "Page"
+      "en": "Page",
+      "es": "Página"
     },
     "measure_pixel": {
       "de": "Pixels",
-      "en": "Pixels"
+      "en": "Pixels",
+      "es": "Píxeles"
     },
     "measure_point": {
       "de": "Points",
-      "en": "Points"
+      "en": "Points",
+      "es": "Puntos"
     },
     "measure_cm": {
       "de": "Zentimeter",
-      "en": "CM"
+      "en": "CM",
+      "es": "cm"
     },
     "measure_mm": {
       "de": "Millimeter",
-      "en": "MM"
+      "en": "MM",
+      "es": "mm"
     },
     "zoom_pasteboard": {
       "de": "Montagefläche",
-      "en": "Pasteboard"
+      "en": "Pasteboard",
+      "es": "Tablero"
     },
     "zoom_spread": {
       "de": "Druckbogen einpassen",
-      "en": "Fit Spread"
+      "en": "Fit Spread",
+      "es": "Ajustar al pliego"
     },
     "zoom_page": {
       "de": "Seite einpassen",
-      "en": "Fit Page"
+      "en": "Fit Page",
+      "es": "Ajustar a la página"
     },
     "quality_high": {
       "de": "Hohe Qualität",
-      "en": "High"
+      "en": "High",
+      "es": "Alta"
     },
     "quality_normal": {
       "de": "Typisch",
-      "en": "Normal"
+      "en": "Normal",
+      "es": "Normal"
     },
     "quality_opt": {
       "de": "Schnell",
-      "en": "Optimized"
+      "en": "Optimized",
+      "es": "Optimizada"
     },
     "anchor_center": {
       "de": "mittig",
-      "en": "Center"
+      "en": "Center",
+      "es": "Centrada"
     },
     "anchor_topleft": {
       "de": "oben links",
-      "en": "Top-Left"
+      "en": "Top-Left",
+      "es": "Izquierda arriba"
     },
     "mode_info": {
       "de": "Infobereich",
-      "en": "Infoarea"
+      "en": "Infoarea",
+      "es": "Área de información"
     },
     "mode_bleed": {
       "de": "Anschnitt",
-      "en": "Bleed"
+      "en": "Bleed",
+      "es": "Sangrado"
     },
     "mode_page": {
       "de": "Vorschau",
-      "en": "Preview"
+      "en": "Preview",
+      "es": "Vista previa"
     },
     "mode_off": {
       "de": "Normal",
-      "en": "Off"
+      "en": "Off",
+      "es": "Normal"
     },
     "proof_doc": {
       "de": "Dokumentfarbraum",
-      "en": "Document-Space"
+      "en": "Document-Space",
+      "es": "Espacio de documento"
     },
     "proof_work": {
       "de": "Arbeitsfarbraum",
-      "en": "Working-Space"
+      "en": "Working-Space",
+      "es": "Espacio de trabajo"
     },
     "proof_off": {
       "de": "Proof aus",
-      "en": "Proof off"
+      "en": "Proof off",
+      "es": "Prueba inactiva"
     },
     "default_workspace": {
       "de": "[Erweitert]",
-      "en": "[Advanced]"
+      "en": "[Advanced]",
+      "es": "[Avanzado]"
     },
     "manager_title": {
       "de": "Anzeige-Vorgaben",
-      "en": "Display-Presets"
+      "en": "Display-Presets",
+      "es": "Preajustes de pantalla"
     },
     "presets": {
       "de": "Vorgaben: ",
-      "en": "Presets: "
+      "en": "Presets: ",
+      "es": "Preajustes: "
     },
     "new_preset": {
       "de": "Neue Vorgabe",
-      "en": "New preset"
+      "en": "New preset",
+      "es": "Nuevo preajuste"
     },
     "new_preset_name": {
       "de": "Vorgabenname: ",
-      "en": "Presetname: "
+      "en": "Presetname: ",
+      "es": "Nombre del preajuste"
     },
     "new": {
       "de": "Neu...",
-      "en": "New..."
+      "en": "New...",
+      "es": "Nuevo..."
     },
     "edit": {
       "de": "Bearbeiten...",
-      "en": "Edit..."
+      "en": "Edit...",
+      "es": "Editar..."
     },
     "delete": {
       "de": "Löschen",
-      "en": "Delete"
+      "en": "Delete",
+      "es": "Eliminar"
     },
     "import": {
       "de": "Importieren",
-      "en": "Import"
+      "en": "Import",
+      "es": "Importar"
     },
     "export": {
       "de": "Exportieren",
-      "en": "Export"
+      "en": "Export",
+      "es": "Exportar"
     },
     "file_exists": {
       "de": "Datei existiert bereits\nÜberschreiben?",
-      "en": "File exists\nOverwrite?"
+      "en": "File exists\nOverwrite?",
+      "es": "El archivo existe.\n¿Sobrescribir?"
     },
     "really_delete": {
       "de": "Vorgabe wirklich löschen?",
-      "en": "Really delete preset?"
+      "en": "Really delete preset?",
+      "es": "¿De verdad borrar el preajuste?"
     },
     "import_from_where": {
       "de": "Welche Dateien importieren?",
-      "en": "Files to import?"
+      "en": "Files to import?",
+      "es": "¿Archivos a importar?"
     },
     "import_to_where": {
       "de": "Wohin exportieren?",
-      "en": "Export to:"
+      "en": "Export to:",
+      "es": "Exportar a:"
     },
     "workspace": {
       "de": "Arbeitsbereich",
-      "en": "Workspace"
+      "en": "Workspace",
+      "es": "Espacio de tareas"
     }
   },
   "display": {
     "start_config_first": {
       "de": "Starten Sie zuerst das 'Anzeige konfigurieren', um Ihre Einstellungen festzulegen",
-      "en": "Start the config-script once to define your own preferences"
+      "en": "Start the config-script once to define your own preferences",
+      "es": "Ejecute el guion de configuración una vez para definir sus propias preferencias."
     },
     "Edit": {
       "de": "Edit",
-      "en": "Edit"
+      "en": "Edit",
+      "es": "Editar"
     }
   },
   "exporter": {
     "doc-group": {
       "de": "Welche Dokumente",
       "en": "Which documents",
-      "es": "Qué documentos"
+      "es": "¿Qué documentos?"
     },
     "crnt_doc": {
       "de": "Aktuelles Dokument",
@@ -1236,7 +1439,8 @@
     },
     "leave_same": {
       "de": "Lassen Sie die Presets identisch, um nur ein PDF zu exportieren",
-      "en": "Leave presets identical to export only one PDF"
+      "en": "Leave presets identical to export only one PDF",
+      "es": "Deje los preajustes idénticos para exportar solo un PDF."
     },
     "doc_group": {
       "de": "Dokumente",
@@ -1320,7 +1524,8 @@
     },
     "export": {
       "de": "Exportieren",
-      "en": "Export"
+      "en": "Export",
+      "es": "Exportar"
     },
     "savemsg": {
       "de": " Dokumente gespeichert",
@@ -1394,14 +1599,15 @@
     },
     "images": {
       "de": "Bilder",
-      "en": "Images"
+      "en": "Images",
+      "es": "Imágenes"
     }
   },
   "fontinstaller": {
     "Fonthub": {
       "de": "Octopus-Fontinstaller",
       "en": "Octopus-Fontinstaller",
-      "es": "Octopus-Fontinstaller"
+      "es": "Instalador de fuentes de Octopus"
     },
     "Add Folder": {
       "de": "Fontordner hinzufügen",
@@ -1701,23 +1907,28 @@
   "octolock-daemon": {
     "is_opened": {
       "de": "Die Datei '_1_' ist anscheinend bereits von '_2_' seit dem Zeitpunkt _3_ geöffnet.",
-      "en": "The file '_1_' apparently has been opened by user '_2_' since _3_."
+      "en": "The file '_1_' apparently has been opened by user '_2_' since _3_.",
+      "es": "Aparentemente el archivo '_1_' fue abierto por el usuario '_2_' desde _3_."
     },
     "cancel_opening": {
       "de": "Öffnen abbrechen?",
-      "en": "Cancel opening?"
+      "en": "Cancel opening?",
+      "es": "¿Cancelar la apertura?"
     },
     "lock_text": {
       "de": "Diese Datei wird vom Script OctoLock aus dem Projekt Octopus verwendet, um auch in komplizierten Situationen zu kontrollieren, ob Dokumente bereits von anderen Anwendern verwendet werden.",
-      "en": "This file is used by the OctoLock script from the Octopus project to check whether documents are already in use by other users, even in complicated situations."
+      "en": "This file is used by the OctoLock script from the Octopus project to check whether documents are already in use by other users, even in complicated situations.",
+      "es": "Este archivo es utilizado por el guion OctoLock del proyecto Octopus para comprobar si otros usuarios ya están utilizando documentos, incluso en situaciones complicadas."
     },
     "yes": {
       "de": "Ja",
-      "en": "Yes"
+      "en": "Yes",
+      "es": "Sí"
     },
     "no": {
       "de": "Nein",
-      "en": "No"
+      "en": "No",
+      "es": "No"
     }
   },
   "placeholder": {
@@ -1765,135 +1976,168 @@
   "show-overflow": {
     "Pink": {
       "de": "Pink",
-      "en": "Pink"
+      "en": "Pink",
+      "es": "Rosa"
     },
     "Blue": {
       "de": "Blau",
-      "en": "Blue"
+      "en": "Blue",
+      "es": "Azul"
     },
     "Orange": {
       "de": "Orange",
-      "en": "Reddish"
+      "en": "Reddish",
+      "es": "Anaranjado"
     },
     "Green": {
       "de": "Grün",
-      "en": "Green"
+      "en": "Green",
+      "es": "Verde"
     },
     "Sand": {
       "de": "Beige",
-      "en": "Sand"
+      "en": "Sand",
+      "es": "Arena"
     },
     "Petrol": {
       "de": "Petrol",
-      "en": "Petrol"
+      "en": "Petrol",
+      "es": "Petróleo"
     },
     "Purple": {
       "de": "Lila",
-      "en": "Purple"
+      "en": "Purple",
+      "es": "Púrpura"
     },
     "Gras": {
       "de": "Gras",
-      "en": "Gras"
+      "en": "Grass",
+      "es": "Césped"
     },
     "Overflow": {
       "de": "Übersatz",
-      "en": "Overflow"
+      "en": "Overflow",
+      "es": "Desborde"
     },
     "Show-Overflow-Head-en": {
       "de": "Show-Overflow-Head-de",
-      "en": "Show-Overflow-Head-en"
+      "en": "Show-Overflow-Head-en",
+      "es": "Show-Overflow-Head-es"
     },
     "win_title": {
       "de": "Übersatz zeigen",
-      "en": "Show Overflows"
+      "en": "Show Overflows",
+      "es": "Mostrar desbordes"
     },
     "Options": {
       "de": "Optionen",
-      "en": "Options"
+      "en": "Options",
+      "es": "Opciones"
     },
     "Colors": {
       "de": "Farben",
-      "en": "Colors"
+      "en": "Colors",
+      "es": "Colores"
     },
     "Position": {
       "de": "Position",
-      "en": "Position"
+      "en": "Position",
+      "es": "Posición"
     },
     "Mark Textframes": {
       "de": "Rahmen markieren",
-      "en": "Mark Textframes"
+      "en": "Mark Textframes",
+      "es": "Marcar marcos de texto"
     },
     "Show Char-Count": {
       "de": "Zeichenzahl zeigen",
-      "en": "Show Char-Count"
+      "en": "Show Char-Count",
+      "es": "Mostrar cuenta de caracteres"
     },
     "Show Threadlines": {
       "de": "Verbindungslinien zeigen",
-      "en": "Show Threadlines"
+      "en": "Show Threadlines",
+      "es": "Mostrar líneas de flujo"
     },
     "Inspect Tablecells": {
       "de": "Tabellenzellen berücksichtigen",
-      "en": "Inspect Tablecells"
+      "en": "Inspect Tablecells",
+      "es": "Inspeccionar celdas"
     },
     "Mirror Layout": {
       "de": "Übersatzrahmen spiegeln Seitenlayout",
-      "en": "Mirror Layout"
+      "en": "Mirror Layout",
+      "es": "Diseño simétrico"
     },
     "Right of Page": {
       "de": "Neben der Seite",
-      "en": "Beside Page"
+      "en": "Beside Page",
+      "es": "Página contigua"
     },
     "Right of Frame": {
       "de": "Neben dem Rahmen",
-      "en": "Beside Frame"
+      "en": "Beside Frame",
+      "es": "Marco contiguo"
     },
     "Below Page": {
       "de": "Unter der Seite",
-      "en": "Below Page"
+      "en": "Below Page",
+      "es": "Página debajo"
     },
     "Below Frame": {
       "de": "Unter dem Rahmen",
-      "en": "Below Frame"
+      "en": "Below Frame",
+      "es": "Marco debajo"
     },
     "Go": {
       "de": "Anlegen",
-      "en": "Go"
+      "en": "Go",
+      "es": "Proceder"
     },
     "Update": {
       "de": "Aktualisieren",
-      "en": "Update"
+      "en": "Update",
+      "es": "Actualizar"
     },
     "Remove": {
       "de": "Entfernen",
-      "en": "Remove"
+      "en": "Remove",
+      "es": "Quitar"
     },
     "Cancel": {
       "de": "Abbrechen",
-      "en": "Cancel"
+      "en": "Cancel",
+      "es": "Cancelar"
     },
     "All On": {
       "de": "Alle an",
-      "en": "All On"
+      "en": "All On",
+      "es": "Todo activo"
     },
     "All Off": {
       "de": "Alle aus",
-      "en": "All Off"
+      "en": "All Off",
+      "es": "Todo inactivo"
     },
     "OF-Frames": {
       "de": "Übersatz",
-      "en": "Overflow"
+      "en": "Overflow",
+      "es": "Desborde"
     },
     "dec_sep": {
       "de": ".",
-      "en": ","
+      "en": ",",
+      "es": ","
     },
     "Table": {
       "de": "Tabelle",
-      "en": "Table"
+      "en": "Table",
+      "es": "Tabla"
     },
     "Anchored Object": {
       "de": "Verankertes Objekt",
-      "en": "Anchored Object"
+      "en": "Anchored Object",
+      "es": "Objeto anclado"
     },
     "ColumnBreak": {
       "de": "<spaltenumbruch>",

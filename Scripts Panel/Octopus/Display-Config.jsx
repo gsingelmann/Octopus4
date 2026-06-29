@@ -328,8 +328,10 @@ function main( what_to_do, preset ) {
         config.name = __('new_preset');
       }
     } else if ( what_to_do == "edit" ) {
-      saved_prefs = __deep_copy( preset );
-      config.name = preset.name;
+      if ( preset ) {
+        saved_prefs = __deep_copy( preset );
+        config.name = preset.name;
+      }
     }
     
     // ----------------------------------  Array abgleichen ------------------

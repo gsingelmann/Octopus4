@@ -6,7 +6,8 @@
 +   Author: Gerald Singelmann, gs@cuppascript.com
 +   Supported by: Satzkiste GmbH, post@satzkiste.de
 
-+    Modified: 2025-01-20
++    Modified: 2026-06-18
+-   indicatorColor wurde nicht korrekt gesetzt
 
 +    License (MIT)
 		Copyright 2023 Gerald Singelmann/Satzkiste GmbH
@@ -81,7 +82,12 @@ function handle() {
     for ( var n = 0; n < conditions.length; n++ ) {
       if ( conditions[n].name.charAt(0) == "∴") {
         conditions[n].visible = true;
-        conditions[n].indicatorColor = palette[ cix ];
+        try {
+          conditions[n].indicatorColor = palette[ cix ];
+        } catch(e) {
+          __log("error", "palette[" + cix + "] enthält keinen validen Wert")
+          conditions[n].indicatorColor = [204,128, 128]
+        }
         cix++;
       }
     }

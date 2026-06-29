@@ -6,7 +6,7 @@
 +   Author: Gerald Singelmann, gs@cuppascript.com
 +   Supported by: Satzkiste GmbH, post@satzkiste.de
 
-+    Modified: 2023-09-10
+-   2026-06-19: Mehr Absicherung gegen CloudDocuments
 
 +    License (MIT) 
 		Copyright 2023 Gerald Singelmann/Satzkiste GmbH
@@ -31,6 +31,7 @@
 #include "./Include.jsxinc"
 __init();
 
+script_id = "octolock-daemon";
 
 app.addEventListener( "beforeOpen", bo_handler );
 app.addEventListener( "afterOpen", ao_handler );
@@ -131,6 +132,12 @@ function write_lock_data( doc ) {
 	try {
 		var volumes = read_volumes_from_prefs();
 
+		if ( doc && ! doc.constructor.name == "Document" ) {
+			__log("error", "'write_lock_data' mit " + doc.constructor.name + " aufgerufen")
+			return;
+		}
+		if ( doc && doc.isCloudDocument ) return
+
 		if ( doc.constructor.name == "Document" && doc.saved ) {
 			var fn = doc.fullName;
 			if ( fn ) {
@@ -155,6 +162,8 @@ function write_lock_data( doc ) {
 }
 function remove_lock_data( doc ) {
 	try {
+		if (doc && doc.isCloudDocument ) return
+		
 		if ( doc.constructor.name == "Document" && doc.saved ) {
 			var fn = doc.fullName;
 			if ( fn ) {

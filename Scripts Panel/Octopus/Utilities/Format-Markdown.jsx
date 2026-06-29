@@ -3,7 +3,8 @@
 +   This script is part of project-octopus.net
 +   Author: Gerald Singelmann, gs@cuppascript.com
 +   Supported by: Satzkiste GmbH, post@satzkiste.de
-+   Modified: 2026-03-13
+
+		2026-06-29: auf IDML umgestellt
 
 +    License (MIT)
 		Copyright 2023 Gerald Singelmann/Satzkiste GmbH
@@ -35,8 +36,19 @@ function main(){
 	var doc = app.activeDocument;
 	if ( ! doc.isValid ) return;
 	if ( doc.paragraphStyleGroups.item("markdown") == null){
-		var src = new File( PATH_DATA_FOLDER + "/Assets/MarkdownStyles.indd" );
-		if ( ! src.exists ) return;
+		var src_idml = new File( PATH_DATA_FOLDER + "/Assets/MarkdownStyles.idml" );
+		var src_indd = new File( PATH_DATA_FOLDER + "/Assets/MarkdownStyles_own.idml" );
+		if ( ! src_indd.exists ) {
+			try {
+				if ( ! src_idml.exists ) return;
+				var idml = app.open( src_idml, false );
+				idml.save( src_indd );
+				idml.close( SaveOptions.NO );
+			} catch(e) {
+				__log("error", e.message + " on " + e.line, "Format Markdown");
+			}
+		}
+		if ( ! src_indd.exists ) return;
 		doc.importStyles(ImportFormat.TEXT_STYLES_FORMAT, src, GlobalClashResolutionStrategy.DO_NOT_LOAD_THE_STYLE )
 		doc.importStyles(ImportFormat.TABLE_STYLES_FORMAT, src, GlobalClashResolutionStrategy.DO_NOT_LOAD_THE_STYLE )
 	}

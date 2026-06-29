@@ -4,6 +4,7 @@
 //  2026-04-21: Logging von http-Requests hinzugefügt
 //              Noch mehr Logging
 //  2026-04-23: msg in __alert hat jetzt eine Max-Höhe
+//  2026-06-18: in get_help_url war __readJSON falsch
 // =============================================================================
 
 DBG = true;
@@ -384,14 +385,14 @@ function __insert_head( w, script_id ) {
 }
 function __get_help_url( script_id ) {
   try {
-    var cfg = readJson( PATH_DATA_FOLDER + "/config.json" );
+    var cfg = __readJson( PATH_DATA_FOLDER + "/config.json" );
     for ( var n = 0; n < cfg.length; n++ ) {
       if ( cfg[n].id == script_id && cfg[n].hasOwnProperty("help_url") ) {
         return cfg[n].help_url;
       }
     }
   } catch(e) {
-    __log("error", e.message + " on " + e.line, "get help")
+    __log("error", e.message + " on " + e.line, "include > get_help_url")
   }
   return "https://www.project-octopus.net";
 }

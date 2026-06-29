@@ -127,13 +127,18 @@ function collect_doc_main( doc ) {
 				for ( var n = 0; n < fonts.length; n++ ) {
 					try {
 						var f = fonts[n];
-						var l = f.location;
-						var fontfile = new File( l );
-						// l.split geht nicht wg Windows
-						var fname = fontfile.fullName.split("/").pop();
-						var tgt_file = new File( tgt_path + "/" + fname );
-						if (tgt_file.exists) {
-							continue;
+						var fontfile;
+						if ( ! f || ! f.location ) {
+							fontfile = new File( Folder.desktop.fullName + "/this file does not exist.blah" );
+						} else {
+							var l = f.location;
+							fontfile = new File( l );
+							// l.split geht nicht wg Windows
+							var fname = fontfile.fullName.split("/").pop();
+							var tgt_file = new File( tgt_path + "/" + fname );
+							if (tgt_file.exists) {
+								continue;
+							}
 						}
 						if ( fontfile.exists  ) {
 							try {
